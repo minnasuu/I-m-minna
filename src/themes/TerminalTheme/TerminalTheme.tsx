@@ -4,6 +4,8 @@ import './TerminalTheme.scss';
 import type { PersonalData } from '../../types';
 import { useTranslations } from '../../hooks/useTranslations';
 import { IconArrowLineRight } from '../../components/Icon';
+import LanguageSwitcher from "../../components/LanguageSwitcher";
+import ThemeSwitcher from "../../components/ThemeSwitcher";
 
 interface TerminalThemeProps {
   data: PersonalData;
@@ -12,9 +14,10 @@ interface TerminalThemeProps {
 const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
   const { t } = useTranslations();
   const [currentLine, setCurrentLine] = useState(0);
-  const [displayedLines, setDisplayedLines] = useState<Array<{ type: string; content: string; link?: string }>>([]);
+  const [displayedLines, setDisplayedLines] = useState<
+    Array<{ type: string; content: string; link?: string }>
+  >([]);
   const [isTyping, setIsTyping] = useState(true);
-  const [showWechatQR, setShowWechatQR] = useState(false);
 
   const terminalLines = [
     { type: "command", content: "whoami" },
@@ -118,6 +121,10 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
           <span className="terminal-btn maximize"></span>
         </div>
         <div className="terminal-title">minna@portfolio:~</div>
+        <div className="terminal-controls">
+          <LanguageSwitcher />
+          <ThemeSwitcher />
+        </div>
       </div>
 
       <div className="terminal-body">

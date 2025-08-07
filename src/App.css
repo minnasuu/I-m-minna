@@ -1,3 +1,9 @@
+/* 导入滚动条样式 */
+@import './styles/scrollbar.css';
+
+/* 添加Google Fonts支持 */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
 /* 重置默认样式 */
 * {
   margin: 0;
@@ -27,17 +33,3 @@ body {
 .theme-renderer {
   min-height: 100vh;
 }
-.float-btn-container{
-  position: fixed;
-  top: 0px;
-  right: 10px;
-  display: flex;
-  gap: 12px;
-  z-index: 1000;
-}
-
-/* 导入滚动条样式 */
-@import './styles/scrollbar.css';
-
-/* 添加Google Fonts支持 */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');

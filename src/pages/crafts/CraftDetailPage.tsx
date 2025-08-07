@@ -1,9 +1,9 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useLanguage } from '../contexts/LanguageContext';
-import { useTranslations } from '../hooks/useTranslations';
-import { personalDataMultiLang } from '../data/personalData';
 import './CraftDetailPage.css';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { useTranslations } from '../../hooks/useTranslations';
+import { personalDataMultiLang } from '../../data/personalData';
 
 const CraftDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

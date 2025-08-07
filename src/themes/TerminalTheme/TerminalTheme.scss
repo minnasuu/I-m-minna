@@ -42,6 +42,49 @@
   color: #888;
   font-size: 14px;
   margin-left: 20px;
+  flex: 1;
+}
+
+.terminal-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  
+  .language-switcher {
+    margin-left: 0;
+    
+    .language-button {
+      height: 28px;
+      font-size: 11px;
+      color: #888;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid #333;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        transform: none;
+      }
+    }
+  }
+  
+  .theme-switcher {
+    .dice-button {
+      width: 28px;
+      height: 28px;
+      font-size: 14px;
+      color: #888;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid #333;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        transform: scale(1.05);
+      }
+    }
+  }
 }
 
 .terminal-body {

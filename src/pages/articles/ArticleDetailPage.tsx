@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { useLanguage } from '../contexts/LanguageContext';
-import { useTranslations } from '../hooks/useTranslations';
-import { personalDataMultiLang } from '../data/personalData';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { useTranslations } from '../../hooks/useTranslations';
+import { personalDataMultiLang } from '../../data/personalData';
 import './ArticleDetailPage.css';
 
 const ArticleDetailPage: React.FC = () => {

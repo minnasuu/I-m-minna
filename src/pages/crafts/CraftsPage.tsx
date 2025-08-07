@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useLanguage } from '../contexts/LanguageContext';
-import { useTranslations } from '../hooks/useTranslations';
-import { personalDataMultiLang } from '../data/personalData';
 import './CraftsPage.css';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { useTranslations } from '../../hooks/useTranslations';
+import { personalDataMultiLang } from '../../data/personalData';
 
 const CraftsPage: React.FC = () => {
   const { language } = useLanguage();
