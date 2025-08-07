@@ -304,20 +304,18 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
           <div className="sidebar-section">
             <div className="section-header">
               <h3>💎 {t("projects.title")}</h3>
-              <Link to="/projects" className="view-all-link">
-                {t("projects.viewAll")}
-                <IconArrowLineRight size={12} />
-              </Link>
             </div>
             <div className="interest-list">
               {data.projects.slice(0, 3).map((project, index) => (
                 <div key={index} className="interest-item">
-                  <Link
-                    to={`/projects/${project.id}`}
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="project-title-link"
                   >
                     <span className="interest-name">{project.name}</span>
-                  </Link>
+                  </a>
                 </div>
               ))}
             </div>
@@ -326,17 +324,21 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
           <div className="sidebar-section">
             <div className="section-header">
               <h3>♾️ {t("crafts.title")}</h3>
-              <Link to="/crafts" className="view-all-link">
-                {t("crafts.viewAll")}
-                <IconArrowLineRight size={12} />
-              </Link>
             </div>
-            <div className="interest-list">
+            <div className="craft-list">
               {data.crafts.slice(0, 3).map((craft, index) => (
-                <div key={index} className="interest-item">
-                  <Link to={`/crafts/${craft.id}`} className="craft-title-link">
-                    <span className="interest-name">{craft.name}</span>
-                  </Link>
+                <div
+                  key={index}
+                  className={`craft-item ${craft.link ? "with-link" : ""}`}
+                >
+                  <a
+                    href={craft.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="craft-title-link"
+                  >
+                    <span className="craft-name">{craft.name}</span>
+                  </a>
                 </div>
               ))}
             </div>

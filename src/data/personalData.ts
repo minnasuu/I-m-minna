@@ -128,6 +128,15 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         liveUrl: "https://admuse.qq.com/",
         featured: true,
         link: "https://admuse.qq.com/"
+      },
+      {
+        id: "3",
+        name: "腾讯广告妙问",
+        description: "腾讯广告妙问，腾讯广告Agent智能问答工具。",
+        technologies: ["React", "TypeScript", "SCSS"],
+        liveUrl: "https://miaowen.qq.com/miaowen-station/index",
+        featured: true,
+        link: "https://miaowen.qq.com/miaowen-station/index"
       }
     ],
     crafts: [
@@ -228,6 +237,15 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         liveUrl: "https://admuse.qq.com/",
         featured: true,
         link: "https://admuse.qq.com/"
+      },
+      {
+        id: "3",
+        name: "Tencent Advertising Miaowen",
+        description: "Tencent Advertising Miaowen, Tencent Advertising Agent Intelligent Question and Answer Tool.",
+        technologies: ["React", "TypeScript", "SCSS"],
+        liveUrl: "https://miaowen.qq.com/miaowen-station/index",
+        featured: true,
+        link: "https://miaowen.qq.com/miaowen-station/index"
       }
     ],
     crafts: [

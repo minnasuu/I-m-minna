@@ -118,6 +118,7 @@
 
 .theme-option.active {
   background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
   transform: scale(1.1);
 }
 

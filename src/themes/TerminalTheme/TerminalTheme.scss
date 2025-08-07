@@ -50,41 +50,6 @@
   align-items: center;
   gap: 8px;
   margin-left: auto;
-  
-  .language-switcher {
-    margin-left: 0;
-    
-    .language-button {
-      height: 28px;
-      font-size: 11px;
-      color: #888;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid #333;
-      
-      &:hover {
-        background: rgba(255, 255, 255, 0.2);
-        color: #fff;
-        transform: none;
-      }
-    }
-  }
-  
-  .theme-switcher {
-    .dice-button {
-      width: 28px;
-      height: 28px;
-      font-size: 14px;
-      color: #888;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid #333;
-      
-      &:hover {
-        background: rgba(255, 255, 255, 0.2);
-        color: #fff;
-        transform: scale(1.05);
-      }
-    }
-  }
 }
 
 .terminal-body {
@@ -181,6 +146,8 @@
 }
 
 /* 兴趣列表样式 */
+.terminal-line.craft-list,
+.terminal-line.project-list,
 .terminal-line.interest-item {
   padding: 8px;
   margin-left: 22px;
@@ -390,10 +357,14 @@
 }
 
 .sidebar-section{
+  .craft-list,
+  .project-list,
   .interest-list{
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    .craft-item,
+    .project-item,
     .interest-item{
       padding: 4px 8px;
       background-color: rgba(255, 255, 255, 0.05);
@@ -402,6 +373,8 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      .craft-name,
+      .project-name,
       .interest-name{
         font-size: 14px;
         line-height: 22px;
@@ -411,11 +384,21 @@
       &.with-link{
         cursor: pointer;
         &:hover{
+          .craft-name,
+          .project-name,
           .interest-name{
             text-shadow: 0 0 5px #dff6ff;
           }
         }
       }
+    }
+  }
+  .craft-list{
+    margin-left: 0;
+    padding-left: 0;
+    &::before{
+      content: '';
+      display: none;
     }
   }
 } 
