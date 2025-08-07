@@ -1,5 +1,10 @@
 import type { PersonalData } from '../types';
 import type { Language } from '../contexts/LanguageContext';
+import { article2025_1_16 } from '../pages/articles/articlesData/article2025_1_16/article2025_1_16';
+import { article2025_1_2 } from '../pages/articles/articlesData/article2025_1_2';
+import { article2025_1_20 } from '../pages/articles/articlesData/article2025_1_20';
+import { article2025_2_22 } from '../pages/articles/articlesData/article2025_2_22/article2025_2_22';
+import { article2025_3_28 } from '../pages/articles/articlesData/article2025_3_28/article2025_3_28';
 
 // 多语言个人数据
 export const personalDataMultiLang: Record<Language, PersonalData> = {
@@ -63,7 +68,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         id: "1",
         title: "网页深色模式与适配",
         summary: "探讨网页深色模式与适配，帮助你构建更高效、可维护的应用。",
-        content: "这里是文章的完整内容...",
+        content: article2025_1_2,
         publishDate: "2025-01-02",
         tags: [ "前端开发"],
         readTime: 5,
@@ -73,7 +78,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         id: "2",
         title: "SVG 实现可交互轮盘（React版本）",
         summary: "使用SVG实现可交互轮盘，支持自定义样式和交互效果。",
-        content: "这里是文章的完整内容...",
+        content: article2025_1_16,
         publishDate: "2025-01-16",
         tags: ["React", "SVG", "轮盘"],
         readTime: 2,
@@ -83,7 +88,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         id: "3",
         title: "深刻认识图片",
         summary: "深刻认识图片，了解图片的格式、大小、质量、加载方式等。",
-        content: "这里是文章的完整内容...",
+        content: article2025_1_20,
         publishDate: "2025-01-20",
           tags: ["图片", "格式", "大小", "质量", "加载方式"],
         readTime: 2,
@@ -93,7 +98,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         id: "4",
         title: "CSS实现变形动画（Morph）的关键",
         summary: "CSS实现变形动画（Morph）的关键，了解变形动画的原理和实现方式。",
-        content: "这里是文章的完整内容...",
+        content: article2025_2_22,
         publishDate: "2025-02-22",
         tags: ["CSS", "变形动画", "Morph"],
         readTime: 15,
@@ -103,8 +108,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         id: "5",
         title: "搭建流畅的 AI Chat布局",
         summary: "搭建流畅的 AI Chat布局，了解AI Chat的布局和实现方式。",
-        content: "这里是文章的完整内容...",
-        publishDate: "2024-03-28",
+        content: article2025_3_28,
+        publishDate: "2025-03-28",
         tags: ["AI Chat", "布局", "实现方式"],
         readTime: 18,
         link: "https://blog.example.com/ai-chat-layout"
@@ -212,11 +217,51 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         id: "1",
         title: "Dark Mode and Adaptation",
         summary: "Explore key patterns and techniques in React development to help you build more efficient and maintainable applications.",
-        content: "Here is the complete article content...",
+        content: article2025_1_2,
         publishDate: "2025-01-02",
         tags: ["React", "Dark Mode", "Adaptation"],
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation"
+      },
+      {
+        id: "2",
+        title: "SVG Interactive Wheel (React Version)",
+        summary: "Use SVG to implement an interactive wheel, support custom styles and interactive effects.",
+        content: article2025_1_16,
+        publishDate: "2025-01-16",
+        tags: ["React", "SVG", "轮盘"],
+        readTime: 2,
+        link: "https://blog.example.com/svg-interactive-wheel"
+      },
+      {
+        id: "3",
+        title: "Deep Understanding of Images",
+        summary: "Deep understanding of images, understand the format, size, quality, loading method, etc. of images.",
+        content: article2025_1_20,
+        publishDate: "2025-01-20",
+        tags: ["图片", "格式", "大小", "质量", "加载方式"],
+        readTime: 2,
+        link: "https://blog.example.com/know-more-about-image"
+      },
+      {
+        id: "4",
+        title: "CSS Implementation of Morphing Animation (Morph)",
+        summary: "CSS implementation of morphing animation (Morph), understand the key points of morphing animation and its implementation method.",
+        content: article2025_2_22,
+        publishDate: "2025-02-22",
+        tags: ["CSS", "变形动画", "Morph"],
+        readTime: 15,
+        link: "https://blog.example.com/threejs-guide"
+      },
+      {
+        id: "5",
+        title: "Build a Smooth AI Chat Layout",
+        summary: "Build a smooth AI Chat Layout, understand the layout and implementation method of AI Chat.",
+        content: article2025_3_28,
+        publishDate: "2025-03-28",
+        tags: ["AI Chat", "布局", "实现方式"],
+        readTime: 18,
+        link: "https://blog.example.com/ai-chat-layout"
       }
     ],
     projects: [

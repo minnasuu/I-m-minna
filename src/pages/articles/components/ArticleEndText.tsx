@@ -1,0 +1,2 @@
+const ArticleEndText = () => <div style={{display:'flex',justifyContent:'center',gap:'4px',fontSize:'14px',color:'#888',textAlign:'center'}}><span>👋</span>结束啦<div style={{transform:'scaleX(-1)'}}>👋</div></div>;
+export default ArticleEndText

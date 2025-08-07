@@ -26,7 +26,7 @@ export interface Article {
   id: string;
   title: string;
   summary: string;
-  content: string;
+  content: React.ReactNode;
   publishDate: string;
   tags: string[];
   readTime: number; // 分钟

@@ -141,8 +141,8 @@ export const translations: Record<Language, Translations> = {
       }
     },
     articles: {
-      title: "随笔",
-      subtitle: "分享我的技术思考和经验",
+      title: "分享我的技术思考和经验",
+      subtitle: "技术洞察与实践总结",
       readMore: "阅读更多",
       readTime: "阅读时间",
       publishedOn: "发布于",
@@ -232,8 +232,8 @@ export const translations: Record<Language, Translations> = {
       }
     },
     articles: {
-      title: "Articles",
-      subtitle: "Sharing my technical thoughts and experiences",
+      title: "Sharing My Technical Thoughts and Experiences",
+      subtitle: "Technical Insights and Practice Summary",
       readMore: "Read More",
       readTime: "Read Time",
       publishedOn: "Published on",

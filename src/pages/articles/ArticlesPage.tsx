@@ -10,65 +10,57 @@ const ArticlesPage: React.FC = () => {
   const { t } = useTranslations();
   const data = personalDataMultiLang[language];
 
+  // 按照发布时间排序，最新的文章在前面
+  const sortedArticles = [...data.articles].sort((a, b) => {
+    return (
+      new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+    );
+  });
+
   return (
     <div className="articles-page">
       <div className="articles-container">
-        <header className="articles-header">
-          <h1>{t('articles.title')}</h1>
-          <p>{t('articles.subtitle')}</p>
-        </header>
-        
+        <div className="back-to-home-top">
+          <Link to="/" className="back-btn-top">
+            <span className="arrow-left">←</span>
+            {t("common.backToHome")}
+          </Link>
+        </div>
+
+        {/* <header className="articles-header">
+          <h1>{t("articles.title")}</h1>
+          <p>{t("articles.subtitle")}</p>
+        </header> */}
+
         <div className="articles-grid">
-          {data.articles.map((article) => (
+          {sortedArticles.map((article) => (
             <article key={article.id} className="article-card">
-              <div className="article-meta">
-                <span className="article-date">
-                  {t('articles.publishedOn')} {new Date(article.publishDate).toLocaleDateString(language === 'zh' ? 'zh-CN' : 'en-US')}
-                </span>
-                <span className="article-read-time">
-                  {article.readTime} {t('articles.readTime')}
-                </span>
-              </div>
-              
-              <h2 className="article-title">
-                <Link to={`/articles/${article.id}`}>
-                  {article.title}
-                </Link>
-              </h2>
-              
-              <p className="article-summary">{article.summary}</p>
-              
-              <div className="article-tags">
-                {article.tags.map((tag, index) => (
-                  <span key={index} className="article-tag">
-                    {tag}
+              <Link to={`/articles/${article.id}`}>
+                <h2 className="article-title">{article.title}</h2>
+
+                <p className="article-summary">{article.summary}</p>
+
+                <div className="article-tags">
+                  {article.tags.map((tag, index) => (
+                    <span key={index} className="article-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="article-meta">
+                  <span className="article-date">
+                    {t("articles.publishedOn")}{" "}
+                    {new Date(article.publishDate).toLocaleDateString(
+                      language === "zh" ? "zh-CN" : "en-US"
+                    )}
                   </span>
-                ))}
-              </div>
-              
-              <div className="article-actions">
-                <Link to={`/articles/${article.id}`} className="read-more-btn">
-                  {t('articles.readMore')}
-                </Link>
-                {article.link && (
-                  <a 
-                    href={article.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="external-link-btn"
-                  >
-                    {t('articles.externalLink')}
-                  </a>
-                )}
-              </div>
+                  <span className="article-read-time">
+                    {article.readTime} {t("articles.readTime")}
+                  </span>
+                </div>
+              </Link>
             </article>
           ))}
-        </div>
-        
-        <div className="back-to-home">
-          <Link to="/" className="back-btn">
-            {t('common.backToHome')}
-          </Link>
         </div>
       </div>
     </div>

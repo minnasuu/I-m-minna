@@ -1,0 +1,173 @@
+:root{
+    // 主题色 
+    --color-primary-1: #E8FCFF; // 背景
+    --color-primary-2: #C2F3FB;// 文字禁用
+    --color-primary-3: #9DE7F8;// 禁用
+    --color-primary-4: #78D9F4;// 特殊选中 & 边框
+    --color-primary-5: #55CAF1;// 悬浮 :hover
+    --color-primary-6: #33B8ED;// 常规
+    --color-primary-7: #2091C5;// 点击 :active
+    --color-primary-8: #116C9D;// 已点击
+
+    // 状态色: success warnning error
+    --color-red-1: #FFECE8;
+    --color-red-2: #FBCBC4;
+    --color-red-3: #F7A9A1;
+    --color-red-4: #F3867E;
+    --color-red-5: #EF625D;
+    --color-red-6: #EB3D3D;
+    --color-red-7: #C3262B;
+    --color-red-8: #9C141D;
+
+    --color-orange-1: #FFF7E8;
+    --color-orange-2: #FFE6C0;
+    --color-orange-3: #FFD298;
+    --color-orange-4: #FFBC70;
+    --color-orange-5: #FFA448;
+    --color-orange-6: #FF8920;
+    --color-orange-7: #D26614;
+    --color-orange-8: #A6490A;
+
+    --color-green-1: #E8FFEA;
+    --color-green-2: #BDF5C3;
+    --color-green-3: #95EBA1;
+    --color-green-4: #70E083;
+    --color-green-5: #4ED669;
+    --color-green-6: #2ECC52;
+    --color-green-7: #1DAC43;
+    --color-green-8: #108C35;
+
+    // 链接色
+    --color-link-1: #E8F3FF;
+    --color-link-2: #BEDAFF;
+    --color-link-3: #94BFFF;
+    --color-link-4: #6AA1FF;
+    --color-link-5: #4080FF;
+    --color-link-6: #165DFF;
+    --color-link-7: #0E42D2;
+    --color-link-8: #072CA6;
+
+    // 标签色 & 数据色
+    --color-tag-1: #F53F3F;
+    --color-tag-2: #FF7D00;
+    --color-tag-3: #23C343;
+    --color-tag-4: #14C9C9;
+    --color-tag-5: #3491FA;
+    --color-tag-6: #8D4EDA;
+    --color-tag-7: #FF4A83;
+    --color-tag-8: #4e5969;
+    --color-tag-9: #DDBEF6;
+    --color-tag-10: #FF99B2;
+    --color-tag-11: #AFF0B5;  
+
+    // 边框色(无交互)
+    --color-border-1: #EFEFEF; // 常规
+    --color-border-2: #EAEAEA; // 边框:hover
+    --color-border-3: #DADADA; // 重边框
+
+    // 边框粗细
+    --border-1: 1px;
+    --border-2: 2px;
+
+    // 背景色
+    --color-bg-white: #FFF;
+    --color-bg-1: #F9F9F9;
+    --color-bg-2: #F6F6F6;
+    --color-bg-3: #F2F2F2;
+
+    // 文字色
+    --color-text-1: #0D0D0D;
+    --color-text-2: #202020;
+    --color-text-3: #555;
+    --color-text-4: #888;
+    --color-text-5: #999;
+    --color-text-light: #F9F9F9;
+    --color-text-white: #FFF;
+
+    // 字号
+    --font-content-small: 12px; // 正文-小
+    --font-content-medium: 14px; // 正文-常规 
+    --font-content-large: 16px; // 正文-大
+    --font-title-mini: 12px; // 标题-辅助
+    --font-title-small: 16px; // 标题-小
+    --font-title-medium: 20px; // 标题-常规 
+    --font-title-large: 24px; // 标题常-大
+    --font-slogan-small: 36px; // 视觉标题-小
+    --font-slogan-medium: 48px; // 视觉标题-常规 
+    --font-slogan-large: 64px; // 视觉标题常-大
+
+    // 字重
+    --font-weight-300: 300; // light
+    --font-weight-400: 400; // regular
+    --font-weight-500: 500; // bold
+    --font-weight-500: 600; // heavy
+
+    // 亲密性
+    --gap-4: 4px;
+    --gap-8: 8px;
+    --gap-12: 12px;
+    --gap-16: 16px;
+    --gap-20: 20px;
+    --gap-24: 24px;
+    --gap-32: 32px;
+    --gap-48: 48px;
+    --gap-80: 80px;
+
+    // 图标尺寸
+    --icon-mini: 12px;
+    --icon-small: 16px;
+    --icon-medium: 20px;
+    --icon-large: 24px;
+
+    // 圆角
+    --radius-2: 2px;
+    --radius-4: 4px;
+    --radius-6: 6px;
+    --radius-8: 8px;
+    --radius-12: 12px;
+    --radius-20: 20px;
+    --radius-50: 50%;
+
+    // 间距
+    --padding-small: 4px;
+    --padding-medium: 8px;
+    --padding-medium-xy: 8px 16px;
+    --padding-large: 16px;
+
+    // 背景模糊
+    --blur-small: blur(10px);
+    --blur-medium: blur(15px);
+    --blur-large: blur(30px);
+
+    // 透明度
+    --opacity-0: 0;
+    --opacity-01: 0.1;
+    --opacity-02: 0.2;
+    --opacity-04: 0.4;
+    --opacity-68: 0.68;
+    --opacity-08: 0.8;
+    --opacity-09: 0.9;
+    --opacity-1: 1;
+
+    // 投影
+    --boxshadow-small: 0px 3px 5px 0px rgba(0, 0, 0, 0.05), 0px 4px 10px 0px rgba(0, 0, 0, 0.07);;
+    --boxshadow-medium: 0 0 10px rgba(0, 0, 0, 0.1);
+    --boxshadow-large: 0 0 20px rgba(0, 0, 0, 0.1);
+
+    // 过渡
+    --transition-15: 0.15s;
+    --transition-2: 0.2s;
+    --transition-3: 0.3s;
+    --transition-8: 0.8s;
+
+    
+    // 层级
+    --zIndex-0: -1; 
+    --zIndex-1: 0;
+    --zIndex-2: 1;
+    --zIndex-3: 10;
+    --zIndex-4: 100; // 气泡
+    --zIndex-5: 1000; // 蒙层
+
+    /****** 暗黑模式 ******/
+}
