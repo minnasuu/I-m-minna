@@ -161,6 +161,63 @@
   color: #333;
 }
 
+.skill-name-link {
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.skill-name-link:hover {
+  color: #007acc;
+}
+
+.skill-name-link:active {
+  color: #005a9e;
+}
+
+.article-title-link {
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.article-title-link:hover {
+  color: #007acc;
+}
+
+.article-title-link:active {
+  color: #005a9e;
+}
+
+.article-title-link h3 {
+  margin: 0 0 15px 0;
+  color: inherit;
+}
+
+.project-title-link {
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.project-title-link:hover {
+  color: #007acc;
+}
+
+.project-title-link:active {
+  color: #005a9e;
+}
+
+.project-title-link h3 {
+  font-size: 1.4em;
+  font-weight: 400;
+  margin: 0 0 15px 0;
+  color: inherit;
+}
+
 @media (max-width: 768px) {
   .minimal-name {
     font-size: 2.5em;

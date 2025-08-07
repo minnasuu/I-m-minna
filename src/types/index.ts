@@ -19,6 +19,7 @@ export interface Skill {
   name: string;
   level: number; // 1-100
   category: 'frontend' | 'backend' | 'devops' | 'design' | 'other';
+  link?: string; // 可选的链接
 }
 
 export interface Interest {
@@ -34,6 +35,7 @@ export interface Article {
   tags: string[];
   readTime: number; // 分钟
   coverImage?: string;
+  link?: string; // 可选的链接
 }
 
 export interface Project {
@@ -45,6 +47,7 @@ export interface Project {
   liveUrl?: string;
   image?: string;
   featured: boolean;
+  link?: string; // 可选的链接
 }
 
 export interface PersonalData {

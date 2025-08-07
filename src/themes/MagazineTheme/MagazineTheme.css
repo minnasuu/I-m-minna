@@ -351,6 +351,69 @@
   color: white;
 }
 
+.skill-name-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.skill-name-link:hover {
+  color: #667eea;
+}
+
+.skill-name-link:active {
+  color: #764ba2;
+}
+
+.skill-name-link h3 {
+  margin: 0;
+  color: inherit;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.article-title-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.article-title-link:hover {
+  color: #667eea;
+}
+
+.article-title-link:active {
+  color: #764ba2;
+}
+
+.article-title-link h3 {
+  margin: 0 0 15px 0;
+  color: inherit;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.project-title-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.project-title-link:hover {
+  color: #667eea;
+}
+
+.project-title-link:active {
+  color: #764ba2;
+}
+
+.project-title-link h3 {
+  margin: 0 0 15px 0;
+  color: inherit;
+  font-size: 1.4em;
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .magazine-cover {
     grid-template-columns: 1fr;

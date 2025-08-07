@@ -33,7 +33,18 @@ const MagazineTheme: React.FC<MagazineThemeProps> = ({ data }) => {
             {data.skills.map((skill, index) => (
               <div key={index} className="skill-card">
                 <div className="skill-header">
-                  <h3>{skill.name}</h3>
+                  {skill.link ? (
+                    <a 
+                      href={skill.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="skill-name-link"
+                    >
+                      <h3>{skill.name}</h3>
+                    </a>
+                  ) : (
+                    <h3>{skill.name}</h3>
+                  )}
                   <span className="skill-percentage">{skill.level}%</span>
                 </div>
                 <div className="skill-progress">
@@ -50,17 +61,10 @@ const MagazineTheme: React.FC<MagazineThemeProps> = ({ data }) => {
 
         <section className="magazine-section">
           <h2 className="section-headline">{t('interests.title')}</h2>
-          <div className="interests-showcase">
+          <div className="interests-grid">
             {data.interests.map((interest, index) => (
               <div key={index} className="interest-card">
-                <div className="interest-header">
-                  <h3>{interest.name}</h3>
-                  <span className="interest-level">{t(`interests.levels.${interest.level}`)}</span>
-                </div>
-                <p className="interest-description">{interest.description}</p>
-                <div className="interest-meta">
-                  <span className="interest-category">{t(`interests.categories.${interest.category}`)}</span>
-                </div>
+                <h3>{interest.name}</h3>
               </div>
             ))}
           </div>
@@ -71,18 +75,22 @@ const MagazineTheme: React.FC<MagazineThemeProps> = ({ data }) => {
           <div className="articles-grid">
             {data.articles.map((article) => (
               <article key={article.id} className="article-card">
-                <div className="article-header">
+                {article.link ? (
+                  <a 
+                    href={article.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="article-title-link"
+                  >
+                    <h3>{article.title}</h3>
+                  </a>
+                ) : (
                   <h3>{article.title}</h3>
-                  <div className="article-meta">
-                    <time>{article.publishDate}</time>
-                    <span className="read-time">{article.readTime} {t('articles.readTime')}</span>
-                  </div>
-                </div>
-                <p className="article-summary">{article.summary}</p>
-                <div className="article-tags">
-                  {article.tags.map((tag, index) => (
-                    <span key={index} className="tag">{tag}</span>
-                  ))}
+                )}
+                <p>{article.summary}</p>
+                <div className="article-meta">
+                  <time>{article.publishDate}</time>
+                  <span>{article.readTime} {t('articles.readTime')}</span>
                 </div>
               </article>
             ))}
@@ -98,11 +106,22 @@ const MagazineTheme: React.FC<MagazineThemeProps> = ({ data }) => {
                   {project.image ? (
                     <img src={project.image} alt={project.name} />
                   ) : (
-                    <div className="project-placeholder">🚀</div>
+                    <div className="project-placeholder">🍉</div>
                   )}
                 </div>
                 <div className="project-content">
-                  <h3>{project.name}</h3>
+                  {project.link ? (
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="project-title-link"
+                    >
+                      <h3>{project.name}</h3>
+                    </a>
+                  ) : (
+                    <h3>{project.name}</h3>
+                  )}
                   <p>{project.description}</p>
                   <div className="project-tech">
                     {project.technologies.map((tech, index) => (

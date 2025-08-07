@@ -27,7 +27,18 @@ const MinimalTheme: React.FC<MinimalThemeProps> = ({ data }) => {
             <div className="skills-list">
               {data.skills.map((skill, index) => (
                 <div key={index} className="skill-item">
-                  <span className="skill-name">{skill.name}</span>
+                  {skill.link ? (
+                    <a 
+                      href={skill.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="skill-name-link"
+                    >
+                      {skill.name}
+                    </a>
+                  ) : (
+                    <span className="skill-name">{skill.name}</span>
+                  )}
                   <div className="skill-level">
                     <div
                       className="skill-bar"
@@ -55,7 +66,18 @@ const MinimalTheme: React.FC<MinimalThemeProps> = ({ data }) => {
             <div className="articles-list">
               {data.articles.map((article) => (
                 <article key={article.id} className="article-item">
-                  <h3>{article.title}</h3>
+                  {article.link ? (
+                    <a 
+                      href={article.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="article-title-link"
+                    >
+                      <h3>{article.title}</h3>
+                    </a>
+                  ) : (
+                    <h3>{article.title}</h3>
+                  )}
                   <p>{article.summary}</p>
                   <div className="article-meta">
                     <time>{article.publishDate}</time>
@@ -71,7 +93,18 @@ const MinimalTheme: React.FC<MinimalThemeProps> = ({ data }) => {
             <div className="projects-list">
               {data.projects.map((project) => (
                 <div key={project.id} className="project-item">
-                  <h3>{project.name}</h3>
+                  {project.link ? (
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="project-title-link"
+                    >
+                      <h3>{project.name}</h3>
+                    </a>
+                  ) : (
+                    <h3>{project.name}</h3>
+                  )}
                   <p>{project.description}</p>
                   <div className="project-tech">
                     {project.technologies.join(', ')}

@@ -133,7 +133,7 @@
 }
 
 .terminal-line.project-list::before {
-  content: "✨ ";
+  content: "🍉 ";
   color: #87ceeb;
 }
 
@@ -272,6 +272,7 @@
   font-size: 12px;
   margin-bottom: 4px;
   color: #ccc;
+  white-space: nowrap;
 }
 
 .skill-bar {
@@ -320,6 +321,63 @@
     }
   }
 } 
+
+.skill-name-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.skill-name-link:hover {
+  color: #00ff00 !important;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+.skill-name-link:active {
+  color: #00cc00 !important;
+}
+
+.skill-name-link .skill-name {
+  color: #cccccc;
+}
+
+.article-title-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.article-title-link:hover {
+  color: #00ff00 !important;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+.article-title-link:active {
+  color: #00cc00 !important;
+}
+
+.article-title-link .interest-name {
+  color: inherit;
+}
+
+.project-title-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.project-title-link:hover {
+  color: #00ff00 !important;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+.project-title-link:active {
+  color: #00cc00 !important;
+}
+
+.project-title-link .interest-name {
+  color: inherit;
+}
 
 /* 响应式设计 */
 @media (max-width: 768px) {

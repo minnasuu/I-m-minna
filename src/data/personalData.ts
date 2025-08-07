@@ -7,8 +7,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     info: {
       name: "苏敏晗",
       avatar: './avatar.png',
-      title: "成为一名UX工程师",
-      bio: "热爱编程、设计和创造的数字艺术家，专注于构建优雅的用户体验和创新的技术解决方案。",
+      title: "（成为一名）UX工程师",
+      bio: "热爱编程、设计和创造，专注于构建优雅的用户体验和创新的技术解决方案。",
       email: "minhansu508@gmail.com",
       location: "深圳, 中国",
       wechat: "minnana1220",
@@ -17,39 +17,28 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       }
     },
     skills: [
-      { name: "React", level: 90, category: "frontend" },
-      { name: "TypeScript", level: 85, category: "frontend" },
-      { name: "Node.js", level: 80, category: "backend" },
-      { name: "Python", level: 75, category: "backend" },
-      { name: "Docker", level: 70, category: "devops" },
-      { name: "Figma", level: 65, category: "design" },
-      { name: "Three.js", level: 60, category: "frontend" },
-      { name: "AWS", level: 55, category: "devops" }
+      { name: "React", level: 90, category: "frontend", link: "https://react.dev" },
+      { name: "TypeScript", level: 85, category: "frontend", link: "https://www.typescriptlang.org" },
+      { name: "Node.js", level: 80, category: "backend", link: "https://nodejs.org" },
+      { name: "SCSS", level: 70, category: "frontend", link: "https://sass-lang.com" },
+      { name: "微信小程序", level: 70, category: "frontend", link: "https://developers.weixin.qq.com/miniprogram/dev/framework/" },
+      { name: "TailwindCSS", level: 50, category: "frontend", link: "https://tailwindcss.com" },
+      { name: "Figma", level: 65, category: "design", link: "https://www.figma.com" },
+      { name: "Three.js", level: 50, category: "frontend", link: "https://threejs.org" },
+      { name: "Python", level: 30, category: "backend", link: "https://www.python.org" },
     ],
     interests: [
       {
-        name: "3D建模与动画",
+        name: "motion 动画",
       },
       {
-        name: "电子音乐制作",
+        name: "手工编织",
       },
       {
-        name: "摄影与后期",
+        name: "摄影",
       },
       {
-        name: "游戏开发",
-      },
-      {
-        name: "科幻小说阅读",
-      },
-      {
-        name: "徒步旅行",
-      },
-      {
-        name: "开源贡献",
-      },
-      {
-        name: "设计思维",
+        name: "猫咪",
       }
     ],
     articles: [
@@ -60,7 +49,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "这里是文章的完整内容...",
         publishDate: "2024-01-15",
         tags: ["React", "最佳实践", "前端开发"],
-        readTime: 8
+        readTime: 8,
+        link: "https://blog.example.com/react-best-practices"
       },
       {
         id: "2",
@@ -69,7 +59,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "这里是文章的完整内容...",
         publishDate: "2024-01-10",
         tags: ["TypeScript", "类型系统"],
-        readTime: 12
+        readTime: 12,
+        link: "https://blog.example.com/typescript-advanced-types"
       },
       {
         id: "3",
@@ -78,7 +69,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "这里是文章的完整内容...",
         publishDate: "2024-01-08",
         tags: ["Docker", "DevOps", "部署"],
-        readTime: 10
+        readTime: 10,
+        link: "https://blog.example.com/docker-best-practices"
       },
       {
         id: "4",
@@ -87,7 +79,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "这里是文章的完整内容...",
         publishDate: "2024-01-05",
         tags: ["Three.js", "WebGL", "3D图形"],
-        readTime: 15
+        readTime: 15,
+        link: "https://blog.example.com/threejs-guide"
       },
       {
         id: "5",
@@ -105,7 +98,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "这里是文章的完整内容...",
         publishDate: "2024-01-01",
         tags: ["AWS", "云计算", "DevOps"],
-        readTime: 20
+        readTime: 20,
+        link: "https://blog.example.com/aws-guide"
       },
       {
         id: "7",
@@ -114,7 +108,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "这里是文章的完整内容...",
         publishDate: "2023-12-28",
         tags: ["Figma", "设计系统", "UI/UX"],
-        readTime: 14
+        readTime: 14,
+        link: "https://blog.example.com/figma-design-system"
       }
     ],
     projects: [
@@ -125,7 +120,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["React", "Node.js", "TensorFlow", "MongoDB"],
         githubUrl: "https://github.com/minna/ai-task-manager",
         liveUrl: "https://ai-task-manager.demo.com",
-        featured: true
+        featured: true,
+        link: "https://ai-task-manager.demo.com"
       },
       {
         id: "2",
@@ -133,7 +129,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         description: "使用Three.js构建的沉浸式数据可视化工具，支持多种数据格式和交互方式。",
         technologies: ["Three.js", "React", "WebGL", "D3.js"],
         githubUrl: "https://github.com/minna/3d-viz",
-        featured: true
+        featured: true,
+        link: "https://3d-viz.demo.com"
       },
       {
         id: "3",
@@ -142,7 +139,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["WebSocket", "React", "Monaco Editor", "Redis"],
         githubUrl: "https://github.com/minna/collab-editor",
         liveUrl: "https://collab-editor.demo.com",
-        featured: true
+        featured: true,
+        link: "https://collab-editor.demo.com"
       },
       {
         id: "4",
@@ -151,7 +149,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["Python", "TensorFlow", "FastAPI", "PostgreSQL"],
         githubUrl: "https://github.com/minna/chatbot-platform",
         liveUrl: "https://chatbot.demo.com",
-        featured: true
+        featured: true,
+        link: "https://chatbot.demo.com"
       },
       {
         id: "5",
@@ -159,7 +158,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         description: "去中心化的电子投票平台，确保投票过程的透明性和安全性。",
         technologies: ["Solidity", "React", "Web3.js", "IPFS"],
         githubUrl: "https://github.com/minna/blockchain-voting",
-        featured: true
+        featured: true,
+        link: "https://blockchain-voting.demo.com"
       },
       {
         id: "6",
@@ -168,7 +168,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["React Native", "ARKit", "ARCore", "Three.js"],
         githubUrl: "https://github.com/minna/ar-navigation",
         liveUrl: "https://ar-nav.demo.com",
-        featured: true
+        featured: true,
+        link: "https://ar-nav.demo.com"
       },
       {
         id: "7",
@@ -177,7 +178,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["Web Audio API", "React", "WebRTC", "Node.js"],
         githubUrl: "https://github.com/minna/cloud-music",
         liveUrl: "https://cloud-music.demo.com",
-        featured: true
+        featured: true,
+        link: "https://cloud-music.demo.com"
       }
     ]
   },
@@ -185,8 +187,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     info: {
       name: "minna",
       avatar: './avatar.png',
-      title: "Becoming a UX Engineer",
-      bio: "A digital artist passionate about programming, design, and creation, focused on building elegant user experiences and innovative technical solutions.",
+      title: "(Becoming a) UX Engineer",
+      bio: "Passionate about programming, design, and creation, focused on building elegant user experiences and innovative technical solutions.",
       email: "minhansu508@gmail.com",
       location: "Shenzhen, China",
       wechat: "minnana1220",
@@ -195,39 +197,27 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       }
     },
     skills: [
-      { name: "React", level: 90, category: "frontend" },
-      { name: "TypeScript", level: 85, category: "frontend" },
-      { name: "Node.js", level: 80, category: "backend" },
-      { name: "Python", level: 75, category: "backend" },
-      { name: "Docker", level: 70, category: "devops" },
-      { name: "Figma", level: 65, category: "design" },
-      { name: "Three.js", level: 60, category: "frontend" },
-      { name: "AWS", level: 55, category: "devops" }
+      { name: "React", level: 90, category: "frontend", link: "https://react.dev" },
+      { name: "TypeScript", level: 85, category: "frontend", link: "https://www.typescriptlang.org" },
+      { name: "Node.js", level: 80, category: "backend", link: "https://nodejs.org" },
+      { name: "Python", level: 75, category: "backend", link: "https://www.python.org" },
+      { name: "Docker", level: 70, category: "devops", link: "https://www.docker.com" },
+      { name: "Figma", level: 65, category: "design", link: "https://www.figma.com" },
+      { name: "Three.js", level: 60, category: "frontend", link: "https://threejs.org" },
+      { name: "AWS", level: 55, category: "devops", link: "https://aws.amazon.com" }
     ],
     interests: [
       {
-        name: "3D Modeling and Animation",
+        name: "Motion Animation",
       },
       {
-        name: "Electronic Music Production",
+        name: "Handmade Knitting",
       },
       {
-        name: "Photography and Post-Production",
+        name: "Photography",
       },
       {
-        name: "Game Development",
-      },
-      {
-        name: "Science Fiction Reading",
-      },
-      {
-        name: "Hiking",
-      },
-      {
-        name: "Open Source Contribution",
-      },
-      {
-        name: "Design Thinking",
+        name: "Cats",
       }
     ],
     articles: [
@@ -238,7 +228,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "Here is the complete article content...",
         publishDate: "2024-01-15",
         tags: ["React", "Best Practices", "Frontend Development"],
-        readTime: 8
+        readTime: 8,
+        link: "https://blog.example.com/react-best-practices"
       },
       {
         id: "2",
@@ -247,7 +238,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "Here is the complete article content...",
         publishDate: "2024-01-10",
         tags: ["TypeScript", "Type System"],
-        readTime: 12
+        readTime: 12,
+        link: "https://blog.example.com/typescript-advanced-types"
       },
       {
         id: "3",
@@ -256,7 +248,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "Here is the complete article content...",
         publishDate: "2024-01-08",
         tags: ["Docker", "DevOps", "Deployment"],
-        readTime: 10
+        readTime: 10,
+        link: "https://blog.example.com/docker-best-practices"
       },
       {
         id: "4",
@@ -265,7 +258,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "Here is the complete article content...",
         publishDate: "2024-01-05",
         tags: ["Three.js", "WebGL", "3D Graphics"],
-        readTime: 15
+        readTime: 15,
+        link: "https://blog.example.com/threejs-guide"
       },
       {
         id: "5",
@@ -283,7 +277,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "Here is the complete article content...",
         publishDate: "2024-01-01",
         tags: ["AWS", "Cloud Computing", "DevOps"],
-        readTime: 20
+        readTime: 20,
+        link: "https://blog.example.com/aws-guide"
       },
       {
         id: "7",
@@ -292,7 +287,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         content: "Here is the complete article content...",
         publishDate: "2023-12-28",
         tags: ["Figma", "Design System", "UI/UX"],
-        readTime: 14
+        readTime: 14,
+        link: "https://blog.example.com/figma-design-system"
       }
     ],
     projects: [
@@ -303,7 +299,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["React", "Node.js", "TensorFlow", "MongoDB"],
         githubUrl: "https://github.com/minna/ai-task-manager",
         liveUrl: "https://ai-task-manager.demo.com",
-        featured: true
+        featured: true,
+        link: "https://ai-task-manager.demo.com"
       },
       {
         id: "2",
@@ -311,7 +308,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         description: "An immersive data visualization tool built with Three.js that supports multiple data formats and interaction methods.",
         technologies: ["Three.js", "React", "WebGL", "D3.js"],
         githubUrl: "https://github.com/minna/3d-viz",
-        featured: true
+        featured: true,
+        link: "https://3d-viz.demo.com"
       },
       {
         id: "3",
@@ -320,7 +318,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["WebSocket", "React", "Monaco Editor", "Redis"],
         githubUrl: "https://github.com/minna/collab-editor",
         liveUrl: "https://collab-editor.demo.com",
-        featured: true
+        featured: true,
+        link: "https://collab-editor.demo.com"
       },
       {
         id: "4",
@@ -329,7 +328,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["Python", "TensorFlow", "FastAPI", "PostgreSQL"],
         githubUrl: "https://github.com/minna/chatbot-platform",
         liveUrl: "https://chatbot.demo.com",
-        featured: true
+        featured: true,
+        link: "https://chatbot.demo.com"
       },
       {
         id: "5",
@@ -337,7 +337,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         description: "A decentralized electronic voting platform that ensures transparency and security in the voting process.",
         technologies: ["Solidity", "React", "Web3.js", "IPFS"],
         githubUrl: "https://github.com/minna/blockchain-voting",
-        featured: true
+        featured: true,
+        link: "https://blockchain-voting.demo.com"
       },
       {
         id: "6",
@@ -346,7 +347,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["React Native", "ARKit", "ARCore", "Three.js"],
         githubUrl: "https://github.com/minna/ar-navigation",
         liveUrl: "https://ar-nav.demo.com",
-        featured: true
+        featured: true,
+        link: "https://ar-nav.demo.com"
       },
       {
         id: "7",
@@ -355,7 +357,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["Web Audio API", "React", "WebRTC", "Node.js"],
         githubUrl: "https://github.com/minna/cloud-music",
         liveUrl: "https://cloud-music.demo.com",
-        featured: true
+        featured: true,
+        link: "https://cloud-music.demo.com"
       }
     ]
   }

@@ -108,7 +108,7 @@ export const translations: Record<Language, Translations> = {
       }
     },
     articles: {
-      title: "技术文章",
+      title: "随笔",
       readMore: "阅读更多",
       readTime: "阅读时间",
       publishedOn: "发布于"
@@ -167,7 +167,7 @@ export const translations: Record<Language, Translations> = {
       }
     },
     articles: {
-      title: "Technical Articles",
+      title: "Articles",
       readMore: "Read More",
       readTime: "Read Time",
       publishedOn: "Published on"

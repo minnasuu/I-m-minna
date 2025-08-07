@@ -32,7 +32,18 @@ const PixelTheme: React.FC<PixelThemeProps> = ({ data }) => {
           <div className="pixel-skills">
             {data.skills.map((skill, index) => (
               <div key={index} className="pixel-skill">
-                <span className="skill-name">{skill.name}</span>
+                {skill.link ? (
+                  <a 
+                    href={skill.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="skill-name-link"
+                  >
+                    <span className="skill-name">{skill.name}</span>
+                  </a>
+                ) : (
+                  <span className="skill-name">{skill.name}</span>
+                )}
                 <div className="skill-bar">
                   <div
                     className="skill-fill"
@@ -52,10 +63,7 @@ const PixelTheme: React.FC<PixelThemeProps> = ({ data }) => {
               <div key={index} className="pixel-interest">
                 <div className="interest-header">
                   <h3 className="interest-name">{interest.name}</h3>
-                  <span className="interest-level">{t(`interests.levels.${interest.level}`)}</span>
                 </div>
-                <p className="interest-description">{interest.description}</p>
-                <span className="interest-category">{t(`interests.categories.${interest.category}`)}</span>
               </div>
             ))}
           </div>
@@ -66,7 +74,18 @@ const PixelTheme: React.FC<PixelThemeProps> = ({ data }) => {
           <div className="pixel-articles">
             {data.articles.map((article) => (
               <div key={article.id} className="pixel-article">
-                <h3>{article.title}</h3>
+                {article.link ? (
+                  <a 
+                    href={article.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="article-title-link"
+                  >
+                    <h3>{article.title}</h3>
+                  </a>
+                ) : (
+                  <h3>{article.title}</h3>
+                )}
                 <p>{article.summary}</p>
                 <div className="article-meta">
                   <span>{article.publishDate}</span>
@@ -82,7 +101,18 @@ const PixelTheme: React.FC<PixelThemeProps> = ({ data }) => {
           <div className="pixel-projects">
             {data.projects.map((project) => (
               <div key={project.id} className="pixel-project">
-                <h3>{project.name}</h3>
+                {project.link ? (
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="project-title-link"
+                  >
+                    <h3>{project.name}</h3>
+                  </a>
+                ) : (
+                  <h3>{project.name}</h3>
+                )}
                 <p>{project.description}</p>
                 <div className="project-tech">
                   {project.technologies.map((tech, index) => (

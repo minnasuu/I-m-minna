@@ -136,11 +136,22 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
           </div>
 
           <div className="sidebar-section">
-            <h3>💻 {t('skills.title')}</h3>
+            <h3>⚡️ {t('skills.title')}</h3>
             <div className="skill-list">
             {data.skills.map((skill, index) => (
               <div key={index} className="skill-item">
-                <span className="skill-name">{skill.name}</span>
+                {skill.link ? (
+                  <a 
+                    href={skill.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="skill-name-link"
+                  >
+                    <span className="skill-name">{skill.name}</span>
+                  </a>
+                ) : (
+                  <span className="skill-name">{skill.name}</span>
+                )}
                 <div className="skill-bar">
                   <div
                     className="skill-fill"
@@ -168,7 +179,18 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
             <div className="interest-list"> 
             {data.articles.map((article, index) => (
               <div key={index} className="interest-item">
-                <span className="interest-name">{article.title}</span>
+                {article.link ? (
+                  <a 
+                    href={article.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="article-title-link"
+                  >
+                    <span className="interest-name">{article.title}</span>
+                  </a>
+                ) : (
+                  <span className="interest-name">{article.title}</span>
+                )}
               </div>
             ))}
             </div>
@@ -179,7 +201,18 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
             <div className="interest-list"> 
             {data.projects.map((project, index) => (
               <div key={index} className="interest-item">
-                <span className="interest-name">{project.name}</span>
+                {project.link ? (
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="project-title-link"
+                  >
+                    <span className="interest-name">{project.name}</span>
+                  </a>
+                ) : (
+                  <span className="interest-name">{project.name}</span>
+                )}
               </div>
             ))}
             </div>
