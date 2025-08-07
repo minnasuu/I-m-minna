@@ -1,0 +1,70 @@
+.theme-switcher {
+  position: fixed;
+  top: 20px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px 0 0 12px;
+  padding: 12px 8px;
+  box-shadow: -2px 4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.theme-switcher:hover {
+  right: 0;
+  padding-right: 12px;
+}
+
+
+
+.theme-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.theme-option:hover {
+  border-color: #007bff;
+  background-color: #f8f9ff;
+  padding-right: 12px;
+}
+
+.theme-option.active {
+  border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+}
+
+.theme-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.theme-name {
+  font-weight: 500;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.theme-switcher:hover .theme-name,
+.theme-option:hover .theme-name {
+  opacity: 1;
+  transform: translateX(0);
+}
