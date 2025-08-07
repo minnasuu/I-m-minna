@@ -11,7 +11,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
   zh: {
     info: {
       name: "苏敏晗",
-      avatar: './avatar.png',
+      avatar: "./avatar.png",
       title: "UI 开发 @腾讯",
       bio: "我觉得自己是一个热爱生活、用心做体验、追求产品品质的 UI开发工程师。我希望自己成为一个技术与艺术并重的、专业的全栈体验开发工程师。",
       email: "minhansu508@gmail.com",
@@ -19,19 +19,19 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       wechat: "minnana1220",
       socialLinks: [
         {
-          name:"Github",
+          name: "Github",
           url: "https://github.com/minnasuu",
         },
         {
           name: "小红书",
           abbreviation: "Suumhan",
           url: "https://www.xiaohongshu.com/user/profile/5de3f0e60000000001001e98?xsec_token=YB_O8hD8Al3lV4mGSuuDDC4m6bSlsqSBOICoeFzx1KgMU=&xsec_source=app_share&xhsshare=CopyLink&appuid=5de3f0e60000000001001e98&apptime=1754584198&share_id=d50b51a3b3be43288a2cd5ec5bf7c6b3",
-        }
-      ]
+        },
+      ],
     },
     skills: [
-      { name: "React", level: 90, category: "frontend",  },
-      { name: "TypeScript", level: 85, category: "frontend",  },
+      { name: "React", level: 90, category: "frontend" },
+      { name: "TypeScript", level: 85, category: "frontend" },
       { name: "Node.js", level: 80, category: "backend" },
       { name: "SCSS", level: 70, category: "frontend" },
       { name: "微信小程序", level: 70, category: "frontend" },
@@ -61,7 +61,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
       {
         name: "最近看过（绿皮书）",
-      }
+      },
     ],
     articles: [
       {
@@ -70,9 +70,9 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         summary: "探讨网页深色模式与适配，帮助你构建更高效、可维护的应用。",
         content: article2025_1_2,
         publishDate: "2025-01-02",
-        tags: [ "前端开发"],
+        tags: ["前端开发"],
         readTime: 5,
-        link: "https://blog.example.com/dark-mode-and-adaptation"
+        link: "https://blog.example.com/dark-mode-and-adaptation",
       },
       {
         id: "2",
@@ -82,7 +82,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         publishDate: "2025-01-16",
         tags: ["React", "SVG", "轮盘"],
         readTime: 2,
-        link: "https://blog.example.com/svg-interactive-wheel"
+        link: "https://blog.example.com/svg-interactive-wheel",
       },
       {
         id: "3",
@@ -90,19 +90,20 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         summary: "深刻认识图片，了解图片的格式、大小、质量、加载方式等。",
         content: article2025_1_20,
         publishDate: "2025-01-20",
-          tags: ["图片", "格式", "大小", "质量", "加载方式"],
+        tags: ["图片", "格式", "大小", "质量", "加载方式"],
         readTime: 2,
-        link: "https://blog.example.com/know-more-about-image"
+        link: "https://blog.example.com/know-more-about-image",
       },
       {
         id: "4",
         title: "CSS实现变形动画（Morph）的关键",
-        summary: "CSS实现变形动画（Morph）的关键，了解变形动画的原理和实现方式。",
+        summary:
+          "CSS实现变形动画（Morph）的关键，了解变形动画的原理和实现方式。",
         content: article2025_2_22,
         publishDate: "2025-02-22",
         tags: ["CSS", "变形动画", "Morph"],
         readTime: 15,
-        link: "https://blog.example.com/threejs-guide"
+        link: "https://blog.example.com/threejs-guide",
       },
       {
         id: "5",
@@ -112,8 +113,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         publishDate: "2025-03-28",
         tags: ["AI Chat", "布局", "实现方式"],
         readTime: 18,
-        link: "https://blog.example.com/ai-chat-layout"
-      }
+        link: "https://blog.example.com/ai-chat-layout",
+      },
     ],
     projects: [
       {
@@ -123,7 +124,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["React", "TypeScript", "SCSS"],
         liveUrl: "https://e.qq.com/ads",
         featured: true,
-        link: "https://e.qq.com/ads"
+        link: "https://e.qq.com/ads",
       },
       {
         id: "2",
@@ -132,7 +133,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["React", "TypeScript", "SCSS"],
         liveUrl: "https://admuse.qq.com/",
         featured: true,
-        link: "https://admuse.qq.com/"
+        link: "https://admuse.qq.com/",
       },
       {
         id: "3",
@@ -141,26 +142,37 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         technologies: ["React", "TypeScript", "SCSS"],
         liveUrl: "https://miaowen.qq.com/miaowen-station/index",
         featured: true,
-        link: "https://miaowen.qq.com/miaowen-station/index"
-      }
+        link: "https://miaowen.qq.com/miaowen-station/index",
+      },
     ],
     crafts: [
       {
         id: "1",
         name: "组件库试验田",
-        description: "基于React的组件库试验田，用于测试和展示组件库的实现和效果。",
+        description:
+          "基于React的组件库试验田，用于测试和展示组件库的实现和效果。",
         technologies: ["React", "TypeScript", "SCSS"],
         githubUrl: "https://github.com/minnasuu/land-design",
         liveUrl: "https://minnasuu.github.io/land-design/",
         featured: true,
-        link: "https://minnasuu.github.io/land-design/"
-      }
-    ]
+        link: "https://minnasuu.github.io/land-design/",
+      },
+      {
+        id: "2",
+        name: "图片处理工具集合",
+        description: "图片处理工具集合，用于处理和展示图片。",
+        technologies: ["React", "TypeScript", "SCSS"],
+        githubUrl: "https://github.com/minnasuu/image-tools",
+        liveUrl: "https://minnasuu.github.io/image-tools/",
+        featured: true,
+        link: "https://minnasuu.github.io/image-tools/",
+      },
+    ],
   },
   en: {
     info: {
       name: "minna",
-      avatar: './avatar.png',
+      avatar: "./avatar.png",
       title: "UI Developer @Tencent",
       bio: "I think I am a UI developer who is passionate about life, focused on experience, and building products. I hope to become a professional full-stack experience developer who is good at both technology and art.",
       email: "minhansu508@gmail.com",
@@ -168,18 +180,18 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       wechat: "minnana1220",
       socialLinks: [
         {
-          name:"Github",
+          name: "Github",
           url: "https://github.com/minnasuu",
         },
         {
           name: "Redbook",
           abbreviation: "Suumhan",
           url: "https://www.xiaohongshu.com/user/profile/5de3f0e60000000001001e98?xsec_token=YB_O8hD8Al3lV4mGSuuDDC4m6bSlsqSBOICoeFzx1KgMU=&xsec_source=app_share&xhsshare=CopyLink&appuid=5de3f0e60000000001001e98&apptime=1754584198&share_id=d50b51a3b3be43288a2cd5ec5bf7c6b3",
-        }
-      ]
+        },
+      ],
     },
     skills: [
-        { name: "React", level: 90, category: "frontend" },
+      { name: "React", level: 90, category: "frontend" },
       { name: "TypeScript", level: 85, category: "frontend" },
       { name: "Node.js", level: 80, category: "backend" },
       { name: "SCSS", level: 70, category: "frontend" },
@@ -210,102 +222,122 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
       {
         name: "Recently watched (Green Book)",
-      }
+      },
     ],
     articles: [
       {
         id: "1",
         title: "Dark Mode and Adaptation",
-        summary: "Explore key patterns and techniques in React development to help you build more efficient and maintainable applications.",
+        summary:
+          "Explore key patterns and techniques in React development to help you build more efficient and maintainable applications.",
         content: article2025_1_2,
         publishDate: "2025-01-02",
         tags: ["React", "Dark Mode", "Adaptation"],
         readTime: 5,
-        link: "https://blog.example.com/dark-mode-and-adaptation"
+        link: "https://blog.example.com/dark-mode-and-adaptation",
       },
       {
         id: "2",
         title: "SVG Interactive Wheel (React Version)",
-        summary: "Use SVG to implement an interactive wheel, support custom styles and interactive effects.",
+        summary:
+          "Use SVG to implement an interactive wheel, support custom styles and interactive effects.",
         content: article2025_1_16,
         publishDate: "2025-01-16",
         tags: ["React", "SVG", "轮盘"],
         readTime: 2,
-        link: "https://blog.example.com/svg-interactive-wheel"
+        link: "https://blog.example.com/svg-interactive-wheel",
       },
       {
         id: "3",
         title: "Deep Understanding of Images",
-        summary: "Deep understanding of images, understand the format, size, quality, loading method, etc. of images.",
+        summary:
+          "Deep understanding of images, understand the format, size, quality, loading method, etc. of images.",
         content: article2025_1_20,
         publishDate: "2025-01-20",
         tags: ["图片", "格式", "大小", "质量", "加载方式"],
         readTime: 2,
-        link: "https://blog.example.com/know-more-about-image"
+        link: "https://blog.example.com/know-more-about-image",
       },
       {
         id: "4",
         title: "CSS Implementation of Morphing Animation (Morph)",
-        summary: "CSS implementation of morphing animation (Morph), understand the key points of morphing animation and its implementation method.",
+        summary:
+          "CSS implementation of morphing animation (Morph), understand the key points of morphing animation and its implementation method.",
         content: article2025_2_22,
         publishDate: "2025-02-22",
         tags: ["CSS", "变形动画", "Morph"],
         readTime: 15,
-        link: "https://blog.example.com/threejs-guide"
+        link: "https://blog.example.com/threejs-guide",
       },
       {
         id: "5",
         title: "Build a Smooth AI Chat Layout",
-        summary: "Build a smooth AI Chat Layout, understand the layout and implementation method of AI Chat.",
+        summary:
+          "Build a smooth AI Chat Layout, understand the layout and implementation method of AI Chat.",
         content: article2025_3_28,
         publishDate: "2025-03-28",
         tags: ["AI Chat", "布局", "实现方式"],
         readTime: 18,
-        link: "https://blog.example.com/ai-chat-layout"
-      }
+        link: "https://blog.example.com/ai-chat-layout",
+      },
     ],
     projects: [
       {
         id: "1",
         name: "Tencent Advertising Official Website",
-        description: "Tencent Advertising Official Website, used to show the products and services of Tencent Advertising.",
+        description:
+          "Tencent Advertising Official Website, used to show the products and services of Tencent Advertising.",
         technologies: ["React", "TypeScript", "SCSS"],
         liveUrl: "https://e.qq.com/ads",
         featured: true,
-        link: "https://e.qq.com/ads"
+        link: "https://e.qq.com/ads",
       },
       {
         id: "2",
         name: "Tencent Advertising AdMuse",
-        description: "Tencent Advertising AdMuse, Tencent Advertising AI Creative Tools Collection Site.",
+        description:
+          "Tencent Advertising AdMuse, Tencent Advertising AI Creative Tools Collection Site.",
         technologies: ["React", "TypeScript", "SCSS"],
         liveUrl: "https://admuse.qq.com/",
         featured: true,
-        link: "https://admuse.qq.com/"
+        link: "https://admuse.qq.com/",
       },
       {
         id: "3",
         name: "Tencent Advertising Miaowen",
-        description: "Tencent Advertising Miaowen, Tencent Advertising Agent Intelligent Question and Answer Tool.",
+        description:
+          "Tencent Advertising Miaowen, Tencent Advertising Agent Intelligent Question and Answer Tool.",
         technologies: ["React", "TypeScript", "SCSS"],
         liveUrl: "https://miaowen.qq.com/miaowen-station/index",
         featured: true,
-        link: "https://miaowen.qq.com/miaowen-station/index"
-      }
+        link: "https://miaowen.qq.com/miaowen-station/index",
+      },
     ],
     crafts: [
       {
         id: "1",
         name: "Component Library Test Field",
-        description: "A component library test field based on React, used to test and show the implementation and effect of the component library.",
+        description:
+          "A component library test field based on React, used to test and show the implementation and effect of the component library.",
         technologies: ["React", "TypeScript", "SCSS"],
         githubUrl: "https://github.com/minnasuu/land-design",
         liveUrl: "https://minnasuu.github.io/land-design/",
         featured: true,
-        link: "https://minnasuu.github.io/land-design/"
-      }
-    ]
-  }
+        link: "https://minnasuu.github.io/land-design/",
+      },
+      {
+        id: "2",
+        name: "Image Processing Tools Collection",
+        description:
+          "Image processing tools collection, used to process and show images.",
+        technologies: ["React", "TypeScript", "SCSS"],
+        githubUrl: "https://github.com/minnasuu/image-tools",
+        liveUrl: "https://minnasuu.github.io/image-tools/",
+        featured: true,
+        link: "https://minnasuu.github.io/image-tools/",
+      },
+    ],
+  },
 };
 
 // 保持向后兼容
