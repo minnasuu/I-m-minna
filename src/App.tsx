@@ -7,7 +7,7 @@ import './App.css';
 function App() {
   return (
     <ThemeProvider>
-      <div className="App">
+      <div className="relative w-full h-full">
         <ThemeSwitcher />
         <ThemeRenderer data={personalData} />
       </div>
