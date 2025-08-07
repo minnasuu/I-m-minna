@@ -133,7 +133,7 @@
 }
 
 .terminal-line.project-list::before {
-  content: "🍉 ";
+  content: "💎 ";
   color: #87ceeb;
 }
 
@@ -193,7 +193,7 @@
 
 .view-more-link:hover {
   color: #fff;
-  text-shadow: 0 0 5px #87ceeb;
+  text-shadow: 0 0 5px #dff6ff;
   transform: translateX(5px);
 }
 
@@ -216,7 +216,7 @@
 
 .view-all-link:hover {
   color: #fff;
-  text-shadow: 0 0 5px #87ceeb;
+  text-shadow: 0 0 5px #dff6ff;
 }
 
 .view-all-text {
@@ -317,7 +317,7 @@
 }
 
 .social-link {
-  display: block;
+  display: inline;
   color: #87ceeb;
   text-decoration: none;
   font-size: 12px;
@@ -325,16 +325,18 @@
   padding: 4px 0;
   transition: color 0.2s;
   word-break: break-all;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .social-link-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
   font-size: 12px;
   color: #cccccc;
-  white-space: nowrap;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .sidebar-section{
@@ -347,15 +349,22 @@
       background-color: rgba(255, 255, 255, 0.05);
       border-radius: 4px;
       transition: all 0.2s ease;
-      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
       .interest-name{
         font-size: 14px;
         line-height: 22px;
         color: #cccccc;
         font-weight: normal;
       }
-      &:hover{
-        background: rgba(255, 255, 255, 0.08);
+      &.with-link{
+        cursor: pointer;
+        &:hover{
+          .interest-name{
+            text-shadow: 0 0 5px #dff6ff;
+          }
+        }
       }
     }
   }
@@ -369,7 +378,7 @@
 
 .skill-name-link:hover {
   color: #00ff00 !important;
-  text-shadow: 0 0 5px #00ff00;
+  text-shadow: 0 0 5px #dff6ff;
 }
 
 .skill-name-link:active {
@@ -388,7 +397,7 @@
 
 .article-title-link:hover {
   color: #00ff00 !important;
-  text-shadow: 0 0 5px #00ff00;
+  text-shadow: 0 0 5px #dff6ff;
 }
 
 .article-title-link:active {
@@ -407,7 +416,7 @@
 
 .project-title-link:hover {
   color: #00ff00 !important;
-  text-shadow: 0 0 5px #00ff00;
+text-shadow: 0 0 5px #dff6ff;
 }
 
 .project-title-link:active {
@@ -416,6 +425,16 @@
 
 .project-title-link .interest-name {
   color: inherit;
+}
+
+.craft-list{
+  padding-left: 10px;
+  margin-left: 20px;
+  color: #87ceeb;
+  &::before{
+    content: "♾️ ";
+    color: #87ceeb;
+  }
 }
 
 /* 响应式设计 */

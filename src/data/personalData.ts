@@ -107,6 +107,18 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     projects: [
       {
         id: "1",
+        name: "腾讯广告官网",
+        description: "腾讯广告官网，用于展示腾讯广告的产品和服务。",
+        technologies: ["React", "TypeScript", "SCSS"],
+        githubUrl: "https://github.com/minnasuu/land-design",
+        liveUrl: "https://minnasuu.github.io/land-design/",
+        featured: true,
+        link: "https://minnasuu.github.io/land-design/"
+      }
+    ],
+    crafts: [
+      {
+        id: "1",
         name: "组件库试验田",
         description: "基于React的组件库试验田，用于测试和展示组件库的实现和效果。",
         technologies: ["React", "TypeScript", "SCSS"],
@@ -179,6 +191,18 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       }
     ],
     projects: [
+      {
+        id: "1",
+        name: "Tencent Advertising Official Website",
+        description: "Tencent Advertising Official Website, used to show the products and services of Tencent Advertising.",
+        technologies: ["React", "TypeScript", "SCSS"],
+        githubUrl: "https://github.com/minnasuu/land-design",
+        liveUrl: "https://www.tencent.com/zh-cn/advertising/",
+        featured: true,
+        link: "https://www.tencent.com/zh-cn/advertising/"
+      }
+    ],
+    crafts: [
       {
         id: "1",
         name: "Component Library Test Field",

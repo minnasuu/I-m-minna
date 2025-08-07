@@ -15,20 +15,16 @@
   font-size: 16px;
   padding: 0;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: transparent;
   border: none;
   outline: none;
   box-shadow: none;
-  backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 1001;
-  &:hover{
-    background-color:  rgba(255, 255, 255, 0.2);
-  }
   &:focus,
   &:focus-visible {
     outline: none;
@@ -39,7 +35,6 @@
 
 .dice-button:hover {
   transform: scale(1.1) rotate(15deg);
-  animation: diceShake 0.6s ease-in-out;
 }
 
 .dice-button:active {

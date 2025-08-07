@@ -71,7 +71,22 @@ export interface Translations {
     detailsPlaceholder: string;
     backToProjects: string;
   };
-  
+
+  // 自研工具部分
+  crafts: {
+    title: string;
+    subtitle: string;
+    viewCraft: string;
+    viewCode: string;
+    viewLive: string;
+    viewDetails: string;
+    viewAll: string;
+    technologies: string;
+    featured: string;
+    craftDetails: string;
+    detailsPlaceholder: string;
+    backToCrafts: string;
+  };
   // 通用
   common: {
     loading: string;
@@ -83,6 +98,8 @@ export interface Translations {
     role: string;
     location: string;
     wechat: string;
+    back: string;
+    backToHome: string;
   };
 }
 
@@ -136,7 +153,7 @@ export const translations: Record<Language, Translations> = {
       viewAll: "查看全部"
     },
     projects: {
-      title: "项目展示",
+      title: "项目",
       subtitle: "我参与开发的一些项目",
       viewProject: "查看项目",
       viewCode: "查看代码",
@@ -149,6 +166,20 @@ export const translations: Record<Language, Translations> = {
       detailsPlaceholder: "这里是项目的详细描述，包括开发过程、技术难点、解决方案等信息。",
       backToProjects: "返回项目列表"
     },
+    crafts: {
+      title: "自研工具",
+      subtitle: "我开发的一些工具和项目",
+      viewCraft: "查看工具",
+      viewCode: "查看代码",
+      viewLive: "在线预览",
+      viewDetails: "查看详情",
+      viewAll: "查看全部",
+      technologies: "技术栈",
+      featured: "精选",
+      craftDetails: "工具详情",
+      detailsPlaceholder: "这里是工具的详细描述，包括开发过程、技术难点、解决方案等信息。",
+      backToCrafts: "返回工具列表"
+    },
     common: {
       loading: "加载中...",
       error: "出错了",
@@ -158,7 +189,9 @@ export const translations: Record<Language, Translations> = {
       name: "姓名",
       role: "角色",
       location: "位置",
-      wechat: "微信"
+      wechat: "微信",
+      back: "返回",
+      backToHome: "返回首页"
     }
   },
   en: {
@@ -210,11 +243,11 @@ export const translations: Record<Language, Translations> = {
       viewAll: "View All"
     },
     projects: {
-      title: "Projects",
-      subtitle: "Some projects I've worked on",
-      viewProject: "View Project",
+      title: "Works",
+      subtitle: "Some works I've done",
+      viewProject: "View Work",
       viewCode: "View Code",
-      viewLive: "Live Demo",
+      viewLive: "View Live",
       viewDetails: "View Details",
       viewAll: "View All",
       technologies: "Technologies",
@@ -222,6 +255,20 @@ export const translations: Record<Language, Translations> = {
       projectDetails: "Project Details",
       detailsPlaceholder: "Here are the detailed descriptions of the project, including development process, technical challenges, solutions, etc.",
       backToProjects: "Back to Projects"
+    },
+    crafts: {
+      title: "Crafts",
+      subtitle: "Some tools and projects I've developed",
+      viewCraft: "View Craft",
+      viewCode: "View Code",
+      viewLive: "View Live",
+      viewDetails: "View Details",
+      viewAll: "View All",
+      technologies: "Technologies",
+      featured: "Featured",
+      craftDetails: "Craft Details",
+      detailsPlaceholder: "Here are the detailed descriptions of the craft, including development process, technical challenges, solutions, etc.",
+      backToCrafts: "Back to Crafts"
     },
     common: {
       loading: "Loading...",
@@ -232,7 +279,9 @@ export const translations: Record<Language, Translations> = {
       name: "Name",
       role: "Role",
       location: "Location",
-      wechat: "WeChat"
+      wechat: "WeChat",
+      back: "Back",
+      backToHome: "Back to Home"
     }
   }
 };

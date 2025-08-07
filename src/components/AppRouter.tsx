@@ -5,7 +5,7 @@ import { LanguageProvider } from '../contexts/LanguageContext';
 import ThemeRenderer from './ThemeRenderer';
 import ThemeSwitcher from './ThemeSwitcher';
 import LanguageSwitcher from './LanguageSwitcher';
-import { ArticlesPage, ArticleDetailPage, ProjectsPage, ProjectDetailPage } from '../pages';
+import { ArticlesPage, ArticleDetailPage, ProjectsPage, ProjectDetailPage, CraftsPage, CraftDetailPage } from '../pages';
 import { personalDataMultiLang } from '../data/personalData';
 
 const AppRouter: React.FC = () => {
@@ -24,6 +24,8 @@ const AppRouter: React.FC = () => {
             <Route path="/articles/:id" element={<ArticleDetailPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:id" element={<ProjectDetailPage />} />
+            <Route path="/crafts" element={<CraftsPage />} />
+            <Route path="/crafts/:id" element={<CraftDetailPage />} />
           </Routes>
         </Router>
       </ThemeProvider>

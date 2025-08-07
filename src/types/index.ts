@@ -46,12 +46,25 @@ export interface Project {
   link?: string; // 可选的链接
 }
 
+export interface Craft {
+  id: string;
+  name: string;
+  description: string;
+  technologies: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  image?: string;
+  featured: boolean;
+  link?: string; // 可选的链接
+}
+
 export interface PersonalData {
   info: PersonalInfo;
   skills: Skill[];
   interests: Interest[];
   articles: Article[];
   projects: Project[];
+  crafts: Craft[];
 }
 
 // 风格类型定义
