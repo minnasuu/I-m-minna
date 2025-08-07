@@ -6,6 +6,7 @@ export interface PersonalInfo {
   bio: string;
   email: string;
   location: string;
+  wechat?: string;
   socialLinks: {
     github?: string;
     linkedin?: string;
@@ -18,7 +19,10 @@ export interface Skill {
   name: string;
   level: number; // 1-100
   category: 'frontend' | 'backend' | 'devops' | 'design' | 'other';
-  icon?: string;
+}
+
+export interface Interest {
+  name: string;
 }
 
 export interface Article {
@@ -46,6 +50,7 @@ export interface Project {
 export interface PersonalData {
   info: PersonalInfo;
   skills: Skill[];
+  interests: Interest[];
   articles: Article[];
   projects: Project[];
 }

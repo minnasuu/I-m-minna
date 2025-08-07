@@ -1,0 +1,334 @@
+.terminal-theme {
+  font-family: 'Courier New', 'Monaco', monospace;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-header {
+  background: #1a1a1a;
+  border-bottom: 1px solid #333;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.terminal-btn.close {
+  background: #ff5f56;
+}
+
+.terminal-btn.minimize {
+  background: #ffbd2e;
+}
+
+.terminal-btn.maximize {
+  background: #cccccc;
+}
+
+.terminal-title {
+  color: #888;
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+.terminal-body {
+  flex: 1;
+  height: 1%;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 0;
+  overflow: auto;
+}
+
+.terminal-content {
+  padding: 20px;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  scrollbar-color: rgba(255, 255, 255, 0.05) transparent; /* 滑块颜色 + 轨道透明 */
+}
+
+.terminal-text {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  font-family: 'Courier New', 'Monaco', monospace;
+}
+
+.terminal-line {
+  margin-bottom: 4px;
+  padding: 2px 0;
+  transition: all 0.2s ease;
+}
+
+.terminal-line:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.command-prompt {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+/* 命令行样式 */
+.terminal-line.command {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+/* 输出内容样式 */
+.terminal-line.output {
+  color: #cccccc;
+  margin-left: 20px;
+  padding-left: 10px;
+  border-left: 2px solid #333;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* 技能条样式 */
+.terminal-line.skill-item {
+  color: #ffd700;
+  margin-left: 20px;
+  padding-left: 10px;
+  position: relative;
+}
+
+.terminal-line.skill-item::before {
+  content: "⚡️ ";
+  color: #ffd700;
+}
+
+/* 文章列表样式 */
+.terminal-line.article-list {
+  color: #87ceeb;
+  margin-left: 20px;
+  padding-left: 10px;
+  position: relative;
+}
+
+.terminal-line.article-list::before {
+  content: "📄 ";
+  color: #87ceeb;
+}
+
+/* 项目列表样式 */
+.terminal-line.project-list {
+  color: #87ceeb;
+  margin-left: 20px;
+  padding-left: 10px;
+  position: relative;
+}
+
+.terminal-line.project-list::before {
+  content: "✨ ";
+  color: #87ceeb;
+}
+
+/* 兴趣列表样式 */
+.terminal-line.interest-item {
+  padding: 8px;
+  margin-left: 22px;
+  color: #cccccc;
+  font-size: 14px;
+  position: relative;
+  width: fit-content;
+  border: none;
+  &:hover{
+    background: transparent;
+  }
+}
+
+/* 提示信息样式 */
+.terminal-line.info-message {
+  color: #ffa500;
+  font-style: italic;
+  margin-left: 20px;
+  padding-left: 10px;
+  background: rgba(255, 165, 0, 0.1);
+  border-radius: 3px;
+}
+
+/* 错误信息样式 */
+.terminal-line.error-message {
+  color: #ff6b6b;
+  margin-left: 20px;
+  padding-left: 10px;
+}
+
+/* 成功信息样式 */
+.terminal-line.success-message {
+  color: #90ee90;
+  margin-left: 20px;
+  padding-left: 10px;
+}
+
+/* 查看全部链接样式 */
+.terminal-line.view-more {
+  color: #87ceeb;
+  margin-left: 20px;
+  padding-left: 10px;
+  font-style: italic;
+}
+
+.view-more-link {
+  color: #87ceeb;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.view-more-link:hover {
+  color: #fff;
+  text-shadow: 0 0 5px #87ceeb;
+  transform: translateX(5px);
+}
+
+.view-more-link::before {
+  content: "🔗 ";
+  color: #87ceeb;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+  color: #cccccc;
+  font-weight: bold;
+  text-shadow: 0 0 5px #cccccc;
+}
+
+@keyframes blink {
+  0%, 50% { 
+    opacity: 1; 
+    text-shadow: 0 0 5px #cccccc;
+  }
+  51%, 100% { 
+    opacity: 0; 
+    text-shadow: none;
+  }
+}
+
+.terminal-sidebar {
+  background: #1a1a1a;
+  border-left: 1px solid #333;
+  padding: 20px;
+  overflow-y: auto;
+  scrollbar-color: rgba(255, 255, 255, 0.05) transparent; /* 滑块颜色 + 轨道透明 */
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.sidebar-section h3 {
+  color: #eee;
+  font-size: 14px;
+  margin: 0 0 15px 0;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+}
+
+.info-item .avatar{
+  width: 100px;
+  height: 100px;
+  margin-inline: auto;
+  border-radius: 50%;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.info-item .label {
+  color: #888;
+}
+
+.info-item .value {
+  color: #cccccc;
+  font-weight: bold;
+}
+
+.skill-item {
+  margin-bottom: 12px;
+}
+
+.skill-name {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: #ccc;
+}
+
+.skill-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 4px;
+  background: #00ff00;
+  transition: width 0.5s ease;
+}
+
+.social-link {
+  display: block;
+  color: #87ceeb;
+  text-decoration: none;
+  font-size: 12px;
+  margin-bottom: 6px;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+
+.sidebar-section{
+  .interest-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    .interest-item{
+      padding: 4px 8px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      .interest-name{
+        font-size: 14px;
+        line-height: 22px;
+        color: #cccccc;
+        font-weight: normal;
+      }
+      &:hover{
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+} 
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .terminal-body {
+    grid-template-columns: 1fr;
+  }
+  
+  .terminal-sidebar {
+    border-left: none;
+    border-top: 1px solid #333;
+  }
+}

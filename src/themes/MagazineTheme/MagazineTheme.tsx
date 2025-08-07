@@ -1,14 +1,16 @@
 import React from 'react';
 import type { PersonalData } from '../../types';
 import './MagazineTheme.css';
+import { useTranslations } from '../../hooks/useTranslations';
 
 interface MagazineThemeProps {
   data: PersonalData;
 }
 
 const MagazineTheme: React.FC<MagazineThemeProps> = ({ data }) => {
+  const { t } = useTranslations();
   return (
-    <div className="magazine-theme">
+    <div className="magazine-theme theme-magazine">
       <header className="magazine-header">
         <div className="magazine-cover">
           <div className="cover-content">
@@ -26,7 +28,7 @@ const MagazineTheme: React.FC<MagazineThemeProps> = ({ data }) => {
 
       <main className="magazine-content">
         <section className="magazine-section">
-          <h2 className="section-headline">专业技能</h2>
+          <h2 className="section-headline">{t('skills.title')}</h2>
           <div className="skills-grid">
             {data.skills.map((skill, index) => (
               <div key={index} className="skill-card">
@@ -47,7 +49,25 @@ const MagazineTheme: React.FC<MagazineThemeProps> = ({ data }) => {
         </section>
 
         <section className="magazine-section">
-          <h2 className="section-headline">最新文章</h2>
+          <h2 className="section-headline">{t('interests.title')}</h2>
+          <div className="interests-showcase">
+            {data.interests.map((interest, index) => (
+              <div key={index} className="interest-card">
+                <div className="interest-header">
+                  <h3>{interest.name}</h3>
+                  <span className="interest-level">{t(`interests.levels.${interest.level}`)}</span>
+                </div>
+                <p className="interest-description">{interest.description}</p>
+                <div className="interest-meta">
+                  <span className="interest-category">{t(`interests.categories.${interest.category}`)}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="magazine-section">
+          <h2 className="section-headline">{t('articles.title')}</h2>
           <div className="articles-grid">
             {data.articles.map((article) => (
               <article key={article.id} className="article-card">
@@ -55,7 +75,7 @@ const MagazineTheme: React.FC<MagazineThemeProps> = ({ data }) => {
                   <h3>{article.title}</h3>
                   <div className="article-meta">
                     <time>{article.publishDate}</time>
-                    <span className="read-time">{article.readTime}分钟阅读</span>
+                    <span className="read-time">{article.readTime} {t('articles.readTime')}</span>
                   </div>
                 </div>
                 <p className="article-summary">{article.summary}</p>
@@ -70,7 +90,7 @@ const MagazineTheme: React.FC<MagazineThemeProps> = ({ data }) => {
         </section>
 
         <section className="magazine-section">
-          <h2 className="section-headline">精选项目</h2>
+          <h2 className="section-headline">{t('projects.title')}</h2>
           <div className="projects-showcase">
             {data.projects.filter(p => p.featured).map((project) => (
               <div key={project.id} className="project-card">
@@ -92,12 +112,12 @@ const MagazineTheme: React.FC<MagazineThemeProps> = ({ data }) => {
                   <div className="project-links">
                     {project.githubUrl && (
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        GitHub
+                        {t('projects.viewCode')}
                       </a>
                     )}
                     {project.liveUrl && (
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        在线预览
+                        {t('projects.viewProject')}
                       </a>
                     )}
                   </div>

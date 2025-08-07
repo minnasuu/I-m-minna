@@ -1,6 +1,4 @@
 .magazine-theme {
-  background: #f8f9fa;
-  color: #333;
   font-family: 'Georgia', 'Times New Roman', serif;
   min-height: 100vh;
   line-height: 1.6;
@@ -139,6 +137,72 @@
 .skill-category {
   font-size: 0.9em;
   color: #7f8c8d;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.interests-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.interest-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  border-left: 4px solid #667eea;
+}
+
+.interest-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.interest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.interest-header h3 {
+  margin: 0;
+  font-size: 1.3em;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.interest-level {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.interest-description {
+  margin: 0 0 15px 0;
+  line-height: 1.7;
+  color: #555;
+  font-size: 1em;
+}
+
+.interest-meta {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.interest-category {
+  background: #f1f3f4;
+  color: #667eea;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
 }

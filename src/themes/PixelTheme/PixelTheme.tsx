@@ -1,14 +1,16 @@
 import React from 'react';
 import './PixelTheme.css';
 import type { PersonalData } from '../../types';
+import { useTranslations } from '../../hooks/useTranslations';
 
 interface PixelThemeProps {
   data: PersonalData;
 }
 
 const PixelTheme: React.FC<PixelThemeProps> = ({ data }) => {
+  const { t } = useTranslations();
   return (
-    <div className="pixel-theme">
+    <div className="pixel-theme theme-pixel">
       <div className="pixel-header">
         <div className="pixel-avatar">
           {data.info.avatar ? (
@@ -26,7 +28,7 @@ const PixelTheme: React.FC<PixelThemeProps> = ({ data }) => {
 
       <div className="pixel-content">
         <section className="pixel-section">
-          <h2 className="pixel-section-title">🎯 技能</h2>
+          <h2 className="pixel-section-title">🎯 {t('skills.title')}</h2>
           <div className="pixel-skills">
             {data.skills.map((skill, index) => (
               <div key={index} className="pixel-skill">
@@ -44,7 +46,23 @@ const PixelTheme: React.FC<PixelThemeProps> = ({ data }) => {
         </section>
 
         <section className="pixel-section">
-          <h2 className="pixel-section-title">📝 文章</h2>
+          <h2 className="pixel-section-title">🎨 {t('interests.title')}</h2>
+          <div className="pixel-interests">
+            {data.interests.map((interest, index) => (
+              <div key={index} className="pixel-interest">
+                <div className="interest-header">
+                  <h3 className="interest-name">{interest.name}</h3>
+                  <span className="interest-level">{t(`interests.levels.${interest.level}`)}</span>
+                </div>
+                <p className="interest-description">{interest.description}</p>
+                <span className="interest-category">{t(`interests.categories.${interest.category}`)}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="pixel-section">
+          <h2 className="pixel-section-title">📝 {t('articles.title')}</h2>
           <div className="pixel-articles">
             {data.articles.map((article) => (
               <div key={article.id} className="pixel-article">
@@ -52,7 +70,7 @@ const PixelTheme: React.FC<PixelThemeProps> = ({ data }) => {
                 <p>{article.summary}</p>
                 <div className="article-meta">
                   <span>{article.publishDate}</span>
-                  <span>{article.readTime}分钟</span>
+                  <span>{article.readTime} {t('articles.readTime')}</span>
                 </div>
               </div>
             ))}
@@ -60,7 +78,7 @@ const PixelTheme: React.FC<PixelThemeProps> = ({ data }) => {
         </section>
 
         <section className="pixel-section">
-          <h2 className="pixel-section-title">🚀 项目</h2>
+          <h2 className="pixel-section-title">🚀 {t('projects.title')}</h2>
           <div className="pixel-projects">
             {data.projects.map((project) => (
               <div key={project.id} className="pixel-project">

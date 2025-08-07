@@ -1,32 +1,37 @@
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import type { PersonalData } from '../types';
+import type { Language } from '../contexts/LanguageContext';
 import PixelTheme from '../themes/PixelTheme';
 import MagazineTheme from '../themes/MagazineTheme';
 import TerminalTheme from '../themes/TerminalTheme';
 import MinimalTheme from '../themes/MinimalTheme';
 
-
 interface ThemeRendererProps {
-  data: PersonalData;
+  data: Record<Language, PersonalData>;
 }
 
 const ThemeRenderer: React.FC<ThemeRendererProps> = ({ data }) => {
   const { currentTheme } = useTheme();
+  const { language } = useLanguage();
+  
+  // 根据当前语言获取对应的数据
+  const currentData = data[language];
 
   const renderTheme = () => {
     switch (currentTheme) {
       case 'pixel':
-        return <PixelTheme data={data} />;
+        return <PixelTheme data={currentData} />;
       case 'magazine':
-        return <MagazineTheme data={data} />;
+        return <MagazineTheme data={currentData} />;
       case 'terminal':
-        return <TerminalTheme data={data} />;
+        return <TerminalTheme data={currentData} />;
       case 'minimal':
-        return <MinimalTheme data={data} />;
+        return <MinimalTheme data={currentData} />;
 
       default:
-        return <MinimalTheme data={data} />;
+        return <MinimalTheme data={currentData} />;
     }
   };
 

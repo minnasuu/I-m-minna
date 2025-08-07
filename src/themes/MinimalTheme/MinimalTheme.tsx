@@ -1,14 +1,17 @@
 import React from 'react';
 import './MinimalTheme.css';
 import type { PersonalData } from '../../types';
+import { useTranslations } from '../../hooks/useTranslations';
 
 interface MinimalThemeProps {
   data: PersonalData;
 }
 
 const MinimalTheme: React.FC<MinimalThemeProps> = ({ data }) => {
+  const { t } = useTranslations();
+  
   return (
-    <div className="minimal-theme">
+    <div className="minimal-theme theme-minimal">
       <header className="minimal-header">
         <div className="container">
           <h1 className="minimal-name">{data.info.name}</h1>
@@ -20,7 +23,7 @@ const MinimalTheme: React.FC<MinimalThemeProps> = ({ data }) => {
       <main className="minimal-content">
         <div className="container">
           <section className="minimal-section">
-            <h2>Skills</h2>
+            <h2>{t('skills.title')}</h2>
             <div className="skills-list">
               {data.skills.map((skill, index) => (
                 <div key={index} className="skill-item">
@@ -37,7 +40,18 @@ const MinimalTheme: React.FC<MinimalThemeProps> = ({ data }) => {
           </section>
 
           <section className="minimal-section">
-            <h2>Articles</h2>
+            <h2>{t('interests.title')}</h2>
+            <div className="interests-list">
+              {data.interests.map((interest, index) => (
+                <div key={index} className="interest-item">
+                  <p className="interest-name">{interest.name}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="minimal-section">
+            <h2>{t('articles.title')}</h2>
             <div className="articles-list">
               {data.articles.map((article) => (
                 <article key={article.id} className="article-item">
@@ -45,7 +59,7 @@ const MinimalTheme: React.FC<MinimalThemeProps> = ({ data }) => {
                   <p>{article.summary}</p>
                   <div className="article-meta">
                     <time>{article.publishDate}</time>
-                    <span>{article.readTime} min read</span>
+                    <span>{article.readTime} {t('articles.readTime')}</span>
                   </div>
                 </article>
               ))}
@@ -53,7 +67,7 @@ const MinimalTheme: React.FC<MinimalThemeProps> = ({ data }) => {
           </section>
 
           <section className="minimal-section">
-            <h2>Projects</h2>
+            <h2>{t('projects.title')}</h2>
             <div className="projects-list">
               {data.projects.map((project) => (
                 <div key={project.id} className="project-item">
@@ -65,12 +79,12 @@ const MinimalTheme: React.FC<MinimalThemeProps> = ({ data }) => {
                   <div className="project-links">
                     {project.githubUrl && (
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        GitHub
+                        {t('projects.viewCode')}
                       </a>
                     )}
                     {project.liveUrl && (
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        Live
+                        {t('projects.viewProject')}
                       </a>
                     )}
                   </div>

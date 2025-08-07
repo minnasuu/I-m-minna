@@ -1,0 +1,153 @@
+/* 滚动条基础样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 0.8;
+}
+
+::-webkit-scrollbar-thumb:active {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox 滚动条样式 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* 主题特定的滚动条样式 */
+.theme-minimal ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.theme-minimal ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.theme-minimal ::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.theme-pixel ::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 0, 0.3);
+  border: 1px solid rgba(0, 255, 0, 0.5);
+}
+
+.theme-pixel ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 0, 0.5);
+  box-shadow: 0 0 8px rgba(0, 255, 0, 0.3);
+}
+
+.theme-pixel ::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 255, 0, 0.7);
+  box-shadow: 0 0 12px rgba(0, 255, 0, 0.5);
+  border: 1px solid rgba(0, 255, 0, 0.8);
+}
+
+.theme-terminal ::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 0, 0.2);
+  border: 1px solid rgba(0, 255, 0, 0.4);
+}
+
+.theme-terminal ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 0, 0.4);
+  box-shadow: 0 0 6px rgba(0, 255, 0, 0.2);
+}
+
+.theme-terminal ::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 255, 0, 0.6);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+  border: 1px solid rgba(0, 255, 0, 0.7);
+}
+
+.theme-magazine ::-webkit-scrollbar-thumb {
+  background: rgba(102, 126, 234, 0.3);
+  border: 1px solid rgba(102, 126, 234, 0.5);
+}
+
+.theme-magazine ::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+}
+
+.theme-magazine ::-webkit-scrollbar-thumb:active {
+  background: rgba(102, 126, 234, 0.7);
+  box-shadow: 0 0 12px rgba(102, 126, 234, 0.5);
+  border: 1px solid rgba(102, 126, 234, 0.8);
+}
+
+.theme-neon ::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.3);
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 4px rgba(0, 255, 255, 0.2);
+}
+
+.theme-neon ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+.theme-neon ::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 255, 255, 0.7);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  border: 1px solid rgba(0, 255, 255, 0.8);
+}
+
+/* 为特定组件添加滚动条样式 */
+.terminal-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 0, 0.2);
+  border: 1px solid rgba(0, 255, 0, 0.4);
+}
+
+.terminal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 0, 0.4);
+  box-shadow: 0 0 6px rgba(0, 255, 0, 0.2);
+}
+
+.terminal-content::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 255, 0, 0.6);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+  border: 1px solid rgba(0, 255, 0, 0.7);
+}
+
+.magazine-content::-webkit-scrollbar-thumb {
+  background: rgba(102, 126, 234, 0.3);
+  border: 1px solid rgba(102, 126, 234, 0.5);
+}
+
+.magazine-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+}
+
+.magazine-content::-webkit-scrollbar-thumb:active {
+  background: rgba(102, 126, 234, 0.7);
+  box-shadow: 0 0 12px rgba(102, 126, 234, 0.5);
+  border: 1px solid rgba(102, 126, 234, 0.8);
+}
+
+/* 响应式滚动条 */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+}

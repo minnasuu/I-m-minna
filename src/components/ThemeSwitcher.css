@@ -1,8 +1,5 @@
 .theme-switcher {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -11,11 +8,11 @@
 /* 骰子按钮样式 */
 .dice-button {
   appearance: none;
-  width: 45px;
-  height: 45px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: none;
-  font-size: 20px;
+  font-size: 16px;
   padding: 0;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.05);
@@ -29,6 +26,9 @@
   justify-content: center;
   position: relative;
   z-index: 1001;
+  &:hover{
+    background-color:  rgba(255, 255, 255, 0.2);
+  }
   &:focus,
   &:focus-visible {
     outline: none;
@@ -98,12 +98,16 @@
   cursor: pointer;
   transition: all 0.2s ease;
   border-radius: 8px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transform: translateX(20px);
   animation: slideInFromRight 0.3s ease forwards;
+  &:hover{
+    background: rgba(255, 255, 255, 0.2);
+  }
   &:focus,
   &:focus-visible {
     outline: none;
@@ -193,11 +197,6 @@
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .theme-switcher {
-    top: 10px;
-    right: 10px;
-  }
-  
   .dice-button {
     width: 40px;
     height: 40px;

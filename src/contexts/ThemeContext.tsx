@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import type { ThemeStyle } from '../types';
 import { getRandomTheme } from '../config/themes';
+import { applyThemeBackground, resetThemeBackground } from '../config/themeColors';
 
 interface ThemeContextType {
   currentTheme: ThemeStyle;
@@ -30,21 +31,31 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const savedTheme = localStorage.getItem('selectedTheme') as ThemeStyle;
     if (savedTheme) {
       setCurrentTheme(savedTheme);
+      applyThemeBackground(savedTheme);
     } else {
       const randomTheme = getRandomTheme() as ThemeStyle;
       setCurrentTheme(randomTheme);
+      applyThemeBackground(randomTheme);
     }
   }, []);
 
   const setTheme = (theme: ThemeStyle) => {
     setCurrentTheme(theme);
     localStorage.setItem('selectedTheme', theme);
+    applyThemeBackground(theme);
   };
 
   const randomizeTheme = () => {
     const randomTheme = getRandomTheme() as ThemeStyle;
     setTheme(randomTheme);
   };
+
+  // 组件卸载时清理
+  useEffect(() => {
+    return () => {
+      resetThemeBackground();
+    };
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ currentTheme, setTheme, randomizeTheme }}>
