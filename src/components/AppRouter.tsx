@@ -7,10 +7,13 @@ import { ArticlesPage, ArticleDetailPage } from "../pages";
 import { personalDataMultiLang } from "../data/personalData";
 
 const AppRouter: React.FC = () => {
+  // 根据环境设置 basename
+  const basename = process.env.NODE_ENV === "production" ? "/I-m-minna" : "";
+
   return (
     <LanguageProvider>
       <ThemeProvider>
-        <Router>
+        <Router basename={basename}>
           <Routes>
             <Route
               path="/"
