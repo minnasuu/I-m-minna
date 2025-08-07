@@ -189,6 +189,10 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
               <span className="label">{t("common.wechat")}:</span>
               <span className="value">{data.info.wechat}</span>
             </div>
+            <div className="info-item">
+              <span className="label">{t("common.email")}:</span>
+              <span className="value">{data.info.email}</span>
+            </div>
           </div>
 
           <div className="sidebar-section">
@@ -196,7 +200,14 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
               <h3>🧲 {t("common.socialLinks")}</h3>
             </div>
             {data.info.socialLinks.map(
-              (socialLink: { name: string; url: string }, index: number) =>
+              (
+                socialLink: {
+                  name: string;
+                  url: string;
+                  abbreviation?: string;
+                },
+                index: number
+              ) =>
                 socialLink.url && (
                   <div className="social-link-item" key={index}>
                     {socialLink.name}：
@@ -207,7 +218,7 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
                       rel="noopener noreferrer"
                       className="social-link"
                     >
-                      {socialLink.url}
+                      {socialLink.abbreviation || socialLink.url}
                     </a>
                   </div>
                 )

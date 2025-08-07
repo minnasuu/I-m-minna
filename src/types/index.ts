@@ -7,7 +7,7 @@ export interface PersonalInfo {
   email: string;
   location: string;
   wechat?: string;
-  socialLinks: { name: string; url: string }[];
+  socialLinks: { name: string;  url: string ,abbreviation?: string;}[];
 }
 
 export interface Skill {

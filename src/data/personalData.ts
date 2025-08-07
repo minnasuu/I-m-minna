@@ -8,7 +8,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       name: "苏敏晗",
       avatar: './avatar.png',
       title: "UI 开发 @腾讯",
-      bio: "我觉得minna是一个热爱生活、专注体验、为产品而做开发的 UI开发工程师。",
+      bio: "我觉得自己是一个热爱生活、用心做体验、追求产品品质的 UI开发工程师。我希望自己成为一个技术与艺术并重的、专业的全栈体验开发工程师。",
       email: "minhansu508@gmail.com",
       location: "深圳, 中国",
       wechat: "minnana1220",
@@ -18,8 +18,9 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
           url: "https://github.com/minnasuu",
         },
         {
-          name:"小红书",
-          url: "https://www.xiaohongshu.com/user/profile/679560000000000000000000",
+          name: "小红书",
+          abbreviation: "Suumhan",
+          url: "https://www.xiaohongshu.com/user/profile/5de3f0e60000000001001e98?xsec_token=YB_O8hD8Al3lV4mGSuuDDC4m6bSlsqSBOICoeFzx1KgMU=&xsec_source=app_share&xhsshare=CopyLink&appuid=5de3f0e60000000001001e98&apptime=1754584198&share_id=d50b51a3b3be43288a2cd5ec5bf7c6b3",
         }
       ]
     },
@@ -39,8 +40,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         name: "动画",
       },
       {
-        name: "网页小工具",
-        link: "/web-tools"
+        name: "AI",
       },
       {
         name: "手工编织",
@@ -50,6 +50,12 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
       {
         name: "猫咪",
+      },
+      {
+        name: "最近在听（孙燕姿-风衣）",
+      },
+      {
+        name: "最近看过（绿皮书）",
       }
     ],
     articles: [
@@ -110,10 +116,18 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         name: "腾讯广告官网",
         description: "腾讯广告官网，用于展示腾讯广告的产品和服务。",
         technologies: ["React", "TypeScript", "SCSS"],
-        githubUrl: "https://github.com/minnasuu/land-design",
-        liveUrl: "https://minnasuu.github.io/land-design/",
+        liveUrl: "https://e.qq.com/ads",
         featured: true,
-        link: "https://minnasuu.github.io/land-design/"
+        link: "https://e.qq.com/ads"
+      },
+      {
+        id: "2",
+        name: "腾讯广告妙思",
+        description: "腾讯广告妙思，腾讯广告AI创意工具集合站。",
+        technologies: ["React", "TypeScript", "SCSS"],
+        liveUrl: "https://admuse.qq.com/",
+        featured: true,
+        link: "https://admuse.qq.com/"
       }
     ],
     crafts: [
@@ -134,7 +148,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       name: "minna",
       avatar: './avatar.png',
       title: "UI Developer @Tencent",
-      bio: "I think minna is a UI developer who is passionate about life, focused on experience, and building products.",
+      bio: "I think I am a UI developer who is passionate about life, focused on experience, and building products. I hope to become a professional full-stack experience developer who is good at both technology and art.",
       email: "minhansu508@gmail.com",
       location: "Shenzhen, China",
       wechat: "minnana1220",
@@ -144,8 +158,9 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
           url: "https://github.com/minnasuu",
         },
         {
-          name:"Redbook",
-          url: "https://www.xiaohongshu.com/user/profile/679560000000000000000000",
+          name: "Redbook",
+          abbreviation: "Suumhan",
+          url: "https://www.xiaohongshu.com/user/profile/5de3f0e60000000001001e98?xsec_token=YB_O8hD8Al3lV4mGSuuDDC4m6bSlsqSBOICoeFzx1KgMU=&xsec_source=app_share&xhsshare=CopyLink&appuid=5de3f0e60000000001001e98&apptime=1754584198&share_id=d50b51a3b3be43288a2cd5ec5bf7c6b3",
         }
       ]
     },
@@ -162,11 +177,10 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     ],
     interests: [
       {
-        name: "Motion Animation",
+        name: "Animation",
       },
       {
-        name: "Web Tools",
-        link: "/web-tools"
+        name: "AI",
       },
       {
         name: "Handmade Knitting",
@@ -176,6 +190,12 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
       {
         name: "Cats",
+      },
+      {
+        name: "Recently listening (Singer: Sun Yanzi - Windbreaker)",
+      },
+      {
+        name: "Recently watched (Green Book)",
       }
     ],
     articles: [
@@ -196,10 +216,18 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         name: "Tencent Advertising Official Website",
         description: "Tencent Advertising Official Website, used to show the products and services of Tencent Advertising.",
         technologies: ["React", "TypeScript", "SCSS"],
-        githubUrl: "https://github.com/minnasuu/land-design",
-        liveUrl: "https://www.tencent.com/zh-cn/advertising/",
+        liveUrl: "https://e.qq.com/ads",
         featured: true,
-        link: "https://www.tencent.com/zh-cn/advertising/"
+        link: "https://e.qq.com/ads"
+      },
+      {
+        id: "2",
+        name: "Tencent Advertising AdMuse",
+        description: "Tencent Advertising AdMuse, Tencent Advertising AI Creative Tools Collection Site.",
+        technologies: ["React", "TypeScript", "SCSS"],
+        liveUrl: "https://admuse.qq.com/",
+        featured: true,
+        link: "https://admuse.qq.com/"
       }
     ],
     crafts: [

@@ -98,6 +98,7 @@ export interface Translations {
     role: string;
     location: string;
     wechat: string;
+    email: string;
     back: string;
     backToHome: string;
   };
@@ -190,6 +191,7 @@ export const translations: Record<Language, Translations> = {
       role: "职位",
       location: "位置",
       wechat: "微信",
+      email: "邮箱",
       back: "返回",
       backToHome: "返回首页"
     }
@@ -280,6 +282,7 @@ export const translations: Record<Language, Translations> = {
       role: "Enterprise",
       location: "Location",
       wechat: "WeChat",
+      email: "Email",
       back: "Back",
       backToHome: "Back to Home"
     }

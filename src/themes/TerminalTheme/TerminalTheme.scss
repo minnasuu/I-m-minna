@@ -216,7 +216,15 @@
 
 .view-all-link:hover {
   color: #fff;
-  text-shadow: 0 0 5px #dff6ff;
+}
+
+.view-all-link svg {
+  transform: translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+.view-all-link:hover svg {
+  transform: translate(4px,-1px);
 }
 
 .view-all-text {
@@ -321,8 +329,6 @@
   color: #87ceeb;
   text-decoration: none;
   font-size: 12px;
-  margin-bottom: 6px;
-  padding: 4px 0;
   transition: color 0.2s;
   word-break: break-all;
   max-width: 100%;
@@ -336,6 +342,7 @@
   font-size: 12px;
   color: #cccccc;
   width: 100%;
+  margin-bottom: 4px;
   flex-wrap: wrap;
 }
 
