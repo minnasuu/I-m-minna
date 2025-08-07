@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './TerminalTheme.scss';
 import type { PersonalData } from '../../types';
 import { useTranslations } from '../../hooks/useTranslations';
+import { IconArrowLineRight } from '../../components/Icon';
 
 interface TerminalThemeProps {
   data: PersonalData;
@@ -70,21 +72,12 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
               <div key={index} className={`terminal-line ${line.type}`}>
                 {line.type === 'command' && <span className="command-prompt">minna@portfolio:~$ </span>}
                 {line.type === 'view-more' ? (
-                  <a 
-                    href={line.link} 
+                  <Link 
+                    to={line.link === '#articles' ? '/articles' : '/projects'} 
                     className="view-more-link"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      // 这里可以添加跳转逻辑，比如切换到其他主题或显示详细信息
-                      if (line.link === '#articles') {
-                        alert(`查看全部 ${data.articles.length} 篇文章\n\n${data.articles.map(article => `• ${article.title} (${article.readTime}min)`).join('\n')}`);
-                      } else if (line.link === '#projects') {
-                        alert(`查看全部 ${data.projects.filter(p => p.featured).length} 个项目\n\n${data.projects.filter(p => p.featured).map(project => `• ${project.name} - ${project.description}`).join('\n')}`);
-                      }
-                    }}
                   >
                     {line.content}
-                  </a>
+                  </Link>
                 ) : (
                   line.content
                 )}
@@ -96,7 +89,9 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
 
         <div className="terminal-sidebar">
           <div className="sidebar-section">
-            <h3>👧 {t('common.systemInfo')}</h3>
+            <div className="section-header">
+              <h3>👧 {t('common.systemInfo')}</h3>
+            </div>
             <div className="info-item">
               <img src={data.info.avatar} alt="avatar" className="avatar" />
             </div>
@@ -119,24 +114,31 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
           </div>
 
           <div className="sidebar-section">
-            <h3>🕸️ {t('common.socialLinks')}</h3>
-            {Object.entries(data.info.socialLinks).map(([platform, url]) => (
-              url && (
-                <a
-                  key={platform}
-                  href={url}
+            <div className="section-header">
+              <h3>🕸️ {t('common.socialLinks')}</h3>
+            </div>
+            {data.info.socialLinks.map((socialLink: { name: string; url: string }, index: number) => (
+              socialLink.url && (
+                <div className="social-link-item" key={index}>
+                  {socialLink.name}：
+                  <a
+                  key={index}
+                  href={socialLink.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-link"
                 >
-                  {platform}://{url.split('//')[1]}
+                  {socialLink.url}
                 </a>
+                </div>
               )
             ))}
           </div>
 
           <div className="sidebar-section">
-            <h3>⚡️ {t('skills.title')}</h3>
+            <div className="section-header">
+              <h3>⚡️ {t('skills.title')}</h3>
+            </div>
             <div className="skill-list">
             {data.skills.map((skill, index) => (
               <div key={index} className="skill-item">
@@ -164,7 +166,9 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
           </div>
 
           <div className="sidebar-section">
-            <h3>📷 {t('interests.title')}</h3>
+            <div className="section-header">
+              <h3>📷 {t('interests.title')}</h3>
+            </div>
             <div className="interest-list"> 
             {data.interests.map((interest, index) => (
               <div key={index} className="interest-item">
@@ -175,44 +179,38 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
           </div>
 
           <div className="sidebar-section">
-            <h3>📄 {t('articles.title')}</h3>
+            <div className="section-header">
+              <h3>📄 {t('articles.title')}</h3>
+              <Link to="/articles" className="view-all-link">
+                {t('articles.viewAll')}
+                <IconArrowLineRight size={12}/>
+              </Link>
+            </div>
             <div className="interest-list"> 
-            {data.articles.map((article, index) => (
+            {data.articles.slice(0, 3).map((article, index) => (
               <div key={index} className="interest-item">
-                {article.link ? (
-                  <a 
-                    href={article.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="article-title-link"
-                  >
-                    <span className="interest-name">{article.title}</span>
-                  </a>
-                ) : (
+                <Link to={`/articles/${article.id}`} className="article-title-link">
                   <span className="interest-name">{article.title}</span>
-                )}
+                </Link>
               </div>
             ))}
             </div>
           </div>
 
           <div className="sidebar-section">
-            <h3>✨ {t('projects.title')}</h3>
+            <div className="section-header">
+              <h3>✨ {t('projects.title')}</h3>
+              <Link to="/projects" className="view-all-link">
+                {t('projects.viewAll')}
+                <IconArrowLineRight size={12}/>
+              </Link>
+            </div>
             <div className="interest-list"> 
-            {data.projects.map((project, index) => (
+            {data.projects.slice(0, 3).map((project, index) => (
               <div key={index} className="interest-item">
-                {project.link ? (
-                  <a 
-                    href={project.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="project-title-link"
-                  >
-                    <span className="interest-name">{project.name}</span>
-                  </a>
-                ) : (
+                <Link to={`/projects/${project.id}`} className="project-title-link">
                   <span className="interest-name">{project.name}</span>
-                )}
+                </Link>
               </div>
             ))}
             </div>

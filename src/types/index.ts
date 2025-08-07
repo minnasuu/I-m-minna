@@ -7,12 +7,7 @@ export interface PersonalInfo {
   email: string;
   location: string;
   wechat?: string;
-  socialLinks: {
-    github?: string;
-    linkedin?: string;
-    twitter?: string;
-    website?: string;
-  };
+  socialLinks: { name: string; url: string }[];
 }
 
 export interface Skill {
@@ -24,6 +19,7 @@ export interface Skill {
 
 export interface Interest {
   name: string;
+  link?: string; // 可选的链接
 }
 
 export interface Article {
@@ -59,7 +55,7 @@ export interface PersonalData {
 }
 
 // 风格类型定义
-export type ThemeStyle = 'pixel' | 'magazine' | 'terminal' | 'minimal' | 'neon';
+export type ThemeStyle = 'terminal';
 
 export interface ThemeConfig {
   name: ThemeStyle;

@@ -24,7 +24,7 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState<ThemeStyle>('minimal');
+  const [currentTheme, setCurrentTheme] = useState<ThemeStyle>('terminal');
 
   // 初始化时随机选择主题
   useEffect(() => {

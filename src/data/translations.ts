@@ -44,17 +44,32 @@ export interface Translations {
   // 文章部分
   articles: {
     title: string;
+    subtitle: string;
     readMore: string;
     readTime: string;
     publishedOn: string;
+    externalLink: string;
+    summary: string;
+    content: string;
+    readOriginal: string;
+    backToArticles: string;
+    viewAll: string;
   };
   
   // 项目部分
   projects: {
     title: string;
+    subtitle: string;
     viewProject: string;
     viewCode: string;
+    viewLive: string;
+    viewDetails: string;
+    viewAll: string;
     technologies: string;
+    featured: string;
+    projectDetails: string;
+    detailsPlaceholder: string;
+    backToProjects: string;
   };
   
   // 通用
@@ -109,15 +124,30 @@ export const translations: Record<Language, Translations> = {
     },
     articles: {
       title: "随笔",
+      subtitle: "分享我的技术思考和经验",
       readMore: "阅读更多",
       readTime: "阅读时间",
-      publishedOn: "发布于"
+      publishedOn: "发布于",
+      externalLink: "外部链接",
+      summary: "摘要",
+      content: "内容",
+      readOriginal: "阅读原文",
+      backToArticles: "返回文章列表",
+      viewAll: "查看全部"
     },
     projects: {
       title: "项目展示",
+      subtitle: "我参与开发的一些项目",
       viewProject: "查看项目",
       viewCode: "查看代码",
-      technologies: "技术栈"
+      viewLive: "在线预览",
+      viewDetails: "查看详情",
+      viewAll: "查看全部",
+      technologies: "技术栈",
+      featured: "精选",
+      projectDetails: "项目详情",
+      detailsPlaceholder: "这里是项目的详细描述，包括开发过程、技术难点、解决方案等信息。",
+      backToProjects: "返回项目列表"
     },
     common: {
       loading: "加载中...",
@@ -168,15 +198,30 @@ export const translations: Record<Language, Translations> = {
     },
     articles: {
       title: "Articles",
+      subtitle: "Sharing my technical thoughts and experiences",
       readMore: "Read More",
       readTime: "Read Time",
-      publishedOn: "Published on"
+      publishedOn: "Published on",
+      externalLink: "External Link",
+      summary: "Summary",
+      content: "Content",
+      readOriginal: "Read Original",
+      backToArticles: "Back to Articles",
+      viewAll: "View All"
     },
     projects: {
       title: "Projects",
+      subtitle: "Some projects I've worked on",
       viewProject: "View Project",
-      viewCode: "View Code", 
-      technologies: "Technologies"
+      viewCode: "View Code",
+      viewLive: "Live Demo",
+      viewDetails: "View Details",
+      viewAll: "View All",
+      technologies: "Technologies",
+      featured: "Featured",
+      projectDetails: "Project Details",
+      detailsPlaceholder: "Here are the detailed descriptions of the project, including development process, technical challenges, solutions, etc.",
+      backToProjects: "Back to Projects"
     },
     common: {
       loading: "Loading...",
