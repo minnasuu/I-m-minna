@@ -14,10 +14,13 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
   const [currentLine, setCurrentLine] = useState(0);
   const [displayedLines, setDisplayedLines] = useState<Array<{ type: string; content: string; link?: string }>>([]);
   const [isTyping, setIsTyping] = useState(true);
+  const [showWechatQR, setShowWechatQR] = useState(false);
 
   const terminalLines = [
     { type: "command", content: "whoami" },
     { type: "output", content: data.info.name },
+    { type: "command", content: "echo $enterprise" },
+    { type: "output", content: data.info.title },
     { type: "command", content: "cat about.txt" },
     { type: "output", content: data.info.bio },
     { type: "command", content: "ls skills/" },
@@ -163,7 +166,20 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
             </div>
             <div className="info-item">
               <span className="label">{t("common.role")}:</span>
-              <span className="value">{data.info.title}</span>
+              <span
+                className="value"
+                dangerouslySetInnerHTML={{
+                  __html: data.info.title
+                    .replace(
+                      /腾讯/g,
+                      '<a href="https://www.tencent.com" target="_blank" rel="noopener noreferrer" style="color: #87ceeb; text-decoration: underline;">腾讯</a>'
+                    )
+                    .replace(
+                      /Tencent/g,
+                      '<a href="https://www.tencent.com" target="_blank" rel="noopener noreferrer" style="color: #87ceeb; text-decoration: underline;">Tencent</a>'
+                    ),
+                }}
+              />
             </div>
             <div className="info-item">
               <span className="label">{t("common.location")}:</span>

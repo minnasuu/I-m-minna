@@ -7,8 +7,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     info: {
       name: "苏敏晗",
       avatar: './avatar.png',
-      title: "（成为一名）UX工程师",
-      bio: "热爱编程、设计和创造，专注于构建优雅的用户体验和创新的技术解决方案。",
+      title: "UI 开发 @腾讯",
+      bio: "我觉得minna是一个热爱生活、专注体验、为产品而做开发的 UI开发工程师。",
       email: "minhansu508@gmail.com",
       location: "深圳, 中国",
       wechat: "minnana1220",
@@ -133,8 +133,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     info: {
       name: "minna",
       avatar: './avatar.png',
-      title: "(Becoming a) UX Engineer",
-      bio: "Passionate about programming, design, and creation, focused on building elegant user experiences and innovative technical solutions.",
+      title: "UI Developer @Tencent",
+      bio: "I think minna is a UI developer who is passionate about life, focused on experience, and building products.",
       email: "minhansu508@gmail.com",
       location: "Shenzhen, China",
       wechat: "minnana1220",
@@ -144,7 +144,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
           url: "https://github.com/minnasuu",
         },
         {
-          name:"小红书",
+          name:"Redbook",
           url: "https://www.xiaohongshu.com/user/profile/679560000000000000000000",
         }
       ]
