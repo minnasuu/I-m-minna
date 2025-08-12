@@ -2,22 +2,26 @@ import type { ThemeStyle } from '../types';
 
 // 主题背景色配置
 export const themeBackgrounds: Record<ThemeStyle, string> = {
-  terminal: '#0a0a0a'
+  terminal: '#0a0a0a',
+  ai: '#667eea'
 };
 
 // 主题背景渐变配置
 export const themeBackgroundGradients: Record<ThemeStyle, string> = {
-  terminal: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)'
+  terminal: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
+  ai: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
 };
 
 // 主题文字颜色配置
 export const themeTextColors: Record<ThemeStyle, string> = {
-  terminal: '#00ff00'
+  terminal: '#00ff00',
+  ai: '#ffffff'
 };
 
 // 主题过渡动画配置
 export const themeTransitions: Record<ThemeStyle, string> = {
-  terminal: 'all 0.1s ease'
+  terminal: 'all 0.1s ease',
+  ai: 'all 0.3s ease'
 };
 
 // 应用主题背景色到body

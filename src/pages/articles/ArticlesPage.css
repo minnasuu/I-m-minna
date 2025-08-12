@@ -1,8 +1,22 @@
 .articles-page {
   min-height: 100vh;
   background: #ffffff;
-  padding: 4rem 0;
+  padding: 48px 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.articles-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
 }
 
 .articles-container {
@@ -41,13 +55,6 @@
 .arrow-left {
   font-size: 1.1rem;
   font-weight: 400;
-}
-
-.articles-header {
-  text-align: center;
-  margin-bottom: 4rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #f0f0f0;
 }
 
 .articles-header h1 {

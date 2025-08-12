@@ -46,7 +46,6 @@ export interface Translations {
     title: string;
     subtitle: string;
     readMore: string;
-    readTime: string;
     publishedOn: string;
     externalLink: string;
     summary: string;
@@ -144,7 +143,6 @@ export const translations: Record<Language, Translations> = {
       title: "分享我的技术思考和经验",
       subtitle: "技术洞察与实践总结",
       readMore: "阅读更多",
-      readTime: "阅读时间",
       publishedOn: "发布于",
       externalLink: "外部链接",
       summary: "摘要",
@@ -235,7 +233,6 @@ export const translations: Record<Language, Translations> = {
       title: "Sharing My Technical Thoughts and Experiences",
       subtitle: "Technical Insights and Practice Summary",
       readMore: "Read More",
-      readTime: "Read Time",
       publishedOn: "Published on",
       externalLink: "External Link",
       summary: "Summary",

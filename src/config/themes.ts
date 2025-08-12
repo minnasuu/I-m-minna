@@ -6,6 +6,12 @@ export const themes: ThemeConfig[] = [
     displayName: '科幻终端',
     description: '黑客风格的终端界面',
     icon: '💻'
+  },
+  {
+    name: 'ai',
+    displayName: 'AI对话',
+    description: 'AI人格化对话界面',
+    icon: '🤖'
   }
 ];
 

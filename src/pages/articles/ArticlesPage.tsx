@@ -20,11 +20,13 @@ const ArticlesPage: React.FC = () => {
   return (
     <div className="articles-page">
       <div className="articles-container">
+        <div className="articles-header">
         <div className="back-to-home-top">
           <Link to="/" className="back-btn-top">
             <span className="arrow-left">←</span>
             {t("common.backToHome")}
           </Link>
+        </div>
         </div>
 
         {/* <header className="articles-header">
@@ -53,9 +55,6 @@ const ArticlesPage: React.FC = () => {
                     {new Date(article.publishDate).toLocaleDateString(
                       language === "zh" ? "zh-CN" : "en-US"
                     )}
-                  </span>
-                  <span className="article-read-time">
-                    {article.readTime} {t("articles.readTime")}
                   </span>
                 </div>
               </Link>

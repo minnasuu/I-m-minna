@@ -37,9 +37,6 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
                 language === "zh" ? "zh-CN" : "en-US"
               )}
             </span>
-            <span className="article-read-time">
-              {article.readTime} {t("articles.readTime")}
-            </span>
           </div>
 
           <h1 className="article-detail-title">{article.title}</h1>
