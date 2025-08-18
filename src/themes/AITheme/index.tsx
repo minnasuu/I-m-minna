@@ -3,18 +3,23 @@ import './AITheme.scss';
 import AIChatInterface from './AIChatInterface';
 import AIAvatar from './AIAvatar';
 import ThemeSwitcher from '../../components/ThemeSwitcher';
+import LanguageSwitcher from "../../components/LanguageSwitcher";
 import AISidebar from "./AISidebar";
+import { useTranslations } from "../../hooks/useTranslations";
 
 const AITheme: React.FC = () => {
+  const { t } = useTranslations();
+
   return (
     <div className="ai-theme">
       <div className="ai-header">
         <AIAvatar />
         <div className="ai-title">
-          <h1>Minna</h1>
-          <p>Who know about me best.</p>
+          <h1>{t("aiTheme.title")}</h1>
+          <p>{t("aiTheme.subtitle")}</p>
         </div>
-        <div style={{ marginLeft: "auto" }}>
+        <div className="ai-controls">
+          <LanguageSwitcher />
           <ThemeSwitcher />
         </div>
       </div>

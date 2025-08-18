@@ -17,6 +17,7 @@
     
     .ai-title {
       margin-left: 1rem;
+      flex: 1;
       
       h1 {
         font-size: 1.5rem;
@@ -29,6 +30,24 @@
         margin: 0.25rem 0 0 0;
         font-size: 0.875rem;
         color: #6b7280;
+      }
+    }
+    
+    .ai-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+      
+      // 覆盖LanguageSwitcher的颜色，适配AI主题的浅色背景
+      .language-switcher {
+        .language-button {
+          color: #374151;
+          
+          &:hover {
+            color: #10b981;
+          }
+        }
       }
     }
   }
@@ -270,10 +289,19 @@ flex: 1;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    
+    .messages-container {
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0 16px;
+    }
     
     .message {
-      padding: 12px 16px;
+      padding: 12px 0;
       display: flex;
       align-items: flex-start;
       gap: 1rem;
@@ -283,7 +311,7 @@ flex: 1;
         background: #f9fafb;
         margin-left: auto;
         border-radius: 12px;
-        margin-right: 16px;
+        padding: 12px 16px;
         
         .message-content {
           color: #111827;
@@ -344,26 +372,41 @@ flex: 1;
         }
         
         .terminal-output {
-          background: #1f2937;
-          color: #f9fafb;
+          background: #f9fafb;
+          color: #374151;
           padding: 1rem;
           border-radius: 8px;
+          border: 1px solid #e2e8f0;
           font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
           font-size: 0.875rem;
           line-height: 1.5;
-          margin: 0.5rem 0;
           overflow-x: auto;
           
           .command {
             color: #10b981;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
           }
           
           .output {
-            color: #f9fafb;
+            color: #4b5563;
+            
+            > div {
+              margin: 0.25rem 0;
+              
+              &:first-child {
+                font-weight: 600;
+                color: #374151;
+                margin-bottom: 0.5rem;
+              }
+            }
           }
           
           .error {
-            color: #ef4444;
+            color: #dc2626;
+            font-weight: 500;
           }
         }
       }
@@ -386,7 +429,7 @@ flex: 1;
       .input-wrapper {
         flex: 1;
         position: relative;
-        min-height: 44px;
+        display: flex;
         
         textarea {
           width: 100%;
@@ -408,9 +451,12 @@ flex: 1;
             color: #9ca3af;
           }
         }
+        
+
       }
       
       button {
+        padding: 0.75rem 1.5rem;
         border: none;
         border-radius: 8px;
         background: #10b981;
@@ -420,9 +466,11 @@ flex: 1;
         cursor: pointer;
         transition: all 0.2s ease;
         height: 44px;
+        min-width: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
         
         &:hover:not(:disabled) {
           background: #059669;

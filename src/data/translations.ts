@@ -86,6 +86,12 @@ export interface Translations {
     detailsPlaceholder: string;
     backToCrafts: string;
   };
+  // AI主题
+  aiTheme: {
+    title: string;
+    subtitle: string;
+  };
+
   // 通用
   common: {
     loading: string;
@@ -179,6 +185,10 @@ export const translations: Record<Language, Translations> = {
       detailsPlaceholder: "这里是工具的详细描述，包括开发过程、技术难点、解决方案等信息。",
       backToCrafts: "返回工具列表"
     },
+    aiTheme: {
+      title: "苏敏晗",
+      subtitle: "有事找我的AI助手～"
+    },
     common: {
       loading: "加载中...",
       error: "出错了",
@@ -268,6 +278,10 @@ export const translations: Record<Language, Translations> = {
       craftDetails: "Craft Details",
       detailsPlaceholder: "Here are the detailed descriptions of the craft, including development process, technical challenges, solutions, etc.",
       backToCrafts: "Back to Crafts"
+    },
+    aiTheme: {
+      title: "Minna",
+      subtitle: "Your AI assistant here～"
     },
     common: {
       loading: "Loading...",

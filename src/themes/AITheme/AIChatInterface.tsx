@@ -594,59 +594,61 @@ const AIChatInterface: React.FC = () => {
   return (
     <div className="ai-chat-interface">
       <div className="chat-messages">
-        {messages.map((message) => (
-          <div key={message.id} className={`message ${message.sender}`}>
-            {message.sender === "ai" ? (
-              <div className="message-avatar">
-                <img src={"/avatar.png"} alt="avatar" />
+        <div className="messages-container">
+          {messages.map((message) => (
+            <div key={message.id} className={`message ${message.sender}`}>
+              {message.sender === "ai" ? (
+                <div className="message-avatar">
+                  <img src={"/avatar.png"} alt="avatar" />
+                </div>
+              ) : null}
+              <div className="message-content">
+                {message.text &&
+                  (message.isTyping ? (
+                    <TypewriterText
+                      text={message.text}
+                      speed={30}
+                      isVisible={typingMessageId === message.id}
+                      onComplete={() => {
+                        setMessages((prev) =>
+                          prev.map((msg) =>
+                            msg.id === message.id
+                              ? {
+                                  ...msg,
+                                  isTyping: false,
+                                  displayText: message.text,
+                                }
+                              : msg
+                          )
+                        );
+                        setTypingMessageId(null);
+                      }}
+                    />
+                  ) : (
+                    <div style={{ whiteSpace: "pre-line" }}>
+                      {message.displayText || message.text}
+                    </div>
+                  ))}
+                {message.terminalOutput && message.terminalOutput}
               </div>
-            ) : null}
-            <div className="message-content">
-              {message.text &&
-                (message.isTyping ? (
-                  <TypewriterText
-                    text={message.text}
-                    speed={30}
-                    isVisible={typingMessageId === message.id}
-                    onComplete={() => {
-                      setMessages((prev) =>
-                        prev.map((msg) =>
-                          msg.id === message.id
-                            ? {
-                                ...msg,
-                                isTyping: false,
-                                displayText: message.text,
-                              }
-                            : msg
-                        )
-                      );
-                      setTypingMessageId(null);
-                    }}
-                  />
-                ) : (
-                  <div style={{ whiteSpace: "pre-line" }}>
-                    {message.displayText || message.text}
-                  </div>
-                ))}
-              {message.terminalOutput && message.terminalOutput}
             </div>
-          </div>
-        ))}
+          ))}
 
-        {isTyping && (
-          <div className="message ai">
-            <div className="message-avatar">🤖</div>
-            <div className="message-content">
-              <span className="typing-indicator">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
+          {isTyping && (
+            <div className="message ai">
+              <div className="message-avatar">🤖</div>
+              <div className="message-content">
+                <span className="typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <div ref={messagesEndRef} />
+          <div ref={messagesEndRef} />
+        </div>
       </div>
 
       <div className="chat-input">

@@ -9,7 +9,7 @@ const ThemeSwitcher: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleDiceClick = () => {
-    const randomTheme = getRandomTheme() as ThemeStyle;
+    const randomTheme = getRandomTheme(currentTheme) as ThemeStyle;
     setTheme(randomTheme);
   };
 
