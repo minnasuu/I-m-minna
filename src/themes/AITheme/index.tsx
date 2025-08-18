@@ -3,6 +3,7 @@ import './AITheme.scss';
 import AIChatInterface from './AIChatInterface';
 import AIAvatar from './AIAvatar';
 import ThemeSwitcher from '../../components/ThemeSwitcher';
+import AISidebar from "./AISidebar";
 
 const AITheme: React.FC = () => {
   return (
@@ -13,12 +14,12 @@ const AITheme: React.FC = () => {
           <h1>Minna</h1>
           <p>Who know about me best.</p>
         </div>
-        <div style={{ marginLeft: 'auto' }}>
+        <div style={{ marginLeft: "auto" }}>
           <ThemeSwitcher />
         </div>
       </div>
-      
       <div className="ai-content">
+        <AISidebar />
         <AIChatInterface />
       </div>
     </div>

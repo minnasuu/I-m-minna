@@ -1,6 +1,5 @@
 .ai-theme {
-  min-height: 100vh;
-  background: #ffffff;
+  height: 100vh;
   color: #374151;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   display: flex;
@@ -37,11 +36,205 @@
   .ai-content {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    max-width: 800px;
     margin: 0 auto;
     width: 100%;
+    height: 1%;
     padding: 0;
+  }
+}
+
+.ai-sidebar {
+  width: 300px;
+  background-color: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  
+  .ai-sidebar-section {
+    margin-bottom: 24px;
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 8px;
+      
+      h3 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #374151;
+        margin: 0;
+      }
+    }
+    
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+      
+      &.avatar-item {
+        justify-content: center;
+        margin-bottom: 16px;
+        
+        .avatar {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          border: 3px solid #ffffff;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          object-fit: cover;
+        }
+      }
+      
+      .label {
+        color: #6b7280;
+        font-weight: 500;
+        min-width: fit-content;
+      }
+      
+      .value {
+        color: #374151;
+        font-weight: 400;
+        text-align: right;
+        flex: 1;
+        margin-left: 8px;
+        word-break: break-all;
+      }
+    }
+    
+    .social-link-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+      font-size: 0.8rem;
+      color: #374151;
+      width: 100%;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      
+      .social-link {
+        color: #10b981;
+        text-decoration: none;
+        font-size: 0.8rem;
+        transition: color 0.2s;
+        word-break: break-all;
+        max-width: 100%;
+        overflow-wrap: break-word;
+        
+        &:hover {
+          color: #059669;
+          text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+        }
+      }
+    }
+    
+    .interest-list,
+    .craft-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      
+      .interest-item,
+      .craft-item {
+        padding: 6px 12px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        
+        .interest-name,
+        .craft-name {
+          color: #374151;
+          font-weight: 500;
+          line-height: 1.4;
+        }
+        
+        .interest-link {
+          font-size: 0.7rem;
+        }
+        
+        &.with-link {
+          cursor: pointer;
+          
+          &:hover {
+            background: #f3f4f6;
+            border-color: #10b981;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+            
+            .interest-name,
+            .craft-name {
+              color: #10b981;
+            }
+          }
+        }
+        
+        &:not(.with-link):hover {
+          background: #f3f4f6;
+          border-color: #d1d5db;
+        }
+      }
+    }
+    
+    .view-all-link {
+      color: #6b7280;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      line-height: 1.4;
+      
+      &:hover {
+        color: #10b981;
+        
+        svg {
+          transform: translateX(2px);
+        }
+      }
+      
+      svg {
+        transition: transform 0.2s ease;
+      }
+    }
+  }
+}
+
+// 链接样式
+.ai-sidebar {
+  .skill-name-link,
+  .article-title-link,
+  .project-title-link,
+  .craft-title-link {
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      .interest-name,
+      .craft-name {
+        color: #10b981 !important;
+        text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+      }
+    }
+    
+    .interest-name,
+    .craft-name {
+      color: inherit;
+    }
   }
 }
 
@@ -66,28 +259,35 @@
 
 // AI Chat Interface Styles
 .ai-chat-interface {
-  flex: 1;
+flex: 1;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
   
   .chat-messages {
     flex: 1;
     padding: 0;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     
     .message {
-      padding: 1.5rem 2rem;
-      border-bottom: 1px solid #f3f4f6;
+      padding: 12px 16px;
       display: flex;
       align-items: flex-start;
       gap: 1rem;
       
       &.user {
+        width: fit-content;
         background: #f9fafb;
+        margin-left: auto;
+        border-radius: 12px;
+        margin-right: 16px;
         
         .message-content {
           color: #111827;
+          font-size: 0.95rem;
         }
       }
       
@@ -103,13 +303,16 @@
         width: 32px;
         height: 32px;
         border-radius: 50%;
-        background: #10b981;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.875rem;
-        color: white;
         flex-shrink: 0;
+        display: none;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
       }
       
       .message-content {
@@ -131,6 +334,13 @@
             &:nth-child(1) { animation-delay: -0.32s; }
             &:nth-child(2) { animation-delay: -0.16s; }
           }
+        }
+        
+        .typewriter-cursor {
+          color: #10b981;
+          font-weight: bold;
+          animation: blink 1s infinite;
+          margin-left: 1px;
         }
         
         .terminal-output {
@@ -161,25 +371,29 @@
   }
   
   .chat-input {
-    padding: 1.5rem 2rem;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    padding: 24px 16px;
     background: #ffffff;
     border-top: 1px solid #e5e7eb;
     
     .input-container {
       display: flex;
-      gap: 1rem;
+      gap: 12px;
       align-items: flex-end;
       
       .input-wrapper {
         flex: 1;
         position: relative;
+        min-height: 44px;
         
         textarea {
           width: 100%;
           min-height: 44px;
           max-height: 120px;
           padding: 0.75rem 1rem;
-          border: 1px solid #d1d5db;
+          border: 1px solid #e5e7eb;
           border-radius: 8px;
           background: #ffffff;
           color: #374151;
@@ -189,10 +403,6 @@
           outline: none;
           transition: border-color 0.2s ease;
           
-          &:focus {
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-          }
           
           &::placeholder {
             color: #9ca3af;
@@ -201,7 +411,6 @@
       }
       
       button {
-        padding: 0.75rem 1.5rem;
         border: none;
         border-radius: 8px;
         background: #10b981;
@@ -241,6 +450,15 @@
   }
 }
 
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
 // 响应式设计
 @media (max-width: 768px) {
   .ai-theme {
@@ -254,6 +472,52 @@
     
     .ai-content {
       padding: 0;
+      flex-direction: column;
+    }
+    
+    .ai-sidebar {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      border-right: none;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 16px;
+      flex-shrink: 0;
+      
+      .ai-sidebar-section {
+        margin-bottom: 16px;
+        
+        // 只显示前两个section（系统信息和社交链接）
+        &:nth-child(n+3) {
+          display: none;
+        }
+        
+        .info-item {
+          &.avatar-item {
+            .avatar {
+              width: 60px;
+              height: 60px;
+            }
+          }
+          
+          .label,
+          .value {
+            font-size: 0.75rem;
+          }
+        }
+        
+        .social-link-item {
+          font-size: 0.75rem;
+          
+          .social-link {
+            font-size: 0.75rem;
+          }
+        }
+        
+        .section-header h3 {
+          font-size: 0.8rem;
+        }
+      }
     }
     
     .ai-chat-interface {
@@ -262,7 +526,43 @@
       }
       
       .chat-input {
-        padding: 1rem;
+        padding: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-sidebar {
+    padding: 12px;
+    
+    .ai-sidebar-section {
+      margin-bottom: 12px;
+      
+      .info-item {
+        &.avatar-item {
+          .avatar {
+            width: 50px;
+            height: 50px;
+          }
+        }
+        
+        .label,
+        .value {
+          font-size: 0.7rem;
+        }
+      }
+      
+      .social-link-item {
+        font-size: 0.7rem;
+        
+        .social-link {
+          font-size: 0.7rem;
+        }
+      }
+      
+      .section-header h3 {
+        font-size: 0.75rem;
       }
     }
   }
