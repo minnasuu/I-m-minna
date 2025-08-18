@@ -1,8 +1,8 @@
 import React from 'react';
 import './AITheme.scss';
 import AIChatInterface from './AIChatInterface';
-import AIPersonality from './AIPersonality';
 import AIAvatar from './AIAvatar';
+import ThemeSwitcher from '../../components/ThemeSwitcher';
 
 const AITheme: React.FC = () => {
   return (
@@ -10,21 +10,16 @@ const AITheme: React.FC = () => {
       <div className="ai-header">
         <AIAvatar />
         <div className="ai-title">
-          <h1>AI Assistant - Minna</h1>
-          <p>Your Personal AI Companion</p>
+          <h1>Minna</h1>
+          <p>Who know about me best.</p>
+        </div>
+        <div style={{ marginLeft: 'auto' }}>
+          <ThemeSwitcher />
         </div>
       </div>
       
       <div className="ai-content">
-        <AIPersonality />
         <AIChatInterface />
-      </div>
-      
-      <div className="ai-footer">
-        <div className="ai-status">
-          <span className="status-indicator online"></span>
-          <span>AI Online - Ready to Chat</span>
-        </div>
       </div>
     </div>
   );

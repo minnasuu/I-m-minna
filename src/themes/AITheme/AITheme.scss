@@ -1,121 +1,232 @@
 .ai-theme {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #ffffff;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #ffffff;
+  color: #374151;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
   
   .ai-header {
     display: flex;
     align-items: center;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 2rem;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 10;
     
     .ai-title {
-      margin-left: 1.5rem;
+      margin-left: 1rem;
       
       h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: 1.5rem;
+        font-weight: 600;
         margin: 0;
-        background: linear-gradient(45deg, #fff, #e0e7ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #111827;
       }
       
       p {
-        margin: 0.5rem 0 0 0;
-        font-size: 1.1rem;
-        opacity: 0.8;
+        margin: 0.25rem 0 0 0;
+        font-size: 0.875rem;
+        color: #6b7280;
       }
     }
   }
   
   .ai-content {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-    padding: 2rem;
-    max-width: 1400px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
     margin: 0 auto;
-    
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  .ai-footer {
-    padding: 1rem 2rem;
-    background: rgba(0, 0, 0, 0.2);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    
-    .ai-status {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      opacity: 0.8;
-      
-      .status-indicator {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        
-        &.online {
-          background: #10b981;
-          box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-          animation: pulse 2s infinite;
-        }
-      }
-    }
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
+    width: 100%;
+    padding: 0;
   }
 }
 
 // AI Avatar Styles
 .ai-avatar {
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #667eea, #764ba2);
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1.25rem;
   color: white;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+  flex-shrink: 0;
+  img {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    z-index: -1;
-    animation: rotate 3s linear infinite;
   }
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
+// AI Chat Interface Styles
+.ai-chat-interface {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  
+  .chat-messages {
+    flex: 1;
+    padding: 0;
+    overflow-y: auto;
+    
+    .message {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid #f3f4f6;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      
+      &.user {
+        background: #f9fafb;
+        
+        .message-content {
+          color: #111827;
+        }
+      }
+      
+      &.ai {
+        background: #ffffff;
+        
+        .message-content {
+          color: #374151;
+        }
+      }
+      
+      .message-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #10b981;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+        color: white;
+        flex-shrink: 0;
+      }
+      
+      .message-content {
+        flex: 1;
+        line-height: 1.6;
+        font-size: 0.95rem;
+        
+        .typing-indicator {
+          display: flex;
+          gap: 4px;
+          
+          span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #9ca3af;
+            animation: typing 1.4s infinite ease-in-out;
+            
+            &:nth-child(1) { animation-delay: -0.32s; }
+            &:nth-child(2) { animation-delay: -0.16s; }
+          }
+        }
+        
+        .terminal-output {
+          background: #1f2937;
+          color: #f9fafb;
+          padding: 1rem;
+          border-radius: 8px;
+          font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+          font-size: 0.875rem;
+          line-height: 1.5;
+          margin: 0.5rem 0;
+          overflow-x: auto;
+          
+          .command {
+            color: #10b981;
+          }
+          
+          .output {
+            color: #f9fafb;
+          }
+          
+          .error {
+            color: #ef4444;
+          }
+        }
+      }
+    }
   }
-  to {
-    transform: rotate(360deg);
+  
+  .chat-input {
+    padding: 1.5rem 2rem;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    
+    .input-container {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      
+      .input-wrapper {
+        flex: 1;
+        position: relative;
+        
+        textarea {
+          width: 100%;
+          min-height: 44px;
+          max-height: 120px;
+          padding: 0.75rem 1rem;
+          border: 1px solid #d1d5db;
+          border-radius: 8px;
+          background: #ffffff;
+          color: #374151;
+          font-size: 0.95rem;
+          font-family: inherit;
+          resize: none;
+          outline: none;
+          transition: border-color 0.2s ease;
+          
+          &:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+          }
+          
+          &::placeholder {
+            color: #9ca3af;
+          }
+        }
+      }
+      
+      button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        background: #10b981;
+        color: white;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:hover:not(:disabled) {
+          background: #059669;
+          transform: translateY(-1px);
+        }
+        
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          transform: none;
+        }
+      }
+    }
   }
 }
 
@@ -130,172 +241,28 @@
   }
 }
 
-// AI Personality Styles
-.ai-personality {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  
-  .personality-header {
-    margin-bottom: 1.5rem;
-    
-    h3 {
-      font-size: 1.5rem;
-      margin: 0 0 0.5rem 0;
-      color: #e0e7ff;
-    }
-  }
-  
-  .personality-traits {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    
-    .trait {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease;
+// 响应式设计
+@media (max-width: 768px) {
+  .ai-theme {
+    .ai-header {
+      padding: 1rem;
       
-      &:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: translateY(-2px);
+      .ai-title h1 {
+        font-size: 1.25rem;
       }
     }
-  }
-  
-  .personality-description {
-    margin-top: 1.5rem;
-    line-height: 1.6;
-    opacity: 0.9;
-  }
-}
-
-// AI Chat Interface Styles
-.ai-chat-interface {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  flex-direction: column;
-  height: 600px;
-  
-  .chat-messages {
-    flex: 1;
-    padding: 1.5rem;
-    overflow-y: auto;
     
-    .message {
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      
-      &.user {
-        flex-direction: row-reverse;
-        
-        .message-content {
-          background: rgba(255, 255, 255, 0.2);
-          border-radius: 20px 20px 5px 20px;
-        }
-      }
-      
-      &.ai {
-        .message-content {
-          background: rgba(102, 126, 234, 0.3);
-          border-radius: 20px 20px 20px 5px;
-        }
-      }
-      
-      .message-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        color: white;
-        flex-shrink: 0;
-      }
-      
-             .message-content {
-         padding: 1rem;
-         max-width: 70%;
-         line-height: 1.5;
-         
-         .typing-indicator {
-           display: flex;
-           gap: 4px;
-           
-           span {
-             width: 8px;
-             height: 8px;
-             border-radius: 50%;
-             background: rgba(255, 255, 255, 0.7);
-             animation: typing 1.4s infinite ease-in-out;
-             
-             &:nth-child(1) { animation-delay: -0.32s; }
-             &:nth-child(2) { animation-delay: -0.16s; }
-           }
-         }
-       }
-     }
-   }
-  
-  .chat-input {
-    padding: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    .ai-content {
+      padding: 0;
+    }
     
-    .input-container {
-      display: flex;
-      gap: 1rem;
-      
-      input {
-        flex: 1;
+    .ai-chat-interface {
+      .chat-messages .message {
         padding: 1rem;
-        border: none;
-        border-radius: 25px;
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        font-size: 1rem;
-        
-        &::placeholder {
-          color: rgba(255, 255, 255, 0.6);
-        }
-        
-        &:focus {
-          outline: none;
-          background: rgba(255, 255, 255, 0.3);
-        }
       }
       
-      button {
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 25px;
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        color: white;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-        
-        &:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-          transform: none;
-        }
+      .chat-input {
+        padding: 1rem;
       }
     }
   }
