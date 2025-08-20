@@ -38,7 +38,9 @@ const ArticlesPage: React.FC = () => {
           {sortedArticles.map((article) => (
             <article key={article.id} className="article-card">
               <Link to={`/articles/${article.id}`}>
-                <h2 className="article-title">{article.title}</h2>
+                <div className="article-title">
+                {article.title}
+                </div>
 
                 <p className="article-summary">{article.summary}</p>
 

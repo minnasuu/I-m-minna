@@ -159,6 +159,12 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      margin-left: 0;
+      padding-left: 0;
+      &::before{
+        content: '';
+        display: none;
+      }
       
       .interest-item,
       .craft-item {
@@ -214,7 +220,7 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       line-height: 1.4;
       
       &:hover {
@@ -278,13 +284,16 @@
 
 // AI Chat Interface Styles
 .ai-chat-interface {
-flex: 1;
+  flex: 1;
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   
   .chat-messages {
-    flex: 1;
+    // flex: 1;
+    height: fit-content;
+    max-height: 100%;
     padding: 0;
     overflow-y: auto;
     display: flex;
@@ -423,6 +432,9 @@ flex: 1;
       display: flex;
       gap: 12px;
       align-items: flex-end;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
       
       .input-wrapper {
         flex: 1;

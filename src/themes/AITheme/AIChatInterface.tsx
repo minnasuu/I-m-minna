@@ -71,7 +71,12 @@ const AIChatInterface: React.FC = () => {
   const currentData = personalDataMultiLang[language];
 
   useEffect(() => {
-    // 移除自动滚动逻辑，让 flexbox 自动处理
+    // 消息从头部插入，最新的消息显示在顶部
+    // 自动滚动到顶部以显示最新消息
+    const chatMessages = document.querySelector('.chat-messages');
+    if (chatMessages) {
+      chatMessages.scrollTop = 0;
+    }
   }, [messages]);
 
   // 自然对话形式的问题，回答内容与终端主题保持一致
@@ -256,8 +261,8 @@ const AIChatInterface: React.FC = () => {
       timestamp: new Date(),
     };
 
-    // 在 column-reverse 模式下，新消息添加到数组末尾会自动显示在底部
-    setMessages((prev) => [...prev, userMessage]);
+    // 新消息从数组头部插入，最新的消息显示在顶部
+    setMessages((prev) => [userMessage, ...prev]);
 
     // 延迟后添加AI回答，使用与终端主题一致的100ms间隔
     setTimeout(() => {
@@ -270,8 +275,8 @@ const AIChatInterface: React.FC = () => {
         isTyping: true,
       };
 
-      // 在 column-reverse 模式下，新消息添加到数组末尾会自动显示在底部
-      setMessages((prev) => [...prev, aiMessage]);
+      // 新消息从数组头部插入，最新的消息显示在顶部
+      setMessages((prev) => [aiMessage, ...prev]);
       setTypingMessageId(aiMessageId);
 
       // 使用更快的逐字输出速度（每个字符30ms，比终端稍快以适应AI主题）
@@ -314,6 +319,7 @@ const AIChatInterface: React.FC = () => {
       timestamp: new Date(),
       isTyping: true,
     };
+    // 欢迎消息从数组头部插入
     setMessages([welcomeMessage]);
     setTypingMessageId("1");
 
@@ -521,8 +527,8 @@ const AIChatInterface: React.FC = () => {
       timestamp: new Date(),
     };
 
-    // 在 column-reverse 模式下，新消息添加到数组末尾会自动显示在底部
-    setMessages((prev) => [...prev, userMessage]);
+    // 新消息从数组头部插入，最新的消息显示在顶部
+    setMessages((prev) => [userMessage, ...prev]);
     setInputText("");
     setIsTyping(true);
 
@@ -540,8 +546,8 @@ const AIChatInterface: React.FC = () => {
         terminalOutput,
         isTyping: true,
       };
-      // 在 column-reverse 模式下，新消息添加到数组末尾会自动显示在底部
-      setMessages((prev) => [...prev, aiResponse]);
+      // 新消息从数组头部插入，最新的消息显示在顶部
+      setMessages((prev) => [aiResponse, ...prev]);
       setTypingMessageId(aiMessageId);
 
       if (aiResponseText) {
@@ -594,7 +600,7 @@ const AIChatInterface: React.FC = () => {
     <div className="ai-chat-interface">
       <div className="chat-messages">
         <>
-          {messages.reverse().map((message) => (
+          {messages.map((message) => (
             <div key={message.id} className={`message ${message.sender}`}>
               {message.sender === "ai" ? (
                 <div className="message-avatar">
