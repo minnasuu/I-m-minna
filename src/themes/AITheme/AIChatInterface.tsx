@@ -66,17 +66,12 @@ const AIChatInterface: React.FC = () => {
   const [autoChatIndex, setAutoChatIndex] = useState(0);
   const [isAutoChatting, setIsAutoChatting] = useState(false);
   const [typingMessageId, setTypingMessageId] = useState<string | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const currentData = personalDataMultiLang[language];
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    // 移除自动滚动逻辑，让 flexbox 自动处理
   }, [messages]);
 
   // 自然对话形式的问题，回答内容与终端主题保持一致
@@ -261,6 +256,7 @@ const AIChatInterface: React.FC = () => {
       timestamp: new Date(),
     };
 
+    // 在 column-reverse 模式下，新消息添加到数组末尾会自动显示在底部
     setMessages((prev) => [...prev, userMessage]);
 
     // 延迟后添加AI回答，使用与终端主题一致的100ms间隔
@@ -274,6 +270,7 @@ const AIChatInterface: React.FC = () => {
         isTyping: true,
       };
 
+      // 在 column-reverse 模式下，新消息添加到数组末尾会自动显示在底部
       setMessages((prev) => [...prev, aiMessage]);
       setTypingMessageId(aiMessageId);
 
@@ -524,6 +521,7 @@ const AIChatInterface: React.FC = () => {
       timestamp: new Date(),
     };
 
+    // 在 column-reverse 模式下，新消息添加到数组末尾会自动显示在底部
     setMessages((prev) => [...prev, userMessage]);
     setInputText("");
     setIsTyping(true);
@@ -542,6 +540,7 @@ const AIChatInterface: React.FC = () => {
         terminalOutput,
         isTyping: true,
       };
+      // 在 column-reverse 模式下，新消息添加到数组末尾会自动显示在底部
       setMessages((prev) => [...prev, aiResponse]);
       setTypingMessageId(aiMessageId);
 
@@ -594,8 +593,8 @@ const AIChatInterface: React.FC = () => {
   return (
     <div className="ai-chat-interface">
       <div className="chat-messages">
-        <div className="messages-container">
-          {messages.map((message) => (
+        <>
+          {messages.reverse().map((message) => (
             <div key={message.id} className={`message ${message.sender}`}>
               {message.sender === "ai" ? (
                 <div className="message-avatar">
@@ -647,8 +646,8 @@ const AIChatInterface: React.FC = () => {
             </div>
           )}
 
-          <div ref={messagesEndRef} />
-        </div>
+          {/* 移除 messagesEndRef，在 column-reverse 模式下不需要 */}
+        </>
       </div>
 
       <div className="chat-input">
