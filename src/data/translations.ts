@@ -194,7 +194,7 @@ export const translations: Record<Language, Translations> = {
       error: "出错了",
       noData: "暂无数据",
       systemInfo: "个人信息",
-      socialLinks: "社交链接",
+      socialLinks: "链接",
       name: "姓名",
       role: "职位",
       location: "位置",

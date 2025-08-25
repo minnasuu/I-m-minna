@@ -44,6 +44,7 @@ export interface Project {
   image?: string;
   featured: boolean;
   link?: string; // 可选的链接
+  imgPopUrl?: string; // 可选的图片弹窗链接
 }
 
 export interface Craft {

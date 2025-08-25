@@ -55,7 +55,7 @@ export default function AISidebar() {
         </div>
       </div>
 
-      {/* 社交链接 */}
+      {/* 链接 */}
       <div className="ai-sidebar-section">
         <div className="section-header">
           <h3>🧲 {t("common.socialLinks")}</h3>
@@ -86,7 +86,7 @@ export default function AISidebar() {
           {data.skills.map((skill, index) => (
             <div
               key={index}
-              className={`interest-item ${skill.link ? "with-link" : ""}`}
+              className={`label-item ${skill.link ? "with-link" : ""}`}
             >
               {skill.link ? (
                 <a
@@ -115,10 +115,10 @@ export default function AISidebar() {
           {data.interests.map((interest, index) => (
             <div
               key={index}
-              className={`interest-item ${interest.link ? "with-link" : ""}`}
+              className={`label-item ${interest.link ? "with-link" : ""}`}
             >
               <span className="interest-name">{interest.name}</span>
-              {interest.link && <span className="interest-link">🔗</span>}
+              {interest.link && <Link to={`/journals/${interest.link}`} className="interest-link">🔗</Link>}
             </div>
           ))}
         </div>
@@ -135,7 +135,7 @@ export default function AISidebar() {
         </div>
         <div className="interest-list">
           {data.articles.slice(0, 3).map((article, index) => (
-            <div key={index} className="interest-item">
+            <div key={index} className="label-item">
               <Link
                 to={`/articles/${article.id}`}
                 className="article-title-link"
@@ -153,8 +153,8 @@ export default function AISidebar() {
           <h3>💎 {t("projects.title")}</h3>
         </div>
         <div className="interest-list">
-          {data.projects.slice(0, 3).map((project, index) => (
-            <div key={index} className="interest-item">
+          {data.projects.map((project, index) => (
+            <div key={index} className="label-item">
               <a
                 href={project.link}
                 target="_blank"
@@ -163,6 +163,11 @@ export default function AISidebar() {
               >
                 <span className="interest-name">{project.name}</span>
               </a>
+              {project.imgPopUrl && (
+                <div className='img-pop-container'>
+                  <img src={project.imgPopUrl} alt="img-pop" className='img-pop' />
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -174,7 +179,7 @@ export default function AISidebar() {
           <h3>♾️ {t("crafts.title")}</h3>
         </div>
         <div className="craft-list">
-          {data.crafts.slice(0, 3).map((craft, index) => (
+          {data.crafts.map((craft, index) => (
             <div
               key={index}
               className={`craft-item ${craft.link ? "with-link" : ""}`}

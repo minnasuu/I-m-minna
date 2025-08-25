@@ -23,6 +23,10 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
           url: "https://github.com/minnasuu",
         },
         {
+          name: "CodePen",
+          url: "https://codepen.io/minhan-su",
+        },
+        {
           name: "小红书",
           abbreviation: "Suumhan",
           url: "https://www.xiaohongshu.com/user/profile/5de3f0e60000000001001e98?xsec_token=YB_O8hD8Al3lV4mGSuuDDC4m6bSlsqSBOICoeFzx1KgMU=&xsec_source=app_share&xhsshare=CopyLink&appuid=5de3f0e60000000001001e98&apptime=1754584198&share_id=d50b51a3b3be43288a2cd5ec5bf7c6b3",
@@ -60,7 +64,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         name: "最近在听（孙燕姿-风衣）",
       },
       {
-        name: "最近看过（绿皮书）",
+        name: "最近看过（天堂电影院）",
       },
     ],
     articles: [
@@ -144,6 +148,14 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         featured: true,
         link: "https://miaowen.qq.com/miaowen-station/index",
       },
+      {
+        id: "4",
+        name: '织作时光',
+        description: '原创手工编织教程与工具小程序，用户数累计7800+。',
+        technologies: ['微信小程序'],
+        featured: true,
+        imgPopUrl: '/ckt-miniprogram-qr.jpg'
+      }
     ],
     crafts: [
       {
@@ -194,6 +206,10 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
           url: "https://github.com/minnasuu",
         },
         {
+          name: "CodePen",
+          url: "https://codepen.io/minhan-su",
+        },
+        {
           name: "Redbook",
           abbreviation: "Suumhan",
           url: "https://www.xiaohongshu.com/user/profile/5de3f0e60000000001001e98?xsec_token=YB_O8hD8Al3lV4mGSuuDDC4m6bSlsqSBOICoeFzx1KgMU=&xsec_source=app_share&xhsshare=CopyLink&appuid=5de3f0e60000000001001e98&apptime=1754584198&share_id=d50b51a3b3be43288a2cd5ec5bf7c6b3",
@@ -231,7 +247,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         name: "Recently listening (Singer: Sun Yanzi - Windbreaker)",
       },
       {
-        name: "Recently watched (Green Book)",
+        name: "Recently watched (Nuovo Cinema Paradiso)",
       },
     ],
     articles: [
@@ -322,6 +338,14 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         featured: true,
         link: "https://miaowen.qq.com/miaowen-station/index",
       },
+      {
+        id: "4",
+        name: 'Crochet&Knit Time',
+        description: 'Original crochet and knitting tutorial and tool mini-program, with more than 7,800 users.',
+        technologies: ['WeChat Mini Program'],
+        featured: true,
+        imgPopUrl: '/ckt-miniprogram-qr.jpg'
+      }
     ],
     crafts: [
       {

@@ -166,8 +166,9 @@
         display: none;
       }
       
-      .interest-item,
+      .label-item,
       .craft-item {
+        position: relative;
         padding: 6px 12px;
         background: #ffffff;
         border: 1px solid #e5e7eb;
@@ -177,6 +178,12 @@
         align-items: center;
         gap: 4px;
         font-size: 0.75rem;
+        &:hover{
+          .img-pop-container{
+            opacity: 1;
+            transform: translate(-50%,-8px);
+          }
+        }
         
         .interest-name,
         .craft-name {
@@ -208,6 +215,42 @@
         &:not(.with-link):hover {
           background: #f3f4f6;
           border-color: #d1d5db;
+        }
+        .img-pop-container{
+          position: absolute;
+          bottom: 100%;
+          left: 50%;
+          padding: 8px;
+          width: 120%;
+          background-color: #ffffff;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          box-sizing: border-box;
+          opacity: 0;
+          transform: translate(-50%,4px);
+          transition: all 0.2s ease;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          pointer-events: none;
+          .img-pop{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+          }
+          &::before{
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-right: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            background-color: #ffffff;
+            border-radius: 2px;
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+          }
         }
       }
     }
@@ -545,7 +588,7 @@
       .ai-sidebar-section {
         margin-bottom: 16px;
         
-        // 只显示前两个section（系统信息和社交链接）
+        // 只显示前两个section（系统信息和链接）
         &:nth-child(n+3) {
           display: none;
         }

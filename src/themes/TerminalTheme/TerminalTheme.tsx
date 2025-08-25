@@ -240,7 +240,7 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
               {data.skills.map((skill, index) => (
                 <div
                   key={index}
-                  className={`interest-item ${skill.link ? "with-link" : ""}`}
+                  className={`label-item ${skill.link ? "with-link" : ""}`}
                 >
                   {skill.link ? (
                     <a
@@ -268,12 +268,12 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
               {data.interests.map((interest, index) => (
                 <div
                   key={index}
-                  className={`interest-item ${
+                  className={`label-item ${
                     interest.link ? "with-link" : ""
                   }`}
                 >
                   <span className="interest-name">{interest.name}</span>
-                  {interest.link && <span className="interest-link">🔗</span>}
+                  {interest.link && <Link to={`/journals/${interest.link}`} className="interest-link">🔗</Link>}
                 </div>
               ))}
             </div>
@@ -289,7 +289,7 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
             </div>
             <div className="interest-list">
               {data.articles.slice(0, 3).map((article, index) => (
-                <div key={index} className="interest-item">
+                <div key={index} className="label-item">
                   <Link
                     to={`/articles/${article.id}`}
                     className="article-title-link"
@@ -306,8 +306,8 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
               <h3>💎 {t("projects.title")}</h3>
             </div>
             <div className="interest-list">
-              {data.projects.slice(0, 3).map((project, index) => (
-                <div key={index} className="interest-item">
+              {data.projects.map((project, index) => (
+                <div key={index} className="label-item">
                   <a
                     href={project.link}
                     target="_blank"
@@ -316,6 +316,11 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
                   >
                     <span className="interest-name">{project.name}</span>
                   </a>
+                  {project.imgPopUrl && (
+                    <div className='img-pop-container'>
+                      <img src={project.imgPopUrl} alt="img-pop" className='img-pop' />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -326,7 +331,7 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
               <h3>♾️ {t("crafts.title")}</h3>
             </div>
             <div className="craft-list">
-              {data.crafts.slice(0, 3).map((craft, index) => (
+              {data.crafts.map((craft, index) => (
                 <div
                   key={index}
                   className={`craft-item ${craft.link ? "with-link" : ""}`}
