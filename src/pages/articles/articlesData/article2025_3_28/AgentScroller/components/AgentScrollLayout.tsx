@@ -46,16 +46,30 @@ const AgentScrollLayout: React.FC<Props> = ({
 
     return () => observer.disconnect();
   }, []);
-  return <div
-    className={`ckt-agent-scroll-layout width-100 py-24 border-box ${className}`}
-    style={{ overflow: 'auto', ...style }}
-    onWheel={onScroll}
-  >
-    {!isEnd && <div ref={loadIndicatorRef} className="flex items-center mx-auto fs-14"
-      style={{ width: 'fit-content', height: '64px' }} onClick={onPreLoad}>
-      <Loading />
-    </div>}
-    <div onScroll={onContentScroll} className={`${contentClassName} flex column gap-24 height-100`} style={{ overflow:'auto',direction: 'ltr', ...contentStyle }}>{children}</div>
-  </div>
+  return (
+    <div
+      className={`ckt-agent-scroll-layout w-full py-24 border-box ${className}`}
+      style={{ overflow: "auto", ...style }}
+      onWheel={onScroll}
+    >
+      {!isEnd && (
+        <div
+          ref={loadIndicatorRef}
+          className="flex items-center mx-auto text-14"
+          style={{ width: "fit-content", height: "64px" }}
+          onClick={onPreLoad}
+        >
+          <Loading />
+        </div>
+      )}
+      <div
+        onScroll={onContentScroll}
+        className={`${contentClassName} flex flex-col gap-24 h-full`}
+        style={{ overflow: "auto", direction: "ltr", ...contentStyle }}
+      >
+        {children}
+      </div>
+    </div>
+  );
 }
 export default AgentScrollLayout;

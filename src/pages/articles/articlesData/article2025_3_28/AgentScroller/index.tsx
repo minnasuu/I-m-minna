@@ -90,25 +90,43 @@ export default tseslint.config({
 
   const loadHistory = () => {
    setTimeout(()=>{
-     setInnerContent([{
-       id: '111', content: <div className="flex column gap-24">
-         <UserItem message="历史问了一个问题"/>
-         <div>一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答</div>
-       </div>
-     }, ...innerContent])
+     setInnerContent([
+       {
+         id: "111",
+         content: (
+           <div className="flex flex-col gap-24">
+             <UserItem message="历史问了一个问题" />
+             <div>
+               一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答一段历史回答
+             </div>
+           </div>
+         ),
+       },
+       ...innerContent,
+     ]);
    },2000)
   }
-  return <div className="width-100 flex column bg-gray" style={{height:'400px'}}>
-    <StyledLandContent className="flex-1 height-1 width-100 pb-24 flex column items-start mx-auto border-box" >
-      <AgentScrollLayout onPreLoad={loadHistory} isEnd>
-        {innerContent?.map(i => i.content)}
-      </AgentScrollLayout>
-      <AgentTextarea onSend={() => {
-        setInnerContent([...innerContent, {id: `${Date.now()}`, content:<UserItem message={'问了一个问题'} />}]);
-        setAnswering(true);
-      }} />
-    </StyledLandContent >
-  </div>
+  return (
+    <div className="w-full flex flex-col bg-gray" style={{ height: "400px" }}>
+      <StyledLandContent className="flex-1 h-full w-full pb-24 flex flex-col items-start mx-auto border-box">
+        <AgentScrollLayout onPreLoad={loadHistory} isEnd>
+          {innerContent?.map((i) => i.content)}
+        </AgentScrollLayout>
+        <AgentTextarea
+          onSend={() => {
+            setInnerContent([
+              ...innerContent,
+              {
+                id: `${Date.now()}`,
+                content: <UserItem message={"问了一个问题"} />,
+              },
+            ]);
+            setAnswering(true);
+          }}
+        />
+      </StyledLandContent>
+    </div>
+  );
 }
 const StyledLandContent = styled.div`
     max-width: 848px;

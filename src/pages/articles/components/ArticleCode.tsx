@@ -1,19 +1,21 @@
+import { LandButton } from "@suminhan/land-design";
 import React, { type CSSProperties } from "react";
 import { useState } from "react";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 type Props = {
   language?: string;
   codeStr?: string;
   style?: CSSProperties;
   className?: string;
-}
+};
 const ArticleCode: React.FC<Props> = ({
-  language = 'text',
-  codeStr = '',
+  language = "text",
+  codeStr = "",
   style,
-  className = '',
+  className = "",
 }) => {
+  // @ts-ignore
   const [isCopied, setIsCopied] = useState<number>(-1);
   const handleCopy = async () => {
     if (!codeStr) return;
@@ -24,29 +26,34 @@ const ArticleCode: React.FC<Props> = ({
       setIsCopied(2);
     }
   };
-  return <div className={`flex flex-col w-full rounded-lg bg-gray border-box border border-gray-2 overflow-hidden ${className}`} style={style}>
-    <div className="flex items-center justify-between px-16 py-12 w-full bg-gray-3 border-b border-gray-2 border-box">
-      <p className="font-bold">{language}</p>
-      <div className="flex items-center gap-12">
-        <button onClick={handleCopy}>复制</button>
+  return (
+    <div
+      className={`flex flex-col w-full rounded-lg bg-gray border-box border border-gray-200 bg-white overflow-hidden ${className}`}
+      style={{ marginBlock: "12px", ...style }}
+    >
+      <div
+        className="flex items-center justify-between w-full bg-gray-3 border-b border-gray-200 border-box"
+        style={{ padding: "12px 16px" }}
+      >
+        <p className="font-bold">{language}</p>
+        <div className="flex items-center gap-12">
+          <LandButton type="transparent" onClick={handleCopy} text="复制" />
+        </div>
       </div>
-    </div>
-    <SyntaxHighlighter
-      language={language}
-      wrapLongLines
-      showLineNumbers
+      <SyntaxHighlighter
+        language={language}
+        wrapLongLines
+        showLineNumbers
         customStyle={{
           // 自定义容器样式
           borderRadius: "8px",
-          backgroundColor: "#f0f0f0",
+          backgroundColor: "transparent",
           padding: "20px",
         }}
       >
-      {codeStr.trim()}
-    </SyntaxHighlighter>
-    {isCopied > 0 && (
-      <div>{isCopied > 1 ? "复制失败,您的浏览器不支持剪贴板操作" : "复制成功！"}</div>
-    )}
-  </div>
+        {codeStr.trim()}
+      </SyntaxHighlighter>
+    </div>
+  );
 };
 export default ArticleCode;

@@ -7,11 +7,18 @@ type Props = {
     imgStyle?: CSSProperties;
 }
 const ArticleImage: React.FC<Props> = ({
-                                           url = '正文内容...',
-                                           alt,
-                                           style,
-                                           imgStyle
-                                      }) => <div className="flex justify-center w-full mt-20" style={style}>
-    <img src={url} alt={alt} className="max-h-[400px] rounded-lg" style={imgStyle} />
-</div>
+  url = "正文内容...",
+  alt,
+  style,
+  imgStyle,
+}) => (
+  <div className="article-image flex justify-center w-full" style={style}>
+    <img
+      src={url}
+      alt={alt}
+      className="max-h-[400px] rounded-lg"
+      style={imgStyle}
+    />
+  </div>
+);
 export default ArticleImage;

@@ -1,18 +1,6 @@
-import styled from "styled-components"
+import "./index.scss";
 
-const Animation1 = () => <StyledAnimationDemo1></StyledAnimationDemo1>
-const StyledAnimationDemo1 = styled.div`
-    width: 80px;
-    height: 80px;
-    background-color: var(--color-primary-2);
-    animation: morph1 2s linear infinite alternate;
-    @keyframes morph1 {
-        0%{
-            border-radius: 2px;
-        }
-        100%{
-            border-radius: 100px;
-        }
-    }
-`
+const Animation1 = () => (
+  <div className="animation-demo1 w-[80px] h-[80px]"></div>
+);
 export default Animation1;

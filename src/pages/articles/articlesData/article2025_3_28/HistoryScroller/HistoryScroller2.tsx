@@ -67,23 +67,47 @@ useEffect(() => {
           observer.disconnect();
   };
 }, [ data]);
-  return <div className={`width-100 flex column border radius-8 ${fix ? 'justify-between' : ''}`} style={{ height: '320px' }}>
-    <AgentScrollLayout 
-    isEnd
-    className={`px-12 border-box ${fix ? '' : 'flex-1 height-1'}`} style={fix ? { height: 'fit-content', maxHeight: '100%' } : {overflow:'auto'}} contentStyle={{ flexDirection: 'column-reverse' }}
+  return (
+    <div
+      className={`w-full flex flex-col border border-gray-2 rounded-[8px] ${
+        fix ? "justify-between" : ""
+      }`}
+      style={{ height: "320px" }}
     >
-      {data?.map(item=>item)}
-      {!isEnd &&<div ref={loadingMoreRef} className="width-100 flex justify-center py-12">加载中...</div>}
-    </AgentScrollLayout>
-    <div className={'flex justify-end px-12 py-12'}>
-      <button style={{width: '100px'}} disabled={loading} onClick={() => {
-      setLoading(true);
-        setData([<UserItem message={'问了一个新的问题4'} />,...data]);
-      }}>
-        {loading?'生成中':'开始'}
-      </button>
+      <AgentScrollLayout
+        isEnd
+        className={`px-12 border-box ${fix ? "" : "flex-1 height-1"}`}
+        style={
+          fix
+            ? { height: "fit-content", maxHeight: "100%" }
+            : { overflow: "auto" }
+        }
+        contentStyle={{ flexDirection: "column-reverse" }}
+      >
+        {data?.map((item) => item)}
+        {!isEnd && (
+          <div
+            ref={loadingMoreRef}
+            className="w-full flex justify-center py-12"
+          >
+            加载中...
+          </div>
+        )}
+      </AgentScrollLayout>
+      <div className={"flex justify-end px-12 py-12"}>
+        <button
+          style={{ width: "100px" }}
+          disabled={loading}
+          onClick={() => {
+            setLoading(true);
+            setData([<UserItem message={"问了一个新的问题4"} />, ...data]);
+          }}
+        >
+          {loading ? "生成中" : "开始"}
+        </button>
+      </div>
     </div>
-  </div>
+  );
 }
 
 export default HistoryScroller2;

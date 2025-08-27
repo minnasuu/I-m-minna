@@ -57,13 +57,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
         </header>
 
         <div className="article-content">
-          <div className="article-detail-summary">
-            <h2>{t("articles.summary")}</h2>
-            <p>{article.summary}</p>
-          </div>
-
           <div className="article-detail-body">
-            <h2>{t("articles.content")}</h2>
             <div className="article-detail-body-content">{article.content}</div>
           </div>
         </div>

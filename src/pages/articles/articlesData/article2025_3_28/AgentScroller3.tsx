@@ -89,48 +89,64 @@ const AgentScroller2: React.FC = () => {
       {displayContent}
     </ReactMarkdown>
   ), [displayContent]);
-  return <div className="width-100 flex column border radius-8" style={{ height: '320px' }}>
-    <AgentScrollLayout isEnd className={'px-12 border-box flex-1 height-1'} onScroll={() => setIsAutoSCroll(false)} contentClassName="ckt-agent-scroll-layout2-2">
-      {show1 && <UserItem message={'问了一个问题'} />}
-      {show2 && <ServerItem>
-        <div
-          className="markdown-container"
-          style={{
-            position: 'relative'
+  return (
+    <div
+      className="w-full flex flex-col border border-gray-2 rounded-[8px]"
+      style={{ height: "320px" }}
+    >
+      <AgentScrollLayout
+        isEnd
+        className={"px-12 border-box flex-1 h-full"}
+        onScroll={() => setIsAutoSCroll(false)}
+        contentClassName="ckt-agent-scroll-layout2-2"
+      >
+        {show1 && <UserItem message={"问了一个问题"} />}
+        {show2 && (
+          <ServerItem>
+            <div
+              className="markdown-container"
+              style={{
+                position: "relative",
+              }}
+            >
+              {renderMarkdown()}
+
+              {/* 闪烁光标效果 */}
+              {!isCompleted.current && (
+                <div
+                  style={{
+                    display: "inline-block",
+                    width: 2,
+                    height: "1.2em",
+                    backgroundColor: "var(--od-light-color)",
+                    animation: "blink 1s step-end infinite",
+                    marginLeft: 4,
+                    verticalAlign: "middle",
+                  }}
+                />
+              )}
+            </div>
+          </ServerItem>
+        )}
+      </AgentScrollLayout>
+      <div className={"flex justify-end px-12 py-12"}>
+        <button
+          style={{ width: "100px" }}
+          disabled={loading}
+          onClick={() => {
+            setIsAutoSCroll(true);
+            setLoading(true);
+            setShow1(true);
+            setTimeout(() => {
+              setShow2(true);
+            }, 1000);
           }}
         >
-          {renderMarkdown()}
-
-          {/* 闪烁光标效果 */}
-          {!isCompleted.current && (
-            <div
-              style={{
-                display: 'inline-block',
-                width: 2,
-                height: '1.2em',
-                backgroundColor: 'var(--od-light-color)',
-                animation: 'blink 1s step-end infinite',
-                marginLeft: 4,
-                verticalAlign: 'middle'
-              }}
-            />
-          )}
-        </div>
-      </ServerItem>}
-    </AgentScrollLayout>
-    <div className={'flex justify-end px-12 py-12'}>
-    <button style={{width: '100px'}} disabled={loading} onClick={() => {
-        setIsAutoSCroll(true)
-        setLoading(true);
-        setShow1(true)
-        setTimeout(() => {
-          setShow2(true)
-        }, 1000);
-      }}>
-        {loading?'生成中':'开始'}
-      </button>
+          {loading ? "生成中" : "开始"}
+        </button>
+      </div>
     </div>
-  </div>
+  );
 }
 
 export default AgentScroller2;

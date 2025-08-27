@@ -157,7 +157,7 @@ const AIChatInterface: React.FC = () => {
             type: "conversation",
           },
           {
-            question: "还有什么想了解的吗？",
+            question: "还可以了解些什么？",
             answer: "你可以在左侧查看更多详细信息，或者继续和我聊天！",
             type: "info",
           },
@@ -309,8 +309,8 @@ const AIChatInterface: React.FC = () => {
 
     const welcomeText =
       language === "zh"
-        ? "你好！欢迎来到我的个人空间，让我来为你介绍一下自己..."
-        : "Hello! Welcome to my personal space, let me introduce myself...";
+        ? "你好！欢迎来到我的个人空间。"
+        : "Hello! Welcome to my personal space.";
 
     const welcomeMessage: Message = {
       id: "1",

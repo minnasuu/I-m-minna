@@ -185,38 +185,59 @@ const HistoryScroller1: React.FC = () => {
   //   if (!isEnd || !scroller) return;
   //   scroller.scrollTop = 168
   // }, [isEnd])
-  return <div className="width-100 flex column border radius-8" style={{ height: '320px' }}>
-    <AgentScrollLayout 
-    isEnd 
-    className={'px-12 border-box flex-1 height-1'} 
-    contentClassName="ckt-agent-scroll-layout2-1"
-    onScroll={() => setIsAutoSCroll(false)}
+  return (
+    <div
+      className="w-full flex flex-col border border-gray-2 rounded-[8px]"
+      style={{ height: "320px" }}
     >
-      {!isEnd&&<div ref={loadingMoreRef} className="width-100 flex justify-center py-12">加载中...</div>}
-      {data?.map(item=>item)}
-    </AgentScrollLayout>
-    <div className={'flex justify-end gap-12 px-12 py-12'}>
-      <button onClick={()=>{
-        setData(initData);
-        setIsEnd(false)
-        setCurrentIndex(0);
-        setDisplayContent('');
-        setLoading(false);
-      }}>
-        重置
-      </button>
-    <button style={{width: '100px'}} disabled={loading} onClick={() => {
-        setIsAutoSCroll(true)
-        setLoading(true);
-        setData(prev => [...prev, <UserItem message={'问了一个新的问题8'} />]);
-        setTimeout(() => {
-          setData(prev => [...prev, agentAnswerItem]);
-        }, 1000);
-      }}>
-        {loading?'生成中':'开始'}
-      </button>
+      <AgentScrollLayout
+        isEnd
+        className={"px-12 border-box flex-1 height-1"}
+        contentClassName="ckt-agent-scroll-layout2-1"
+        onScroll={() => setIsAutoSCroll(false)}
+      >
+        {!isEnd && (
+          <div
+            ref={loadingMoreRef}
+            className="w-full flex justify-center py-12"
+          >
+            加载中...
+          </div>
+        )}
+        {data?.map((item) => item)}
+      </AgentScrollLayout>
+      <div className={"flex justify-end gap-12 px-12 py-12"}>
+        <button
+          onClick={() => {
+            setData(initData);
+            setIsEnd(false);
+            setCurrentIndex(0);
+            setDisplayContent("");
+            setLoading(false);
+          }}
+        >
+          重置
+        </button>
+        <button
+          style={{ width: "100px" }}
+          disabled={loading}
+          onClick={() => {
+            setIsAutoSCroll(true);
+            setLoading(true);
+            setData((prev) => [
+              ...prev,
+              <UserItem message={"问了一个新的问题8"} />,
+            ]);
+            setTimeout(() => {
+              setData((prev) => [...prev, agentAnswerItem]);
+            }, 1000);
+          }}
+        >
+          {loading ? "生成中" : "开始"}
+        </button>
+      </div>
     </div>
-  </div>
+  );
 }
 
 export default HistoryScroller1;

@@ -43,38 +43,44 @@ const BlinkOutput: React.FC = () => {
     isCompleted.current = false;
   };
 
-  return <div className="width-100 border radius-12 p-16 flex column items-end border-box" style={{height:'240px'}}>
-    <div className="flex-1 flex width-100 overflow-auto" style={{flexDirection:'column-reverse'}}>
-      <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-        {displayContent}
-        
-        {/* 闪烁光标效果 */}
-        {!isCompleted.current && (
-        <span
-            style={{
-            display: 'inline-block',
-            width: 2,
-            height: '1.2em',
-            backgroundColor: 'var(--color-text-3)',
-            animation: 'blink .6s step-end infinite',
-            marginLeft: 0,
-            verticalAlign: 'middle'
-            }}
-        />
-        )}
-      </pre>
+  return (
+    <div
+      className="w-full h-[240px] border border-gray-2 rounded-[12px] flex flex-col items-end border-box"
+      style={{ padding: "16px" }}
+    >
+      <div className="flex-1 flex w-full overflow-auto flex-col-reverse">
+        <pre className="whitespace-pre-wrap break-words">
+          {displayContent}
+
+          {/* 闪烁光标效果 */}
+          {!isCompleted.current && (
+            <span
+              style={{
+                display: "inline-block",
+                width: 2,
+                height: "1.2em",
+                backgroundColor: "var(--color-text-3)",
+                animation: "blink .6s step-end infinite",
+                marginLeft: 0,
+                verticalAlign: "middle",
+              }}
+            />
+          )}
+        </pre>
+      </div>
+
+      <div className="mt-[12px]">
+        <button
+          onClick={startOutput}
+          disabled={loading}
+          className="radius-[4px] bg-blue text-white"
+          style={{ padding: "12px 24px" }}
+        >
+          {loading ? "输出中..." : "开始输出"}
+        </button>
+      </div>
     </div>
-    
-    <div className="mt-12">
-      <button 
-        onClick={startOutput} 
-        disabled={loading}
-        className="px-12 py-4 radius-4 bg-blue color-white"
-      >
-        {loading ? '输出中...' : '开始输出'}
-      </button>
-    </div>
-  </div>
+  );
 }
 
 export default BlinkOutput;

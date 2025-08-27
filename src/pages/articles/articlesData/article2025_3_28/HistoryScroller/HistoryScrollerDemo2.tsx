@@ -36,9 +36,22 @@ const HistoryScrollerDemo2:React.FC = () => {
           }
       };
   }, [loading, data]);
-    return <div className="flex-1 flex column items-center width-100 gap-16 p-24 bg-gray overflow-auto border-box" style={{ height: '220px', flexDirection: 'column-reverse' }}>
-    {data.map((_i, idx1) => <div key={idx1} className="width-100 bg-gray-3 shrink-0" style={{ height: '120px' }}>对话{idx1 + 1}</div>)}
-    <div ref={loadingRef}>{loading && '加载中...'}</div>
-  </div>
+    return (
+      <div
+        className="flex-1 flex flex-col items-center w-full gap-16 p-24 bg-gray overflow-auto border-box"
+        style={{ height: "220px", flexDirection: "column-reverse" }}
+      >
+        {data.map((_i, idx1) => (
+          <div
+            key={idx1}
+            className="w-full bg-gray-3 shrink-0"
+            style={{ height: "120px" }}
+          >
+            对话{idx1 + 1}
+          </div>
+        ))}
+        <div ref={loadingRef}>{loading && "加载中..."}</div>
+      </div>
+    );
 }
 export default HistoryScrollerDemo2;
