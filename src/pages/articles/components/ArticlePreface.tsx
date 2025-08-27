@@ -5,6 +5,6 @@ type Props = {
 }
 const ArticlePreface: React.FC<Props> = ({
                                           children = '前言内容...',
-                                      }) => <div style={{padding:'16px',fontSize:'14px',color:'#888',borderRadius:'8px',backgroundColor:'#f0f0f0',textIndent:'2px'}}>{children}</div>
+                                      }) => <div className="p-16 text-14 text-gray-2 rounded-lg bg-gray-3 text-indent-2">{children}</div>
 
 export default ArticlePreface;

@@ -59,13 +59,14 @@ export const article2025_2_22= <ArticleLayout>
                 </ul>
             </ArticleDesc>
             <ArticleDesc>
-                <div className={'mx-auto p-32'} style={{width: '24px',height:'24px',transform:'scale(4)'}}><Animation2/></div>
+                <div className={'mx-auto w-100 h-100'}><Animation2/></div>
             </ArticleDesc>
             <ArticleTitle type={'h3'} title={`1.3. SVG <path> 变形动画`}/>
             <ArticleDesc>{`SVG 的 <path> 元素支持 d 属性动态变化，可定义初始和结束路径实现更流畅的矢量图形变形。效果等同于在 clip-path 中使用 svg 图形。`}</ArticleDesc>
             <ArticleDesc>
-                <div className={'mx-auto p-32'} style={{width: '24px', height: '24px', transform: 'scale(4)'}}>
-                    <Animation3/></div>
+                <div className={'mx-auto flex items-center justify-center w-100 h-100'}>
+                    <Animation3 className="scale-4"/>
+                </div>
             </ArticleDesc>
         </ArticlePartLayout>
         <ArticlePartLayout>
@@ -91,7 +92,7 @@ export const article2025_2_22= <ArticleLayout>
             <ArticleDesc>转换之后将两个图形的 path 路径作为初始路径和结束路径，即可实现丝滑的 morph
                 变形动画。</ArticleDesc>
             <ArticleDesc>
-                <div className={'mx-auto p-32'}>
+                <div className={'w-100 h-100 flex items-center justify-center'}>
                     <Animation4/>
                 </div>
             </ArticleDesc>

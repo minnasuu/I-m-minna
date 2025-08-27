@@ -3,5 +3,5 @@ type Props = {
 }
 const ArticleLayout:React.FC<Props> = ({
                                                children
-                                      }) => <div style={{display:'flex',flexDirection:'column',gap:'24px',marginTop:'20px'}}>{children}</div>
+                                      }) => <div className="flex flex-col gap-24 mt-20">{children}</div>
 export default ArticleLayout;

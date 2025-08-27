@@ -77,6 +77,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         tags: ["前端开发"],
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation",
+        type: "tech",
       },
       {
         id: "2",
@@ -87,6 +88,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         tags: ["React", "SVG", "轮盘"],
         readTime: 2,
         link: "https://blog.example.com/svg-interactive-wheel",
+        type: "tech",
       },
       {
         id: "3",
@@ -97,6 +99,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         tags: ["图片", "格式", "大小", "质量", "加载方式"],
         readTime: 2,
         link: "https://blog.example.com/know-more-about-image",
+        type: "tech",
       },
       {
         id: "4",
@@ -108,6 +111,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         tags: ["CSS", "变形动画", "Morph"],
         readTime: 15,
         link: "https://blog.example.com/threejs-guide",
+        type: "tech",
       },
       {
         id: "5",
@@ -118,6 +122,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         tags: ["AI Chat", "布局", "实现方式"],
         readTime: 18,
         link: "https://blog.example.com/ai-chat-layout",
+        type: "tech",
       },
     ],
     projects: [
@@ -261,6 +266,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         tags: ["React", "Dark Mode", "Adaptation"],
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation",
+        type: "tech",
       },
       {
         id: "2",
@@ -272,6 +278,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         tags: ["React", "SVG", "轮盘"],
         readTime: 2,
         link: "https://blog.example.com/svg-interactive-wheel",
+        type: "tech",
       },
       {
         id: "3",
@@ -283,6 +290,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         tags: ["图片", "格式", "大小", "质量", "加载方式"],
         readTime: 2,
         link: "https://blog.example.com/know-more-about-image",
+        type: "tech",
       },
       {
         id: "4",
@@ -294,6 +302,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         tags: ["CSS", "变形动画", "Morph"],
         readTime: 15,
         link: "https://blog.example.com/threejs-guide",
+        type: "tech",
       },
       {
         id: "5",
@@ -305,6 +314,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         tags: ["AI Chat", "布局", "实现方式"],
         readTime: 18,
         link: "https://blog.example.com/ai-chat-layout",
+        type: "tech",
       },
     ],
     projects: [

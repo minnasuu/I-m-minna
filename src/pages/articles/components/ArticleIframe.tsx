@@ -19,6 +19,6 @@ const ArticleIframe: React.FC<Props> = ({
             behavior: 'smooth'
         })
     },[top])
-    return <iframe ref={iframeRef} src={url} className={`flex justify-center width-100 ${className}`} style={{border:'none',minHeight:'400px',...style}}></iframe>
+    return <iframe ref={iframeRef} src={url} className={`flex justify-center w-full border-none min-h-[400px] ${className}`} style={style}></iframe>
 }
 export default ArticleIframe;

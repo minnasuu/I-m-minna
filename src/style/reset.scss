@@ -12,16 +12,14 @@ h3,
 h4,
 h5,
 p,
-a {
+a,
+li {
     margin: 0;
     padding: 0;
+    line-height: 1.5em;
 }
 ul{
     padding-left: 1em;
-    li{
-        text-indent: 0.5em;
-        list-style: none;
-    }
 }
 a {
     list-style: none;

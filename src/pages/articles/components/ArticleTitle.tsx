@@ -7,11 +7,11 @@ const ArticleTitle: React.FC<Props> = ({
   title = '标题',
 }) => {
   switch (type) {
-    case "h1": return <h1 style={{fontSize:'24px',fontWeight:'600',color:'#202020'}}>{title}</h1>; break;
-    case "h2": return <h2 style={{fontSize:'20px',fontWeight:'600',color:'#202020'}}>{title}</h2>; break;
-    case "h3": return <h3 style={{fontSize:'16px',fontWeight:'600',color:'#202020'}}>{title}</h3>; break;
-    case "h4": return <h4 style={{fontSize:'14px',fontWeight:'600',color:'#202020'}}>{title}</h4>; break;
-    case "h5": return <h5 style={{fontSize:'12px',fontWeight:'600',color:'#202020'}}>{title}</h5>; break;
+    case "h1": return <h1 className="text-24 font-bold text-gray-1">{title}</h1>; break;
+    case "h2": return <h2 className="text-20 font-bold text-gray-1">{title}</h2>; break;
+    case "h3": return <h3 className="text-16 font-bold text-gray-1">{title}</h3>; break;
+    case "h4": return <h4 className="text-14 font-bold text-gray-1">{title}</h4>; break;
+    case "h5": return <h5 className="text-12 font-bold text-gray-1">{title}</h5>; break;
     default: return null;
   }
 }

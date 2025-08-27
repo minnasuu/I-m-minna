@@ -24,9 +24,9 @@ const ArticleCode: React.FC<Props> = ({
       setIsCopied(2);
     }
   };
-  return <div className={`flex column width-100 radius-12 bg-gray border-box border overflow-hidden ${className}`} style={style}>
-    <div className="flex items-center justify-between px-16 py-12 width-100 bg-gray-3 border-bottom fs-14 color-gray-2 border-box">
-      <p className="fw-600">{language}</p>
+  return <div className={`flex flex-col w-full rounded-lg bg-gray border-box border border-gray-2 overflow-hidden ${className}`} style={style}>
+    <div className="flex items-center justify-between px-16 py-12 w-full bg-gray-3 border-b border-gray-2 border-box">
+      <p className="font-bold">{language}</p>
       <div className="flex items-center gap-12">
         <button onClick={handleCopy}>复制</button>
       </div>

@@ -8,9 +8,9 @@ const ArticleList:React.FC<Props> = ({
                                          list,
                                          ordered
                                      }) => {
-    return ordered ? <ol style={{display:'flex',flexDirection:'column',gap:'12px',marginTop:'12px'}}>
+    return ordered ? <ol className="flex flex-col gap-12 mt-12">
         {list.map((item) => <li>{item}</li>)}
-    </ol> : <ul style={{display:'flex',flexDirection:'column',gap:'12px',marginTop:'12px'}}>
+    </ol> : <ul className="flex flex-col gap-12 mt-12">
         {list.map((item) => <li>{item}</li>)}
     </ul>
 }

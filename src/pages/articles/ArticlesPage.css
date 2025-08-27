@@ -12,6 +12,7 @@
   right: 0;
   height: 48px;
   z-index: 100;
+  padding: 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,13 +25,6 @@
   margin: 0 auto;
   padding: 2rem;
   position: relative;
-}
-
-.back-to-home-top {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 10;
 }
 
 .back-btn-top {
@@ -234,17 +228,8 @@
     padding: 0 1.5rem;
   }
   
-  .back-to-home-top {
-    top: -1rem;
-  }
-  
   .back-btn-top {
-    padding: 0.5rem 0.75rem;
     font-size: 0.85rem;
-  }
-  
-  .articles-header {
-    margin-bottom: 3rem;
   }
   
   .articles-header h1 {
@@ -278,4 +263,9 @@
   .external-link-btn {
     text-align: center;
   }
+}
+
+
+.articles-action-buttons .land-dropdown-drop{
+  width: 100%;
 }

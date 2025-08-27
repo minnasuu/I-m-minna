@@ -11,7 +11,7 @@ const ArticleImage: React.FC<Props> = ({
                                            alt,
                                            style,
                                            imgStyle
-                                      }) => <div style={{display:'flex',justifyContent:'center',width:'100%',marginTop:'20px',...style}}>
-    <img src={url} alt={alt} style={{maxHeight: '400px',borderRadius:'8px',...imgStyle}} />
+                                      }) => <div className="flex justify-center w-full mt-20" style={style}>
+    <img src={url} alt={alt} className="max-h-[400px] rounded-lg" style={imgStyle} />
 </div>
 export default ArticleImage;

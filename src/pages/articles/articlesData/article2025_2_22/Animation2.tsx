@@ -2,8 +2,8 @@ import styled from "styled-components"
 
 const Animation2 = () => <StyledAnimationDemo2></StyledAnimationDemo2>
 const StyledAnimationDemo2 = styled.div`
-    width: 24px;
-    height: 24px;
+    width: 100px;
+    height: 100px;
     background-color: var(--color-primary-2);
     animation: morph2 1s linear infinite alternate;
     @keyframes morph2 {

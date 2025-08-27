@@ -1,5 +1,6 @@
 /* 导入滚动条样式 */
 @import './styles/scrollbar.css';
+@import "tailwindcss";
 
 /* 添加Google Fonts支持 */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');

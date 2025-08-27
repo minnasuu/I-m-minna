@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const Animation3 = () => <StyledAnimationDemo3></StyledAnimationDemo3>
+const Animation3 = ({className}:{className?:string}) => <StyledAnimationDemo3 className={className}></StyledAnimationDemo3>
 const StyledAnimationDemo3 = styled.div`
     width: 24px;
     height: 24px;

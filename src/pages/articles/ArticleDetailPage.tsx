@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, Link } from "react-router-dom";
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useTranslations } from '../../hooks/useTranslations';
 import { personalDataMultiLang } from '../../data/personalData';
@@ -28,6 +28,12 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
 
   return (
     <div className="article-detail-page">
+      <div className="articles-header">
+        <Link to="/articles" className="back-btn-top">
+          <span className="arrow-left">←</span>
+          {t("返回文章列表")}
+        </Link>
+      </div>
       <div className="article-detail-container">
         <header className="article-detail-header">
           <div className="article-meta">
