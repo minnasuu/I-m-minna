@@ -201,21 +201,9 @@
           
           &:hover {
             background: #f3f4f6;
-            border-color: #10b981;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
-            
-            .interest-name,
-            .craft-name {
-              color: #10b981;
-            }
           }
         }
         
-        &:not(.with-link):hover {
-          background: #f3f4f6;
-          border-color: #d1d5db;
-        }
         .img-pop-container{
           position: absolute;
           bottom: 100%;
@@ -290,14 +278,6 @@
     text-decoration: none;
     cursor: pointer;
     transition: all 0.2s ease;
-    
-    &:hover {
-      .interest-name,
-      .craft-name {
-        color: #10b981 !important;
-        text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
-      }
-    }
     
     .interest-name,
     .craft-name {

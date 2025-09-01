@@ -135,7 +135,7 @@ export default function AISidebar() {
         </div>
         <div className="interest-list">
           {data.articles.slice(0, 3).map((article, index) => (
-            <div key={index} className="label-item">
+            <div key={index} className={`label-item ${article.link ? "with-link" : ""}`}>
               <Link
                 to={`/articles/${article.id}`}
                 className="article-title-link"
@@ -154,7 +154,7 @@ export default function AISidebar() {
         </div>
         <div className="interest-list">
           {data.projects.map((project, index) => (
-            <div key={index} className="label-item">
+            <div key={index} className={`label-item ${project.link ? "with-link" : ""}`}>
               <a
                 href={project.link}
                 target="_blank"
