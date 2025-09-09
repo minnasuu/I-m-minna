@@ -9,6 +9,25 @@
   padding: 2rem 0;
 }
 
+.article-detail-page-anchor {
+  position: fixed;
+  top: 48px;
+  right: 0;
+  max-width: 200px;
+  height: 60vh;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  .land-anchor{
+    width: 100%;
+    .land-anchor-link {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
 .article-detail-container {
   max-width: 800px;
   padding: 2rem;

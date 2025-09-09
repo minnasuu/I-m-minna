@@ -44,7 +44,8 @@ const exampleArticle: Article = {
   publishDate: "2025-01-01",
   tags: ["示例", "组件", "Props"],
   readTime: 5,
-  link: "https://example.com/article"
+  link: "https://example.com/article",
+  type: "tech"
 };
 
 const ArticleExample: React.FC = () => {

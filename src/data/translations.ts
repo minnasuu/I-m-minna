@@ -187,7 +187,7 @@ export const translations: Record<Language, Translations> = {
     },
     aiTheme: {
       title: "苏敏晗",
-      subtitle: "有事找我的AI助手～"
+      subtitle: "和我聊聊天吧"
     },
     common: {
       loading: "加载中...",
@@ -281,7 +281,7 @@ export const translations: Record<Language, Translations> = {
     },
     aiTheme: {
       title: "Minna",
-      subtitle: "Your AI assistant here～"
+      subtitle: "Chat with Minna."
     },
     common: {
       loading: "Loading...",

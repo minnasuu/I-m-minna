@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Navigate, Link } from "react-router-dom";
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useTranslations } from '../../hooks/useTranslations';
 import { personalDataMultiLang } from '../../data/personalData';
 import type { Article } from "../../types";
 import "./ArticleDetailPage.css";
+import { LandAnchor } from '@suminhan/land-design';
 
 interface ArticleDetailPageProps {
   article?: Article; // 可选的 props，如果没有传入则从 personalData 中获取
@@ -26,8 +27,94 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
     return <Navigate to="/articles" replace />;
   }
 
+  const [articleAnchors,setArticleAnchors] = useState<{ key: string; title: string }[]>([]);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // 等待DOM渲染完成后提取标题节点
+    const timer = setTimeout(() => {
+      if (contentRef.current) {
+        const extractHeadings = () => {
+          const headings = contentRef.current?.querySelectorAll('h1,h2');
+          const anchors: { key: string; title: string }[] = [];
+          
+          headings?.forEach((heading, index) => {
+            let headingId = heading.id;
+            
+            // 如果没有id，则自动生成一个
+            if (!headingId) {
+              headingId = `heading-${index + 1}`;
+              heading.id = headingId;
+            }
+            
+            // 提取标题文本
+            const title = heading.textContent?.trim() || `标题 ${index + 1}`;
+            
+            anchors.push({
+              key: headingId,
+              title: title
+            });
+          });
+          
+          setArticleAnchors(anchors);
+        };
+
+        extractHeadings();
+      }
+    }, 100); // 给一点时间让React渲染完成
+
+    return () => clearTimeout(timer);
+  }, [article.content]);
+
+  // 监听DOM变化，当内容变化时重新提取标题
+  useEffect(() => {
+    if (!contentRef.current) return;
+
+    const observer = new MutationObserver(() => {
+      // 延迟执行，避免频繁更新
+      const timer = setTimeout(() => {
+        if (contentRef.current) {
+          const headings = contentRef.current.querySelectorAll('h1, h2, h3, h4, h5, h6');
+          const anchors: { key: string; title: string }[] = [];
+          
+          headings?.forEach((heading, index) => {
+            let headingId = heading.id;
+            
+            // 如果没有id，则自动生成一个
+            if (!headingId) {
+              headingId = `heading-${index + 1}`;
+              heading.id = headingId;
+            }
+            
+            // 提取标题文本
+            const title = heading.textContent?.trim() || `标题 ${index + 1}`;
+            
+            anchors.push({
+              key: headingId,
+              title: title
+            });
+          });
+          
+          setArticleAnchors(anchors);
+        }
+      }, 50);
+
+      return () => clearTimeout(timer);
+    });
+
+    observer.observe(contentRef.current, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+
+    return () => observer.disconnect();
+  }, []);
   return (
-    <div className="article-detail-page">
+    <div className="article-detail-page" id="article-detail-page">
+      {articleAnchors.length > 0 && <div className='article-detail-page-anchor'>
+        <LandAnchor data={articleAnchors}/>
+      </div>}
       <div className="articles-header">
         <Link to="/articles" className="back-btn-top">
           <span className="arrow-left">←</span>
@@ -58,7 +145,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
 
         <div className="article-content">
           <div className="article-detail-body">
-            <div className="article-detail-body-content">{article.content}</div>
+            <div className="article-detail-body-content" ref={contentRef}>{article.content}</div>
           </div>
         </div>
       </div>
