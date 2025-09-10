@@ -5,7 +5,8 @@ import { useTranslations } from '../../hooks/useTranslations';
 import { personalDataMultiLang } from '../../data/personalData';
 import type { Article } from "../../types";
 import "./ArticleDetailPage.css";
-import { LandAnchor } from '@suminhan/land-design';
+import LineAnchor from './components/LineAnchor/LineAnchor';
+import { Icon } from '@suminhan/land-design';
 
 interface ArticleDetailPageProps {
   article?: Article; // 可选的 props，如果没有传入则从 personalData 中获取
@@ -29,6 +30,12 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
 
   const [articleAnchors,setArticleAnchors] = useState<{ key: string; title: string }[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // 处理章节变化
+  const handleSectionChange = (sectionIndex: number) => {
+    // 可以在这里添加其他逻辑，比如更新URL hash
+    console.log('Current section changed to:', sectionIndex, articleAnchors[sectionIndex]?.title);
+  };
 
   useEffect(() => {
     // 等待DOM渲染完成后提取标题节点
@@ -74,7 +81,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
       // 延迟执行，避免频繁更新
       const timer = setTimeout(() => {
         if (contentRef.current) {
-          const headings = contentRef.current.querySelectorAll('h1, h2, h3, h4, h5, h6');
+          const headings = contentRef.current.querySelectorAll('h1');
           const anchors: { key: string; title: string }[] = [];
           
           headings?.forEach((heading, index) => {
@@ -112,13 +119,16 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
   }, []);
   return (
     <div className="article-detail-page" id="article-detail-page">
-      {articleAnchors.length > 0 && <div className='article-detail-page-anchor'>
-        <LandAnchor data={articleAnchors}/>
-      </div>}
+      {articleAnchors.length > 0 && (
+        <LineAnchor 
+          anchors={articleAnchors} 
+          contentRef={contentRef}
+          onSectionChange={handleSectionChange}
+        />
+      )}
       <div className="articles-header">
         <Link to="/articles" className="back-btn-top">
-          <span className="arrow-left">←</span>
-          {t("返回文章列表")}
+          <Icon name='last-step'/>
         </Link>
       </div>
       <div className="article-detail-container">

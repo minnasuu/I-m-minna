@@ -4,7 +4,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useTranslations } from '../../hooks/useTranslations';
 import { personalDataMultiLang } from '../../data/personalData';
 import './ArticlesPage.css';
-import {  LandSelect} from '@suminhan/land-design';
+import {  Icon, LandSelect} from '@suminhan/land-design';
 
 const selectData = [
   {label: '全部', key: 'all'},
@@ -39,8 +39,7 @@ const ArticlesPage: React.FC = () => {
         <div className="articles-header">
         <div className="back-to-home-top">
           <Link to="/" className="back-btn-top">
-            <span className="arrow-left">←</span>
-            {t("common.backToHome")}
+            <Icon name='last-step'/>
           </Link>
         </div>
         <div className='articles-action-buttons'>
