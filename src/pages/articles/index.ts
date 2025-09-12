@@ -1,2 +1,2 @@
-export { default as ArticlesPage } from './ArticlesPage';
-export { default as ArticleDetailPage, ArticleDetailPageWithProps } from './ArticleDetailPage'; 
+export { default as ArticlesPage } from './pages/ArticlesPage';
+export { default as ArticleDetailPage, ArticleDetailPageWithProps } from './pages/ArticleDetailPage'; 

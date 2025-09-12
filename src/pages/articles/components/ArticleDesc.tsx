@@ -1,6 +1,6 @@
 import { LandButton } from "@suminhan/land-design";
 import React, { useState } from "react";
-import './index.css'
+import '../styles/components/index.css'
 
 type Props = {
   noIndent?: boolean;

@@ -9,27 +9,27 @@ const ArticleTitle: React.FC<Props> = ({
   switch (type) {
     case "h1":
       return (
-        <h1 className="article-title-h1 font-bold color-gray-1">{title}</h1>
+        <h1 className="article-title-h1 font-bold color-gray-1 pt-16">{title}</h1>
       );
       break;
     case "h2":
       return (
-        <h2 className="article-title-h2 font-bold color-gray-1">{title}</h2>
+        <h2 className="article-title-h2 font-bold color-gray-1 pt-8">{title}</h2>
       );
       break;
     case "h3":
       return (
-        <h3 className="article-title-h3 font-bold color-gray-1">{title}</h3>
+        <h3 className="article-title-h3 font-bold color-gray-1 pt-8">{title}</h3>
       );
       break;
     case "h4":
       return (
-        <h4 className="article-title-h4 font-bold color-gray-1">{title}</h4>
+        <h4 className="article-title-h4 font-bold color-gray-1 pt-4">{title}</h4>
       );
       break;
     case "h5":
       return (
-        <h5 className="article-title-h5 font-bold color-gray-1">{title}</h5>
+        <h5 className="article-title-h5 font-bold color-gray-1 pt-4">{title}</h5>
       );
       break;
     default:

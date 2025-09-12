@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Navigate, Link } from "react-router-dom";
-import { useLanguage } from '../../contexts/LanguageContext';
-import { useTranslations } from '../../hooks/useTranslations';
-import { personalDataMultiLang } from '../../data/personalData';
-import type { Article } from "../../types";
-import "./ArticleDetailPage.css";
-import LineAnchor from './components/LineAnchor/LineAnchor';
+import { useLanguage } from '../../../contexts/LanguageContext';
+import { useTranslations } from '../../../hooks/useTranslations';
+import { personalDataMultiLang } from '../../../data/personalData';
+import type { Article } from "../../../types";
+import "../styles/ArticleDetailPage.css";
+import LineAnchor from '../components/LineAnchor/LineAnchor';
 import { Icon } from '@suminhan/land-design';
 
 interface ArticleDetailPageProps {

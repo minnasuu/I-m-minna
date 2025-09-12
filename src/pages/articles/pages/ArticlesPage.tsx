@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useLanguage } from '../../contexts/LanguageContext';
-import { useTranslations } from '../../hooks/useTranslations';
-import { personalDataMultiLang } from '../../data/personalData';
-import './ArticlesPage.css';
+import { useLanguage } from '../../../contexts/LanguageContext';
+import { useTranslations } from '../../../hooks/useTranslations';
+import { personalDataMultiLang } from '../../../data/personalData';
+import '../styles/ArticlesPage.css';
 import {  Icon, LandSelect} from '@suminhan/land-design';
 
 const selectData = [

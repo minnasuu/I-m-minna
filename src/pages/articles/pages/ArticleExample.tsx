@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArticleDetailPageWithProps } from './ArticleDetailPage';
-import type { Article } from '../../types';
+import type { Article } from '../../../types';
 
 // 示例文章数据
 const exampleArticle: Article = {
