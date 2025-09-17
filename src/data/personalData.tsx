@@ -78,6 +78,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation",
         type: "tech",
+        coverImage: "./articles/cover/cover-mock.png",
       },
       {
         id: "2",
@@ -89,6 +90,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/svg-interactive-wheel",
         type: "tech",
+        coverImage: "./articles/cover-mock.png",
       },
       {
         id: "3",
@@ -100,6 +102,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/know-more-about-image",
         type: "tech",
+        coverImage: "./articles/cover/cover-mock.png",
       },
       {
         id: "4",
@@ -112,6 +115,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 15,
         link: "https://blog.example.com/threejs-guide",
         type: "tech",
+        coverImage: "./articles/cover/cover-mock.png",
       },
       {
         id: "5",
@@ -123,6 +127,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 18,
         link: "https://blog.example.com/ai-chat-layout",
         type: "tech",
+        coverImage: "./articles/cover/cover-mock.png",
       },
     ],
     projects: [
@@ -155,12 +160,12 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
       {
         id: "4",
-        name: '织作时光',
-        description: '原创手工编织教程与工具小程序，用户数累计7800+。',
-        technologies: ['微信小程序'],
+        name: "织作时光",
+        description: "原创手工编织教程与工具小程序，用户数累计7800+。",
+        technologies: ["微信小程序"],
         featured: true,
-        imgPopUrl: '/ckt-miniprogram-qr.jpg'
-      }
+        imgPopUrl: "/ckt-miniprogram-qr.jpg",
+      },
     ],
     crafts: [
       {
@@ -267,6 +272,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation",
         type: "tech",
+        coverImage: "./articles/cover/cover-mock.png",
       },
       {
         id: "2",
@@ -279,6 +285,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/svg-interactive-wheel",
         type: "tech",
+        coverImage: "./articles/cover-mock.png",
       },
       {
         id: "3",
@@ -291,6 +298,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/know-more-about-image",
         type: "tech",
+        coverImage: "./articles/cover/cover-mock.png",
       },
       {
         id: "4",
@@ -303,6 +311,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 15,
         link: "https://blog.example.com/threejs-guide",
         type: "tech",
+        coverImage: "./articles/cover/cover-mock.png",
       },
       {
         id: "5",
@@ -315,6 +324,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 18,
         link: "https://blog.example.com/ai-chat-layout",
         type: "tech",
+        coverImage: "./articles/cover/cover-mock.png",
       },
     ],
     projects: [
@@ -350,12 +360,13 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
       {
         id: "4",
-        name: 'Crochet&Knit Time',
-        description: 'Original crochet and knitting tutorial and tool mini-program, with more than 7,800 users.',
-        technologies: ['WeChat Mini Program'],
+        name: "Crochet&Knit Time",
+        description:
+          "Original crochet and knitting tutorial and tool mini-program, with more than 7,800 users.",
+        technologies: ["WeChat Mini Program"],
         featured: true,
-        imgPopUrl: '/ckt-miniprogram-qr.jpg'
-      }
+        imgPopUrl: "/ckt-miniprogram-qr.jpg",
+      },
     ],
     crafts: [
       {
