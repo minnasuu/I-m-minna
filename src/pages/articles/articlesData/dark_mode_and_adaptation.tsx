@@ -70,7 +70,7 @@ const codeStr5 = `:root {
     }}
 />
   `
-export const article2025_1_2 = (
+export const dark_mode_and_adaptation = (
   <ArticleLayout>
     <ArticleSectionLayout>
       <ArticlePartLayout>

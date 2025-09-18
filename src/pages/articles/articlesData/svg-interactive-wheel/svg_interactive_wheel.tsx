@@ -134,7 +134,7 @@ const codeStr9 = `<StyledRotarySvg
   ))}
 </StyledRotarySvg>
 `;
-export const article2025_1_16 = (
+export const svg_interactive_wheel = (
   <ArticleLayout>
     <ArticleSectionLayout>
       <ArticlePreface>

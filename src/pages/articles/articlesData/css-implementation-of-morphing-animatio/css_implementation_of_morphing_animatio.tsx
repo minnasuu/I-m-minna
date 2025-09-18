@@ -10,7 +10,7 @@ import Animation3 from "./Animation3.tsx";
 import Animation4 from "./Animation4.tsx";
 import ArticleEndText from "../../components/ArticleEndText.tsx";
 
-export const article2025_2_22 = (
+export const css_implementation_of_morphing_animation = (
   <ArticleLayout>
     <ArticleSectionLayout>
       <ArticlePartLayout>
@@ -156,4 +156,4 @@ export const article2025_2_22 = (
   </ArticleLayout>
 );
 
-export default article2025_2_22;
+export default css_implementation_of_morphing_animation;

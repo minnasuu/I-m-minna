@@ -56,7 +56,7 @@
 }
 
 .line-anchor-item.active .line-anchor-line {
-  background: #b6bafa;
+  background: #999;
   height: 3px;
   position: relative;
 }
@@ -69,12 +69,12 @@
 
 /* 当前章节样式 */
 .line-anchor-item.current .line-anchor-line {
-  background: #646cff;
+  background: #202020;
   height: 4px;
 }
 
 .line-anchor-item.current.active .line-anchor-line {
-  background: #646cff;
+  background: #202020;
   height: 4px;
 }
 
@@ -111,16 +111,6 @@
   color: #999;
 }
 
-.tooltip-current {
-  font-size: 10px;
-  color: #28a745;
-  font-weight: 600;
-  margin-top: 4px;
-  padding: 2px 6px;
-  background: rgba(40, 167, 69, 0.1);
-  border-radius: 4px;
-  border: 1px solid rgba(40, 167, 69, 0.3);
-}
 
 @keyframes tooltipFadeIn {
   from {

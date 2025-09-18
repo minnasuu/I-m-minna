@@ -1,11 +1,11 @@
 import type { PersonalData } from '../types';
 import type { Language } from '../contexts/LanguageContext';
-import { article2025_1_16 } from '../pages/articles/articlesData/article2025_1_16/article2025_1_16';
-import { article2025_1_2 } from '../pages/articles/articlesData/article2025_1_2';
-import { article2025_1_20 } from '../pages/articles/articlesData/article2025_1_20';
-import { article2025_2_22 } from '../pages/articles/articlesData/article2025_2_22/article2025_2_22';
-import { article2025_3_28 } from '../pages/articles/articlesData/article2025_3_28/article2025_3_28';
-import { article2025_9_15 } from '../pages/articles/articlesData/article2025_9_15/index';
+import {  svg_interactive_wheel } from '../pages/articles/articlesData/svg-interactive-wheel/svg_interactive_wheel';
+import {  dark_mode_and_adaptation } from '../pages/articles/articlesData/dark_mode_and_adaptation';
+import { deep_understanding_of_images } from '../pages/articles/articlesData/deep_understanding_of_images';
+import css_implementation_of_morphing_animation from '../pages/articles/articlesData/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio';
+import { build_a_smooth_ai_chat_layout } from '../pages/articles/articlesData/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout';
+import { web_shortcut_key } from '../pages/articles/articlesData/web-shortcut-key/web_shortcut_key';
 
 // 多语言个人数据
 export const personalDataMultiLang: Record<Language, PersonalData> = {
@@ -70,10 +70,10 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     ],
     articles: [
       {
-        id: "1",
+        id: "dark-mode-and-adaptation",
         title: "网页深色模式与适配",
         summary: "探讨网页深色模式与适配，帮助你构建更高效、可维护的应用。",
-        content: article2025_1_2,
+        content: dark_mode_and_adaptation,
         publishDate: "2025-01-02",
         tags: ["前端开发"],
         readTime: 5,
@@ -82,10 +82,10 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         coverImage: "./articles/cover/cover-mock.png",
       },
       {
-        id: "2",
+        id: "svg-interactive-wheel",
         title: "SVG 实现可交互轮盘（React版本）",
         summary: "使用SVG实现可交互轮盘，支持自定义样式和交互效果。",
-        content: article2025_1_16,
+        content: svg_interactive_wheel,
         publishDate: "2025-01-16",
         tags: ["React", "SVG", "轮盘"],
         readTime: 2,
@@ -94,10 +94,10 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         coverImage: "./articles/cover-mock.png",
       },
       {
-        id: "3",
+        id: "deep-understanding-of-images",
         title: "深刻认识图片",
         summary: "深刻认识图片，了解图片的格式、大小、质量、加载方式等。",
-        content: article2025_1_20,
+        content: deep_understanding_of_images,
         publishDate: "2025-01-20",
         tags: ["图片", "格式", "大小", "质量", "加载方式"],
         readTime: 2,
@@ -106,11 +106,11 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         coverImage: "./articles/cover/cover-mock.png",
       },
       {
-        id: "4",
+        id: "css-implementation-of-morphing-animation",
         title: "CSS实现变形动画（Morph）的关键",
         summary:
           "CSS实现变形动画（Morph）的关键，了解变形动画的原理和实现方式。",
-        content: article2025_2_22,
+        content: css_implementation_of_morphing_animation,
         publishDate: "2025-02-22",
         tags: ["CSS", "变形动画", "Morph"],
         readTime: 15,
@@ -119,10 +119,10 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         coverImage: "./articles/cover/cover-mock.png",
       },
       {
-        id: "5",
+        id: "build-a-smooth-ai-chat-layout",
         title: "搭建流畅的 AI Chat布局",
         summary: "搭建流畅的 AI Chat布局，了解AI Chat的布局和实现方式。",
-        content: article2025_3_28,
+        content: build_a_smooth_ai_chat_layout,
         publishDate: "2025-03-28",
         tags: ["AI Chat", "布局", "实现方式"],
         readTime: 18,
@@ -131,11 +131,11 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         coverImage: "./articles/cover/cover-mock.png",
       },
       {
-        id: "6",
+        id: "web-shortcut-key",
         title: "揭秘网页快捷键",
         summary:
           "揭秘网页快捷键，了解网页快捷键的原理和实现方式。",
-        content: article2025_9_15,
+        content: web_shortcut_key,
         publishDate: "2025-09-15",
         tags: ["网页快捷键", "Linear", "YouTuBe"],
         readTime: 15,
@@ -145,7 +145,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     ],
     projects: [
       {
-        id: "1",
+        id: "tencent-advertising-official-website",
         name: "腾讯广告官网",
         description: "腾讯广告官网，用于展示腾讯广告的产品和服务。",
         technologies: ["React", "TypeScript", "SCSS"],
@@ -154,7 +154,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://e.qq.com/ads",
       },
       {
-        id: "2",
+        id: "tencent-advertising-admuse",
         name: "腾讯广告妙思",
         description: "腾讯广告妙思，腾讯广告AI创意工具集合站。",
         technologies: ["React", "TypeScript", "SCSS"],
@@ -163,7 +163,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://admuse.qq.com/",
       },
       {
-        id: "3",
+        id: "tencent-advertising-miaowen",
         name: "腾讯广告妙问",
         description: "腾讯广告妙问，腾讯广告Agent智能问答工具。",
         technologies: ["React", "TypeScript", "SCSS"],
@@ -172,7 +172,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://miaowen.qq.com/miaowen-station/index",
       },
       {
-        id: "4",
+        id: "crochet-knit-time",
         name: "织作时光",
         description: "原创手工编织教程与工具小程序，用户数累计7800+。",
         technologies: ["微信小程序"],
@@ -182,7 +182,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     ],
     crafts: [
       {
-        id: "1",
+        id: "component-library-test-field",
         name: "组件库试验田",
         description:
           "基于React的组件库试验田，用于测试和展示组件库的实现和效果。",
@@ -193,7 +193,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://minnasuu.github.io/land-design/",
       },
       {
-        id: "2",
+        id: "image-processing-tools-collection",
         name: "图片处理工具集合",
         description: "图片处理工具集合，用于处理和展示图片。",
         technologies: ["React", "TypeScript", "SCSS"],
@@ -203,7 +203,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://minnasuu.github.io/image-tools/",
       },
       {
-        id: "3",
+        id: "3d-audio-particle",
         name: "3d粒子音乐播放器",
         description: "通过3d粒子可视化显示音乐，支持自定义上传。",
         technologies: ["React", "TypeScript", "SCSS"],
@@ -275,11 +275,11 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     ],
     articles: [
       {
-        id: "1",
+        id: "dark-mode-and-adaptation",
         title: "Dark Mode and Adaptation",
         summary:
           "Explore key patterns and techniques in React development to help you build more efficient and maintainable applications.",
-        content: article2025_1_2,
+        content: dark_mode_and_adaptation,
         publishDate: "2025-01-02",
         tags: ["React", "Dark Mode", "Adaptation"],
         readTime: 5,
@@ -288,11 +288,11 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         coverImage: "./articles/cover/cover-mock.png",
       },
       {
-        id: "2",
+        id: "svg-interactive-wheel",
         title: "SVG Interactive Wheel (React Version)",
         summary:
           "Use SVG to implement an interactive wheel, support custom styles and interactive effects.",
-        content: article2025_1_16,
+        content: svg_interactive_wheel,
         publishDate: "2025-01-16",
         tags: ["React", "SVG", "轮盘"],
         readTime: 2,
@@ -301,11 +301,11 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         coverImage: "./articles/cover-mock.png",
       },
       {
-        id: "3",
+        id: "deep-understanding-of-images",
         title: "Deep Understanding of Images",
         summary:
           "Deep understanding of images, understand the format, size, quality, loading method, etc. of images.",
-        content: article2025_1_20,
+        content: deep_understanding_of_images,
         publishDate: "2025-01-20",
         tags: ["图片", "格式", "大小", "质量", "加载方式"],
         readTime: 2,
@@ -314,11 +314,11 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         coverImage: "./articles/cover/cover-mock.png",
       },
       {
-        id: "4",
+        id: "css-implementation-of-morphing-animation",
         title: "CSS Implementation of Morphing Animation (Morph)",
         summary:
           "CSS implementation of morphing animation (Morph), understand the key points of morphing animation and its implementation method.",
-        content: article2025_2_22,
+        content: css_implementation_of_morphing_animation,
         publishDate: "2025-02-22",
         tags: ["CSS", "变形动画", "Morph"],
         readTime: 15,
@@ -327,11 +327,11 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         coverImage: "./articles/cover/cover-mock.png",
       },
       {
-        id: "5",
+        id: "build-a-smooth-ai-chat-layout",
         title: "Build a Smooth AI Chat Layout",
         summary:
           "Build a smooth AI Chat Layout, understand the layout and implementation method of AI Chat.",
-        content: article2025_3_28,
+        content: build_a_smooth_ai_chat_layout,
         publishDate: "2025-03-28",
         tags: ["AI Chat", "布局", "实现方式"],
         readTime: 18,
@@ -339,10 +339,23 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         type: "tech",
         coverImage: "./articles/cover/cover-mock.png",
       },
+      {
+        id: "web-shortcut-key",
+        title: "Web Shortcut Key",
+        summary:
+          "Web Shortcut Key, understand the shortcut key of web.",
+        content: web_shortcut_key,
+        publishDate: "2025-09-15",
+        tags: ["网页快捷键", "Linear", "YouTuBe"],
+        readTime: 15,
+        link: "https://blog.example.com/web-shortcut-key",
+        type: "tech",
+        coverImage: "./articles/cover/cover-mock.png",
+      },
     ],
     projects: [
       {
-        id: "1",
+        id: "tencent-advertising-official-website",
         name: "Tencent Advertising Official Website",
         description:
           "Tencent Advertising Official Website, used to show the products and services of Tencent Advertising.",
@@ -352,7 +365,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://e.qq.com/ads",
       },
       {
-        id: "2",
+        id: "tencent-advertising-admuse",
         name: "Tencent Advertising AdMuse",
         description:
           "Tencent Advertising AdMuse, Tencent Advertising AI Creative Tools Collection Site.",
@@ -362,7 +375,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://admuse.qq.com/",
       },
       {
-        id: "3",
+        id: "tencent-advertising-miaowen",
         name: "Tencent Advertising Miaowen",
         description:
           "Tencent Advertising Miaowen, Tencent Advertising Agent Intelligent Question and Answer Tool.",
@@ -372,7 +385,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://miaowen.qq.com/miaowen-station/index",
       },
       {
-        id: "4",
+        id: "crochet-knit-time",
         name: "Crochet&Knit Time",
         description:
           "Original crochet and knitting tutorial and tool mini-program, with more than 7,800 users.",
@@ -383,7 +396,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     ],
     crafts: [
       {
-        id: "1",
+        id: "component-library-test-field",
         name: "Component Library Test Field",
         description:
           "A component library test field based on React, used to test and show the implementation and effect of the component library.",
@@ -394,7 +407,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://minnasuu.github.io/land-design/",
       },
       {
-        id: "2",
+        id: "image-processing-tools-collection",
         name: "Image Processing Tools Collection",
         description:
           "Image processing tools collection, used to process and show images.",
@@ -405,7 +418,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://minnasuu.github.io/image-tools/",
       },
       {
-        id: "3",
+        id: "3d-audio-particle",
         name: "3D Audio Particle",
         description:
           "Visualize music through 3D particles, support custom upload.",

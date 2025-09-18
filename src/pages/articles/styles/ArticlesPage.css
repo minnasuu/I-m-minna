@@ -93,38 +93,12 @@
 .article-card:hover {
   transform: none;
   box-shadow: none;
-}
-
-.article-card-even {
-  .article-card-image::after{
-    transform-origin: top right;
-  }
-  .article-card-image::before{
-    transform-origin: bottom right;
-  }
   &:hover{
     .article-card-image::after{
-      transform: rotate(90deg);
+      transform: translateY(-100%);
     }
     .article-card-image::before{
-      transform: rotate(-90deg);
-    }
-  }
-}
-
-.article-card-odd {
-  .article-card-image::after{
-    transform-origin: top left;
-  }
-  .article-card-image::before{
-    transform-origin: bottom left;
-  }
-  &:hover{
-    .article-card-image::after{
-      transform: rotate(-90deg);
-    }
-    .article-card-image::before{
-      transform: rotate(90deg);
+      transform: translateY(100%);
     }
   }
 }
@@ -143,8 +117,8 @@
 
 .article-card-image {
   position: relative;
-  height: 400px;
-  aspect-ratio: 1;
+  height: 450px;
+  aspect-ratio: 2/3;
   object-fit: cover;
   background-color: #f1f1f1;
   &::after{

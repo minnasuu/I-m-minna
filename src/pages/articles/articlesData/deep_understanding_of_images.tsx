@@ -7,7 +7,7 @@ import ArticleDesc from "../components/ArticleDesc.tsx";
 import ArticleTable from "../components/ArticleTable.tsx";
 import ArticleEndText from "../components/ArticleEndText.tsx";
 
-export const article2025_1_20 = (
+export const deep_understanding_of_images = (
   <ArticleLayout>
     <ArticleSectionLayout>
       <ArticlePartLayout>

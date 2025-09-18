@@ -257,9 +257,6 @@ const LineAnchor: React.FC<LineAnchorProps> = ({ anchors, contentRef, onSectionC
                 <div className="tooltip-progress">
                   {Math.round(anchor.progress * 100)}% 内容
                 </div>
-                {currentSection === index && (
-                  <div className="tooltip-current">当前阅读</div>
-                )}
               </div>
             )}
           </div>

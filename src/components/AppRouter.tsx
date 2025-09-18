@@ -1,10 +1,22 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import ThemeRenderer from "./ThemeRenderer";
 import { ArticlesPage, ArticleDetailPage } from "../pages";
 import { personalDataMultiLang } from "../data/personalData";
+
+// 滚动重置组件
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // 路由变化时立即滚动到顶部
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const AppRouter: React.FC = () => {
   // 根据环境设置 basename
@@ -14,6 +26,7 @@ const AppRouter: React.FC = () => {
     <LanguageProvider>
       <ThemeProvider>
         <Router basename={basename}>
+          <ScrollToTop />
           <Routes>
             <Route
               path="/"

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Navigate, Link } from "react-router-dom";
 import { useLanguage } from '../../../contexts/LanguageContext';
-import { useTranslations } from '../../../hooks/useTranslations';
 import { personalDataMultiLang } from '../../../data/personalData';
 import type { Article } from "../../../types";
 import "../styles/ArticleDetailPage.css";
 import LineAnchor from '../components/LineAnchor/LineAnchor';
 import { Icon } from '@suminhan/land-design';
+import Markdown from 'react-markdown';
 
 interface ArticleDetailPageProps {
   article?: Article; // 可选的 props，如果没有传入则从 personalData 中获取
@@ -17,7 +17,6 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
 }) => {
   const { id } = useParams<{ id: string }>();
   const { language } = useLanguage();
-  const { t } = useTranslations();
   const data = personalDataMultiLang[language];
 
   // 优先使用 props 传入的文章，如果没有则从 personalData 中查找
@@ -30,12 +29,38 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
 
   const [articleAnchors,setArticleAnchors] = useState<{ key: string; title: string }[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   // 处理章节变化
   const handleSectionChange = (sectionIndex: number) => {
     // 可以在这里添加其他逻辑，比如更新URL hash
     console.log('Current section changed to:', sectionIndex, articleAnchors[sectionIndex]?.title);
   };
+
+  // 页面初始化滚动到顶部
+  useEffect(() => {
+    // 立即滚动到顶部，处理页面刷新或首次加载
+    window.scrollTo(0, 0);
+    
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: 0,
+        behavior: 'auto' // 使用 'auto' 确保立即滚动，不使用平滑动画
+      });
+    }
+  }, []);
+
+  // 当文章ID变化时滚动到顶部（处理路由切换）
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: 0,
+        behavior: 'auto'
+      });
+    }
+  }, [id]);
 
   useEffect(() => {
     // 等待DOM渲染完成后提取标题节点
@@ -131,7 +156,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
           <Icon name="last-step" />
         </Link>
       </div>
-      <div className="article-detail-container">
+      <div className="article-detail-container" ref={scrollRef}>
         <header className="article-detail-header">
           <div className="article-meta">
             <span className="article-date">

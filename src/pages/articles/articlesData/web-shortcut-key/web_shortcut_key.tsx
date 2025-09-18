@@ -3,7 +3,7 @@ import ArticlePartLayout from '../../components/ArticlePartLayout'
 import ArticleTitle from '../../components/ArticleTitle'
 import ArticleLayout from '../../components/ArticleLayout'
 
-export const article2025_9_15 = 
+export const web_shortcut_key = 
 <ArticleLayout>
     <ArticleSectionLayout>
         <ArticlePartLayout>

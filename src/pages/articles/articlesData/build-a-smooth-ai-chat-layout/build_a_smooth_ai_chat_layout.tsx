@@ -6,7 +6,7 @@ import ArticleList from "../../components/ArticleList.tsx";
 import ArticleTable from "../../components/ArticleTable.tsx";
 import ArticleTitle from "../../components/ArticleTitle.tsx";
 import AgentScroller1 from "./AgentScroller1.tsx";
-import AgentScroller2 from "./AgentScroller2";
+import AgentScroller2 from "./AgentScroller2.tsx";
 import AgentScroller3 from "./AgentScroller3.tsx";
 import AgentScroller4 from "./AgentScroller4.tsx";
 import ArticleCode from "../../components/ArticleCode.tsx";
@@ -167,7 +167,7 @@ const codeString9 = `
 }
 `
 
-export const article2025_3_28 = (
+export const build_a_smooth_ai_chat_layout = (
   <ArticleLayout>
     <ArticleSectionLayout>
       <ArticlePartLayout>
