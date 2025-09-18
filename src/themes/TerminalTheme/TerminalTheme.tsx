@@ -288,7 +288,7 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
               </Link>
             </div>
             <div className="interest-list">
-              {data.articles.slice(0, 3).map((article, index) => (
+              {data.articles.reverse().slice(0, 3).map((article, index) => (
                 <div key={index} className="label-item">
                   <Link
                     to={`/articles/${article.id}`}

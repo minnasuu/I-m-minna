@@ -134,7 +134,7 @@ export default function AISidebar() {
           </Link>
         </div>
         <div className="interest-list">
-          {data.articles.slice(0, 3).map((article, index) => (
+          {data.articles.reverse().slice(0, 3).map((article, index) => (
             <div key={index} className={`label-item ${article.link ? "with-link" : ""}`}>
               <Link
                 to={`/articles/${article.id}`}

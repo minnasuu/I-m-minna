@@ -5,6 +5,7 @@ import { article2025_1_2 } from '../pages/articles/articlesData/article2025_1_2'
 import { article2025_1_20 } from '../pages/articles/articlesData/article2025_1_20';
 import { article2025_2_22 } from '../pages/articles/articlesData/article2025_2_22/article2025_2_22';
 import { article2025_3_28 } from '../pages/articles/articlesData/article2025_3_28/article2025_3_28';
+import { article2025_9_15 } from '../pages/articles/articlesData/article2025_9_15/index';
 
 // 多语言个人数据
 export const personalDataMultiLang: Record<Language, PersonalData> = {
@@ -124,6 +125,18 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         link: "https://blog.example.com/ai-chat-layout",
         type: "tech",
       },
+      {
+        id: "6",
+        title: "揭秘网页快捷键",
+        summary:
+          "揭秘网页快捷键，了解网页快捷键的原理和实现方式。",
+        content: article2025_9_15,
+        publishDate: "2025-09-15",
+        tags: ["网页快捷键", "Linear", "YouTuBe"],
+        readTime: 15,
+        link: "https://blog.example.com/web-shortcut-key",
+        type: "tech",
+      }
     ],
     projects: [
       {
