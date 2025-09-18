@@ -86,7 +86,6 @@ interface Translations {
     title: string;
     readMore: string;
     readTime: string;
-    publishedOn: string;
   };
   projects: {
     title: string;

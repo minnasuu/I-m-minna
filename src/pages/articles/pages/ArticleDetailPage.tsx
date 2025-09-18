@@ -120,22 +120,21 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
   return (
     <div className="article-detail-page" id="article-detail-page">
       {articleAnchors.length > 0 && (
-        <LineAnchor 
-          anchors={articleAnchors} 
+        <LineAnchor
+          anchors={articleAnchors}
           contentRef={contentRef}
           onSectionChange={handleSectionChange}
         />
       )}
       <div className="articles-header">
         <Link to="/articles" className="back-btn-top">
-          <Icon name='last-step'/>
+          <Icon name="last-step" />
         </Link>
       </div>
       <div className="article-detail-container">
         <header className="article-detail-header">
           <div className="article-meta">
             <span className="article-date">
-              {t("articles.publishedOn")}{" "}
               {new Date(article.publishDate).toLocaleDateString(
                 language === "zh" ? "zh-CN" : "en-US"
               )}
@@ -155,7 +154,9 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
 
         <div className="article-content">
           <div className="article-detail-body">
-            <div className="article-detail-body-content" ref={contentRef}>{article.content}</div>
+            <div className="article-detail-body-content" ref={contentRef}>
+              {article.content}
+            </div>
           </div>
         </div>
       </div>
