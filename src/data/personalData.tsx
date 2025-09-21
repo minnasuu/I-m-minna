@@ -118,11 +118,12 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
           "CSS实现变形动画（Morph）的关键，了解变形动画的原理和实现方式。",
         content: css_implementation_of_morphing_animation,
         publishDate: "2025-02-22",
-        tags: ["CSS", "变形动画", "Morph"],
+        tags: ["clip-path", "SVG Path", "Morphing Animation"],
         readTime: 15,
         link: "https://blog.example.com/threejs-guide",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage:
+          "./articles/cover/css_implementation_of_morphing_animation.jpg",
       },
       {
         id: "build-a-smooth-ai-chat-layout",
@@ -134,7 +135,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 18,
         link: "https://blog.example.com/ai-chat-layout",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: "./articles/cover/build_a_smooth_ai_chat_layout.jpg",
       },
       {
         id: "web-shortcut-key",
@@ -331,7 +332,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
           "CSS implementation of morphing animation (Morph), understand the key points of morphing animation and its implementation method.",
         content: css_implementation_of_morphing_animation,
         publishDate: "2025-02-22",
-        tags: ["CSS", "变形动画", "Morph"],
+        tags: ["clip-path", "SVG Path", "Morphing Animation"],
         readTime: 15,
         link: "https://blog.example.com/threejs-guide",
         type: "tech",
