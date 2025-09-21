@@ -92,7 +92,11 @@ const ArticlesPage: React.FC = () => {
                     </div>
                   </div>
                   <div className="article-card-image">
-                    <img src={article.coverImage} alt={article.title} />
+                    {article.coverImage?.endsWith(".mp4") ? (
+                      <video src={article.coverImage} autoPlay loop muted />
+                    ) : (
+                      <img src={article.coverImage} alt={article.title} />
+                    )}
                   </div>
                 </div>
               </Link>

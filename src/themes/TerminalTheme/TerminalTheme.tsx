@@ -268,12 +268,17 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
               {data.interests.map((interest, index) => (
                 <div
                   key={index}
-                  className={`label-item ${
-                    interest.link ? "with-link" : ""
-                  }`}
+                  className={`label-item ${interest.link ? "with-link" : ""}`}
                 >
                   <span className="interest-name">{interest.name}</span>
-                  {interest.link && <Link to={`/journals/${interest.link}`} className="interest-link">🔗</Link>}
+                  {interest.link && (
+                    <Link
+                      to={`/journals/${interest.link}`}
+                      className="interest-link"
+                    >
+                      🔗
+                    </Link>
+                  )}
                 </div>
               ))}
             </div>
@@ -288,16 +293,23 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
               </Link>
             </div>
             <div className="interest-list">
-              {data.articles.reverse().slice(0, 3).map((article, index) => (
-                <div key={index} className="label-item">
-                  <Link
-                    to={`/articles/${article.id}`}
-                    className="article-title-link"
-                  >
-                    <span className="interest-name">{article.title}</span>
-                  </Link>
-                </div>
-              ))}
+              {data.articles
+                .sort(
+                  (a, b) =>
+                    new Date(b.publishDate).getTime() -
+                    new Date(a.publishDate).getTime()
+                )
+                .slice(0, 3)
+                .map((article, index) => (
+                  <div key={index} className="label-item">
+                    <Link
+                      to={`/articles/${article.id}`}
+                      className="article-title-link"
+                    >
+                      <span className="interest-name">{article.title}</span>
+                    </Link>
+                  </div>
+                ))}
             </div>
           </div>
 
@@ -317,8 +329,12 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
                     <span className="interest-name">{project.name}</span>
                   </a>
                   {project.imgPopUrl && (
-                    <div className='img-pop-container'>
-                      <img src={project.imgPopUrl} alt="img-pop" className='img-pop' />
+                    <div className="img-pop-container">
+                      <img
+                        src={project.imgPopUrl}
+                        alt="img-pop"
+                        className="img-pop"
+                      />
                     </div>
                   )}
                 </div>

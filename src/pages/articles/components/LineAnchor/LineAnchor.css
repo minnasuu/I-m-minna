@@ -126,9 +126,8 @@
 /* 响应式设计 */
 @media (max-width: 768px) {
   .line-anchor {
-    right: 10px;
+    right: 12px;
   }
-  
   .line-anchor-tooltip {
     right: calc(100% + 8px);
     font-size: 11px;

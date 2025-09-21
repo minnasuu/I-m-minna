@@ -5,8 +5,7 @@ import { personalDataMultiLang } from '../../../data/personalData';
 import type { Article } from "../../../types";
 import "../styles/ArticleDetailPage.css";
 import LineAnchor from '../components/LineAnchor/LineAnchor';
-import { Icon } from '@suminhan/land-design';
-import Markdown from 'react-markdown';
+import { Icon } from "@suminhan/land-design";
 
 interface ArticleDetailPageProps {
   article?: Article; // 可选的 props，如果没有传入则从 personalData 中获取
@@ -144,6 +143,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
   }, []);
   return (
     <div className="article-detail-page" id="article-detail-page">
+      <div className="article-detail-page-bottom-mask"></div>
       {articleAnchors.length > 0 && (
         <LineAnchor
           anchors={articleAnchors}

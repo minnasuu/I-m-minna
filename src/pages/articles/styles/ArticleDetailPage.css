@@ -1,4 +1,5 @@
 .article-detail-page {
+  position: relative;
   min-height: 100vh;
   color: #202020;
   background: #ffffff;
@@ -6,17 +7,29 @@
     radial-gradient(circle, #e0e0e0 1px, transparent 1px);
   background-size: 20px 20px;
   background-position: 0 0, 10px 10px;
-  padding: 2rem 0;
   /* 确保页面从顶部开始显示，防止闪烁 */
   overflow-anchor: none;
+}
+
+.article-detail-page-bottom-mask {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff);
+  backdrop-filter: blur(1px);
+  mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 1));
 }
 
 /* 旧的anchor样式已移除，现在使用LineAnchor组件 */
 
 .article-detail-container {
   max-width: 800px;
-  padding: 2rem;
+  height: 100vh;
+  padding: 48px 20px;
   margin: 0 auto;
+  overflow: auto;
 }
 
 .article-detail-header {
@@ -35,7 +48,7 @@
 .article-detail-title {
   font-size: 2.25rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: #202020;
   line-height: 1.3;
   margin-bottom: 1rem;
 }
@@ -47,12 +60,15 @@
 }
 
 .article-detail-tag {
-  background: #f0f0f0;
-  color: #666;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  background: #f8f9fa;
+    color: #666;
+    padding: 0.25rem 0.5rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    border: 1px solid #e9ecef;
+    transition: all 0.2s 
+ease;
 }
 
 .article-content {
@@ -70,7 +86,7 @@
 /* 响应式设计 */
 @media (max-width: 768px) {
   .article-detail-container {
-    padding: 0 1rem;
+    padding: 48px 20px;
   }
 
   

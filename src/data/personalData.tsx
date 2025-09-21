@@ -1,11 +1,11 @@
 import type { PersonalData } from '../types';
 import type { Language } from '../contexts/LanguageContext';
 import {  svg_interactive_wheel } from '../pages/articles/articlesData/svg-interactive-wheel/svg_interactive_wheel';
-import {  dark_mode_and_adaptation } from '../pages/articles/articlesData/dark_mode_and_adaptation';
-import { deep_understanding_of_images } from '../pages/articles/articlesData/deep_understanding_of_images';
-import css_implementation_of_morphing_animation from '../pages/articles/articlesData/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio';
-import { build_a_smooth_ai_chat_layout } from '../pages/articles/articlesData/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout';
-import { web_shortcut_key } from '../pages/articles/articlesData/web-shortcut-key/web_shortcut_key';
+import { dark_mode_and_adaptation } from "../pages/articles/articlesData/dark_mode_and_adaptation/dark_mode_and_adaptation";
+import { deep_understanding_of_images } from "../pages/articles/articlesData/deep_understanding_of_images";
+import css_implementation_of_morphing_animation from "../pages/articles/articlesData/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio";
+import { build_a_smooth_ai_chat_layout } from "../pages/articles/articlesData/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout";
+import { web_shortcut_key } from "../pages/articles/articlesData/web-shortcut-key/web_shortcut_key";
 
 // 多语言个人数据
 export const personalDataMultiLang: Record<Language, PersonalData> = {
@@ -71,27 +71,33 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     articles: [
       {
         id: "dark-mode-and-adaptation",
-        title: "网页深色模式与适配",
+        title: "网页深色模式与适配 ☀️🌙",
         summary: "探讨网页深色模式与适配，帮助你构建更高效、可维护的应用。",
         content: dark_mode_and_adaptation,
         publishDate: "2025-01-02",
-        tags: ["前端开发"],
+        tags: [
+          "CSS 自定义变量",
+          "CSS-in-JS",
+          "TDesign",
+          "Ant Design",
+          "Apple Developer",
+        ],
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: "./articles/cover/dark_mode_and_adaptation.jpg",
       },
       {
         id: "svg-interactive-wheel",
-        title: "SVG 实现可交互轮盘（React版本）",
+        title: "SVG 实现可交互轮盘",
         summary: "使用SVG实现可交互轮盘，支持自定义样式和交互效果。",
         content: svg_interactive_wheel,
         publishDate: "2025-01-16",
-        tags: ["React", "SVG", "轮盘"],
+        tags: ["SVG mask", "React"],
         readTime: 2,
         link: "https://blog.example.com/svg-interactive-wheel",
         type: "tech",
-        coverImage: "./articles/cover-mock.png",
+        coverImage: "./articles/cover/svg-interactive-wheel.mp4",
       },
       {
         id: "deep-understanding-of-images",
@@ -133,15 +139,14 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       {
         id: "web-shortcut-key",
         title: "揭秘网页快捷键",
-        summary:
-          "揭秘网页快捷键，了解网页快捷键的原理和实现方式。",
+        summary: "揭秘网页快捷键，了解网页快捷键的原理和实现方式。",
         content: web_shortcut_key,
         publishDate: "2025-09-15",
         tags: ["网页快捷键", "Linear", "YouTuBe"],
         readTime: 15,
         link: "https://blog.example.com/web-shortcut-key",
         type: "tech",
-      }
+      },
     ],
     projects: [
       {
@@ -281,11 +286,17 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
           "Explore key patterns and techniques in React development to help you build more efficient and maintainable applications.",
         content: dark_mode_and_adaptation,
         publishDate: "2025-01-02",
-        tags: ["React", "Dark Mode", "Adaptation"],
+        tags: [
+          "CSS Custom Properties",
+          "CSS-in-JS",
+          "TDesign",
+          "Ant Design",
+          "Apple Developer",
+        ],
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: "./articles/cover/dark_mode_and_adaptation.jpg",
       },
       {
         id: "svg-interactive-wheel",
@@ -294,11 +305,11 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
           "Use SVG to implement an interactive wheel, support custom styles and interactive effects.",
         content: svg_interactive_wheel,
         publishDate: "2025-01-16",
-        tags: ["React", "SVG", "轮盘"],
+        tags: ["SVG mask", "React"],
         readTime: 2,
         link: "https://blog.example.com/svg-interactive-wheel",
         type: "tech",
-        coverImage: "./articles/cover-mock.png",
+        coverImage: "./articles/cover/svg-interactive-wheel.mp4",
       },
       {
         id: "deep-understanding-of-images",
@@ -342,8 +353,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       {
         id: "web-shortcut-key",
         title: "Web Shortcut Key",
-        summary:
-          "Web Shortcut Key, understand the shortcut key of web.",
+        summary: "Web Shortcut Key, understand the shortcut key of web.",
         content: web_shortcut_key,
         publishDate: "2025-09-15",
         tags: ["网页快捷键", "Linear", "YouTuBe"],
