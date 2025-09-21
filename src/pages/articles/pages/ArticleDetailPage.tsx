@@ -31,9 +31,8 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // 处理章节变化
-  const handleSectionChange = (sectionIndex: number) => {
+  const handleSectionChange = () => {
     // 可以在这里添加其他逻辑，比如更新URL hash
-    console.log('Current section changed to:', sectionIndex, articleAnchors[sectionIndex]?.title);
   };
 
   // 页面初始化滚动到顶部

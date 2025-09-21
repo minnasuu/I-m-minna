@@ -2,7 +2,7 @@ import type { PersonalData } from '../types';
 import type { Language } from '../contexts/LanguageContext';
 import {  svg_interactive_wheel } from '../pages/articles/articlesData/svg-interactive-wheel/svg_interactive_wheel';
 import { dark_mode_and_adaptation } from "../pages/articles/articlesData/dark_mode_and_adaptation/dark_mode_and_adaptation";
-import { deep_understanding_of_images } from "../pages/articles/articlesData/deep_understanding_of_images";
+import { deep_understanding_of_images } from "../pages/articles/articlesData/deep_understanding_of_images/deep_understanding_of_images";
 import css_implementation_of_morphing_animation from "../pages/articles/articlesData/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio";
 import { build_a_smooth_ai_chat_layout } from "../pages/articles/articlesData/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout";
 import { web_shortcut_key } from "../pages/articles/articlesData/web-shortcut-key/web_shortcut_key";
@@ -109,7 +109,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/know-more-about-image",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: "./articles/cover/deep_understanding_of_images.jpg",
       },
       {
         id: "css-implementation-of-morphing-animation",
@@ -322,7 +322,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/know-more-about-image",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: "./articles/cover/deep_understanding_of_images.jpg",
       },
       {
         id: "css-implementation-of-morphing-animation",

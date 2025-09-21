@@ -234,26 +234,32 @@ const LineAnchor: React.FC<LineAnchorProps> = ({ anchors, contentRef, onSectionC
         {anchorData.map((anchor, index) => (
           <div
             key={anchor.key}
-            ref={el => {
+            ref={(el) => {
               lineRefs.current[index] = el;
             }}
-            className={`line-anchor-item ${anchor.isActive ? 'active' : ''} ${hoveredIndex === index ? 'hovered' : ''} ${currentSection === index ? 'current' : ''}`}
+            className={`line-anchor-item ${anchor.isActive ? "active" : ""} ${
+              hoveredIndex === index ? "hovered" : ""
+            } ${currentSection === index ? "current" : ""}`}
             onClick={() => handleLineClick(anchor.key)}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
-            style={{
-              '--line-width': `${Math.min(anchor.progress * 80, 80)}px`
-            } as React.CSSProperties}
+            style={
+              {
+                "--line-width": `${Math.min(anchor.progress * 50, 50)}px`,
+              } as React.CSSProperties
+            }
           >
             <div className="line-anchor-line" />
             {hoveredIndex === index && (
               <div className="line-anchor-tooltip">
-                <div className="tooltip-title">{anchor.title.split('\n').map((line, i) => (
-                  <React.Fragment key={i}>
-                    {line}
-                    {i < anchor.title.split('\n').length - 1 && <br />}
-                  </React.Fragment>
-                ))}</div>
+                <div className="tooltip-title">
+                  {anchor.title.split("\n").map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < anchor.title.split("\n").length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
+                </div>
                 <div className="tooltip-progress">
                   {Math.round(anchor.progress * 100)}% 内容
                 </div>
