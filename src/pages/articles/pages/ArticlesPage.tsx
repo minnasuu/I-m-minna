@@ -87,7 +87,7 @@ const ArticlesPage: React.FC = () => {
                         to={`/articles/${article.id}`}
                         className="article-button"
                       >
-                        <LandButton.ButtonArrow text="阅读更多" type="fill" />
+                        <LandButton.ButtonArrow text="查看" type="background" />
                       </Link>
                     </div>
                   </div>

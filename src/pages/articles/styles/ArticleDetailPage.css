@@ -100,3 +100,7 @@ ease;
     gap: 0.5rem;
   } 
 }
+
+.article-markdown hr{
+  height: 1px;
+}

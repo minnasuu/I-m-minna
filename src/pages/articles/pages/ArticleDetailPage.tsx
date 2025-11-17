@@ -157,6 +157,8 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
       </div>
       <div className="article-detail-container" ref={scrollRef}>
         <header className="article-detail-header">
+          <h1 className="article-detail-title">{article.title}</h1>
+          
           <div className="article-meta">
             <span className="article-date">
               {new Date(article.publishDate).toLocaleDateString(
@@ -164,8 +166,6 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
               )}
             </span>
           </div>
-
-          <h1 className="article-detail-title">{article.title}</h1>
 
           <div className="article-detail-tags">
             {article.tags.map((tag, index) => (

@@ -6,6 +6,7 @@ import { deep_understanding_of_images } from "../pages/articles/articlesData/dee
 import css_implementation_of_morphing_animation from "../pages/articles/articlesData/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio";
 import { build_a_smooth_ai_chat_layout } from "../pages/articles/articlesData/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout";
 import { web_shortcut_key } from "../pages/articles/articlesData/web-shortcut-key/web_shortcut_key";
+import { article_1763369707943 } from "../pages/articles/articlesData/article-1763369707943/article_1763369707943";
 
 // 多语言个人数据
 export const personalDataMultiLang: Record<Language, PersonalData> = {
@@ -69,6 +70,17 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
     ],
     articles: [
+      {
+        id: "article-1763369707943",
+        title: "前端项目样式组织方案探索",
+        summary: "xxx",
+        content: article_1763369707943,
+        publishDate: "2025-11-17",
+        tags: ["css", "原子类", "Material Design"],
+        readTime: 10,
+        link: "https://blog.example.com/article-1763369707943",
+        type: "tech",
+      },
       {
         id: "dark-mode-and-adaptation",
         title: "网页深色模式与适配 ☀️🌙",
@@ -280,6 +292,17 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
     ],
     articles: [
+      {
+        id: "article-1763369707943",
+        title: "前端项目样式组织方案探索",
+        summary: "xxx",
+        content: article_1763369707943,
+        publishDate: "2025-11-17",
+        tags: ["css", "原子类", "Material Design"],
+        readTime: 10,
+        link: "https://blog.example.com/article-1763369707943",
+        type: "tech",
+      },
       {
         id: "dark-mode-and-adaptation",
         title: "Dark Mode and Adaptation",
