@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './LineAnchor.css';
 
 interface LineAnchorProps {
-  anchors: { key: string; title: string }[];
+  anchors?: { key: string; title: string }[]; // 可选，如果不提供则自动提取
   contentRef: React.RefObject<HTMLDivElement | null>;
   onSectionChange?: (currentSection: number) => void;
+  autoExtract?: boolean; // 是否自动提取标题
 }
 
 interface AnchorData {
@@ -14,18 +15,64 @@ interface AnchorData {
   isActive: boolean;
 }
 
-const LineAnchor: React.FC<LineAnchorProps> = ({ anchors, contentRef, onSectionChange }) => {
+const LineAnchor: React.FC<LineAnchorProps> = ({ 
+  anchors: providedAnchors, 
+  contentRef, 
+  onSectionChange,
+  autoExtract = true 
+}) => {
   const [anchorData, setAnchorData] = useState<AnchorData[]>([]);
+  const [extractedAnchors, setExtractedAnchors] = useState<{ key: string; title: string }[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentSection, setCurrentSection] = useState<number>(0);
   const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
+  
+  // 获取最终使用的 anchors
+  const anchors = providedAnchors || extractedAnchors;
+
+  // 自动提取文章标题
+  const extractHeadings = useCallback(() => {
+    if (!contentRef.current || !autoExtract || providedAnchors) return;
+
+    const headings = contentRef.current.querySelectorAll('h1');
+    const newAnchors: { key: string; title: string }[] = [];
+
+    headings.forEach((heading, index) => {
+      const text = heading.textContent?.trim() || '';
+      if (!text) return;
+
+      // 生成唯一的 ID
+      const id = `heading-${index}-${text.toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '')}`;
+
+      // 设置 ID 到元素上
+      heading.id = id;
+
+      // 添加锚点样式类
+      heading.classList.add('article-heading-anchor');
+
+      newAnchors.push({
+        key: id,
+        title: text
+      });
+    });
+
+    setExtractedAnchors(newAnchors);
+  }, [contentRef, autoExtract, providedAnchors]);
 
   // 计算每个标题的内容百分比
-  const calculateProgress = () => {
+  const calculateProgress = useCallback(() => {
     if (!contentRef.current || anchors.length === 0) return;
 
-    // 使用文档的总高度
-    const contentHeight = document.documentElement.scrollHeight;
+    // 获取滚动容器
+    const scrollContainer = document.querySelector('.article-detail-container') as HTMLDivElement;
+    if (!scrollContainer) return;
+
+    // 使用内容区域的总高度
+    const contentHeight = contentRef.current.scrollHeight;
     
     const newAnchorData: AnchorData[] = anchors.map((anchor, index) => {
       const element = document.getElementById(anchor.key);
@@ -45,8 +92,7 @@ const LineAnchor: React.FC<LineAnchorProps> = ({ anchors, contentRef, onSectionC
       
       const sectionHeight = nextTop - currentTop;
       
-      // 计算该章节内容占全文的百分比
-      // 使用更合理的计算方式：章节高度 / 总内容高度
+      // 计算该章节内容占全文的百分比  
       const progress = Math.min(sectionHeight / contentHeight, 1);
       
       // 设置最小和最大长度
@@ -62,66 +108,59 @@ const LineAnchor: React.FC<LineAnchorProps> = ({ anchors, contentRef, onSectionC
     });
 
     setAnchorData(newAnchorData);
-  };
+  }, [anchors]);
 
   // 监听滚动，更新当前激活的标题
   const updateActiveAnchor = React.useCallback(() => {
     if (!contentRef.current || anchors.length === 0) return;
 
-    // 检测实际的滚动容器
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const containerHeight = window.innerHeight;
+    // 获取滚动容器
+    const scrollContainer = document.querySelector('.article-detail-container') as HTMLDivElement;
+    if (!scrollContainer) return;
+
+    const scrollTop = scrollContainer.scrollTop;
+    const containerHeight = scrollContainer.clientHeight;
+    const viewportBottom = scrollTop + containerHeight;
     
-    // 使用页面滚动位置
-    const scrollBottom = scrollTop + containerHeight;
-    const scrollCenter = scrollTop + containerHeight / 2;
-
-    let newCurrentSection = currentSection; // 保持当前章节作为默认值
-    let maxVisibleRatio = 0;
-
-    // 遍历所有章节，找到最合适的当前章节
+    let newCurrentSection = 0; // 默认第一个章节
+    
+    // 从前往后找到最后一个标题在容器视口上方的章节
     for (let index = 0; index < anchors.length; index++) {
-      const anchor = anchors[index];
-      const element = document.getElementById(anchor.key);
+      const element = document.getElementById(anchors[index].key);
       if (!element) continue;
-
-      const elementTop = element.offsetTop;
-      const nextElement = anchors[index + 1] ? document.getElementById(anchors[index + 1].key) : null;
-      const nextTop = nextElement ? nextElement.offsetTop : document.documentElement.scrollHeight;
       
-      // 计算当前章节在视口中的可见比例
-      const visibleTop = Math.max(scrollTop, elementTop);
-      const visibleBottom = Math.min(scrollBottom, nextTop);
-      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-      const sectionHeight = nextTop - elementTop;
-      const visibleRatio = sectionHeight > 0 ? visibleHeight / sectionHeight : 0;
+      // 获取元素相对于滚动容器的位置
+      const containerRect = scrollContainer.getBoundingClientRect();
+      const elementRect = element.getBoundingClientRect();
+      const elementTop = elementRect.top - containerRect.top + scrollTop;
       
-      // 如果章节标题在视口上方且下一个章节还没到，则这是当前章节
+      // 如果标题在容器视口上方（包括一些偏移量），则这是当前章节
       if (scrollTop >= elementTop - 100) {
-        newCurrentSection = index;
-      }
-      
-      // 如果有更好的可见比例，更新当前章节
-      if (visibleRatio > maxVisibleRatio && visibleRatio > 0.2) {
-        maxVisibleRatio = visibleRatio;
         newCurrentSection = index;
       }
     }
 
-    // 使用最新的anchorData状态
+    // 更新锚点数据的激活状态
     setAnchorData(prevAnchorData => {
       return prevAnchorData.map((anchor, index) => {
         const element = document.getElementById(anchor.key);
-        if (!element) return anchor;
+        if (!element) return { ...anchor, isActive: false };
 
-        const elementTop = element.offsetTop;
-        const nextElement = anchors[index + 1] ? document.getElementById(anchors[index + 1].key) : null;
-        const nextTop = nextElement ? nextElement.offsetTop : document.documentElement.scrollHeight;
+        // 获取元素相对于滚动容器的位置
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const elementRect = element.getBoundingClientRect();
+        const elementTop = elementRect.top - containerRect.top + scrollTop;
         
-        // 更精确的激活判断
-        const isInViewport = scrollBottom > elementTop && scrollTop < nextTop;
-        const isCenterInSection = scrollCenter >= elementTop && scrollCenter < nextTop;
-        const isActive = isInViewport && (isCenterInSection || scrollTop >= elementTop - 50);
+        const nextElement = anchors[index + 1] ? document.getElementById(anchors[index + 1].key) : null;
+        let nextTop = contentRef.current!.scrollHeight;
+        
+        if (nextElement) {
+          const nextElementRect = nextElement.getBoundingClientRect();
+          nextTop = nextElementRect.top - containerRect.top + scrollTop;
+        }
+        
+        // 简单判断：章节内容是否与容器视口有交集
+        const isActive = elementTop <= viewportBottom && nextTop > scrollTop;
         
         return {
           ...anchor,
@@ -130,17 +169,23 @@ const LineAnchor: React.FC<LineAnchorProps> = ({ anchors, contentRef, onSectionC
       });
     });
 
-    // 更新当前章节状态
-    if (newCurrentSection !== currentSection) {
-      setCurrentSection(newCurrentSection);
-      onSectionChange?.(newCurrentSection);
-    }
-  }, [anchors, contentRef, currentSection, onSectionChange]);
+    // 实时更新当前章节状态
+    setCurrentSection(prevSection => {
+      if (newCurrentSection !== prevSection) {
+        // 调试日志（生产环境可删除）
+        console.log('当前章节更新:', newCurrentSection, anchors[newCurrentSection]?.title);
+        onSectionChange?.(newCurrentSection);
+      }
+      return newCurrentSection;
+    });
+  }, [anchors, contentRef, onSectionChange]);
 
   // 点击横线跳转到对应标题
   const handleLineClick = (anchorKey: string) => {
     const element = document.getElementById(anchorKey);
-    if (element) {
+    const scrollContainer = document.querySelector('.article-detail-container') as HTMLDivElement;
+    
+    if (element && scrollContainer) {
       // 找到对应的章节索引
       const sectionIndex = anchors.findIndex(anchor => anchor.key === anchorKey);
       if (sectionIndex !== -1) {
@@ -148,52 +193,82 @@ const LineAnchor: React.FC<LineAnchorProps> = ({ anchors, contentRef, onSectionC
         onSectionChange?.(sectionIndex);
       }
       
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      // 计算元素相对于滚动容器的位置
+      const containerRect = scrollContainer.getBoundingClientRect();
+      const elementRect = element.getBoundingClientRect();
+      const elementTop = elementRect.top - containerRect.top + scrollContainer.scrollTop;
+      
+      // 在滚动容器中平滑滚动到目标位置
+      scrollContainer.scrollTo({
+        top: elementTop - 100, // 留一点偏移量
+        behavior: 'smooth'
       });
     }
   };
 
-  // 初始化计算
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      calculateProgress();
-      // 初始化后立即调用一次updateActiveAnchor
-      setTimeout(updateActiveAnchor, 100);
-    }, 50);
-    
-    return () => clearTimeout(timer);
-  }, [anchors, contentRef.current, updateActiveAnchor]);
-
-  // 监听滚动 - 监听window的滚动事件
+  // 初始化：先提取标题，再计算进度，并添加滚动监听
   useEffect(() => {
     if (!contentRef.current) return;
 
-    let scrollTimer: NodeJS.Timeout;
-    const handleScroll = () => {
-      // 使用防抖，避免频繁调用
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => {
-        updateActiveAnchor();
-      }, 16); // 约60fps
+    const initTimer = setTimeout(() => {
+      // 先提取标题
+      extractHeadings();
+      
+      // 然后计算进度
+      const progressTimer = setTimeout(() => {
+        calculateProgress();
+        // 最后更新激活状态
+        setTimeout(updateActiveAnchor, 100);
+      }, 100);
+
+      return () => clearTimeout(progressTimer);
+    }, 50);
+    
+    return () => clearTimeout(initTimer);
+  }, [contentRef.current, extractHeadings, calculateProgress, updateActiveAnchor]);
+
+  // 监听滚动容器的滚动事件
+  useEffect(() => {
+    const scrollContainer = document.querySelector('.article-detail-container') as HTMLDivElement;
+    if (!scrollContainer) return;
+
+    // 防抖处理，提高性能
+    let timeoutId: NodeJS.Timeout;
+    const debouncedUpdate = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(updateActiveAnchor, 8); // 8ms 防抖，支持 120fps
     };
 
+    scrollContainer.addEventListener('scroll', debouncedUpdate, { passive: true });
+    
+    return () => {
+      scrollContainer.removeEventListener('scroll', debouncedUpdate);
+      clearTimeout(timeoutId);
+    };
+  }, [updateActiveAnchor]);
+
+  // 当提取的标题发生变化时，重新计算进度
+  useEffect(() => {
+    if (extractedAnchors.length > 0) {
+      const timer = setTimeout(() => {
+        calculateProgress();
+        setTimeout(updateActiveAnchor, 100);
+      }, 50);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [extractedAnchors, calculateProgress, updateActiveAnchor]);
+
+  // 监听窗口大小变化，重新计算进度
+  useEffect(() => {
     const handleResize = () => {
       calculateProgress();
       setTimeout(updateActiveAnchor, 100);
     };
 
-    // 监听window的滚动事件而不是contentElement
-    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleResize);
-
-    return () => {
-      clearTimeout(scrollTimer);
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [contentRef.current, updateActiveAnchor]);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [calculateProgress, updateActiveAnchor]);
 
   // 监听内容变化，重新计算
   useEffect(() => {
@@ -210,7 +285,7 @@ const LineAnchor: React.FC<LineAnchorProps> = ({ anchors, contentRef, onSectionC
     });
 
     return () => observer.disconnect();
-  }, [anchors]);
+  }, [calculateProgress]);
 
   // 获取当前章节信息（暂时注释掉，未来可能用到）
   // const getCurrentSectionInfo = () => {
