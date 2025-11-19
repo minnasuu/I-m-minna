@@ -1,11 +1,11 @@
 import React from 'react';
 import './AITheme.scss';
 import AIChatInterface from './AIChatInterface';
-import AIAvatar from './AIAvatar';
 import ThemeSwitcher from '../../../shared/components/ThemeSwitcher';
 import LanguageSwitcher from "../../../shared/components/LanguageSwitcher";
 import AISidebar from "./AISidebar";
 import { useTranslations } from "../../../shared/hooks/useTranslations";
+import avatarImg from '../../../assets/images/avatar.png';
 
 const AITheme: React.FC = () => {
   const { t } = useTranslations();
@@ -13,7 +13,9 @@ const AITheme: React.FC = () => {
   return (
     <div className="ai-theme">
       <div className="ai-header">
-        <AIAvatar />
+        <div className="ai-avatar">
+          <img src={avatarImg} alt="AI Avatar" />
+        </div>
         <div className="ai-title">
           <h1>{t("aiTheme.title")}</h1>
           <p>{t("aiTheme.subtitle")}</p>
