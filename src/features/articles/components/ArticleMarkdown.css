@@ -11,15 +11,12 @@
 .article-markdown h5,
 .article-markdown h6 {
   margin-top: 24px;
-  margin-bottom: 16px;
   font-weight: 600;
   line-height: 1.25;
 }
 
 .article-markdown h1 {
-  font-size: 2em;
-  border-bottom: 1px solid #eaecef;
-  padding-bottom: 0.5em;
+  font-size: 1.75em;
 }
 
 .article-markdown h2 {
@@ -40,12 +37,13 @@
 
 .article-markdown h6 {
   font-size: 0.85em;
-  color: #6a737d;
 }
 
 .article-markdown p {
   margin-top: 0;
   margin-bottom: 0;
+  line-height: 1.5;
+  text-indent: 2em;
 }
 
 .article-markdown blockquote {

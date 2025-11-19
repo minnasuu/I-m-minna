@@ -33,7 +33,67 @@
 }
 
 .article-detail-header {
-  margin-bottom: 1rem;
+  position: relative;
+  margin-bottom: 3rem;
+  max-width: 100%;
+  margin-inline: auto;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* 背景图层 */
+.article-header-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.article-header-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(0px);
+  transform: scale(1.05);
+  transition: transform 0.6s ease;
+}
+
+.article-detail-header:hover .article-header-image {
+  transform: scale(1.08);
+}
+
+/* 渐变遮罩 */
+.article-header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  backdrop-filter: saturate(120%);
+}
+
+/* 内容层 */
+.article-header-content {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 2rem 2rem;
+  width: 100%;
   max-width: 800px;
   margin-inline: auto;
 }
@@ -44,15 +104,27 @@
   align-items: center;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 没有背景图时的meta颜色 */
+.article-detail-header:not(:has(.article-header-background)) .article-meta {
   color: #6c757d;
 }
 
 .article-detail-title {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #202020;
+  color: #ffffff;
   line-height: 1.3;
   margin-bottom: 1rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 没有背景图时的标题颜色 */
+.article-detail-header:not(:has(.article-header-background)) .article-detail-title {
+  color: #202020;
+  text-shadow: none;
 }
 
 .article-detail-tags {
@@ -62,15 +134,34 @@
 }
 
 .article-detail-tag {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.95);
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+}
+
+.article-detail-tag:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+/* 没有背景图时的tag样式 */
+.article-detail-header:not(:has(.article-header-background)) .article-detail-tag {
   background: #f8f9fa;
-    color: #666;
-    padding: 0.25rem 0.5rem;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: 400;
-    border: 1px solid #e9ecef;
-    transition: all 0.2s 
-ease;
+  color: #666;
+  border: 1px solid #e9ecef;
+  backdrop-filter: none;
+}
+
+.article-detail-header:not(:has(.article-header-background)) .article-detail-tag:hover {
+  background: #e9ecef;
+  border-color: #dee2e6;
 }
 
 .article-content {
@@ -93,6 +184,14 @@ ease;
     padding: 48px 20px;
   }
 
+  .article-detail-header {
+    min-height: 350px;
+    border-radius: 12px;
+  }
+
+  .article-header-content {
+    padding: 2rem 1.5rem 1.5rem;
+  }
   
   .article-detail-title {
     font-size: 1.75rem;

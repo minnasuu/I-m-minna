@@ -157,22 +157,36 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
       </div>
       <div className="article-detail-container" ref={scrollRef}>
         <header className="article-detail-header">
-          <h1 className="article-detail-title">{article.title}</h1>
+          {/* 背景图层 */}
+          {article.coverImage && (
+            <div className="article-header-background">
+              <div 
+                className="article-header-image"
+                style={{ backgroundImage: `url(${article.coverImage})` }}
+              />
+              <div className="article-header-overlay" />
+            </div>
+          )}
           
-          <div className="article-meta">
-            <span className="article-date">
-              {new Date(article.publishDate).toLocaleDateString(
-                language === "zh" ? "zh-CN" : "en-US"
-              )}
-            </span>
-          </div>
-
-          <div className="article-detail-tags">
-            {article.tags.map((tag, index) => (
-              <span key={index} className="article-detail-tag">
-                {tag}
+          {/* 内容层 */}
+          <div className="article-header-content">
+            <h1 className="article-detail-title">{article.title}</h1>
+            
+            <div className="article-meta">
+              <span className="article-date">
+                {new Date(article.publishDate).toLocaleDateString(
+                  language === "zh" ? "zh-CN" : "en-US"
+                )}
               </span>
-            ))}
+            </div>
+
+            <div className="article-detail-tags">
+              {article.tags.map((tag, index) => (
+                <span key={index} className="article-detail-tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </header>
 
