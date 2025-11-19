@@ -36,7 +36,8 @@ npm run build
 ## 配置说明
 
 ### Vite 配置
-- 使用 `/` 作为基础路径（GitHub Pages 用户页面）
+- 使用 `./` 作为基础路径（相对路径，确保在GitHub Pages上正常工作）
+- React Router 不使用 basename（GitHub Pages 用户页面）
 
 ### GitHub Actions
 - 工作流文件：`.github/workflows/deploy.yml`
