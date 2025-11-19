@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test React App</title>
+    <link rel="stylesheet" href="https://unpkg.com/@suminhan/land-design@latest/lib/style.css">
+</head>
+<body>
+    <div id="root">Loading...</div>
+    
+    <script>
+        // 测试基本DOM操作
+        console.log('DOM loaded');
+        console.log('Root element:', document.getElementById('root'));
+        
+        // 测试模块加载
+        window.addEventListener('error', function(e) {
+            console.error('Global error:', e.error);
+        });
+        
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('Unhandled promise rejection:', e.reason);
+        });
+    </script>
+    
+    <script type="module" src="./dist/assets/index-CYXoQ79x.js"></script>
+</body>
+</html>
