@@ -109,7 +109,6 @@
   
   .stacked-card-info {
     position: relative;
-    background: #ffffff;
     transition: padding 0.4s ease;
     display: flex;
     flex-direction: column;
@@ -117,6 +116,7 @@
     min-height: fit-content;
     
     .stacked-card-title {
+      height: 100%;
       font-size: 0.8rem;
       font-weight: 600;
       padding: 8px;

@@ -391,7 +391,7 @@
   }
   
   .stacked-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--color-gray-11);
     border: 1px solid #333;
     
     &:hover {
@@ -414,7 +414,6 @@
     }
     
     .stacked-card-info {
-      background: var(--color-gray-11);
       
       .stacked-card-title {
         color: #cccccc;
