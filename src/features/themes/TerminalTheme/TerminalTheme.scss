@@ -1,8 +1,11 @@
+@import '../../../shared/components/themes/Sidebar/Sidebar.scss';
+
 .terminal-theme {
   font-family: 'Courier New', 'Monaco', monospace;
-  max-height: 100vh;
+  height: 100vh;  // ✅ 改用 height 而不是 max-height
   display: flex;
   flex-direction: column;
+  overflow: hidden;  // ✅ 防止整体滚动
 }
 
 .terminal-header {
@@ -53,20 +56,40 @@
 }
 
 .terminal-body {
+  display: flex;
   flex: 1;
-  height: 1%;
-  display: grid;
-  grid-template-columns: 1fr 300px;
+  min-height: 0;  // ✅ 允许 flex 子元素缩小
   gap: 0;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .terminal-content {
+  flex: 1;
   padding: 20px;
   overflow-y: auto;
+  min-height: 0;  // ✅ 允许滚动
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
   scrollbar-color: rgba(255, 255, 255, 0.05) transparent; /* 滑块颜色 + 轨道透明 */
+  
+  // 自定义滚动条样式
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
 }
+
 
 .terminal-text {
   font-size: 14px;
@@ -260,256 +283,209 @@
   }
 }
 
+// Terminal主题Sidebar颜色覆盖
 .terminal-sidebar {
   background: #1a1a1a;
   border-left: 1px solid #333;
-  padding: 20px;
-  overflow-y: auto;
-  scrollbar-color: rgba(255, 255, 255, 0.05) transparent; /* 滑块颜色 + 轨道透明 */
-}
-
-.sidebar-section {
-  margin-bottom: 30px;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #333;
-  padding-bottom: 8px;
-}
-
-.section-header h3 {
-  color: #eee;
-  font-size: 14px;
-  margin: 0;
-}
-
-.info-item .avatar{
-  width: 100px;
-  height: 100px;
-  margin-inline: auto;
-  border-radius: 50%;
-}
-
-.info-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 12px;
-}
-
-.info-item .label {
-  color: #888;
-}
-
-.info-item .value {
-  color: #cccccc;
-  font-weight: bold;
-}
-
-.skill-item {
-  margin-bottom: 12px;
-}
-
-.skill-name {
-  display: block;
-  font-size: 12px;
-  margin-bottom: 4px;
-  color: #ccc;
-  white-space: nowrap;
-}
-
-.skill-bar {
-  width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.skill-fill {
-  height: 4px;
-  background: #00ff00;
-  transition: width 0.5s ease;
-}
-
-.social-link {
-  display: inline;
-  color: #87ceeb;
-  text-decoration: none;
-  font-size: 12px;
-  transition: color 0.2s;
-  word-break: break-all;
-  max-width: 100%;
-  overflow-wrap: break-word;
-}
-
-.social-link-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 4px;
-  font-size: 12px;
-  color: #cccccc;
-  width: 100%;
-  margin-bottom: 4px;
-  flex-wrap: wrap;
-}
-
-.sidebar-section{
-  .craft-list,
-  .project-list,
-  .interest-list{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    .craft-item,
-    .project-item,
-    .label-item{
-      position: relative;
-      padding: 4px 8px;
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      &:hover{
-        .img-pop-container{
-          opacity: 1;
-          transform: translate(-50%,-8px);
+  overflow-y: auto !important;  // ✅ 强制启用滚动
+  height: 100% !important;  // ✅ 确保高度限制
+  flex-shrink: 0;  // ✅ 防止被压缩
+  scrollbar-color: rgba(255, 255, 255, 0.05) transparent;
+  
+  // 自定义滚动条样式（Webkit浏览器）
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+  
+  .terminal-sidebar-section,
+  .sidebar-section {
+    .section-header {
+      border-bottom: 1px solid #333;
+      
+      h3 {
+        color: #eee;
+      }
+    }
+    
+    .info-item {
+      &.avatar-item {
+        .avatar {
+          border: none;
         }
       }
-      .craft-name,
-      .project-name,
-      .interest-name{
-        font-size: 14px;
-        line-height: 22px;
-        color: #cccccc;
-        font-weight: normal;
+      
+      .label {
+        color: #888;
       }
-      &.with-link{
-        cursor: pointer;
-        &:hover{
-          .craft-name,
-          .project-name,
-          .interest-name{
-            text-shadow: 0 0 5px #dff6ff;
+      
+      .value {
+        color: #cccccc;
+        font-weight: bold;
+      }
+    }
+    
+    .social-link-item {
+      color: #cccccc;
+      
+      .social-link {
+        color: #87ceeb;
+        
+        &:hover {
+          color: #fff;
+          text-shadow: 0 0 5px #dff6ff;
+        }
+      }
+    }
+    
+    .interest-list,
+    .craft-list {
+      .label-item,
+      .craft-item {
+        background-color: rgba(255, 255, 255, 0.05);
+        border: none;
+        border-radius: 4px;
+        
+        .interest-name,
+        .craft-name {
+          color: #cccccc;
+          font-weight: normal;
+        }
+        
+        &.with-link {
+          &:hover {
+            .craft-name,
+            .project-name,
+            .interest-name {
+              text-shadow: 0 0 5px #dff6ff;
+            }
           }
         }
       }
     }
   }
-  .craft-list{
-    margin-left: 0;
-    padding-left: 0;
-    &::before{
-      content: '';
-      display: none;
+}
+
+// Terminal主题 StackedCardList 样式覆盖
+.terminal-stacked-card-list-wrapper {
+  .stacked-card-list {
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
     }
   }
-} 
-.img-pop-container{
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  padding: 8px;
-  width: 120%;
+  
+  .stacked-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    
+    &:hover {
+      border-color: #00ff00;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    .stacked-card-preview {
+      background: linear-gradient(135deg, rgba(0, 255, 0, 0.1) 0%, rgba(135, 206, 235, 0.1) 100%);
+      
+      .stacked-card-thumbnail-placeholder {
+        background: linear-gradient(135deg, rgba(0, 255, 0, 0.15) 0%, rgba(135, 206, 235, 0.15) 100%);
+        color: #00ff00;
+      }
+      
+      .stacked-card-overlay {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+      }
+    }
+    
+    .stacked-card-info {
+      background: var(--color-gray-11);
+      
+      .stacked-card-title {
+        color: #cccccc;
+      }
+      
+      .stacked-card-meta {
+        color: #888;
+        
+        .card-date::before {
+          background: #87ceeb;
+        }
+        
+        .card-readtime::before {
+          background: #00ff00;
+        }
+      }
+      
+      .stacked-card-description {
+        color: #888;
+      }
+    }
+  }
+  
+  .stacked-card-view-more {
+    .view-more-button {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #333;
+      color: #cccccc;
+      
+      &:hover {
+        background: #00ff00;
+        border-color: #00ff00;
+        color: #000;
+        transform: translateX(4px);
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        
+        .arrow {
+          transform: translateX(4px);
+        }
+      }
+    }
+  }
+}
+
+// 图片弹窗颜色
+.terminal-sidebar .img-pop-container {
   background-color: #1a1a1a;
   border: 1px solid #333;
-  border-radius: 8px;
-  box-sizing: border-box;
-  opacity: 0;
-  transform: translate(-50%,4px);
-  transition: all 0.2s ease;
-  pointer-events: none;
-  .img-pop{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-  }
-  &::before{
-    content: '';
-    display: block;
-    width: 8px;
-    height: 8px;
+  box-shadow: none;
+  
+  &::before {
     border-right: 1px solid #333;
     border-bottom: 1px solid #333;
     background-color: #1a1a1a;
-    border-radius: 2px;
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
   }
 }
 
-.skill-name-link {
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.skill-name-link:hover {
-  color: #00ff00 !important;
-  text-shadow: 0 0 5px #dff6ff;
-}
-
-.skill-name-link:active {
-  color: #00cc00 !important;
-}
-
-.skill-name-link .skill-name {
-  color: #cccccc;
-}
-
-.article-title-link {
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.article-title-link:hover {
-  color: #00ff00 !important;
-  text-shadow: 0 0 5px #dff6ff;
-}
-
-.article-title-link:active {
-  color: #00cc00 !important;
-}
-
-.article-title-link .interest-name {
-  color: inherit;
-}
-
-.project-title-link {
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.project-title-link:hover {
-  color: #00ff00 !important;
-text-shadow: 0 0 5px #dff6ff;
-}
-
-.project-title-link:active {
-  color: #00cc00 !important;
-}
-
-.project-title-link .interest-name {
-  color: inherit;
-}
-
-.craft-list{
-  padding-left: 10px;
-  margin-left: 20px;
-  color: #87ceeb;
-  &::before{
-    content: "♾️ ";
-    color: #87ceeb;
+// 链接样式
+.terminal-sidebar {
+  .skill-name-link,
+  .article-title-link,
+  .project-title-link,
+  .craft-title-link {
+    &:hover {
+      color: #00ff00 !important;
+      text-shadow: 0 0 5px #dff6ff;
+    }
+    
+    &:active {
+      color: #00cc00 !important;
+    }
   }
 }
 

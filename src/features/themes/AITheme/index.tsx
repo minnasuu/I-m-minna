@@ -3,12 +3,18 @@ import './AITheme.scss';
 import AIChatInterface from './AIChatInterface';
 import ThemeSwitcher from '../../../shared/components/ThemeSwitcher';
 import LanguageSwitcher from "../../../shared/components/LanguageSwitcher";
-import AISidebar from "./AISidebar";
+import Sidebar from "../../../shared/components/themes/Sidebar";
+import type { SidebarThemeConfig } from "../../../shared/components/themes/Sidebar";
 import { useTranslations } from "../../../shared/hooks/useTranslations";
 import avatarImg from '../../../assets/images/avatar.png';
 
 const AITheme: React.FC = () => {
   const { t } = useTranslations();
+
+  const sidebarConfig: SidebarThemeConfig = {
+    themePrefix: 'ai',
+    linkColor: '#10b981',
+  };
 
   return (
     <div className="ai-theme">
@@ -26,7 +32,7 @@ const AITheme: React.FC = () => {
         </div>
       </div>
       <div className="ai-content">
-        <AISidebar />
+        <Sidebar themeConfig={sidebarConfig} />
         <AIChatInterface />
       </div>
     </div>

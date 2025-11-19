@@ -23,6 +23,8 @@ interface StackedCardListProps {
   className?: string
   viewMoreLink?: string
   viewMoreText?: string
+  /** 主题前缀，用于应用主题样式 */
+  themePrefix?: string
 }
 
 export default function StackedCardList({
@@ -33,6 +35,7 @@ export default function StackedCardList({
   className = '',
   viewMoreLink,
   viewMoreText = 'View More',
+  themePrefix,
 }: StackedCardListProps) {
   const [expanded, setExpanded] = useState<boolean>(false)
   
@@ -127,8 +130,10 @@ export default function StackedCardList({
     )
   }
   
+  const wrapperClass = `stacked-card-list-wrapper ${themePrefix ? `${themePrefix}-stacked-card-list-wrapper` : ''} ${className}`.trim()
+  
   return (
-    <div className={`stacked-card-list-wrapper ${className}`} onMouseLeave={() => setExpanded(false)}>
+    <div className={wrapperClass} onMouseLeave={() => setExpanded(false)}>
       <div className="stacked-card-list">
         {visibleItems.map((item, index) => renderCard(item, index))}
       </div>

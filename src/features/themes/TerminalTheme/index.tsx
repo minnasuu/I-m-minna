@@ -2,22 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './TerminalTheme.scss';
 import type { PersonalData } from '../../../shared/types';
-import { useTranslations } from '../../../shared/hooks/useTranslations';
-import { IconArrowLineRight } from '../../../shared/components/Icon';
 import LanguageSwitcher from "../../../shared/components/LanguageSwitcher";
 import ThemeSwitcher from "../../../shared/components/ThemeSwitcher";
+import Sidebar from "../../../shared/components/themes/Sidebar";
+import type { SidebarThemeConfig } from "../../../shared/components/themes/Sidebar";
 
 interface TerminalThemeProps {
   data: PersonalData;
 }
 
 const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
-  const { t } = useTranslations();
   const [currentLine, setCurrentLine] = useState(0);
   const [displayedLines, setDisplayedLines] = useState<
     Array<{ type: string; content: string; link?: string }>
   >([]);
   const [isTyping, setIsTyping] = useState(true);
+
+  const sidebarConfig: SidebarThemeConfig = {
+    themePrefix: 'terminal',
+    linkColor: '#87ceeb',
+  };
 
   const terminalLines = [
     { type: "command", content: "whoami" },
@@ -159,212 +163,7 @@ const TerminalTheme: React.FC<TerminalThemeProps> = ({ data }) => {
           </div>
         </div>
 
-        <div className="terminal-sidebar">
-          <div className="sidebar-section">
-            <div className="section-header">
-              <h3>👧 {t("common.systemInfo")}</h3>
-            </div>
-            <div className="info-item">
-              <img src={data.info.avatar} alt="avatar" className="avatar" />
-            </div>
-            <div className="info-item">
-              <span className="label">{t("common.name")}:</span>
-              <span className="value">{data.info.name}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">{t("common.role")}:</span>
-              <span
-                className="value"
-                dangerouslySetInnerHTML={{
-                  __html: data.info.title
-                    .replace(
-                      /腾讯/g,
-                      '<a href="https://www.tencent.com" target="_blank" rel="noopener noreferrer" style="color: #87ceeb; text-decoration: underline;">腾讯</a>'
-                    )
-                    .replace(
-                      /Tencent/g,
-                      '<a href="https://www.tencent.com" target="_blank" rel="noopener noreferrer" style="color: #87ceeb; text-decoration: underline;">Tencent</a>'
-                    ),
-                }}
-              />
-            </div>
-            <div className="info-item">
-              <span className="label">{t("common.location")}:</span>
-              <span className="value">{data.info.location}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">{t("common.wechat")}:</span>
-              <span className="value">{data.info.wechat}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">{t("common.email")}:</span>
-              <span className="value">{data.info.email}</span>
-            </div>
-          </div>
-
-          <div className="sidebar-section">
-            <div className="section-header">
-              <h3>🧲 {t("common.socialLinks")}</h3>
-            </div>
-            {data.info.socialLinks.map(
-              (
-                socialLink: {
-                  name: string;
-                  url: string;
-                  abbreviation?: string;
-                },
-                index: number
-              ) =>
-                socialLink.url && (
-                  <div className="social-link-item" key={index}>
-                    {socialLink.name}：
-                    <a
-                      key={index}
-                      href={socialLink.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="social-link"
-                    >
-                      {socialLink.abbreviation || socialLink.url}
-                    </a>
-                  </div>
-                )
-            )}
-          </div>
-
-          <div className="sidebar-section">
-            <div className="section-header">
-              <h3>⚡️ {t("skills.title")}</h3>
-            </div>
-            <div className="interest-list">
-              {data.skills.map((skill, index) => (
-                <div
-                  key={index}
-                  className={`label-item ${skill.link ? "with-link" : ""}`}
-                >
-                  {skill.link ? (
-                    <a
-                      href={skill.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="skill-name-link"
-                    >
-                      <span className="interest-name">{skill.name}</span>
-                    </a>
-                  ) : (
-                    <span className="interest-name">{skill.name}</span>
-                  )}
-                  {skill.link && <span className="interest-link">🔗</span>}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="sidebar-section">
-            <div className="section-header">
-              <h3>📄 {t("articles.title")}</h3>
-              <Link to="/articles" className="view-all-link">
-                {t("articles.viewAll")}
-                <IconArrowLineRight size={12} />
-              </Link>
-            </div>
-            <div className="interest-list">
-              {data.articles
-                .sort(
-                  (a, b) =>
-                    new Date(b.publishDate).getTime() -
-                    new Date(a.publishDate).getTime()
-                )
-                .slice(0, 3)
-                .map((article, index) => (
-                  <div key={index} className="label-item">
-                    <Link
-                      to={`/articles/${article.id}`}
-                      className="article-title-link"
-                    >
-                      <span className="interest-name">{article.title}</span>
-                    </Link>
-                  </div>
-                ))}
-            </div>
-          </div>
-
-          <div className="sidebar-section">
-            <div className="section-header">
-              <h3>💎 {t("projects.title")}</h3>
-            </div>
-            <div className="interest-list">
-              {data.projects.map((project, index) => (
-                <div key={index} className="label-item">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-title-link"
-                  >
-                    <span className="interest-name">{project.name}</span>
-                  </a>
-                  {project.imgPopUrl && (
-                    <div className="img-pop-container">
-                      <img
-                        src={project.imgPopUrl}
-                        alt="img-pop"
-                        className="img-pop"
-                      />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="sidebar-section">
-            <div className="section-header">
-              <h3>♾️ {t("crafts.title")}</h3>
-            </div>
-            <div className="craft-list">
-              {data.crafts.map((craft, index) => (
-                <div
-                  key={index}
-                  className={`craft-item ${craft.link ? "with-link" : ""}`}
-                >
-                  <a
-                    href={craft.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="craft-title-link"
-                  >
-                    <span className="craft-name">{craft.name}</span>
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-
-           <div className="sidebar-section">
-            <div className="section-header">
-              <h3>📸 {t("interests.title")}</h3>
-            </div>
-            <div className="interest-list">
-              {data.interests.map((interest, index) => (
-                <div
-                  key={index}
-                  className={`label-item ${interest.link ? "with-link" : ""}`}
-                >
-                  <span className="interest-name">{interest.name}</span>
-                  {interest.link && (
-                    <Link
-                      to={`/journals/${interest.link}`}
-                      className="interest-link"
-                    >
-                      🔗
-                    </Link>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <Sidebar themeConfig={sidebarConfig} />
       </div>
     </div>
   );

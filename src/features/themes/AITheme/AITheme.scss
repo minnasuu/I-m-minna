@@ -1,9 +1,12 @@
+@import '../../../shared/components/themes/Sidebar/Sidebar.scss';
+
 .ai-theme {
   height: 100vh;
   color: #374151;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   display: flex;
   flex-direction: column;
+  overflow: hidden;  // ✅ 防止整体滚动
   
   .ai-header {
     display: flex;
@@ -57,95 +60,69 @@
     display: flex;
     margin: 0 auto;
     width: 100%;
-    height: 1%;
+    min-height: 0;  // ✅ 允许 flex 子元素缩小
     padding: 0;
+    overflow: hidden;  // ✅ 让子元素处理滚动
   }
 }
 
+// AI主题Sidebar颜色覆盖
 .ai-sidebar {
-  width: 30%;
   background-color: #f9fafb;
   border-right: 1px solid #e5e7eb;
-  padding: 20px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
+  overflow-y: auto !important;  // ✅ 强制启用滚动
+  height: 100% !important;  // ✅ 确保高度限制
+  flex-shrink: 0;  // ✅ 防止被压缩
+  
+  // 自定义滚动条样式（Webkit浏览器）
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f9fafb;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+    
+    &:hover {
+      background: #9ca3af;
+    }
+  }
   
   .ai-sidebar-section {
-    margin-bottom: 24px;
-    
     .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
       border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 8px;
       
       h3 {
-        font-size: 0.875rem;
-        font-weight: 600;
         color: #374151;
-        margin: 0;
       }
     }
     
     .info-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      font-size: 0.8rem;
-      
       &.avatar-item {
-        justify-content: center;
-        margin-bottom: 16px;
-        
         .avatar {
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
           border: 3px solid #ffffff;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          object-fit: cover;
         }
       }
       
       .label {
         color: #6b7280;
-        font-weight: 500;
-        min-width: fit-content;
       }
       
       .value {
         color: #374151;
-        font-weight: 400;
-        text-align: right;
-        flex: 1;
-        margin-left: 8px;
-        word-break: break-all;
       }
     }
     
     .social-link-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 4px;
-      font-size: 0.8rem;
       color: #374151;
-      width: 100%;
-      margin-bottom: 8px;
-      flex-wrap: wrap;
       
       .social-link {
         color: #10b981;
-        text-decoration: none;
-        font-size: 0.8rem;
-        transition: color 0.2s;
-        word-break: break-all;
-        max-width: 100%;
-        overflow-wrap: break-word;
         
         &:hover {
           color: #059669;
@@ -156,116 +133,115 @@
     
     .interest-list,
     .craft-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-left: 0;
-      padding-left: 0;
-      &::before{
-        content: '';
-        display: none;
-      }
-      
       .label-item,
       .craft-item {
-        position: relative;
-        padding: 6px 12px;
         background: #ffffff;
         border: 1px solid #e5e7eb;
-        border-radius: 16px;
-        transition: all 0.2s ease;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 0.75rem;
-        &:hover{
-          .img-pop-container{
-            opacity: 1;
-            transform: translate(-50%,-8px);
-          }
-        }
         
         .interest-name,
         .craft-name {
           color: #374151;
-          font-weight: 500;
-          line-height: 1.4;
-        }
-        
-        .interest-link {
-          font-size: 0.7rem;
         }
         
         &.with-link {
-          cursor: pointer;
-          
           &:hover {
             background: #f3f4f6;
           }
         }
-        
-        .img-pop-container{
-          position: absolute;
-          bottom: 100%;
-          left: 50%;
-          padding: 8px;
-          width: 120%;
-          background-color: #ffffff;
-          border: 1px solid #e5e7eb;
-          border-radius: 8px;
-          box-sizing: border-box;
-          opacity: 0;
-          transform: translate(-50%,4px);
-          transition: all 0.2s ease;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          pointer-events: none;
-          .img-pop{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 4px;
-          }
-          &::before{
-            content: '';
-            display: block;
-            width: 8px;
-            height: 8px;
-            border-right: 1px solid #e5e7eb;
-            border-bottom: 1px solid #e5e7eb;
-            background-color: #ffffff;
-            border-radius: 2px;
-            position: absolute;
-            bottom: -4px;
-            left: 50%;
-            transform: translateX(-50%) rotate(45deg);
-          }
-        }
+      }
+    }
+  }
+}
+
+// AI主题 StackedCardList 样式覆盖
+.ai-stacked-card-list-wrapper {
+  .stacked-card-list {
+    &::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      
+      &:hover {
+        background: #9ca3af;
+      }
+    }
+  }
+  
+  .stacked-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    
+    &:hover {
+      border-color: #10b981;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+    }
+    
+    .stacked-card-preview {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      
+      .stacked-card-thumbnail-placeholder {
+        background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        color: #10b981;
+      }
+      
+      .stacked-card-overlay {
+        background: linear-gradient(to bottom, rgba(16, 185, 129, 0) 0%, rgba(16, 185, 129, 0.2) 100%);
       }
     }
     
-    .view-all-link {
-      color: #6b7280;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.8rem;
-      line-height: 1.4;
+    .stacked-card-info {
+      background: #ffffff;
       
-      &:hover {
-        color: #10b981;
+      .stacked-card-title {
+        color: #111827;
+      }
+      
+      .stacked-card-meta {
+        color: #6b7280;
         
-        svg {
-          transform: translateX(2px);
+        .card-date::before {
+          background: #10b981;
+        }
+        
+        .card-readtime::before {
+          background: #3b82f6;
         }
       }
       
-      svg {
-        transition: transform 0.2s ease;
+      .stacked-card-description {
+        color: #6b7280;
       }
     }
+  }
+  
+  .stacked-card-view-more {
+    .view-more-button {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      color: #6b7280;
+      
+      &:hover {
+        background: #10b981;
+        border-color: #10b981;
+        color: #ffffff;
+        transform: translateX(4px);
+        
+        .arrow {
+          transform: translateX(4px);
+        }
+      }
+    }
+  }
+}
+
+// 图片弹窗颜色
+.ai-sidebar .img-pop-container {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  &::before {
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #ffffff;
   }
 }
 
@@ -275,10 +251,6 @@
   .article-title-link,
   .project-title-link,
   .craft-title-link {
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    
     .interest-name,
     .craft-name {
       color: inherit;
