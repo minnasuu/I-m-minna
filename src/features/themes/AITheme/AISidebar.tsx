@@ -1,9 +1,9 @@
-
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../../../shared/contexts/LanguageContext'
 import { personalDataMultiLang } from '../../../data/personalData'
 import { useTranslations } from '../../../shared/hooks/useTranslations'
-import { IconArrowLineRight } from '../../../shared/components/Icon'
+import StackedCardList from '../../../shared/components/themes/StackedCardList/StackedCardList'
+import type { StackedCardItem } from '../../../shared/components/themes/StackedCardList/StackedCardList'
 
 export default function AISidebar() {
   const { language } = useLanguage()
@@ -106,30 +106,33 @@ export default function AISidebar() {
         </div>
       </div>
 
-      {/* 文章 */}
+      {/* 文章 - 卡片形式 */}
       <div className="ai-sidebar-section">
         <div className="section-header">
           <h3>📄 {t("articles.title")}</h3>
-          <Link to="/articles" className="view-all-link">
-            {t("articles.viewAll")}
-            <IconArrowLineRight size={12} />
-          </Link>
         </div>
-        <div className="interest-list">
-          {data.articles.reverse().slice(0, 3).map((article, index) => (
-            <div key={index} className={`label-item ${article.link ? "with-link" : ""}`}>
-              <Link
-                to={`/articles/${article.id}`}
-                className="article-title-link"
-              >
-                <span className="interest-name">{article.title}</span>
-              </Link>
-            </div>
-          ))}
-        </div>
+        <StackedCardList
+          items={data.articles
+            .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+            .map((article): StackedCardItem => ({
+              id: article.id,
+              title: article.title,
+              coverImage: article.coverImage,
+              link: `/articles/${article.id}`,
+              meta: {
+                date: article.publishDate,
+                readTime: article.readTime,
+              },
+            }))}
+          maxVisibleItems={10}
+          cardWidth={120}
+          overlapOffset={30}
+          viewMoreLink="/articles"
+          viewMoreText={t("articles.viewAll")}
+        />
       </div>
 
-      {/* 项目 */}
+      {/* 项目 - 卡片形式 */}
       <div className="ai-sidebar-section">
         <div className="section-header">
           <h3>💎 {t("projects.title")}</h3>
@@ -155,7 +158,7 @@ export default function AISidebar() {
         </div>
       </div>
 
-      {/* 作品 */}
+      {/* 作品 - 卡片形式 */}
       <div className="ai-sidebar-section">
         <div className="section-header">
           <h3>♾️ {t("crafts.title")}</h3>

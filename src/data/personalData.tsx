@@ -200,8 +200,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
       {
         id: "crochet-knit-time",
-        name: "织作时光",
-        description: "原创手工编织教程与工具小程序，用户数累计7800+。",
+        name: "Minna集（小程序）",
+        description: "个人工具集小程序，用户数累计7800+。",
         technologies: ["微信小程序"],
         featured: true,
         imgPopUrl: cktMiniprogramQr,
@@ -429,9 +429,9 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
       {
         id: "crochet-knit-time",
-        name: "Crochet&Knit Time",
+        name: "Minna's Collection(miniprogram)",
         description:
-          "Original crochet and knitting tutorial and tool mini-program, with more than 7,800 users.",
+          "Minna's Collection of tools, with more than 7,800 users.",
         technologies: ["WeChat Mini Program"],
         featured: true,
         imgPopUrl: cktMiniprogramQr,
