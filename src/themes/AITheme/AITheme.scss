@@ -338,6 +338,11 @@
       &.user {
        display: flex;
        justify-content: flex-end;
+       animation: slideInBottom 0.3s ease-out;
+       @keyframes slideInBottom {
+        0%{transform: translateY(10%);}
+        100%{transform: translateY(0);}
+       }
         
         .message-content {
           width: fit-content;

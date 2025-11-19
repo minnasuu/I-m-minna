@@ -106,24 +106,6 @@ export default function AISidebar() {
         </div>
       </div>
 
-      {/* 兴趣爱好 */}
-      <div className="ai-sidebar-section">
-        <div className="section-header">
-          <h3>📸 {t("interests.title")}</h3>
-        </div>
-        <div className="interest-list">
-          {data.interests.map((interest, index) => (
-            <div
-              key={index}
-              className={`label-item ${interest.link ? "with-link" : ""}`}
-            >
-              <span className="interest-name">{interest.name}</span>
-              {interest.link && <Link to={`/journals/${interest.link}`} className="interest-link">🔗</Link>}
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* 文章 */}
       <div className="ai-sidebar-section">
         <div className="section-header">
@@ -192,6 +174,24 @@ export default function AISidebar() {
               >
                 <span className="craft-name">{craft.name}</span>
               </a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+       {/* 兴趣爱好 */}
+      <div className="ai-sidebar-section">
+        <div className="section-header">
+          <h3>📸 {t("interests.title")}</h3>
+        </div>
+        <div className="interest-list">
+          {data.interests.map((interest, index) => (
+            <div
+              key={index}
+              className={`label-item ${interest.link ? "with-link" : ""}`}
+            >
+              <span className="interest-name">{interest.name}</span>
+              {interest.link && <Link to={`/journals/${interest.link}`} className="interest-link">🔗</Link>}
             </div>
           ))}
         </div>
