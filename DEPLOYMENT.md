@@ -18,7 +18,7 @@
    - 部署到 GitHub Pages
 
 3. **访问你的网站**
-   - 网站地址：`https://[你的用户名].github.io/I-m-minna/`
+   - 网站地址：`https://minnasuu.github.io/`
    - 部署可能需要几分钟时间
 
 ## 手动部署
@@ -36,8 +36,7 @@ npm run build
 ## 配置说明
 
 ### Vite 配置
-- 生产环境使用 `/I-m-minna/` 作为基础路径
-- 开发环境使用 `/` 作为基础路径
+- 使用 `/` 作为基础路径（GitHub Pages 用户页面）
 
 ### GitHub Actions
 - 工作流文件：`.github/workflows/deploy.yml`

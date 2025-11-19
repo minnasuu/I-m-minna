@@ -12,7 +12,7 @@ if [ $? -eq 0 ]; then
     echo "To deploy to GitHub Pages:"
     echo "1. Commit and push your changes to the main branch"
     echo "2. GitHub Actions will automatically deploy to GitHub Pages"
-    echo "3. Your site will be available at: https://[your-username].github.io/I-m-minna/"
+    echo "3. Your site will be available at: https://minnasuu.github.io/"
 else
     echo "Build failed!"
     exit 1
