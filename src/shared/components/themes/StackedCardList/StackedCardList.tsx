@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './StackedCardList.scss'
 
 export interface StackedCardItem {
@@ -38,24 +38,39 @@ export default function StackedCardList({
   themePrefix,
 }: StackedCardListProps) {
   const [expanded, setExpanded] = useState<boolean>(false)
+  const navigate = useNavigate()
   
   const visibleItems = items.slice(0, maxVisibleItems)
   const hasMore = items.length > maxVisibleItems
   
-  // 切换卡片展开状态
-  const toggleCard = (e: React.MouseEvent<HTMLDivElement>) => {
+  // 点击卡片处理：未展开时先展开，展开后再跳转
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement>, item: StackedCardItem) => {
     e.preventDefault()
-    setExpanded(true)
     
-    // 将点击的卡片滚动到可视区域
-    const clickedCard = e.currentTarget
-    setTimeout(() => {
-      clickedCard.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
-      })
-    }, 200) // 延迟一点让展开动画开始后再滚动
+    // 如果已经展开且有链接，则跳转
+    if (expanded && item.link) {
+      // 判断是内部链接还是外部链接
+      if (item.link.startsWith('http') || item.link.startsWith('//')) {
+        // 外部链接，新窗口打开
+        window.open(item.link, '_blank', 'noopener,noreferrer')
+      } else {
+        // 内部链接，使用 react-router 导航
+        navigate(item.link)
+      }
+    } else {
+      // 未展开时，展开卡片
+      setExpanded(true)
+      
+      // 将点击的卡片滚动到可视区域
+      const clickedCard = e.currentTarget
+      setTimeout(() => {
+        clickedCard.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        })
+      }, 200)
+    }
   }
   
   // 计算每张卡片的初始位置
@@ -95,34 +110,17 @@ export default function StackedCardList({
         
         <div className="stacked-card-info">
           <div className="stacked-card-title">{item.title}</div>
-          
-          {/* {isExpanded && (
-            <>
-              {item.meta && (
-                <div className="stacked-card-meta">
-                  {item.meta.date && <span className="card-date">{item.meta.date}</span>}
-                  {item.meta.readTime && <span className="card-readtime">{item.meta.readTime}min</span>}
-                </div>
-              )}
-              
-              {item.description && (
-                <div className="stacked-card-description">{item.description}</div>
-              )}
-              
-              {item.renderContent && item.renderContent()}
-            </>
-          )} */}
         </div>
       </>
     )
     
     const cardProps = {
-      className: `stacked-card ${expanded ? 'expanded' : ''}`,
+      className: `stacked-card ${expanded ? 'expanded' : ''} ${item.link ? 'clickable' : ''}`,
       style: getCardStyle(index),
-      onClick: toggleCard,
+      onClick: (e: React.MouseEvent<HTMLDivElement>) => handleCardClick(e, item),
     }
     
-    // 所有卡片都用 div 包裹，点击切换展开状态
+    // 所有卡片都用 div 包裹，点击跳转或展开
     return (
       <div key={item.id} {...cardProps}>
         {cardContent}
@@ -140,22 +138,21 @@ export default function StackedCardList({
       
       {hasMore && viewMoreLink && (
         <div className="stacked-card-view-more">
-          {viewMoreLink.startsWith('http') ? (
-            <a
-              href={viewMoreLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="view-more-button"
-            >
-              {viewMoreText}
-              <span className="arrow">→</span>
-            </a>
-          ) : (
-            <Link to={viewMoreLink} className="view-more-button">
-              {viewMoreText}
-              <span className="arrow">→</span>
-            </Link>
-          )}
+          <a
+            href={viewMoreLink}
+            onClick={(e) => {
+              e.preventDefault()
+              if (viewMoreLink.startsWith('http') || viewMoreLink.startsWith('//')) {
+                window.open(viewMoreLink, '_blank', 'noopener,noreferrer')
+              } else {
+                navigate(viewMoreLink)
+              }
+            }}
+            className="view-more-button"
+          >
+            {viewMoreText}
+            <span className="arrow">→</span>
+          </a>
         </div>
       )}
     </div>

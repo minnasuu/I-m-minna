@@ -135,10 +135,11 @@ export default function Sidebar({ themeConfig }: SidebarProps) {
       <div className={sectionClass}>
         <div className="section-header">
           <h3>📄 {t('articles.title')}</h3>
+          {data.articles.length > 10 && <Link to="/articles" className="view-more-link">{t('articles.viewAll')}</Link>}
         </div>
         <StackedCardList
           items={data.articles
-            .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+            .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()).filter((_i,idx) => idx < 10)
             .map((article): StackedCardItem => ({
               id: article.id,
               title: article.title,
@@ -149,11 +150,8 @@ export default function Sidebar({ themeConfig }: SidebarProps) {
                 readTime: article.readTime,
               },
             }))}
-          maxVisibleItems={10}
           cardWidth={120}
           overlapOffset={30}
-          viewMoreLink="/articles"
-          viewMoreText={t('articles.viewAll')}
           themePrefix={themePrefix}
         />
       </div>
