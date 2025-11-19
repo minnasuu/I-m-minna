@@ -8,6 +8,8 @@ import Animation1 from "./Animation1.tsx";
 import Animation2 from "./Animation2.tsx";
 import Animation3 from "./Animation3.tsx";
 import Animation4 from "./Animation4.tsx";
+import article1 from "../../../../assets/articles/articles2025-2-22-1.png";
+import article2 from "../../../../assets/articles/articles2025-2-22-2.png";
 import ArticleEndText from "../../components/ArticleEndText.tsx";
 
 export const css_implementation_of_morphing_animation = (
@@ -123,7 +125,7 @@ export const css_implementation_of_morphing_animation = (
           </ul>
         </ArticleDesc>
         <ArticleImage
-          url={"/articles/articles2025-2-22-1.png"}
+          url={article1}
           imgStyle={{ width: "300px" }}
         ></ArticleImage>
         <ArticleDesc>
@@ -135,7 +137,7 @@ export const css_implementation_of_morphing_animation = (
             <li>
               figma + 插件 fill rule Editor
               <ArticleImage
-                url={"/articles/articles2025-2-22-2.png"}
+                url={article2}
               ></ArticleImage>
             </li>
             <li>Illustrator</li>

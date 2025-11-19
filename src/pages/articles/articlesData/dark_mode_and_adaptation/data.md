@@ -68,7 +68,7 @@ css variables（自定义属性）
 
 Ant Design将暗黑模式是作为众多主题模式中的一种，因为实现的原理是相同的。
 
-<img src="/articles/articles2025-1-2-1.png" alt="Ant Design主题系统" style="width: 80%;" />
+<img src="src/assets/articles/articles2025-1-2-1.png" alt="Ant Design主题系统" style="width: 80%;" />
 
 ### 配置方式：
 
@@ -135,7 +135,7 @@ CSS-in-JS
   - 如有必要，为浅色和深色外观设计单独的界面图标。
   - 确保全彩图像和图标在两种外观中都有良好的效果。
 
-<img src="/articles/articles2025-1-2-2.png" alt="Apple深色模式指南" style="width:80%;" />
+<img src="../../../../../assets/articles/articles2025-1-2-2.png" alt="Apple深色模式指南" style="width:80%;" />
 
 # 四. 网页开发中如何适配深色模式？
 

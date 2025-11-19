@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { personalDataMultiLang } from '../../data/personalData';
+import avatarImg from '../../assets/images/avatar.png';
 
 interface Message {
   id: string;
@@ -604,7 +605,7 @@ const AIChatInterface: React.FC = () => {
             <div key={message.id} className={`message ${message.sender}`}>
               {message.sender === "ai" ? (
                 <div className="message-avatar">
-                  <img src={"/avatar.png"} alt="avatar" />
+                  <img src={avatarImg} alt="avatar" />
                 </div>
               ) : null}
               <div className="message-content">

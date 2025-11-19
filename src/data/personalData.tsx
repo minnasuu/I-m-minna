@@ -8,12 +8,22 @@ import { build_a_smooth_ai_chat_layout } from "../pages/articles/articlesData/bu
 import { web_shortcut_key } from "../pages/articles/articlesData/web-shortcut-key/web_shortcut_key";
 import { article_1763369707943 } from "../pages/articles/articlesData/article-1763369707943/article_1763369707943";
 
+// Import assets
+import avatarImg from '../assets/images/avatar.png';
+import cktMiniprogramQr from '../assets/images/ckt-miniprogram-qr.jpg';
+import darkModeAdaptationCover from '../assets/articles/cover/dark_mode_and_adaptation.jpg';
+import svgInteractiveWheelCover from '../assets/articles/cover/svg-interactive-wheel.mp4';
+import deepUnderstandingImagesCover from '../assets/articles/cover/deep_understanding_of_images.jpg';
+// import buildAiChatLayoutCover from '../assets/articles/cover/build_a_smooth_ai_chat_layout.jpg'; // File doesn't exist
+import coverMock from '../assets/articles/cover/cover-mock.png';
+import nuovoCinemaParadisoCover from '../assets/articles/cover/nuovo_cinema_paradiso.jpg';
+
 // 多语言个人数据
 export const personalDataMultiLang: Record<Language, PersonalData> = {
   zh: {
     info: {
       name: "苏敏晗",
-      avatar: "./avatar.png",
+      avatar: avatarImg,
       title: "UI 开发 @腾讯",
       bio: "我觉得自己是一个热爱生活、用心做体验、追求产品品质的 UI开发工程师。我希望自己成为一个技术与艺术并重的、专业的全栈体验开发工程师。",
       email: "minhansu508@gmail.com",
@@ -97,7 +107,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation",
         type: "tech",
-        coverImage: "./articles/cover/dark_mode_and_adaptation.jpg",
+        coverImage: darkModeAdaptationCover,
       },
       {
         id: "svg-interactive-wheel",
@@ -109,7 +119,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/svg-interactive-wheel",
         type: "tech",
-        coverImage: "./articles/cover/svg-interactive-wheel.mp4",
+        coverImage: svgInteractiveWheelCover,
       },
       {
         id: "deep-understanding-of-images",
@@ -121,7 +131,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/know-more-about-image",
         type: "tech",
-        coverImage: "./articles/cover/deep_understanding_of_images.jpg",
+        coverImage: deepUnderstandingImagesCover,
       },
       {
         id: "css-implementation-of-morphing-animation",
@@ -134,8 +144,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 15,
         link: "https://blog.example.com/threejs-guide",
         type: "tech",
-        coverImage:
-          "./articles/cover/css_implementation_of_morphing_animation.jpg",
+        coverImage: nuovoCinemaParadisoCover,
       },
       {
         id: "build-a-smooth-ai-chat-layout",
@@ -147,7 +156,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 18,
         link: "https://blog.example.com/ai-chat-layout",
         type: "tech",
-        coverImage: "./articles/cover/build_a_smooth_ai_chat_layout.jpg",
+        coverImage: coverMock,
       },
       {
         id: "web-shortcut-key",
@@ -195,7 +204,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         description: "原创手工编织教程与工具小程序，用户数累计7800+。",
         technologies: ["微信小程序"],
         featured: true,
-        imgPopUrl: "/ckt-miniprogram-qr.jpg",
+        imgPopUrl: cktMiniprogramQr,
       },
     ],
     crafts: [
@@ -235,7 +244,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
   en: {
     info: {
       name: "minna",
-      avatar: "./avatar.png",
+      avatar: avatarImg,
       title: "UI Developer @Tencent",
       bio: "I think I am a UI developer who is passionate about life, focused on experience, and building products. I hope to become a professional full-stack experience developer who is good at both technology and art.",
       email: "minhansu508@gmail.com",
@@ -320,7 +329,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation",
         type: "tech",
-        coverImage: "./articles/cover/dark_mode_and_adaptation.jpg",
+        coverImage: darkModeAdaptationCover,
       },
       {
         id: "svg-interactive-wheel",
@@ -333,7 +342,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/svg-interactive-wheel",
         type: "tech",
-        coverImage: "./articles/cover/svg-interactive-wheel.mp4",
+        coverImage: svgInteractiveWheelCover,
       },
       {
         id: "deep-understanding-of-images",
@@ -346,7 +355,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/know-more-about-image",
         type: "tech",
-        coverImage: "./articles/cover/deep_understanding_of_images.jpg",
+        coverImage: deepUnderstandingImagesCover,
       },
       {
         id: "css-implementation-of-morphing-animation",
@@ -359,7 +368,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 15,
         link: "https://blog.example.com/threejs-guide",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: coverMock,
       },
       {
         id: "build-a-smooth-ai-chat-layout",
@@ -372,7 +381,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 18,
         link: "https://blog.example.com/ai-chat-layout",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: coverMock,
       },
       {
         id: "web-shortcut-key",
@@ -384,7 +393,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 15,
         link: "https://blog.example.com/web-shortcut-key",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: coverMock,
       },
     ],
     projects: [
@@ -425,7 +434,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
           "Original crochet and knitting tutorial and tool mini-program, with more than 7,800 users.",
         technologies: ["WeChat Mini Program"],
         featured: true,
-        imgPopUrl: "/ckt-miniprogram-qr.jpg",
+        imgPopUrl: cktMiniprogramQr,
       },
     ],
     crafts: [

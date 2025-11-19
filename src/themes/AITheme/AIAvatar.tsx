@@ -1,9 +1,10 @@
 import React from 'react';
+import avatarImg from '../../assets/images/avatar.png';
 
 const AIAvatar: React.FC = () => {
   return (
     <div className="ai-avatar">
-      <img src="/avatar.png" alt="AI Avatar" />
+      <img src={avatarImg} alt="AI Avatar" />
     </div>
   );
 };
