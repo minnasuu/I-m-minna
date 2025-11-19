@@ -5,5 +5,5 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/', // GitHub Pages 用户页面使用根路径
+  base: './', // 使用相对路径，确保在GitHub Pages上正常工作
 })

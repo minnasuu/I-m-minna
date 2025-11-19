@@ -19,8 +19,8 @@ const ScrollToTop: React.FC = () => {
 };
 
 const AppRouter: React.FC = () => {
-  // 根据环境设置 basename
-  const basename = process.env.NODE_ENV === "production" ? "/I-m-minna" : "";
+  // GitHub Pages 用户页面使用根路径，无需 basename
+  const basename = "";
 
   return (
     <LanguageProvider>
