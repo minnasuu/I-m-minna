@@ -1,22 +1,22 @@
-import type { PersonalData } from '../types';
-import type { Language } from '../contexts/LanguageContext';
-import {  svg_interactive_wheel } from '../pages/articles/articlesData/svg-interactive-wheel/svg_interactive_wheel';
-import { dark_mode_and_adaptation } from "../pages/articles/articlesData/dark_mode_and_adaptation/dark_mode_and_adaptation";
-import { deep_understanding_of_images } from "../pages/articles/articlesData/deep_understanding_of_images/deep_understanding_of_images";
-import css_implementation_of_morphing_animation from "../pages/articles/articlesData/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio";
-import { build_a_smooth_ai_chat_layout } from "../pages/articles/articlesData/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout";
-import { web_shortcut_key } from "../pages/articles/articlesData/web-shortcut-key/web_shortcut_key";
-import { article_1763369707943 } from "../pages/articles/articlesData/article-1763369707943/article_1763369707943";
+import type { PersonalData } from '../shared/types';
+import type { Language } from '../shared/contexts/LanguageContext';
+import {  svg_interactive_wheel } from '../features/articles/data/svg-interactive-wheel/svg_interactive_wheel';
+import { dark_mode_and_adaptation } from "../features/articles/data/dark_mode_and_adaptation/dark_mode_and_adaptation";
+import { deep_understanding_of_images } from "../features/articles/data/deep_understanding_of_images/deep_understanding_of_images";
+import css_implementation_of_morphing_animation from "../features/articles/data/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio";
+import { build_a_smooth_ai_chat_layout } from "../features/articles/data/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout";
+import { web_shortcut_key } from "../features/articles/data/web-shortcut-key/web_shortcut_key";
+import { article_1763369707943 } from "../features/articles/data/article-1763369707943/article_1763369707943";
 
 // Import assets
 import avatarImg from '../assets/images/avatar.png';
 import cktMiniprogramQr from '../assets/images/ckt-miniprogram-qr.jpg';
-import darkModeAdaptationCover from '../assets/articles/cover/dark_mode_and_adaptation.jpg';
-import svgInteractiveWheelCover from '../assets/articles/cover/svg-interactive-wheel.mp4';
-import deepUnderstandingImagesCover from '../assets/articles/cover/deep_understanding_of_images.jpg';
-// import buildAiChatLayoutCover from '../assets/articles/cover/build_a_smooth_ai_chat_layout.jpg'; // File doesn't exist
-import coverMock from '../assets/articles/cover/cover-mock.png';
-import nuovoCinemaParadisoCover from '../assets/articles/cover/nuovo_cinema_paradiso.jpg';
+import darkModeAdaptationCover from '../assets/articles/covers/dark_mode_and_adaptation.jpg';
+import svgInteractiveWheelCover from '../assets/articles/covers/svg-interactive-wheel.mp4';
+import deepUnderstandingImagesCover from '../assets/articles/covers/deep_understanding_of_images.jpg';
+// import buildAiChatLayoutCover from '../assets/articles/covers/build_a_smooth_ai_chat_layout.jpg'; // File doesn't exist
+import coverMock from '../assets/articles/covers/cover-mock.png';
+import nuovoCinemaParadisoCover from '../assets/articles/covers/nuovo_cinema_paradiso.jpg';
 
 // 多语言个人数据
 export const personalDataMultiLang: Record<Language, PersonalData> = {

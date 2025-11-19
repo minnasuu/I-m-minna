@@ -1,4 +1,4 @@
-import type { ThemeConfig } from "../types";
+import type { ThemeConfig } from "../shared/types";
 
 export const themes: ThemeConfig[] = [
   {
