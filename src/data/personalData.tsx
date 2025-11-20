@@ -17,6 +17,7 @@ import deepUnderstandingImagesCover from '../assets/articles/covers/deep_underst
 // import buildAiChatLayoutCover from '../assets/articles/covers/build_a_smooth_ai_chat_layout.jpg'; // File doesn't exist
 import coverMock from '../assets/articles/covers/cover-mock.png';
 import nuovoCinemaParadisoCover from '../assets/articles/covers/nuovo_cinema_paradiso.jpg';
+import shortcutCover from '../assets/articles/covers/shortcut.png';
 
 // 多语言个人数据
 export const personalDataMultiLang: Record<Language, PersonalData> = {
@@ -168,6 +169,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 15,
         link: "https://blog.example.com/web-shortcut-key",
         type: "tech",
+        coverImage: shortcutCover
       },
     ],
     projects: [
@@ -303,7 +305,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
     articles: [
       {
         id: "article-1763369707943",
-        title: "前端项目样式组织方案探索",
+        title: "Frontend CSS",
         summary: "xxx",
         content: article_1763369707943,
         publishDate: "2025-11-17",

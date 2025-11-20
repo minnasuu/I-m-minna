@@ -93,54 +93,72 @@
 .article-card:hover {
   transform: none;
   box-shadow: none;
-  &:hover{
+  /* &:hover{
     .article-card-image::after{
       transform: translateY(-100%);
     }
     .article-card-image::before{
       transform: translateY(100%);
     }
-  }
+  } */
 }
 
 .article-card-content {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-block: 100px;
   gap: 12px;
 }
 
 .article-card-content-info {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+   z-index: 1;
 }
+ /* 奇数卡片图片在右侧 */
+  .article-card:nth-child(odd) .article-card-image {
+    right: 0;
+    left: auto;
+    &::after{
+      width: 100%;
+    }
+    &::before{
+      width: 30%;
+    }
+  }
 
 .article-card-image {
-  position: relative;
-  height: 450px;
-  aspect-ratio: 9/16;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  aspect-ratio: 16/9;
   object-fit: cover;
   background-color: #f1f1f1;
+  overflow: hidden;
   &::after{
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 50%;
-    background: linear-gradient(to bottom,rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0));
-    mask-image: linear-gradient(to top,rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(to right,rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0));
+    mask-image: linear-gradient(to left,rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
     transition: transform 0.3s ease;
   }
   &::before{
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
+    right: 0;
     width: 100%;
-    height: 50%;
-    background: linear-gradient(to top,rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0));
-    mask-image: linear-gradient(to bottom,rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    height: 100%;
+    background: linear-gradient(to left,rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0));
+    /* mask-image: linear-gradient(to right,rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); */
     transition: transform 0.3s ease;
   }
 }
