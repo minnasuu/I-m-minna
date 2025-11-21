@@ -1,0 +1,157 @@
+import React, { useState, useMemo, useEffect } from 'react';
+import { marked } from 'marked';
+import ArticleMarkdown from '../ArticleMarkdown';
+import type { Article } from '../../../../shared/types';
+import './ArticleSliders.scss';
+import { Icon, LandButton } from '@suminhan/land-design';
+
+interface ArticleSlidersProps {
+  article: Article;
+  onClose?: () => void;
+}
+
+interface SlideData {
+  type: 'cover' | 'markdown';
+  content?: string;
+}
+
+const ArticleSliders: React.FC<ArticleSlidersProps> = ({ article, onClose }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = useMemo<SlideData[]>(() => {
+    const markdown = article.markdownContent || '';
+    const slidesList: SlideData[] = [];
+    
+    // 1. Add Cover Slide
+    slidesList.push({ type: 'cover' });
+
+    // 2. Parse Markdown Slides
+    if (markdown) {
+        const tokens = marked.lexer(markdown);
+        let currentSlideTokens: any[] = [];
+
+        const pushSlide = (tokens: any[]) => {
+            if (tokens.length > 0) {
+                slidesList.push({
+                    type: 'markdown',
+                    content: tokens.map(t => t.raw).join('')
+                });
+            }
+        };
+
+        tokens.forEach((token: any) => {
+            // Check if token is a heading of level 1 or 2
+            if (token.type === 'heading' && token.depth <= 2) {
+                pushSlide(currentSlideTokens);
+                currentSlideTokens = [token];
+            } else {
+                currentSlideTokens.push(token);
+            }
+        });
+        
+        pushSlide(currentSlideTokens);
+    }
+
+    return slidesList;
+  }, [article]);
+
+  const nextSlide = () => {
+    if (currentSlide < slides.length - 1) {
+      setCurrentSlide(curr => curr + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentSlide > 0) {
+      setCurrentSlide(curr => curr - 1);
+    }
+  };
+  
+  // Keyboard support
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            prevSlide();
+        } else if (e.key === 'Escape' && onClose) {
+            onClose();
+        }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentSlide, slides.length, onClose]);
+
+  if (slides.length === 0) {
+      return <div className="article-sliders-container">No content</div>;
+  }
+
+  const renderCoverSlide = () => (
+    <div className="cover-slide-content">
+       {/* Background Visual */}
+       <div className="cover-visual">
+          <div className="visual-inner">
+             {article.coverImage?.endsWith(".mp4") ? (
+                 <video src={article.coverImage} autoPlay loop muted playsInline />
+             ) : (
+                 <img src={article.coverImage || ''} alt={article.title} />
+             )}
+          </div>
+       </div>
+
+       {/* Text Content */}
+       <div className="cover-text">
+           <div className="article-meta-top">
+               <span className="article-date">
+                   {new Date(article.publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+               </span>
+               <span className="article-type-badge">{article.type === 'tech' ? 'Technical' : 'Essay'}</span>
+           </div>
+           
+           <h1 className="article-title">{article.title}</h1>
+           <p className="article-summary">{article.summary}</p>
+           
+           <div className="article-tags">
+               {article.tags.map((tag, idx) => (
+                   <span key={idx} className="tag-pill">#{tag}</span>
+               ))}
+           </div>
+       </div>
+    </div>
+  );
+
+  return (
+    <div className="article-sliders-container">
+      <div 
+        className="slider-track" 
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+      >
+        {slides.map((slide, index) => (
+          <div className={`slide ${slide.type === 'cover' ? 'is-cover' : ''}`} key={index}>
+            <div className="slide-inner">
+                {slide.type === 'cover' ? renderCoverSlide() : (
+                    <div className="markdown-content-wrapper">
+                         <ArticleMarkdown>{slide.content || ''}</ArticleMarkdown>
+                    </div>
+                )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="slide-indicator">
+        {currentSlide === 0 ? 'Cover' : `${currentSlide} / ${slides.length - 1}`}
+      </div>
+
+      <div className="slider-controls">
+        <LandButton type='fill' onClick={prevSlide} disabled={currentSlide === 0}><Icon name="arrow-line" className="rotate-90" strokeWidth={4} /></LandButton>
+        <LandButton type='fill' onClick={nextSlide} disabled={currentSlide === slides.length - 1}><Icon name="arrow-line" className="-rotate-90" strokeWidth={4} /></LandButton>
+      </div>
+      {onClose && <div className='slider-controls-close'>
+        <LandButton type='fill' onClick={onClose} icon={<Icon name='last-step' strokeWidth={4}/>}></LandButton>
+        </div>}
+    </div>
+  );
+};
+
+export default ArticleSliders;

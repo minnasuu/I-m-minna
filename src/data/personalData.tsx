@@ -5,14 +5,14 @@ import { dark_mode_and_adaptation } from "../features/articles/data/dark_mode_an
 import { deep_understanding_of_images } from "../features/articles/data/deep_understanding_of_images/deep_understanding_of_images";
 import css_implementation_of_morphing_animation from "../features/articles/data/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio";
 import { build_a_smooth_ai_chat_layout } from "../features/articles/data/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout";
-import { web_shortcut_key } from "../features/articles/data/web-shortcut-key/web_shortcut_key";
-import { article_1763369707943 } from "../features/articles/data/article-1763369707943/article_1763369707943";
+import { article_1763369707943, article_1763369707943_md } from "../features/articles/data/article-1763369707943/article_1763369707943";
+import { web_shortcut_key, web_shortcut_key_md } from "../features/articles/data/web-shortcut-key/web_shortcut_key";
 
 // Import assets
 import avatarImg from '../assets/images/avatar.png';
 import cktMiniprogramQr from '../assets/images/ckt-miniprogram-qr.jpg';
 import darkModeAdaptationCover from '../assets/articles/covers/dark_mode_and_adaptation.jpg';
-import svgInteractiveWheelCover from '../assets/articles/covers/svg-interactive-wheel.mp4';
+import svgInteractiveWheelCover from '../assets/articles/covers/svg-interactive-wheel.jpg';
 import deepUnderstandingImagesCover from '../assets/articles/covers/deep_understanding_of_images.jpg';
 // import buildAiChatLayoutCover from '../assets/articles/covers/build_a_smooth_ai_chat_layout.jpg'; // File doesn't exist
 import coverMock from '../assets/articles/covers/cover-mock.png';
@@ -86,6 +86,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         title: "前端项目样式组织方案探索",
         summary: "xxx",
         content: article_1763369707943,
+        markdownContent: article_1763369707943_md,
         publishDate: "2025-11-17",
         tags: ["css", "原子类", "Material Design"],
         readTime: 10,
@@ -164,6 +165,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         title: "揭秘网页快捷键",
         summary: "揭秘网页快捷键，了解网页快捷键的原理和实现方式。",
         content: web_shortcut_key,
+        markdownContent: web_shortcut_key_md,
         publishDate: "2025-09-15",
         tags: ["网页快捷键", "Linear", "YouTuBe"],
         readTime: 15,
@@ -308,6 +310,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         title: "Frontend CSS",
         summary: "xxx",
         content: article_1763369707943,
+        markdownContent: article_1763369707943_md,
         publishDate: "2025-11-17",
         tags: ["css", "原子类", "Material Design"],
         readTime: 10,
@@ -390,6 +393,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         title: "Web Shortcut Key",
         summary: "Web Shortcut Key, understand the shortcut key of web.",
         content: web_shortcut_key,
+        markdownContent: web_shortcut_key_md,
         publishDate: "2025-09-15",
         tags: ["网页快捷键", "Linear", "YouTuBe"],
         readTime: 15,

@@ -33,6 +33,7 @@ export interface Article {
   coverImage?: string;
   link?: string; // 可选的链接
   type: 'tech' | 'essay';
+  markdownContent?: string;
 }
 
 export interface Project {

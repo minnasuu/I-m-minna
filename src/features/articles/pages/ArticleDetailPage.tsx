@@ -6,6 +6,7 @@ import type { Article } from "../../../shared/types";
 import "../styles/ArticleDetailPage.scss";
 import LineAnchor from '../components/LineAnchor/LineAnchor';
 import { Icon } from "@suminhan/land-design";
+import ArticleSliders from '../components/ArticleSliders/ArticleSliders';
 
 interface ArticleDetailPageProps {
   article?: Article; // 可选的 props，如果没有传入则从 personalData 中获取
@@ -27,6 +28,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
   }
 
   const [articleAnchors,setArticleAnchors] = useState<{ key: string; title: string }[]>([]);
+  const [isSliderView, setIsSliderView] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -142,6 +144,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
   }, []);
   return (
     <div className="article-detail-page" id="article-detail-page">
+      {!isSliderView && <>
       <div className="article-detail-page-bottom-mask"></div>
       {articleAnchors.length > 0 && (
         <LineAnchor
@@ -151,12 +154,35 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
         />
       )}
       <div className="articles-header">
-        <div className="header-content" style={{ width: '100%', display: 'flex' }}>
+        <div className="header-content" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/articles" className="back-btn-circle">
             <Icon name="last-step" />
           </Link>
+          {article.markdownContent && (
+            <button 
+              onClick={() => setIsSliderView(true)}
+              style={{
+                background: 'var(--color-bg-2)',
+                border: '1px solid var(--color-border-1)',
+                borderRadius: '20px',
+                padding: '6px 16px',
+                cursor: 'pointer',
+                color: 'var(--color-text-1)',
+                fontSize: '14px'
+              }}
+            >
+              Slider View
+            </button>
+          )}
         </div>
       </div>
+      </>}
+
+      {isSliderView && article.markdownContent ? (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 2000, background: 'var(--color-bg-1)' }}>
+            <ArticleSliders article={article} onClose={() => setIsSliderView(false)} />
+        </div>
+      ) : (
       <div className="article-detail-container" ref={scrollRef}>
         <header className="article-detail-header">
           
@@ -207,6 +233,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 };
