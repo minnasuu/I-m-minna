@@ -74,7 +74,7 @@ const ArticlesPage: React.FC = () => {
                     </div>
                     <div className="view-btn">
                       <span className="btn-text">{t('articles.readMore')}</span>
-                      <Icon name="arrow-right" className="btn-icon" /> 
+                      <Icon name="arrow-line" className="btn-icon -rotate-90" strokeWidth={4}/> 
                       {/* 或者使用 LandButton，但为了自定义样式这里简化了 */}
                     </div>
                   </div>
