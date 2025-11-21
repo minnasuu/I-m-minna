@@ -30,6 +30,8 @@ const ArticleSliders: React.FC<ArticleSlidersProps> = ({ article, onClose }) => 
     if (markdown) {
         const tokens = marked.lexer(markdown);
         let currentSlideTokens: any[] = [];
+        let currentSlideLength = 0;
+        const MAX_SLIDE_LENGTH = 1200;
 
         const pushSlide = (tokens: any[]) => {
             if (tokens.length > 0) {
@@ -41,12 +43,24 @@ const ArticleSliders: React.FC<ArticleSlidersProps> = ({ article, onClose }) => 
         };
 
         tokens.forEach((token: any) => {
+            const tokenLength = token.raw?.length || 0;
+
             // Check if token is a heading of level 1 or 2
             if (token.type === 'heading' && token.depth <= 2) {
                 pushSlide(currentSlideTokens);
                 currentSlideTokens = [token];
+                currentSlideLength = tokenLength;
             } else {
-                currentSlideTokens.push(token);
+                // Check if adding this token would exceed the limit
+                // We only split if we already have content (don't split if it's the first item)
+                if (currentSlideTokens.length > 0 && currentSlideLength + tokenLength > MAX_SLIDE_LENGTH) {
+                    pushSlide(currentSlideTokens);
+                    currentSlideTokens = [token];
+                    currentSlideLength = tokenLength;
+                } else {
+                    currentSlideTokens.push(token);
+                    currentSlideLength += tokenLength;
+                }
             }
         });
         
