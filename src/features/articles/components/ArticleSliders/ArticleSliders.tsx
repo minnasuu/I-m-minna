@@ -14,17 +14,19 @@ interface ArticleSlidersProps {
 interface SlideData {
   type: 'cover' | 'markdown';
   content?: string;
+  title?: string;
 }
 
 const ArticleSliders: React.FC<ArticleSlidersProps> = ({ article, onClose }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const thumbnailRef = React.useRef<HTMLDivElement>(null);
 
   const slides = useMemo<SlideData[]>(() => {
     const markdown = article.markdownContent || '';
     const slidesList: SlideData[] = [];
     
     // 1. Add Cover Slide
-    slidesList.push({ type: 'cover' });
+    slidesList.push({ type: 'cover', title: 'Cover' });
 
     // 2. Parse Markdown Slides
     if (markdown) {
@@ -35,9 +37,23 @@ const ArticleSliders: React.FC<ArticleSlidersProps> = ({ article, onClose }) => 
 
         const pushSlide = (tokens: any[]) => {
             if (tokens.length > 0) {
+                // Extract title from first heading
+                const firstHeading = tokens.find((t: any) => t.type === 'heading');
+                let title = `Slide ${slidesList.length + 1}`;
+                if (firstHeading) {
+                    title = firstHeading.text;
+                } else {
+                   // Try to get first few words of text
+                   const firstText = tokens.find((t: any) => t.type === 'paragraph' || t.type === 'text');
+                   if (firstText) {
+                       title = firstText.text.slice(0, 20) + (firstText.text.length > 20 ? '...' : '');
+                   }
+                }
+
                 slidesList.push({
                     type: 'markdown',
-                    content: tokens.map(t => t.raw).join('')
+                    content: tokens.map(t => t.raw).join(''),
+                    title
                 });
             }
         };
@@ -97,6 +113,16 @@ const ArticleSliders: React.FC<ArticleSlidersProps> = ({ article, onClose }) => 
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [currentSlide, slides.length, onClose]);
 
+  // Auto scroll thumbnails
+  useEffect(() => {
+      if (thumbnailRef.current) {
+          const activeThumb = thumbnailRef.current.children[currentSlide] as HTMLElement;
+          if (activeThumb) {
+              activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+      }
+  }, [currentSlide]);
+
   if (slides.length === 0) {
       return <div className="article-sliders-container">No content</div>;
   }
@@ -152,6 +178,37 @@ const ArticleSliders: React.FC<ArticleSlidersProps> = ({ article, onClose }) => 
             </div>
           </div>
         ))}
+      </div>
+      <div className="slider-thumbnails-container">
+          <div className="slider-thumbnails" ref={thumbnailRef}>
+              {slides.map((slide, index) => (
+                  <div 
+                    key={index} 
+                    className={`thumbnail ${currentSlide === index ? 'active' : ''}`}
+                    onClick={() => setCurrentSlide(index)}
+                    title={slide.title}
+                  >
+                      {slide.type === 'cover' ? (
+                          <div className="thumb-cover">
+                              {article.coverImage?.endsWith(".mp4") ? (
+                                 <video src={article.coverImage} muted />
+                             ) : (
+                                 <img src={article.coverImage || ''} alt="cover" />
+                             )}
+                          </div>
+                      ) : (
+                          <div className="thumb-content">
+                              <div className="thumb-markdown">
+                                  <ArticleMarkdown>{slide.content || ''}</ArticleMarkdown>
+                              </div>
+                              <div className="thumb-overlay">
+                                  <span>{index}</span>
+                              </div>
+                          </div>
+                      )}
+                  </div>
+              ))}
+          </div>
       </div>
 
       <div className="slide-indicator">
