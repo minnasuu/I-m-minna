@@ -1,0 +1,289 @@
+// 变量定义
+$font-primary: "Wotfard", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+$font-serif: "ChenYuluoyan-Thin", "Times New Roman", serif;
+$color-bg: #ffffff;
+$color-text-main: #000000;
+$color-text-sub: #555555;
+$color-text-light: #999999;
+$transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+.articles-page {
+  min-height: 100vh;
+  background-color: $color-bg;
+  font-family: $font-primary;
+  color: $color-text-main;
+  padding-bottom: 10rem;
+}
+
+// 顶部导航
+.articles-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  
+  .header-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.back-btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-main;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+  }
+}
+
+// 主容器
+.articles-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+// Hero 区域
+.articles-hero {
+  padding: 8rem 0 6rem;
+  text-align: center; // 居中对齐，更稳重
+  
+  .hero-title {
+    font-size: 4.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.04em;
+    
+    .text-serif {
+      font-family: $font-serif;
+      font-weight: normal;
+      font-style: italic;
+    }
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: $color-text-light;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+.articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0; // 移除默认间距，通过 padding 控制
+}
+
+// --- 统一视觉风格的文章卡片 ---
+.article-item {
+  position: relative;
+  padding: 5rem 0; // 大垂直间距
+  border-bottom: 1px solid rgba(0,0,0,0.05); // 极淡的分割线
+  
+  &:last-child { border-bottom: none; }
+  
+  .article-link-wrapper {
+    display: grid;
+    // 布局核心：图文重叠
+    // 定义一个网格区域，所有内容都放在同一个区域里
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    isolation: isolate;
+    
+    // 交互：Hover 时整体上浮
+    transition: transform 0.5s $transition-smooth;
+    &:hover {
+      transform: translateY(-5px);
+      
+      .visual-inner img, .visual-inner canvas, .visual-inner video {
+        opacity: 0.25; // Hover 时稍微加深一点点
+        transform: scale(1.05);
+        filter: grayscale(100%) blur(4px); // Hover 时反而模糊，突出文字？或者相反
+        // 尝试：Hover 时保持模糊，但位移，营造流动感
+      }
+      
+      .article-title {
+        color: #000; // 纯黑
+      }
+      
+      .view-btn {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+// 内容层 (Z-Index 高)
+.article-content {
+  grid-area: 1 / 1 / 2 / 2;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px; // 限制文字宽度
+  margin: 0 auto; // 居中
+  text-align: center; // 文字居中
+  pointer-events: none; // 让鼠标事件穿透到 wrapper
+}
+
+// 视觉层 (Z-Index 低，作为背景氛围)
+.article-visual {
+  grid-area: 1 / 1 / 2 / 2;
+  z-index: 1;
+  width: 100%;
+  height: 400px; // 固定一个高度，作为氛围带
+  align-self: center;
+  opacity: 0.6; // 整体半透明
+  pointer-events: auto;
+  
+  .visual-inner {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    
+    // 核心融合技：双向渐变遮罩
+    // 让图片只在中间隐约出现，四周完全消失
+    -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    
+    img, video, canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      // 统一风格化：高斯模糊 + 黑白 + 高亮
+      // 这样无论原图多乱，都会变成一团柔和的灰色烟雾
+      filter: grayscale(100%) blur(8px) contrast(0.8) brightness(1.2);
+      transition: all 1s ease;
+      transform: scale(1.1);
+    }
+  }
+}
+
+// 文字排版优化
+.article-meta-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  
+  .article-date {
+    font-family: $font-serif;
+    font-style: italic;
+    color: $color-text-light;
+    font-size: 1.1rem;
+  }
+  
+  .article-type-badge {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: $color-text-light;
+  }
+}
+
+.article-title {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: 400; // 更细的字重，显得优雅
+  margin: 0 0 1.5rem 0;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  text-shadow: 0 20px 40px rgba(255,255,255,0.8); // 防止背景太深影响阅读
+}
+
+.article-summary {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: $color-text-sub;
+  margin: 0 auto 2.5rem;
+  max-width: 480px; // 摘要更窄一点
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.article-tags {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  
+  .tag-pill {
+    font-size: 0.8rem;
+    color: $color-text-light;
+    &::before { content: '#'; opacity: 0.4; }
+  }
+}
+
+.view-btn {
+  margin-top: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0; // 默认隐藏
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+  
+  .btn-text {
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+  }
+}
+
+
+// 响应式
+@media (max-width: 768px) {
+  .articles-hero {
+    padding: 6rem 0 4rem;
+    .hero-title { font-size: 3rem; }
+  }
+  
+  .article-item {
+    padding: 3rem 0;
+  }
+  
+  .article-title {
+    font-size: 2.2rem;
+  }
+  
+  .article-visual {
+    height: 300px;
+    opacity: 0.4; // 手机上淡一点
+  }
+  
+  .view-btn {
+    opacity: 1; // 手机上常驻
+    transform: translateY(0);
+  }
+}

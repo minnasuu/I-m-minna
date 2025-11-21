@@ -1,9 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from "../../../shared/contexts/LanguageContext";
+import { useTranslations } from "../../../shared/hooks/useTranslations";
 import { personalDataMultiLang } from "../../../data/personalData";
-import "../styles/ArticlesPage.css";
-import { Icon, LandButton, LandSelect } from "@suminhan/land-design";
+import "../styles/ArticlesPage.scss"; // 引入新的 SCSS 文件
+import { Icon,  LandSelect } from "@suminhan/land-design";
+import ArtisticImage from "../components/ArtisticImage";
 
 const selectData = [
   { label: "全部", key: "all" },
@@ -13,34 +15,34 @@ const selectData = [
 
 const ArticlesPage: React.FC = () => {
   const { language } = useLanguage();
+  const { t } = useTranslations();
   const data = personalDataMultiLang[language];
 
-  // 按照发布时间排序，最新的文章在前面
-  const sortedArticles = [...data.articles].sort((a, b) => {
-    return (
-      new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
-    );
-  });
+  // 按时间排序
+  const sortedArticles = useMemo(() => {
+    return [...data.articles].sort((a, b) => {
+      return new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime();
+    });
+  }, [data.articles]);
+
   const [selectValue, setSelectValue] = useState<string>("all");
+  
   const filteredArticles = useMemo(() => {
     return sortedArticles.filter((article) => {
-      if (selectValue === "all") {
-        return true;
-      }
+      if (selectValue === "all") return true;
       return article.type === selectValue;
     });
   }, [sortedArticles, selectValue]);
 
   return (
     <div className="articles-page">
-      <div className="articles-container">
-        <div className="articles-header">
-          <div className="back-to-home-top">
-            <Link to="/" className="back-btn-top">
-              <Icon name="last-step" />
-            </Link>
-          </div>
-          <div className="articles-action-buttons">
+      {/* 顶部导航区域 */}
+      <header className="articles-header">
+        <div className="header-content">
+          <Link to="/" className="back-btn-circle">
+            <Icon name="last-step" />
+          </Link>
+          <div className="filter-container">
             <LandSelect
               data={selectData}
               selected={selectValue}
@@ -48,62 +50,74 @@ const ArticlesPage: React.FC = () => {
             />
           </div>
         </div>
+      </header>
 
-        <div className="articles-grid">
-          {filteredArticles.map((article, index) => (
-            <article
-              key={article.id}
-              className={`article-card ${
-                index % 2 === 0 ? "article-card-even" : "article-card-odd"
-              }`}
-            >
-              <Link to={`/articles/${article.id}`}>
-                <div
-                  className="article-card-content"
-                  style={{
-                    flexDirection: index % 2 === 0 ? "row" : "row-reverse",
-                  }}
-                >
-                  <div className="article-card-content-info">
-                    <div className="article-title">{article.title}</div>
-                    <p className="article-summary">{article.summary}</p>
+      <main className="articles-container">
+        <div className="articles-hero">
+          <h1 className="hero-title">
+            {language === 'zh' ? (
+              <>
+                <span className="text-gradient">思考</span> 与 <span>写作</span>
+              </>
+            ) : (
+              <>
+                Thinking <span className="text-serif">&</span> <br/> Writing
+              </>
+            )}
+          </h1>
+          <p className="hero-subtitle">{t('articles.subtitle')}</p>
+        </div>
 
+        <div className="articles-list">
+          {filteredArticles.map((article) => (
+            <article key={article.id} className="article-item">
+              <Link to={`/articles/${article.id}`} className="article-link-wrapper">
+                
+                {/* 文本区域 */}
+                <div className="article-content">
+                  <div className="article-meta-top">
+                    <span className="article-date">
+                      {new Date(article.publishDate).toLocaleDateString(
+                        language === "zh" ? "zh-CN" : "en-US",
+                        { year: 'numeric', month: 'long', day: 'numeric' }
+                      )}
+                    </span>
+                    <span className="article-type-badge">{article.type === 'tech' ? 'Technical' : 'Essay'}</span>
+                  </div>
+
+                  <h2 className="article-title">{article.title}</h2>
+                  <p className="article-summary">{article.summary}</p>
+
+                  <div className="article-footer">
                     <div className="article-tags">
-                      {article.tags.map((tag, index) => (
-                        <span key={index} className="article-tag">
-                          {tag}
-                        </span>
+                      {article.tags.map((tag, idx) => (
+                        <span key={idx} className="tag-pill">#{tag}</span>
                       ))}
                     </div>
-                    <div className="article-meta">
-                      <span className="article-date">
-                        {new Date(article.publishDate).toLocaleDateString(
-                          language === "zh" ? "zh-CN" : "en-US"
-                        )}
-                      </span>
-                    </div>
-                    <div className="article-buttons">
-                      <Link
-                        to={`/articles/${article.id}`}
-                        className="article-button"
-                      >
-                        <LandButton.ButtonArrow text="查看" type="background" />
-                      </Link>
+                    <div className="view-btn">
+                      <span className="btn-text">{t('articles.readMore')}</span>
+                      <Icon name="arrow-right" className="btn-icon" /> 
+                      {/* 或者使用 LandButton，但为了自定义样式这里简化了 */}
                     </div>
                   </div>
-                  <div className="article-card-image">
+                </div>
+
+                {/* 图片区域 */}
+                <div className="article-visual">
+                  <div className="visual-inner">
                     {article.coverImage?.endsWith(".mp4") ? (
-                      <video src={article.coverImage} autoPlay loop muted />
+                      <video src={article.coverImage} autoPlay loop muted playsInline />
                     ) : (
-                      <img src={article.coverImage} alt={article.title} />
+                      <ArtisticImage src={article.coverImage || ''} alt={article.title} />
                     )}
                   </div>
                 </div>
+
               </Link>
             </article>
           ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 };
