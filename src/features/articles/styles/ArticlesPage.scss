@@ -47,27 +47,70 @@ $transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
 // Hero 区域
 .articles-hero {
   padding: 8rem 0 6rem;
-  text-align: center; // 居中对齐，更稳重
+  text-align: center;
+  position: relative;
+  overflow: hidden;
   
   .hero-title {
     font-size: 4.5rem;
-    line-height: 1.1;
+    line-height: 1.2;
     font-weight: 800;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
     letter-spacing: -0.04em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
     
-    .text-serif {
-      font-family: $font-serif;
-      font-weight: normal;
-      font-style: italic;
+    .text-main {
+      font-size: 7rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      color: $color-text-main; // 纯色，移除渐变
+      position: relative;
+      
+      // 极其简约的下划线
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 0;
+        width: 0;
+        height: 8px;
+        background: rgba(0,0,0,0.05);
+        z-index: -1;
+        transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      
+      &:hover::after {
+        width: 100%;
+      }
+    }
+    
+    .text-connector {
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(0,0,0,0.2); // 极淡
+      
+      &.text-serif {
+        font-family: $font-serif;
+        font-style: italic;
+        font-size: 4.5rem;
+      }
     }
   }
   
   .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 0.85rem;
     color: $color-text-light;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.4em; // 更大的字间距，增加呼吸感
     text-transform: uppercase;
+    position: relative;
+    font-weight: 500;
+    opacity: 0.6;
   }
 }
 
@@ -80,15 +123,30 @@ $transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
 // --- 统一视觉风格的文章卡片 ---
 .article-item {
   position: relative;
-  padding: 5rem 0; // 大垂直间距
-  border-bottom: 1px solid rgba(0,0,0,0.05); // 极淡的分割线
+  padding: 2rem 0; // 增加留白
+  border-bottom: 1px solid rgba(0,0,0,0.03); // 极细的线
   
   &:last-child { border-bottom: none; }
   
+  // 极简编号
+  counter-increment: article-counter;
+  
+  &::before {
+    content: counter(article-counter, decimal-leading-zero);
+    position: absolute;
+    top: 6.5rem; // 对齐标题
+    left: -40px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(0,0,0,0.2);
+    font-family: "SF Mono", monospace; // 工业感等宽字体
+    letter-spacing: 0.05em;
+    transform: rotate(-90deg); // 竖排编号
+    transform-origin: center;
+  }
+  
   .article-link-wrapper {
     display: grid;
-    // 布局核心：图文重叠
-    // 定义一个网格区域，所有内容都放在同一个区域里
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     text-decoration: none;
@@ -96,31 +154,34 @@ $transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
     position: relative;
     isolation: isolate;
     
-    // 交互：Hover 时整体上浮
-    transition: transform 0.5s $transition-smooth;
+    transition: opacity 0.4s ease;
+    
+    // 极简交互：仅透明度变化
     &:hover {
-      transform: translateY(-5px);
-      
       .article-visual {
-        opacity: 0.8;
+        opacity: 0.3; // 稍微显现
       }
 
       .visual-inner img, .visual-inner canvas, .visual-inner video {
-        opacity: 0.8;
-        transform: scale(1.05);
-        filter: grayscale(0%) blur(1px);
+        filter: grayscale(100%) blur(0px); // 清晰化
+        transform: scale(1.02);
       }
       
       .article-title {
-        color: #000; // 纯黑
+        color: #000;
       }
       
       .view-btn {
-        opacity: 0.8;
+        opacity: 1;
         transform: translateY(0);
       }
     }
   }
+}
+
+// 为列表添加计数器
+.articles-list {
+  counter-reset: article-counter;
 }
 
 // 内容层 (Z-Index 高)
@@ -130,21 +191,22 @@ $transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 600px; // 限制文字宽度
-  margin: 0 auto; // 居中
-  text-align: center; // 文字居中
-  pointer-events: none; // 让鼠标事件穿透到 wrapper
+  max-width: 720px; // 增加宽度
+  margin: 0 auto;
+  text-align: center;
+  pointer-events: none;
+  position: relative;
 }
 
-// 视觉层 (Z-Index 低，作为背景氛围)
+
 .article-visual {
   grid-area: 1 / 1 / 2 / 2;
   z-index: 1;
   width: 100%;
-  height: 400px; // 固定一个高度，作为氛围带
+  height: 500px; // 增加高度
   align-self: center;
-  opacity: 0.6; // 整体半透明
-  transition: opacity 0.5s ease;
+  opacity: 0; // 默认完全隐藏，Hover 时出现
+  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   pointer-events: auto;
   
   .visual-inner {
@@ -152,18 +214,13 @@ $transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
     height: 100%;
     overflow: hidden;
     
-    // 核心融合技：双向渐变遮罩
-    // 让图片只在中间隐约出现，四周完全消失
-    -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
-    mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    // 移除复杂遮罩，保持干净
     
     img, video, canvas {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      // 统一风格化：高斯模糊 + 黑白 + 高亮
-      // 这样无论原图多乱，都会变成一团柔和的灰色烟雾
-      filter: grayscale(100%) blur(8px) contrast(0.8) brightness(1.2);
+      filter: grayscale(100%) blur(20px); // 默认模糊
       transition: all 1s ease;
       transform: scale(1.1);
     }
@@ -175,56 +232,92 @@ $transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  
+  // 移除复杂装饰线，使用极简短线
+  &::after {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: #000;
+    position: absolute;
+    bottom: -1rem;
+  }
   
   .article-date {
-    font-family: $font-serif;
-    font-style: italic;
-    color: $color-text-light;
-    font-size: 1.1rem;
+    font-family: $font-primary; // 换回无衬线，更现代
+    font-weight: 500;
+    color: $color-text-main;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
   }
   
   .article-type-badge {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    border: 1px solid rgba(0,0,0,0.1);
-    padding: 2px 8px;
-    border-radius: 4px;
-    color: $color-text-light;
+    border: 1px solid #000; // 纯黑边框
+    padding: 4px 12px;
+    border-radius: 100px; // 胶囊型
+    color: #000;
+    background: transparent;
   }
 }
 
 .article-title {
-  font-size: 3.5rem;
-  line-height: 1.1;
-  font-weight: 400; // 更细的字重，显得优雅
-  margin: 0 0 1.5rem 0;
+  font-size: 3rem; // 稍微减小，增加精致感
+  line-height: 1.2;
+  font-weight: 600;
+  margin: 0 0 2rem 0;
   color: #1a1a1a;
-  letter-spacing: -0.03em;
-  text-shadow: 0 20px 40px rgba(255,255,255,0.8); // 防止背景太深影响阅读
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+  
+  // 移除首字母放大
 }
 
 .article-summary {
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.8; // 增加行高
   color: $color-text-sub;
-  margin: 0 auto 2.5rem;
-  max-width: 480px; // 摘要更窄一点
+  margin: 0 auto 3rem;
+  max-width: 520px;
   font-weight: 400;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .article-tags {
   display: flex;
   justify-content: center;
-  gap: 0.8rem;
+  gap: 1.5rem;
   
   .tag-pill {
     font-size: 0.8rem;
     color: $color-text-light;
-    &::before { content: '#'; opacity: 0.4; }
+    position: relative;
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+    
+    &::before { 
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: #ddd;
+      border-radius: 50%;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    
+    &:hover {
+      color: #000;
+      
+      &::before {
+        background-color: #000;
+      }
+    }
   }
 }
 
@@ -252,11 +345,39 @@ $transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
 @media (max-width: 768px) {
   .articles-hero {
     padding: 6rem 0 4rem;
-    .hero-title { font-size: 3rem; }
+    
+    .hero-title { 
+      font-size: 3rem;
+      gap: 1rem;
+      
+      .text-main {
+        font-size: 4.5rem;
+        // 移除手机端hover效果
+        &:hover::after {
+          width: 0;
+        }
+      }
+      
+      .text-connector {
+        font-size: 2rem;
+        
+        &.text-serif {
+          font-size: 2.5rem;
+        }
+      }
+    }
+    
+    .hero-subtitle {
+      font-size: 0.85rem;
+    }
   }
   
   .article-item {
     padding: 3rem 0;
+    
+    &::before {
+      display: none; // 隐藏编号
+    }
   }
   
   .article-title {
@@ -265,11 +386,17 @@ $transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
   
   .article-visual {
     height: 300px;
-    opacity: 0.4; // 手机上淡一点
+    opacity: 0.4;
   }
   
   .view-btn {
-    opacity: 1; // 手机上常驻
+    opacity: 1;
     transform: translateY(0);
+  }
+  
+  .article-meta-top {
+    .article-date {
+      font-size: 1rem;
+    }
   }
 }

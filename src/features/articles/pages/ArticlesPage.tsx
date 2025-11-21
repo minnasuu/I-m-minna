@@ -4,7 +4,7 @@ import { useLanguage } from "../../../shared/contexts/LanguageContext";
 import { useTranslations } from "../../../shared/hooks/useTranslations";
 import { personalDataMultiLang } from "../../../data/personalData";
 import "../styles/ArticlesPage.scss"; // 引入新的 SCSS 文件
-import { Icon } from "@suminhan/land-design";
+import { Icon, LandButton } from "@suminhan/land-design";
 import ArtisticImage from "../components/ArtisticImage";
 import BackButton from "../../../shared/components/BackButton";
 
@@ -34,11 +34,15 @@ const ArticlesPage: React.FC = () => {
           <h1 className="hero-title">
             {language === 'zh' ? (
               <>
-                <span className="text-gradient">思考</span> 与 <span>写作</span>
+                <span className="text-main">思考</span>
+                <span className="text-connector">与</span>
+                <span className="text-main">写作</span>
               </>
             ) : (
               <>
-                Thinking <span className="text-serif">&</span> <br/> Writing
+                <span className="text-main">Thinking</span>
+                <span className="text-connector text-serif">&</span>
+                <span className="text-main">Writing</span>
               </>
             )}
           </h1>
