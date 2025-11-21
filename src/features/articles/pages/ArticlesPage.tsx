@@ -1,17 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from "../../../shared/contexts/LanguageContext";
 import { useTranslations } from "../../../shared/hooks/useTranslations";
 import { personalDataMultiLang } from "../../../data/personalData";
 import "../styles/ArticlesPage.scss"; // 引入新的 SCSS 文件
-import { Icon,  LandSelect } from "@suminhan/land-design";
+import { Icon } from "@suminhan/land-design";
 import ArtisticImage from "../components/ArtisticImage";
-
-const selectData = [
-  { label: "全部", key: "all" },
-  { label: "随笔", key: "essay" },
-  { label: "技术", key: "tech" },
-];
 
 const ArticlesPage: React.FC = () => {
   const { language } = useLanguage();
@@ -25,15 +19,6 @@ const ArticlesPage: React.FC = () => {
     });
   }, [data.articles]);
 
-  const [selectValue, setSelectValue] = useState<string>("all");
-  
-  const filteredArticles = useMemo(() => {
-    return sortedArticles.filter((article) => {
-      if (selectValue === "all") return true;
-      return article.type === selectValue;
-    });
-  }, [sortedArticles, selectValue]);
-
   return (
     <div className="articles-page">
       {/* 顶部导航区域 */}
@@ -42,13 +27,6 @@ const ArticlesPage: React.FC = () => {
           <Link to="/" className="back-btn-circle">
             <Icon name="last-step" />
           </Link>
-          <div className="filter-container">
-            <LandSelect
-              data={selectData}
-              selected={selectValue}
-              onChange={(value) => setSelectValue(value.key)}
-            />
-          </div>
         </div>
       </header>
 
@@ -69,7 +47,7 @@ const ArticlesPage: React.FC = () => {
         </div>
 
         <div className="articles-list">
-          {filteredArticles.map((article) => (
+          {sortedArticles.map((article) => (
             <article key={article.id} className="article-item">
               <Link to={`/articles/${article.id}`} className="article-link-wrapper">
                 
