@@ -4,6 +4,7 @@ import ArticleMarkdown from '../ArticleMarkdown';
 import type { Article } from '../../../../shared/types';
 import './ArticleSliders.scss';
 import { Icon, LandButton } from '@suminhan/land-design';
+import BackButton from '../../../../shared/components/BackButton';
 
 interface ArticleSlidersProps {
   article: Article;
@@ -148,7 +149,7 @@ const ArticleSliders: React.FC<ArticleSlidersProps> = ({ article, onClose }) => 
         <LandButton type='fill' onClick={nextSlide} disabled={currentSlide === slides.length - 1}><Icon name="arrow-line" className="-rotate-90" strokeWidth={4} /></LandButton>
       </div>
       {onClose && <div className='slider-controls-close'>
-        <LandButton type='fill' onClick={onClose} icon={<Icon name='last-step' strokeWidth={4}/>}></LandButton>
+        <BackButton onClick={onClose} />
         </div>}
     </div>
   );

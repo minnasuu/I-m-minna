@@ -7,6 +7,7 @@ import "../styles/ArticleDetailPage.scss";
 import LineAnchor from '../components/LineAnchor/LineAnchor';
 import { Icon } from "@suminhan/land-design";
 import ArticleSliders from '../components/ArticleSliders/ArticleSliders';
+import BackButton from '../../../shared/components/BackButton';
 
 interface ArticleDetailPageProps {
   article?: Article; // 可选的 props，如果没有传入则从 personalData 中获取
@@ -155,9 +156,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
       )}
       <div className="articles-header">
         <div className="header-content" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link to="/articles" className="back-btn-circle">
-            <Icon name="last-step" />
-          </Link>
+          <BackButton to="/articles" />
           {article.markdownContent && (
             <button 
               onClick={() => setIsSliderView(true)}

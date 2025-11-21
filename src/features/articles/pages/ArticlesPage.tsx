@@ -6,6 +6,7 @@ import { personalDataMultiLang } from "../../../data/personalData";
 import "../styles/ArticlesPage.scss"; // 引入新的 SCSS 文件
 import { Icon } from "@suminhan/land-design";
 import ArtisticImage from "../components/ArtisticImage";
+import BackButton from "../../../shared/components/BackButton";
 
 const ArticlesPage: React.FC = () => {
   const { language } = useLanguage();
@@ -24,9 +25,7 @@ const ArticlesPage: React.FC = () => {
       {/* 顶部导航区域 */}
       <header className="articles-header">
         <div className="header-content">
-          <Link to="/" className="back-btn-circle">
-            <Icon name="last-step" />
-          </Link>
+          <BackButton to="/" />
         </div>
       </header>
 
