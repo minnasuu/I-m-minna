@@ -1,0 +1,218 @@
+// 变量定义 (保持与 ArticlesPage 一致)
+$font-primary: "Wotfard", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+$font-serif: "ChenYuluoyan-Thin", "Times New Roman", serif;
+$color-bg: #ffffff;
+$color-text-main: #000000;
+$color-text-sub: #555555;
+$color-text-light: #999999;
+$transition-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+.article-detail-page {
+  min-height: 100vh;
+  background-color: $color-bg;
+  font-family: $font-primary;
+  color: $color-text-main;
+  overflow-anchor: none;
+  padding-bottom: 10rem;
+}
+
+// 顶部导航 (复用 ArticlesPage 风格)
+.articles-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 80px;
+  // 渐变背景和遮罩，与 ArticlesPage 一致
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(4px); // 轻微模糊
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.back-btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-main;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.8);
+  cursor: pointer;
+  
+  &:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+  }
+}
+
+.article-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+// 文章头部 Hero 区域
+.article-detail-header {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  text-align: center;
+  position: relative;
+}
+
+// 标题样式 (与 ArticlesPage .article-title 保持一致但更大)
+.article-detail-title {
+  font-size: 3.5rem; // 稍微大一点
+  line-height: 1.1;
+  font-weight: 400; // 细字重
+  margin: 0 0 2rem 0;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+}
+
+// Meta 信息 (日期、标签)
+.article-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  
+  .article-date {
+    font-family: $font-serif;
+    font-style: italic;
+    color: $color-text-light;
+    font-size: 1.2rem;
+  }
+}
+
+.article-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  
+  .article-detail-tag {
+    font-size: 0.8rem;
+    color: $color-text-light;
+    padding: 2px 0;
+    
+    &::before { content: '#'; opacity: 0.4; margin-right: 2px;}
+  }
+}
+
+// 封面图区域
+.article-header-background {
+  width: 100%;
+  height: 400px; // 固定高度
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  position: relative;
+  
+  // 如果是背景图模式
+  .article-header-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+  }
+
+  // 简单的遮罩，不需要太重
+  .article-header-overlay {
+    display: none; // 详情页一般不需要太重的遮罩，除非文字在图上。现在文字在上方/下方。
+    // 如果设计是文字在图上，再开启。
+    // 目前设计：Title在上，Image在下，或者 Image在上 Title在下。
+    // 参考 ArticlesPage，List是 左文右图。
+    // Detail 页通常是：Title -> Meta -> Image -> Content
+  }
+}
+
+// 如果想让 Title 在 Image 上面 (Overlay 风格)，可以保留之前的样式，
+// 但为了"一致性" (clean, airy)，我建议 Title -> Image -> Content 的流式布局。
+// 上面的 .article-detail-header 默认是流式布局。
+
+.article-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: $color-text-sub;
+  
+  // 这里可以添加 Markdown 内容的具体样式，比如 h2, h3, p, code 等
+  // 简单复用部分 ArticlesPage 变量
+  
+  p {
+    margin-bottom: 1.5em;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    color: $color-text-main;
+    letter-spacing: -0.02em;
+  }
+  
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: $color-text-main;
+  }
+  
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+  
+  blockquote {
+    border-left: 3px solid #000;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: $color-text-light;
+  }
+}
+
+// 底部遮罩 (保持原有的)
+.article-detail-page-bottom-mask {
+  position: fixed; // 改为 fixed 或者是 absolute based on page container
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff);
+  pointer-events: none;
+  z-index: 10;
+}
+
+// 响应式
+@media (max-width: 768px) {
+  .articles-header {
+    padding: 0 20px;
+  }
+  
+  .article-detail-container {
+    padding: 0 20px;
+  }
+  
+  .article-detail-title {
+    font-size: 2.2rem;
+  }
+  
+  .article-header-background {
+    height: 250px;
+  }
+}
+

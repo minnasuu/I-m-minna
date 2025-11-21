@@ -3,7 +3,7 @@ import { useParams, Navigate, Link } from "react-router-dom";
 import { useLanguage } from '../../../shared/contexts/LanguageContext';
 import { personalDataMultiLang } from '../../../data/personalData';
 import type { Article } from "../../../shared/types";
-import "../styles/ArticleDetailPage.css";
+import "../styles/ArticleDetailPage.scss";
 import LineAnchor from '../components/LineAnchor/LineAnchor';
 import { Icon } from "@suminhan/land-design";
 
@@ -151,35 +151,26 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
         />
       )}
       <div className="articles-header">
-        <Link to="/articles" className="back-btn-top">
-          <Icon name="last-step" />
-        </Link>
+        <div className="header-content" style={{ width: '100%', display: 'flex' }}>
+          <Link to="/articles" className="back-btn-circle">
+            <Icon name="last-step" />
+          </Link>
+        </div>
       </div>
       <div className="article-detail-container" ref={scrollRef}>
         <header className="article-detail-header">
-          {/* 背景图层 */}
-          {article.coverImage && (
-            <div className="article-header-background">
-              <div 
-                className="article-header-image"
-                style={{ backgroundImage: `url(${article.coverImage})` }}
-              />
-              <div className="article-header-overlay" />
-            </div>
-          )}
           
-          {/* 内容层 */}
-          <div className="article-header-content">
-            <h1 className="article-detail-title">{article.title}</h1>
+          {/* 标题和 Meta 信息上移，作为页面的一级信息 */}
+          <h1 className="article-detail-title">{article.title}</h1>
+          
+          <div className="article-meta">
+            <span className="article-date">
+              {new Date(article.publishDate).toLocaleDateString(
+                language === "zh" ? "zh-CN" : "en-US",
+                { year: 'numeric', month: 'long', day: 'numeric' }
+              )}
+            </span>
             
-            <div className="article-meta">
-              <span className="article-date">
-                {new Date(article.publishDate).toLocaleDateString(
-                  language === "zh" ? "zh-CN" : "en-US"
-                )}
-              </span>
-            </div>
-
             <div className="article-detail-tags">
               {article.tags.map((tag, index) => (
                 <span key={index} className="article-detail-tag">
@@ -188,6 +179,24 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
               ))}
             </div>
           </div>
+
+          {/* 封面图作为视觉分割，放在标题下方 */}
+          {article.coverImage && (
+            <div className="article-header-background">
+              {article.coverImage.endsWith(".mp4") ? (
+                 <video 
+                   src={article.coverImage} 
+                   autoPlay loop muted playsInline 
+                   style={{width: '100%', height: '100%', objectFit: 'cover'}}
+                 />
+              ) : (
+                <div 
+                  className="article-header-image"
+                  style={{ backgroundImage: `url(${article.coverImage})` }}
+                />
+              )}
+            </div>
+          )}
         </header>
 
         <div className="article-content">
