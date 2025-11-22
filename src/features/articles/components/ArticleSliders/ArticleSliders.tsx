@@ -163,23 +163,28 @@ const ArticleSliders: React.FC<ArticleSlidersProps> = ({ article, onClose }) => 
 
   return (
     <div className="article-sliders-container">
-      <div 
-        className="slider-track" 
+      <div
+        className="slider-track"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {slides.map((slide, index) => (
-          <div className={`slide ${slide.type === 'cover' ? 'is-cover' : ''}`} key={index}>
+          <div
+            className={`slide ${slide.type === "cover" ? "is-cover" : ""}`}
+            key={index}
+          >
             <div className="slide-inner">
-                {slide.type === 'cover' ? renderCoverSlide() : (
-                    <div className="markdown-content-wrapper">
-                         <ArticleMarkdown>{slide.content || ''}</ArticleMarkdown>
-                    </div>
-                )}
+              {slide.type === "cover" ? (
+                renderCoverSlide()
+              ) : (
+                <div className="markdown-content-wrapper">
+                  <ArticleMarkdown>{slide.content || ""}</ArticleMarkdown>
+                </div>
+              )}
             </div>
           </div>
         ))}
       </div>
-      <div className="slider-thumbnails-container">
+      {/* <div className="slider-thumbnails-container">
           <div className="slider-thumbnails" ref={thumbnailRef}>
               {slides.map((slide, index) => (
                   <div 
@@ -209,19 +214,35 @@ const ArticleSliders: React.FC<ArticleSlidersProps> = ({ article, onClose }) => 
                   </div>
               ))}
           </div>
-      </div>
+      </div> */}
 
       <div className="slide-indicator">
-        {currentSlide === 0 ? 'Cover' : `${currentSlide} / ${slides.length - 1}`}
+        {currentSlide === 0
+          ? "Cover"
+          : `${currentSlide} / ${slides.length - 1}`}
       </div>
 
       <div className="slider-controls">
-        <LandButton type='fill' onClick={prevSlide} disabled={currentSlide === 0}><Icon name="arrow-line" className="rotate-90" strokeWidth={4} /></LandButton>
-        <LandButton type='fill' onClick={nextSlide} disabled={currentSlide === slides.length - 1}><Icon name="arrow-line" className="-rotate-90" strokeWidth={4} /></LandButton>
+        <LandButton
+          type="fill"
+          onClick={prevSlide}
+          disabled={currentSlide === 0}
+        >
+          <Icon name="arrow-line" className="rotate-90" strokeWidth={4} />
+        </LandButton>
+        <LandButton
+          type="fill"
+          onClick={nextSlide}
+          disabled={currentSlide === slides.length - 1}
+        >
+          <Icon name="arrow-line" className="-rotate-90" strokeWidth={4} />
+        </LandButton>
       </div>
-      {onClose && <div className='slider-controls-close'>
-        <BackButton onClick={onClose} />
-        </div>}
+      {onClose && (
+        <div className="slider-controls-close">
+          <BackButton onClick={onClose} />
+        </div>
+      )}
     </div>
   );
 };

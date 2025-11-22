@@ -395,9 +395,11 @@
     border: 1px solid #333;
     
     &:hover {
-      border-color: #00ff00;
+      border-color: rgba(0, 255, 0, 0.3);
       box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-      background: rgba(255, 255, 255, 0.08);
+    }
+    &.clickable:hover .stacked-card-title{
+      color: #00ff00;
     }
     
     .stacked-card-preview {
