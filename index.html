@@ -2,12 +2,31 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./avatar.svg" />
+    <link rel="icon" type="image/svg+xml" href="/avatar.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Welcome to Minna's personal portfolio. Exploring UI Design and Web Development.">
     <title>Hello, (I'm) Minna.</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Minna Su | Portfolio">
+    <meta property="og:description" content="Check out my latest projects and designs.">
+    <meta property="og:image" content="https://minnasuu.github.io/assets/img/cover.jpg">
     <link rel="stylesheet" href="https://unpkg.com/@suminhan/land-design@latest/lib/style.css">
-    <script type="module" crossorigin src="./assets/index-D_Tmhahf.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DJo30S7I.css">
+    <!-- GitHub Pages 单页应用路由支持 -->
+    <script type="text/javascript">
+      // 处理从 404.html 重定向过来的路径
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+    <script type="module" crossorigin src="/assets/index-jynOkv0o.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BPZFz_ga.css">
   </head>
   <body>
     <div id="root"></div>
