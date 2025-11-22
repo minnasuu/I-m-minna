@@ -81,18 +81,18 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
     ],
     articles: [
-      {
-        id: "article-1763369707943",
-        title: "前端项目样式组织方案探索",
-        summary: "xxx",
-        content: article_1763369707943,
-        markdownContent: article_1763369707943_md,
-        publishDate: "2025-11-17",
-        tags: ["css", "原子类", "Material Design"],
-        readTime: 10,
-        link: "https://blog.example.com/article-1763369707943",
-        type: "tech",
-      },
+      // {
+      //   id: "article-1763369707943",
+      //   title: "前端项目样式组织方案探索",
+      //   summary: "xxx",
+      //   content: article_1763369707943,
+      //   markdownContent: article_1763369707943_md,
+      //   publishDate: "2025-11-17",
+      //   tags: ["css", "原子类", "Material Design"],
+      //   readTime: 10,
+      //   link: "https://blog.example.com/article-1763369707943",
+      //   type: "tech",
+      // },
       {
         id: "dark-mode-and-adaptation",
         title: "网页深色模式与适配 ☀️🌙",
@@ -163,7 +163,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       {
         id: "web-shortcut-key",
         title: "揭秘网页快捷键",
-        summary: "揭秘网页快捷键，了解网页快捷键的原理和实现方式。",
+        summary: "揭秘网页快捷键，了解网页快捷键的设计原则和实现方式。",
         content: web_shortcut_key,
         markdownContent: web_shortcut_key_md,
         publishDate: "2025-09-15",
@@ -171,7 +171,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 15,
         link: "https://blog.example.com/web-shortcut-key",
         type: "tech",
-        coverImage: shortcutCover
+        coverImage: shortcutCover,
       },
     ],
     projects: [
@@ -305,18 +305,18 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
     ],
     articles: [
-      {
-        id: "article-1763369707943",
-        title: "Frontend CSS",
-        summary: "xxx",
-        content: article_1763369707943,
-        markdownContent: article_1763369707943_md,
-        publishDate: "2025-11-17",
-        tags: ["css", "原子类", "Material Design"],
-        readTime: 10,
-        link: "https://blog.example.com/article-1763369707943",
-        type: "tech",
-      },
+      // {
+      //   id: "article-1763369707943",
+      //   title: "Frontend CSS",
+      //   summary: "xxx",
+      //   content: article_1763369707943,
+      //   markdownContent: article_1763369707943_md,
+      //   publishDate: "2025-11-17",
+      //   tags: ["css", "原子类", "Material Design"],
+      //   readTime: 10,
+      //   link: "https://blog.example.com/article-1763369707943",
+      //   type: "tech",
+      // },
       {
         id: "dark-mode-and-adaptation",
         title: "Dark Mode and Adaptation",
@@ -391,7 +391,8 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       {
         id: "web-shortcut-key",
         title: "Web Shortcut Key",
-        summary: "Web Shortcut Key, understand the shortcut key of web.",
+        summary:
+          "Web Shortcut Key, understand the shortcut key of web and how to use them.",
         content: web_shortcut_key,
         markdownContent: web_shortcut_key_md,
         publishDate: "2025-09-15",
@@ -436,8 +437,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       {
         id: "crochet-knit-time",
         name: "Minna's Collection(miniprogram)",
-        description:
-          "Minna's Collection of tools, with more than 7,800 users.",
+        description: "Minna's Collection of tools, with more than 7,800 users.",
         technologies: ["WeChat Mini Program"],
         featured: true,
         imgPopUrl: cktMiniprogramQr,
