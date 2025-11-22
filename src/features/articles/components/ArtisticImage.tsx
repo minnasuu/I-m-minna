@@ -14,7 +14,6 @@ const ArtisticImage: React.FC<ArtisticImageProps> = ({ src, alt, className }) =>
   
   // 动画状态
   const animationRef = useRef<number>(0);
-  const mousePos = useRef({ x: 0, y: 0 });
   const targetOffset = useRef({ x: 0, y: 0 }); // 目标偏移量（基于鼠标位置）
   const currentOffset = useRef({ x: 0, y: 0 }); // 当前平滑过渡的偏移量
   const isHovering = useRef(false);

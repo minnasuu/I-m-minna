@@ -5,7 +5,6 @@ import { dark_mode_and_adaptation } from "../features/articles/data/dark_mode_an
 import { deep_understanding_of_images } from "../features/articles/data/deep_understanding_of_images/deep_understanding_of_images";
 import css_implementation_of_morphing_animation from "../features/articles/data/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio";
 import { build_a_smooth_ai_chat_layout } from "../features/articles/data/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout";
-import { article_1763369707943, article_1763369707943_md } from "../features/articles/data/article-1763369707943/article_1763369707943";
 import { web_shortcut_key, web_shortcut_key_md } from "../features/articles/data/web-shortcut-key/web_shortcut_key";
 
 // Import assets

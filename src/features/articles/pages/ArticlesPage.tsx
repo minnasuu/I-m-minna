@@ -4,7 +4,7 @@ import { useLanguage } from "../../../shared/contexts/LanguageContext";
 import { useTranslations } from "../../../shared/hooks/useTranslations";
 import { personalDataMultiLang } from "../../../data/personalData";
 import "../styles/ArticlesPage.scss"; // 引入新的 SCSS 文件
-import { Icon, LandButton } from "@suminhan/land-design";
+import { Icon } from "@suminhan/land-design";
 import ArtisticImage from "../components/ArtisticImage";
 import BackButton from "../../../shared/components/BackButton";
 

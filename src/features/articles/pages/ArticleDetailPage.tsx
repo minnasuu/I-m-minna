@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { useLanguage } from '../../../shared/contexts/LanguageContext';
 import { personalDataMultiLang } from '../../../data/personalData';
 import type { Article } from "../../../shared/types";
 import "../styles/ArticleDetailPage.scss";
 import LineAnchor from '../components/LineAnchor/LineAnchor';
-import { Icon } from "@suminhan/land-design";
 import ArticleSliders from '../components/ArticleSliders/ArticleSliders';
 import BackButton from '../../../shared/components/BackButton';
 
