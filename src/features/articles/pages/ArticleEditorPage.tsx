@@ -144,7 +144,7 @@ const ArticleEditorPage: React.FC = () => {
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Content</label>
           <MdEditor
             style={{ height: '100%' }}
-            renderHTML={text => mdParser.render(text)}
+            renderHTML={(text: string) => mdParser.render(text)}
             onChange={handleEditorChange}
             value={formData.content}
           />
