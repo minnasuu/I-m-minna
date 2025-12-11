@@ -18,8 +18,7 @@ npm install
 cp ../.env.server.example ../.env.server
 
 # Edit .env.server and add your actual Dify API key
-vi ../.env.server
-# 或使用你喜欢的文本编辑器
+nano ../.env.server
 ```
 
 ### 3. Run the Server
