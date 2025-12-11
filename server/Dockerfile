@@ -10,6 +10,7 @@ RUN npm install --production
 
 # 复制后端源代码
 COPY index.js ./
+COPY routes ./routes
 
 # 暴露端口
 EXPOSE 3001
