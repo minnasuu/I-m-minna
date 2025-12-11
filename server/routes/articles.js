@@ -5,33 +5,51 @@ const prisma = new PrismaClient();
 
 // GET all articles
 router.get('/', async (req, res) => {
+  console.log('API Request: GET /api/articles - Start');
   try {
     const articles = await prisma.article.findMany({
       orderBy: { publishDate: 'desc' }
     });
+    console.log(`API Request: GET /api/articles - Found ${articles.length} articles`);
+    
+    // 尝试先序列化，看看是否会报错
+    const jsonStr = JSON.stringify(articles);
+    console.log('API Request: GET /api/articles - JSON serialization successful, length:', jsonStr.length);
+
     res.json(articles);
+    console.log('API Request: GET /api/articles - Response sent');
   } catch (error) {
-    console.error('Error fetching articles:', error);
-    res.status(500).json({ error: 'Failed to fetch articles' });
+    console.error('API Error: Error fetching articles (Stack):', error.stack);
+    console.error('API Error: Error fetching articles (Msg):', error.message);
+    // 确保返回 JSON 格式的错误
+    if (!res.headersSent) {
+      res.status(500).json({ error: 'Failed to fetch articles', details: error.message });
+    }
   }
 });
 
 // GET article by ID
 router.get('/:id', async (req, res) => {
+  console.log(`API Request: GET /api/articles/${req.params.id} - Start`);
   try {
     const article = await prisma.article.findUnique({
       where: { id: req.params.id }
     });
-    if (!article) return res.status(404).json({ error: 'Article not found' });
+    if (!article) {
+        console.log(`API Request: GET /api/articles/${req.params.id} - Not Found`);
+        return res.status(404).json({ error: 'Article not found' });
+    }
+    console.log(`API Request: GET /api/articles/${req.params.id} - Found`);
     res.json(article);
   } catch (error) {
-    console.error('Error fetching article:', error);
+    console.error(`API Error: Error fetching article ${req.params.id}:`, error);
     res.status(500).json({ error: 'Failed to fetch article' });
   }
 });
 
 // POST create article (Simple implementation, essentially for the author)
 router.post('/', async (req, res) => {
+  console.log('API Request: POST /api/articles - Start');
   try {
     const { title, summary, content, publishDate, tags, readTime, coverImage, link, type } = req.body;
     
@@ -48,12 +66,12 @@ router.post('/', async (req, res) => {
         type: type || 'tech'
       }
     });
+    console.log(`API Request: POST /api/articles - Created article ${article.id}`);
     res.json(article);
   } catch (error) {
-    console.error('Error creating article:', error);
+    console.error('API Error: Error creating article:', error);
     res.status(500).json({ error: 'Failed to create article' });
   }
 });
 
 module.exports = router;
-
