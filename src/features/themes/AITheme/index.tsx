@@ -1,5 +1,5 @@
 import React from 'react';
-import './AITheme.scss';
+import './aiTheme.scss';
 import AIChatInterface from './AIChatInterface';
 import ThemeSwitcher from '../../../shared/components/ThemeSwitcher';
 import LanguageSwitcher from "../../../shared/components/LanguageSwitcher";
