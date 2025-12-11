@@ -1,124 +1,257 @@
-# I'm Minna - 多风格个人页面
+# 🌟 Minna's Personal Website
 
-一个支持多种视觉风格的个人作品集网站，每次访问都会随机展示不同的设计风格。
+一个现代化的个人网站，支持多种主题风格和 AI 对话功能。
 
-## 🎨 支持的风格
+## ✨ 主要特性
 
-- **🎮 像素游戏风格** - 复古像素艺术风格，像经典游戏界面
-- **📰 杂志封面风格** - 现代杂志布局，优雅的排版设计
-- **💻 科幻终端风格** - 黑客风格的终端界面
-- **⚪ 极简主义风格** - 简洁干净的设计风格
-- **🌃 霓虹赛博风格** - 赛博朋克霓虹灯效果
+- 🎨 **多主题支持** - AI 助手主题、终端主题等
+- 🤖 **AI 对话功能** - 基于 Dify API 的智能对话
+- 📝 **文章系统** - Markdown 支持的技术博客
+- 💾 **本地缓存** - 24小时对话历史保存
+- 🚀 **现代技术栈** - React 19 + TypeScript + Vite
+- 📱 **响应式设计** - 完美适配移动端和桌面端
 
-## 🚀 特性
+---
 
-- **随机风格加载** - 每次访问随机选择一种风格
-- **手动风格切换** - 右上角主题切换器支持手动切换
-- **统一数据源** - 所有风格使用相同的数据结构
-- **响应式设计** - 支持移动端和桌面端
-- **TypeScript支持** - 完整的类型安全
+## 🚀 快速开始
+
+### 本地开发
+
+```bash
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+
+# 启动后端服务（如需 AI 功能）
+npm run dev:server
+```
+
+访问 `http://localhost:5173`
+
+---
+
+## 📦 部署
+
+### 方式 1: 宝塔面板部署（推荐）
+
+详细步骤请查看 [宝塔部署文档](./BAOTA_DEPLOYMENT.md)
+
+```bash
+# 1. 配置环境变量
+cp env.example .env
+vi .env  # 填写配置
+
+# 2. 运行部署脚本
+./deploy-baota.sh
+
+# 3. 在宝塔面板配置 Nginx
+# 详见 BAOTA_DEPLOYMENT.md
+```
+
+### 方式 2: Docker 部署
+
+详细步骤请查看 [Docker 部署文档](./DOCKER_DEPLOYMENT.md)
+
+```bash
+# 1. 配置环境变量
+cp env.example .env
+vi .env  # 填写配置
+
+# 2. 运行部署脚本
+./deploy-docker.sh
+```
+
+### 方式 3: 快速查看
+
+查看 [快速部署指南](./QUICK_DEPLOY.md)
+
+---
+
+## 🛠️ 技术栈
+
+### 前端
+- **React 19** - UI 框架
+- **TypeScript** - 类型安全
+- **Vite 6** - 构建工具
+- **Tailwind CSS** - 样式框架
+- **React Router** - 路由管理
+- **React Markdown** - Markdown 渲染
+
+### 后端
+- **Node.js 18+** - 运行环境
+- **Express** - Web 框架
+- **Dify API** - AI 对话服务
+
+### 部署
+- **Docker** - 容器化
+- **Nginx** - Web 服务器
+- **PM2** - 进程管理
+
+---
 
 ## 📁 项目结构
 
 ```
-src/
-├── components/          # 通用组件
-│   ├── ThemeRenderer.tsx    # 主题渲染器
-│   ├── ThemeSwitcher.tsx    # 主题切换器
-│   └── ThemeSwitcher.css    # 切换器样式
-├── contexts/           # React上下文
-│   └── ThemeContext.tsx     # 主题状态管理
-├── data/              # 数据层
-│   └── personalData.ts      # 个人数据
-├── themes/            # 风格组件
-│   ├── PixelTheme.tsx       # 像素风格
-│   ├── PixelTheme.css
-│   ├── MagazineTheme.tsx    # 杂志风格
-│   ├── MagazineTheme.css
-│   ├── TerminalTheme.tsx    # 终端风格
-│   ├── TerminalTheme.css
-│   ├── MinimalTheme.tsx     # 极简风格
-│   ├── MinimalTheme.css
-│   ├── NeonTheme.tsx        # 霓虹风格
-│   └── NeonTheme.css
-├── types/             # TypeScript类型定义
-│   └── index.ts
-├── config/            # 配置文件
-│   └── themes.ts           # 主题配置
-└── App.tsx            # 主应用组件
+I-m-minna/
+├── src/                          # 前端源代码
+│   ├── features/
+│   │   ├── themes/              # 主题组件
+│   │   │   ├── AITheme/        # AI 对话主题
+│   │   │   └── TerminalTheme/  # 终端主题
+│   │   └── articles/            # 文章系统
+│   ├── shared/                  # 共享组件
+│   │   ├── components/         # 通用组件
+│   │   ├── contexts/           # React Context
+│   │   └── utils/              # 工具函数
+│   └── data/                   # 数据配置
+│
+├── server/                      # 后端服务
+│   ├── index.js               # Express 服务器
+│   └── package.json           # 后端依赖
+│
+├── public/                      # 静态资源
+├── docs/                       # 文档
+│   ├── BAOTA_DEPLOYMENT.md   # 宝塔部署文档
+│   └── DOCKER_DEPLOYMENT.md  # Docker 部署文档
+│
+├── Dockerfile                  # 前端 Docker 配置
+├── docker-compose.yml         # Docker Compose 配置
+├── nginx.conf                 # Nginx 配置
+├── ecosystem.config.js        # PM2 配置
+└── deploy-*.sh               # 部署脚本
 ```
-
-## 🛠️ 技术栈
-
-- **React 19** - 前端框架
-- **TypeScript** - 类型安全
-- **Vite** - 构建工具
-- **CSS3** - 样式和动画
-
-## 📊 数据结构
-
-所有风格都使用统一的数据结构：
-
-```typescript
-interface PersonalData {
-  info: PersonalInfo;      // 个人信息
-  skills: Skill[];         // 技能列表
-  articles: Article[];     // 文章列表
-  projects: Project[];     // 项目列表
-}
-```
-
-## 🎯 使用方法
-
-1. **安装依赖**
-   ```bash
-   npm install
-   ```
-
-2. **启动开发服务器**
-   ```bash
-   npm run dev
-   ```
-
-3. **构建生产版本**
-   ```bash
-   npm run build
-   ```
-
-## 🎨 自定义数据
-
-编辑 `src/data/personalData.ts` 文件来更新你的个人信息：
-
-- 个人信息（姓名、职位、简介等）
-- 技能列表（技术栈和熟练度）
-- 文章列表（博客文章或技术分享）
-- 项目列表（作品集项目）
-
-## 🔧 添加新风格
-
-1. 在 `src/themes/` 目录下创建新的风格组件
-2. 在 `src/config/themes.ts` 中添加新风格配置
-3. 在 `src/components/ThemeRenderer.tsx` 中添加渲染逻辑
-4. 在 `src/types/index.ts` 中更新 `ThemeStyle` 类型
-
-## 📱 响应式支持
-
-所有风格都支持响应式设计，在移动设备上会自动调整布局。
-
-## 🎲 随机风格
-
-- 首次访问时随机选择一种风格
-- 用户选择会保存在本地存储中
-- 点击随机按钮可以重新随机选择
-
-## 🔮 未来计划
-
-- [ ] 添加更多风格主题
-- [ ] 支持深色/浅色模式切换
-- [ ] 添加动画过渡效果
-- [ ] 支持国际化
-- [ ] 添加更多交互功能
 
 ---
 
-**享受你的多风格个人页面！** 🎉
+## 🔧 配置
+
+### 环境变量
+
+创建 `.env` 文件：
+
+```env
+# Dify API 配置
+DIFY_API_KEY=your-api-key-here
+DIFY_API_URL=https://api.dify.ai/v1
+
+# 服务配置
+PORT=3001
+FRONTEND_URL=http://your-domain.com
+```
+
+### 前端配置
+
+编辑 `src/data/personalData.tsx` 更新个人信息：
+- 个人信息
+- 技能列表
+- 项目作品
+- 文章内容
+
+---
+
+## 🎨 主题系统
+
+### AI 主题
+- 智能对话功能
+- Markdown 渲染
+- 对话历史缓存
+- 暂停/继续生成
+
+### 终端主题
+- 复古终端界面
+- 命令行交互
+- 打字机效果
+
+---
+
+## 📝 文章系统
+
+支持 Markdown 格式的技术文章：
+- 代码高亮
+- 图片展示
+- 目录导航
+- 响应式布局
+
+---
+
+## 🔐 安全说明
+
+1. **API 密钥保护**
+   - 使用后端代理，密钥不暴露给前端
+   - `.env` 文件已添加到 `.gitignore`
+
+2. **HTTPS 支持**
+   - 支持 SSL 证书配置
+   - 自动 HTTPS 重定向
+
+3. **CORS 配置**
+   - 限制允许的域名
+   - 防止跨域攻击
+
+---
+
+## 📊 性能优化
+
+- ✅ Gzip 压缩
+- ✅ 静态资源缓存
+- ✅ 代码分割
+- ✅ 懒加载
+- ✅ CDN 支持
+
+---
+
+## 🐛 故障排查
+
+### 前端问题
+
+**页面刷新 404**
+- 确保 Nginx 配置了 `try_files $uri $uri/ /index.html;`
+
+**静态资源加载失败**
+- 检查 `root` 目录是否指向 `dist` 文件夹
+
+### 后端问题
+
+**无法连接后端**
+- 检查 PM2 状态：`pm2 status`
+- 查看日志：`pm2 logs minna-backend`
+
+**API 调用失败**
+- 验证 Dify API Key 是否正确
+- 检查 Dify 工作流是否已发布
+
+---
+
+## 📖 文档
+
+- [宝塔部署指南](./BAOTA_DEPLOYMENT.md) - 完整的宝塔面板部署步骤
+- [Docker 部署指南](./DOCKER_DEPLOYMENT.md) - Docker 容器化部署
+- [快速开始](./QUICK_DEPLOY.md) - 快速部署参考
+- [开发环境设置](./DEV_SETUP.md) - 本地开发环境配置
+
+---
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+---
+
+## 📄 许可证
+
+MIT License
+
+---
+
+## 👤 作者
+
+**苏敏晗 (Minna Su)**
+
+- Website: https://suminhan.cn
+- GitHub: [@minnasuuGitHub](https://github.com/minnasuuGitHub)
+
+---
+
+**⭐ 如果这个项目对你有帮助，请给个 Star！**
