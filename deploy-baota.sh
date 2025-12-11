@@ -63,7 +63,7 @@ pm2 delete minna-backend 2>/dev/null || true
 
 # 7. 启动 PM2
 echo "▶️  启动后端服务..."
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 pm2 save
 
 # 8. 显示状态

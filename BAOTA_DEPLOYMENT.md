@@ -131,11 +131,11 @@ node index.js
 
 #### 6.1 创建 PM2 配置文件
 
-在项目根目录创建 `ecosystem.config.js`：
+在项目根目录创建 `ecosystem.config.cjs`：
 
 ```bash
 cd /www/wwwroot/minna
-cat > ecosystem.config.js << 'EOF'
+cat > ecosystem.config.cjs << 'EOF'
 module.exports = {
   apps: [{
     name: 'minna-backend',
@@ -169,7 +169,7 @@ EOF
 或使用命令行：
 ```bash
 cd /www/wwwroot/minna
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 pm2 save
 pm2 startup
 ```

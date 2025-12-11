@@ -119,7 +119,7 @@ I-m-minna/
 ├── Dockerfile                  # 前端 Docker 配置
 ├── docker-compose.yml         # Docker Compose 配置
 ├── nginx.conf                 # Nginx 配置
-├── ecosystem.config.js        # PM2 配置
+├── ecosystem.config.cjs       # PM2 配置
 └── deploy-*.sh               # 部署脚本
 ```
 
@@ -175,25 +175,6 @@ FRONTEND_URL=http://your-domain.com
 - 响应式布局
 
 ---
-
-## 🔐 安全说明
-
-### API 密钥保护 ⚠️ 重要
-
-本项目使用**后端代理模式**保护 Dify API 密钥：
-
-```
-浏览器 → 前端 → 后端代理 → Dify API
-                    ↑
-              密钥只存在这里
-```
-
-- ✅ **前端代码**：不包含任何 API 密钥
-- ✅ **后端服务**：API 密钥存储在 `.env.server` 中
-- ✅ **Git 保护**：`.env*` 文件已添加到 `.gitignore`
-- ✅ **HTTPS**：支持 SSL 证书，加密传输
-- ✅ **CORS**：限制允许的域名访问
-
 详细安全说明请查看 [SECURITY.md](./SECURITY.md)
 
 ---
