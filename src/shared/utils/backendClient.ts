@@ -10,6 +10,18 @@ export interface ChatResponse {
   conversationId: string;
 }
 
+export interface CreateArticleRequest {
+  title: string;
+  summary: string;
+  content: string;
+  publishDate: string;
+  tags: string[];
+  readTime: number;
+  coverImage?: string;
+  link?: string;
+  type: string;
+}
+
 const getBackendUrl = (): string => {
   // 如果设置了环境变量，优先使用
   if (import.meta.env.VITE_BACKEND_URL) {
@@ -92,6 +104,30 @@ export const fetchArticleById = async (id: string): Promise<Article> => {
     return data;
   } catch (error) {
     console.error(`Error fetching article ${id}:`, error);
+    throw error;
+  }
+};
+
+export const createArticle = async (article: CreateArticleRequest): Promise<Article> => {
+  const backendUrl = getBackendUrl();
+  const url = `${backendUrl}/api/articles`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(article),
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to create article: ${response.status}`);
+    }
+    const data: Article = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error creating article:', error);
     throw error;
   }
 };

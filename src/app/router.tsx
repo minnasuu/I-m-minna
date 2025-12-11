@@ -3,7 +3,11 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { ThemeProvider } from '../shared/contexts/ThemeContext';
 import { LanguageProvider } from '../shared/contexts/LanguageContext';
 import ThemeRenderer from "../shared/components/ThemeRenderer";
-import { ArticlesPage, ArticleDetailPage } from "../features/articles";
+import {
+  ArticlesPage,
+  ArticleDetailPage,
+  ArticleEditorPage,
+} from "../features/articles";
 import { personalDataMultiLang } from "../data/personalData";
 
 // 滚动重置组件
@@ -33,6 +37,7 @@ const AppRouter: React.FC = () => {
               element={<ThemeRenderer data={personalDataMultiLang} />}
             />
             <Route path="/articles" element={<ArticlesPage />} />
+            <Route path="/articles-editor" element={<ArticleEditorPage />} />
             <Route path="/articles/:id" element={<ArticleDetailPage />} />
           </Routes>
         </Router>

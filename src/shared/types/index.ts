@@ -26,7 +26,7 @@ export interface Article {
   id: string;
   title: string;
   summary: string;
-  content: React.ReactNode;
+  content: React.ReactNode | string; // 支持后端返回的 string 和前端静态数据的 ReactNode
   publishDate: string;
   tags: string[];
   readTime: number; // 分钟

@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
         content, // Markdown content
         publishDate: new Date(publishDate),
         tags: tags || [],
-        readTime: readTime || 0,
+        readTime: parseInt(readTime) || 0,
         coverImage,
         link,
         type: type || 'tech'

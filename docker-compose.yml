@@ -7,29 +7,27 @@ services:
       context: ./server
       dockerfile: Dockerfile
     container_name: minna-backend
-    restart: unless-stopped
+    restart: always
     ports:
-      - "8001:3001"  # 外部使用 8001，容器内仍是 3001
+      - "8001:3001"
     environment:
       - NODE_ENV=production
       - PORT=3001
       - DIFY_API_KEY=${DIFY_API_KEY}
       - DIFY_API_URL=${DIFY_API_URL:-https://api.dify.ai/v1}
-      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:80}
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_NAME=minna_blog
+      # 生产环境通常前端通过 Nginx 代理访问，这里允许 Nginx 的地址
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost}
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/minna_blog
     depends_on:
-      - db
+      db:
+        condition: service_started
     networks:
       - minna-network
+    # 健康检查
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
       interval: 30s
-      timeout: 3s
+      timeout: 10s
       retries: 3
       start_period: 10s
 
@@ -39,9 +37,9 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: minna-frontend
-    restart: unless-stopped
+    restart: always
     ports:
-      - "8080:80"  # 外部使用 8080，容器内仍是 80
+      - "80:80" # 生产环境通常直接暴露 80
     depends_on:
       backend:
         condition: service_healthy
@@ -52,9 +50,7 @@ services:
   db:
     image: postgres:15-alpine
     container_name: minna-db
-    restart: unless-stopped
-    ports:
-      - "5432:5432"
+    restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

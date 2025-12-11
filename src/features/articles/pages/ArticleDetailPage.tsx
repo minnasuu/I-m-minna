@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams, Navigate } from "react-router-dom";
-import { useLanguage } from '../../../shared/contexts/LanguageContext';
-// import { personalDataMultiLang } from '../../../data/personalData';
+import { useParams } from "react-router-dom";
+import { useLanguage } from "../../../shared/contexts/LanguageContext";
 import { fetchArticleById } from "../../../shared/utils/backendClient";
-import ArticleMarkdown from '../components/ArticleMarkdown';
+import ArticleMarkdown from "../components/ArticleMarkdown";
 import type { Article } from "../../../shared/types";
 import "../styles/ArticleDetailPage.scss";
-import LineAnchor from '../components/LineAnchor/LineAnchor';
-import ArticleSliders from '../components/ArticleSliders/ArticleSliders';
-import BackButton from '../../../shared/components/BackButton';
+import LineAnchor from "../components/LineAnchor/LineAnchor";
+import ArticleSliders from "../components/ArticleSliders/ArticleSliders";
+import BackButton from "../../../shared/components/BackButton";
 
 interface ArticleDetailPageProps {
-  article?: Article; // 可选的 props，如果没有传入则从 personalData 中获取
+  article?: Article; // 可选的 props，如果没有传入则从 API 获取
 }
 
 const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
@@ -19,10 +18,10 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
 }) => {
   const { id } = useParams<{ id: string }>();
   const { language } = useLanguage();
-  // const data = personalDataMultiLang[language];
 
   const [article, setArticle] = useState<Article | undefined>(propArticle);
   const [loading, setLoading] = useState(!propArticle);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (propArticle) {
@@ -35,16 +34,24 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
     const loadArticle = async () => {
       try {
         setLoading(true);
+        setError(null);
         const data = await fetchArticleById(id);
-        // 将后端返回的 content (string) 转换为 ReactNode (ArticleMarkdown)
-        const contentString = data.content as unknown as string;
+
+        // 处理内容：如果是字符串（Markdown），则保留原样，渲染时交给 ArticleMarkdown
+        // 如果已经是 ReactNode（不太可能从 API 返回），则直接使用
+        const contentString =
+          typeof data.content === "string" ? data.content : "";
+
         setArticle({
           ...data,
           markdownContent: contentString,
-          content: <ArticleMarkdown>{contentString}</ArticleMarkdown>,
+          // 如果 content 是 string，我们在渲染时会特殊处理，这里先保持原样或者赋给 markdownContent
+          // 为了兼容旧逻辑，我们确保 content 属性存在
+          content: data.content,
         });
       } catch (error) {
         console.error("Failed to load article:", error);
+        setError("Failed to load article");
       } finally {
         setLoading(false);
       }
@@ -52,129 +59,76 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
     loadArticle();
   }, [id, propArticle]);
 
-  if (loading) return <div>Loading...</div>;
-
-  if (!article) {
-    return <Navigate to="/articles" replace />;
-  }
+  // 页面初始化滚动到顶部
+  const scrollRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }, [id]);
 
   const [articleAnchors, setArticleAnchors] = useState<
     { key: string; title: string }[]
   >([]);
   const [isSliderView, setIsSliderView] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 处理章节变化
-  const handleSectionChange = () => {
-    // 可以在这里添加其他逻辑，比如更新URL hash
-  };
-
-  // 页面初始化滚动到顶部
+  // 提取标题生成目录
   useEffect(() => {
-    // 立即滚动到顶部，处理页面刷新或首次加载
-    window.scrollTo(0, 0);
+    if (!article) return;
 
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        top: 0,
-        behavior: "auto", // 使用 'auto' 确保立即滚动，不使用平滑动画
-      });
-    }
-  }, []);
-
-  // 当文章ID变化时滚动到顶部（处理路由切换）
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        top: 0,
-        behavior: "auto",
-      });
-    }
-  }, [id]);
-
-  useEffect(() => {
-    // 等待DOM渲染完成后提取标题节点
+    // 给一点时间让React渲染完成
     const timer = setTimeout(() => {
       if (contentRef.current) {
-        const extractHeadings = () => {
-          const headings = contentRef.current?.querySelectorAll("h1,h2");
-          const anchors: { key: string; title: string }[] = [];
+        const headings = contentRef.current.querySelectorAll("h1, h2");
+        const anchors: { key: string; title: string }[] = [];
 
-          headings?.forEach((heading, index) => {
-            let headingId = heading.id;
-
-            // 如果没有id，则自动生成一个
-            if (!headingId) {
-              headingId = `heading-${index + 1}`;
-              heading.id = headingId;
-            }
-
-            // 提取标题文本
-            const title = heading.textContent?.trim() || `标题 ${index + 1}`;
-
-            anchors.push({
-              key: headingId,
-              title: title,
-            });
+        headings.forEach((heading, index) => {
+          let headingId = heading.id;
+          if (!headingId) {
+            headingId = `heading-${index + 1}`;
+            heading.id = headingId;
+          }
+          anchors.push({
+            key: headingId,
+            title: heading.textContent?.trim() || `标题 ${index + 1}`,
           });
-
-          setArticleAnchors(anchors);
-        };
-
-        extractHeadings();
+        });
+        setArticleAnchors(anchors);
       }
-    }, 100); // 给一点时间让React渲染完成
+    }, 100);
 
     return () => clearTimeout(timer);
-  }, [article.content]);
+  }, [article, isSliderView]);
 
-  // 监听DOM变化，当内容变化时重新提取标题
-  useEffect(() => {
-    if (!contentRef.current) return;
+  if (loading) {
+    return (
+      <div className="article-detail-page flex justify-center items-center h-screen">
+        <div className="text-xl text-gray-500">Loading...</div>
+      </div>
+    );
+  }
 
-    const observer = new MutationObserver(() => {
-      // 延迟执行，避免频繁更新
-      const timer = setTimeout(() => {
-        if (contentRef.current) {
-          const headings = contentRef.current.querySelectorAll("h1");
-          const anchors: { key: string; title: string }[] = [];
+  if (error || !article) {
+    return (
+      <div className="article-detail-page flex flex-col justify-center items-center h-screen">
+        <div className="text-xl text-red-500 mb-4">
+          {error || "Article not found"}
+        </div>
+        <BackButton to="/articles" />
+      </div>
+    );
+  }
 
-          headings?.forEach((heading, index) => {
-            let headingId = heading.id;
+  // 决定如何渲染内容
+  const renderContent = () => {
+    if (typeof article.content === "string") {
+      return <ArticleMarkdown>{article.content}</ArticleMarkdown>;
+    }
+    return article.content;
+  };
 
-            // 如果没有id，则自动生成一个
-            if (!headingId) {
-              headingId = `heading-${index + 1}`;
-              heading.id = headingId;
-            }
-
-            // 提取标题文本
-            const title = heading.textContent?.trim() || `标题 ${index + 1}`;
-
-            anchors.push({
-              key: headingId,
-              title: title,
-            });
-          });
-
-          setArticleAnchors(anchors);
-        }
-      }, 50);
-
-      return () => clearTimeout(timer);
-    });
-
-    observer.observe(contentRef.current, {
-      childList: true,
-      subtree: true,
-      characterData: true,
-    });
-
-    return () => observer.disconnect();
-  }, []);
   return (
     <div className="article-detail-page" id="article-detail-page">
       {!isSliderView && (
@@ -184,7 +138,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
             <LineAnchor
               anchors={articleAnchors}
               contentRef={contentRef}
-              onSectionChange={handleSectionChange}
+              onSectionChange={() => {}}
             />
           )}
           <div className="articles-header">
@@ -198,7 +152,9 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
               }}
             >
               <BackButton to="/articles" />
-              {article.markdownContent && (
+              {/* 仅当有 markdownContent 时才显示 Slider View 按钮 */}
+              {(article.markdownContent ||
+                typeof article.content === "string") && (
                 <button
                   onClick={() => setIsSliderView(true)}
                   style={{
@@ -219,7 +175,8 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
         </>
       )}
 
-      {isSliderView && article.markdownContent ? (
+      {isSliderView &&
+      (article.markdownContent || typeof article.content === "string") ? (
         <div
           style={{
             position: "fixed",
@@ -232,14 +189,18 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
           }}
         >
           <ArticleSliders
-            article={article}
+            article={{
+              ...article,
+              markdownContent:
+                article.markdownContent ||
+                (typeof article.content === "string" ? article.content : ""),
+            }}
             onClose={() => setIsSliderView(false)}
           />
         </div>
       ) : (
         <div className="article-detail-container" ref={scrollRef}>
           <header className="article-detail-header">
-            {/* 标题和 Meta 信息上移，作为页面的一级信息 */}
             <h1 className="article-detail-title">{article.title}</h1>
 
             <div className="article-meta">
@@ -259,7 +220,6 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
               </div>
             </div>
 
-            {/* 封面图作为视觉分割，放在标题下方 */}
             {article.coverImage && (
               <div className="article-header-background">
                 {article.coverImage.endsWith(".mp4") ? (
@@ -288,7 +248,7 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
           <div className="article-content">
             <div className="article-detail-body">
               <div className="article-detail-body-content" ref={contentRef}>
-                {article.content}
+                {renderContent()}
               </div>
             </div>
           </div>
@@ -298,7 +258,6 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
   );
 };
 
-// 示例：如何通过 props 传入文章内容
 export const ArticleDetailPageWithProps: React.FC<{ article: Article }> = ({
   article,
 }) => {

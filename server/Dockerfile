@@ -6,11 +6,14 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# 安装依赖
-RUN npm install
+# 安装依赖 (Production)
+RUN npm install --production
+
+# 安装 Prisma CLI (开发依赖，用于 generate 和 migrate)
+RUN npm install -D prisma
 
 # 生成 Prisma Client
-RUN rm -rf node_modules/.prisma/client && npx prisma generate
+RUN npx prisma generate
 
 # 复制后端源代码
 COPY index.js ./
@@ -19,9 +22,5 @@ COPY routes ./routes
 # 暴露端口
 EXPOSE 3001
 
-# 健康检查
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3001/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
-
-# 启动服务
-CMD ["node", "index.js"]
+# 启动脚本：先运行 migrate 确保数据库同步，然后启动服务
+CMD ["sh", "-c", "npx prisma migrate deploy && node index.js"]
