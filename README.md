@@ -193,11 +193,20 @@ FRONTEND_URL=http://your-domain.com
 
 ### 前端问题
 
+**JavaScript 模块加载失败（MIME 类型错误）**
+- 错误：`Expected a JavaScript module script but the server responded with a MIME type of "application/octet-stream"`
+- 解决：在 Nginx 配置中添加 `include mime.types;`
+- 详见：[FIX_MIME_TYPE.md](./FIX_MIME_TYPE.md)
+
 **页面刷新 404**
 - 确保 Nginx 配置了 `try_files $uri $uri/ /index.html;`
 
 **静态资源加载失败**
 - 检查 `root` 目录是否指向 `dist` 文件夹
+
+**dist 目录构建失败**
+- 错误：`ENOTDIR: not a directory, scandir '/www/wwwroot/minna/dist/.user.ini'`
+- 解决：删除 dist 目录重新构建 `rm -rf dist && npm run build`
 
 ### 后端问题
 

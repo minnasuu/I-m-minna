@@ -5,7 +5,7 @@ import { useTranslations } from '../../../hooks/useTranslations';
 import StackedCardList from '../StackedCardList/StackedCardList';
 import type { StackedCardItem } from '../StackedCardList/StackedCardList';
 import type { SidebarThemeConfig } from './types';
-import './Sidebar.scss';
+import './sidebar.scss';
 
 interface SidebarProps {
   /** 主题配置 */

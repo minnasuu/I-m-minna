@@ -201,32 +201,78 @@ pm2 startup
    - **代理目录**: `/api`
 5. 点击 **提交**
 
-#### 7.3 配置 Nginx 静态文件和路由（重要！）
+#### 7.3 配置 Nginx（重要！）
 
-点击网站的 **设置** → **配置文件**，找到 `location / { }` 部分，修改为：
+点击网站的 **设置** → **配置文件**，完整配置如下：
 
 ```nginx
-location / {
+server {
+    listen 80;
+    server_name your-domain.com;
+    
+    # MIME 类型配置（重要！防止 JS 模块加载失败）
+    include mime.types;
+    default_type application/octet-stream;
+    
+    # 字符集
+    charset utf-8;
+    
+    # 根目录
     root /www/wwwroot/minna/dist;
-    try_files $uri $uri/ /index.html;
     index index.html;
     
+    # Gzip 压缩
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_types text/plain text/css text/xml text/javascript 
+               application/json application/javascript application/xml+rss 
+               application/x-javascript;
+    
+    # SPA 路由处理
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+    
     # 静态资源缓存
-    location ~* \.(jpg|jpeg|png|gif|ico|css|js|svg|woff|woff2|ttf|eot)$ {
+    location ~* \.(js|mjs|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|otf|webp)$ {
         expires 1y;
         add_header Cache-Control "public, immutable";
+        access_log off;
     }
-}
-
-# API 反向代理（如果之前添加了，这里会自动生成）
-location /api/ {
-    proxy_pass http://127.0.0.1:3001;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
+    
+    # API 反向代理
+    location /api/ {
+        proxy_pass http://127.0.0.1:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_cache_bypass $http_upgrade;
+    }
+    
+    # 安全头
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    
+    # 错误页面（保留宝塔标记，不要删除）
+    #ERROR-PAGE-START
+    #error_page 404 /404.html;
+    #error_page 502 /502.html;
+    #ERROR-PAGE-END
 }
 ```
+
+⚠️ **重要提示**：
+- `include mime.types;` 这一行非常重要，防止 JavaScript 模块加载失败
+- 替换 `your-domain.com` 为你的实际域名
+- 保留 `#ERROR-PAGE-START` 等宝塔标记，否则保存会失败
 
 点击 **保存** 并重载配置。
 
