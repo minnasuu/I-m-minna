@@ -39,7 +39,7 @@ services:
     container_name: minna-frontend
     restart: always
     ports:
-      - "80:80" # 生产环境通常直接暴露 80
+      - "8080:80" # 生产环境通常直接暴露 80
     depends_on:
       backend:
         condition: service_healthy
