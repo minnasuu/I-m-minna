@@ -181,9 +181,13 @@ pm2 startup
 1. 点击 **网站** → **添加站点**
 2. 填写信息：
    - **域名**: `your-domain.com`（你的域名）
-   - **根目录**: `/www/wwwroot/minna/dist`
+   - **根目录**: `/www/wwwroot/minna`（⚠️ 注意：是项目根目录，不是 dist）
    - **PHP 版本**: 选择 **纯静态**
 3. 点击 **提交**
+
+> ⚠️ **重要**：根目录设置为项目根目录 `/www/wwwroot/minna`，而不是 `/www/wwwroot/minna/dist`。  
+> 这样可以避免宝塔面板在 dist 目录创建 `.user.ini` 等文件，导致构建失败。  
+> 真正的静态文件路径会在 Nginx 配置中通过 `root` 指令指定。
 
 #### 7.2 配置反向代理
 
