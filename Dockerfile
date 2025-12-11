@@ -8,9 +8,9 @@ COPY package*.json ./
 # 如果有 pnpm-lock.yaml，可以使用 pnpm
 # COPY pnpm-lock.yaml ./
 
-# 安装依赖
+# 安装依赖 (使用 legacy-peer-deps 解决 React 19 和一些库的依赖冲突)
 # RUN npm install -g pnpm && pnpm install
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # 复制前端源代码
 COPY . .
