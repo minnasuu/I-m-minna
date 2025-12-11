@@ -33,7 +33,7 @@ services:
     container_name: minna-frontend
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8080:80"  # 外部使用 8080，容器内仍是 80
     depends_on:
       backend:
         condition: service_healthy
