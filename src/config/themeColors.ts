@@ -1,4 +1,4 @@
-import type { ThemeStyle } from '../types';
+import type { ThemeStyle } from '../shared/types';
 
 // 主题背景色配置
 export const themeBackgrounds: Record<ThemeStyle, string> = {

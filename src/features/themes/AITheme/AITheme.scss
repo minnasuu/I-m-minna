@@ -1,0 +1,634 @@
+@import '../../../shared/components/themes/Sidebar/Sidebar.scss';
+
+.ai-theme {
+  height: 100vh;
+  color: #374151;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;  // ✅ 防止整体滚动
+  
+  .ai-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    
+    .ai-title {
+      margin-left: 1rem;
+      flex: 1;
+      
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0;
+        color: #111827;
+      }
+      
+      p {
+        margin: 0.25rem 0 0 0;
+        font-size: 0.875rem;
+        color: #6b7280;
+      }
+    }
+    
+    .ai-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+      
+      // 覆盖LanguageSwitcher的颜色，适配AI主题的浅色背景
+      .language-switcher {
+        .language-button {
+          color: #374151;
+          
+          &:hover {
+            color: #10b981;
+          }
+        }
+      }
+    }
+  }
+  
+  .ai-content {
+    flex: 1;
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+    min-height: 0;  // ✅ 允许 flex 子元素缩小
+    padding: 0;
+    overflow: hidden;  // ✅ 让子元素处理滚动
+  }
+}
+
+// AI主题Sidebar颜色覆盖
+.ai-sidebar {
+  background-color: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+  overflow-y: auto !important;  // ✅ 强制启用滚动
+  height: 100% !important;  // ✅ 确保高度限制
+  flex-shrink: 0;  // ✅ 防止被压缩
+  
+  // 自定义滚动条样式（Webkit浏览器）
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f9fafb;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+    
+    &:hover {
+      background: #9ca3af;
+    }
+  }
+  
+  .ai-sidebar-section {
+    .section-header {
+      border-bottom: 1px solid #e5e7eb;
+      
+      h3 {
+        color: #374151;
+      }
+    }
+    
+    .info-item {
+      &.avatar-item {
+        .avatar {
+          border: 3px solid #ffffff;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
+      
+      .label {
+        color: #6b7280;
+      }
+      
+      .value {
+        color: #374151;
+      }
+    }
+    
+    .social-link-item {
+      color: #374151;
+      
+      .social-link {
+        color: #10b981;
+        
+        &:hover {
+          color: #059669;
+          text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+        }
+      }
+    }
+    
+    .interest-list,
+    .craft-list {
+      .label-item,
+      .craft-item {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        
+        .interest-name,
+        .craft-name {
+          color: #374151;
+        }
+        
+        &.with-link {
+          &:hover {
+            background: #f3f4f6;
+          }
+        }
+      }
+    }
+  }
+}
+
+// AI主题 StackedCardList 样式覆盖
+.ai-stacked-card-list-wrapper {
+  .stacked-card-list {
+    &::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      
+      &:hover {
+        background: #9ca3af;
+      }
+    }
+  }
+  
+  .stacked-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    
+    &:hover {
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+    }
+    
+    .stacked-card-preview {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      
+      .stacked-card-thumbnail-placeholder {
+        background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        color: #10b981;
+      }
+      
+      .stacked-card-overlay {
+        background: linear-gradient(to bottom, rgba(16, 185, 129, 0) 0%, rgba(16, 185, 129, 0.2) 100%);
+      }
+    }
+    
+    .stacked-card-info {
+      
+      .stacked-card-title {
+        color: #111827;
+      }
+      
+      .stacked-card-meta {
+        color: #6b7280;
+        
+        .card-date::before {
+          background: #10b981;
+        }
+        
+        .card-readtime::before {
+          background: #3b82f6;
+        }
+      }
+      
+      .stacked-card-description {
+        color: #6b7280;
+      }
+    }
+  }
+  
+  .stacked-card-view-more {
+    .view-more-button {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      color: #6b7280;
+      
+      &:hover {
+        background: #10b981;
+        border-color: #10b981;
+        color: #ffffff;
+        transform: translateX(4px);
+        
+        .arrow {
+          transform: translateX(4px);
+        }
+      }
+    }
+  }
+}
+
+// 图片弹窗颜色
+.ai-sidebar .img-pop-container {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  &::before {
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #ffffff;
+  }
+}
+
+// 链接样式
+.ai-sidebar {
+  .skill-name-link,
+  .article-title-link,
+  .project-title-link,
+  .craft-title-link {
+    .interest-name,
+    .craft-name {
+      color: inherit;
+    }
+  }
+}
+
+// AI Avatar Styles
+.ai-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: white;
+  flex-shrink: 0;
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+// AI Chat Interface Styles
+.ai-chat-interface {
+  flex: 1;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  .chat-messages {
+    // flex: 1;
+    height: fit-content;
+    max-height: 100%;
+    padding: 0;
+    overflow-y: auto;
+    display: flex;
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 12px;
+    padding: 20px 16px;
+    
+    .message {
+      max-width: 640px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 12px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      
+      &.user {
+       display: flex;
+       justify-content: flex-end;
+       animation: slideInBottom 0.3s ease-out;
+       @keyframes slideInBottom {
+        0%{transform: translateY(10%);}
+        100%{transform: translateY(0);}
+       }
+        
+        .message-content {
+          width: fit-content;
+          color: #111827;
+          font-size: 0.95rem;
+          background: #f9fafb;
+          margin-left: auto;
+          border-radius: 12px;
+          padding: 12px 16px;
+        }
+      }
+      
+      &.ai {
+        background: #ffffff;
+        
+        .message-content {
+          color: #374151;
+        }
+      }
+      
+      .message-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        display: none;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+      
+      .message-content {
+        line-height: 1.6;
+        font-size: 0.95rem;
+        
+        .typing-indicator {
+          display: flex;
+          gap: 4px;
+          
+          span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #9ca3af;
+            animation: typing 1.4s infinite ease-in-out;
+            
+            &:nth-child(1) { animation-delay: -0.32s; }
+            &:nth-child(2) { animation-delay: -0.16s; }
+          }
+        }
+        
+        .typewriter-cursor {
+          color: #10b981;
+          font-weight: bold;
+          animation: blink 1s infinite;
+          margin-left: 1px;
+        }
+        
+        .terminal-output {
+          background: #f9fafb;
+          color: #374151;
+          padding: 1rem;
+          border-radius: 8px;
+          border: 1px solid #e2e8f0;
+          font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+          font-size: 0.875rem;
+          line-height: 1.5;
+          overflow-x: auto;
+          
+          .command {
+            color: #10b981;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+          }
+          
+          .output {
+            color: #4b5563;
+            
+            > div {
+              margin: 0.25rem 0;
+              
+              &:first-child {
+                font-weight: 600;
+                color: #374151;
+                margin-bottom: 0.5rem;
+              }
+            }
+          }
+          
+          .error {
+            color: #dc2626;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+  
+  .chat-input {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    padding: 24px 16px;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    
+    .input-container {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      
+      .input-wrapper {
+        flex: 1;
+        position: relative;
+        display: flex;
+        
+        textarea {
+          width: 100%;
+          min-height: 44px;
+          max-height: 120px;
+          padding: 0.75rem 1rem;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          background: #ffffff;
+          color: #374151;
+          font-size: 0.95rem;
+          font-family: inherit;
+          resize: none;
+          outline: none;
+          transition: border-color 0.2s ease;
+          
+          
+          &::placeholder {
+            color: #9ca3af;
+          }
+        }
+        
+
+      }
+      
+      button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        background: #10b981;
+        color: white;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        height: 44px;
+        min-width: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        
+        &:hover:not(:disabled) {
+          background: #059669;
+          transform: translateY(-1px);
+        }
+        
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          transform: none;
+        }
+
+        // 暂停按钮样式
+        &.stop-button {
+          background: #202020;
+          
+          &:hover {
+            background: #000000;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes typing {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .ai-theme {
+    .ai-header {
+      padding: 1rem;
+      
+      .ai-title h1 {
+        font-size: 1.25rem;
+      }
+    }
+    
+    .ai-content {
+      padding: 0;
+      flex-direction: column;
+    }
+    
+    .ai-sidebar {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      border-right: none;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 16px;
+      flex-shrink: 0;
+      
+      .ai-sidebar-section {
+        margin-bottom: 16px;
+        
+        // 只显示前两个section（系统信息和链接）
+        &:nth-child(n+3) {
+          display: none;
+        }
+        
+        .info-item {
+          &.avatar-item {
+            .avatar {
+              width: 60px;
+              height: 60px;
+            }
+          }
+          
+          .label,
+          .value {
+            font-size: 0.75rem;
+          }
+        }
+        
+        .social-link-item {
+          font-size: 0.75rem;
+          
+          .social-link {
+            font-size: 0.75rem;
+          }
+        }
+        
+        .section-header h3 {
+          font-size: 0.8rem;
+        }
+      }
+    }
+    
+    .ai-chat-interface {
+      .chat-messages .message {
+        padding: 1rem;
+      }
+      
+      .chat-input {
+        padding: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-sidebar {
+    padding: 12px;
+    
+    .ai-sidebar-section {
+      margin-bottom: 12px;
+      
+      .info-item {
+        &.avatar-item {
+          .avatar {
+            width: 50px;
+            height: 50px;
+          }
+        }
+        
+        .label,
+        .value {
+          font-size: 0.7rem;
+        }
+      }
+      
+      .social-link-item {
+        font-size: 0.7rem;
+        
+        .social-link {
+          font-size: 0.7rem;
+        }
+      }
+      
+      .section-header h3 {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

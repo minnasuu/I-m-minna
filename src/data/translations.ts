@@ -1,4 +1,4 @@
-import type { Language } from '../contexts/LanguageContext';
+import type { Language } from '../shared/contexts/LanguageContext';
 
 export interface Translations {
   // 个人信息

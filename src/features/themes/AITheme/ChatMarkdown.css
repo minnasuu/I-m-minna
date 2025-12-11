@@ -1,0 +1,193 @@
+.chat-markdown {
+  width: 100%;
+  line-height: 1.6;
+  color: inherit;
+}
+
+.chat-markdown > *:first-child {
+  margin-top: 0;
+}
+
+.chat-markdown > *:last-child {
+  margin-bottom: 0;
+}
+
+/* 标题 */
+.chat-markdown h1,
+.chat-markdown h2,
+.chat-markdown h3,
+.chat-markdown h4,
+.chat-markdown h5,
+.chat-markdown h6 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.chat-markdown h1 {
+  font-size: 1.5em;
+}
+
+.chat-markdown h2 {
+  font-size: 1.3em;
+}
+
+.chat-markdown h3 {
+  font-size: 1.15em;
+}
+
+.chat-markdown h4,
+.chat-markdown h5,
+.chat-markdown h6 {
+  font-size: 1em;
+}
+
+/* 段落 */
+.chat-markdown p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* 列表 */
+.chat-markdown ul,
+.chat-markdown ol {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding-left: 1.5em;
+}
+
+.chat-markdown ul {
+  list-style: disc;
+}
+
+.chat-markdown ol {
+  list-style: decimal;
+}
+
+.chat-markdown li {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.chat-markdown li > p {
+  margin: 0;
+}
+
+/* 引用 */
+.chat-markdown blockquote {
+  margin: 12px 0;
+  padding: 8px 12px;
+  color: #6b7280;
+  border-left: 3px solid #d1d5db;
+  background-color: #f9fafb;
+  border-radius: 4px;
+}
+
+.chat-markdown blockquote > *:first-child {
+  margin-top: 0;
+}
+
+.chat-markdown blockquote > *:last-child {
+  margin-bottom: 0;
+}
+
+/* 行内代码 */
+.chat-markdown code {
+  padding: 2px 6px;
+  font-size: 0.9em;
+  background-color: #f3f4f6;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+  color: #ef4444;
+}
+
+/* 代码块 */
+.chat-markdown pre {
+  margin: 12px 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.chat-markdown pre code {
+  padding: 0;
+  background-color: transparent;
+  color: inherit;
+  border-radius: 0;
+  font-size: 0.9em;
+}
+
+/* 表格 */
+.chat-markdown table {
+  border-collapse: collapse;
+  margin: 12px 0;
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+.chat-markdown table thead {
+  background-color: #f9fafb;
+}
+
+.chat-markdown table th,
+.chat-markdown table td {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.chat-markdown table th {
+  font-weight: 600;
+}
+
+.chat-markdown table tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+/* 分割线 */
+.chat-markdown hr {
+  margin: 16px 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* 链接 */
+.chat-markdown a {
+  color: #10b981;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.chat-markdown a:hover {
+  color: #059669;
+  text-decoration: underline;
+}
+
+/* 强调 */
+.chat-markdown strong {
+  font-weight: 600;
+}
+
+.chat-markdown em {
+  font-style: italic;
+}
+
+/* 图片 */
+.chat-markdown img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+
+/* 任务列表 */
+.chat-markdown input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+/* 删除线 */
+.chat-markdown del {
+  text-decoration: line-through;
+  opacity: 0.7;
+}

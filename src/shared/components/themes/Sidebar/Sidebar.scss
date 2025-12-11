@@ -1,0 +1,268 @@
+// 通用Sidebar基础样式 - 统一结构和布局
+// 颜色等主题特定样式通过各主题的SCSS文件覆盖
+
+// 共同的Sidebar容器基础样式
+[class$="-sidebar"] {
+  width: 30vw;
+  padding: 20px;
+  height: 100%;
+  min-height: 0;  // ✅ 关键！允许 flex 子元素缩小
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;  // ✅ 防止水平滚动
+}
+
+// 共同的Section样式
+[class$="-sidebar-section"] {
+  margin-bottom: 24px;
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    
+    h3 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+  
+  // 信息项
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+    
+    &.avatar-item {
+      justify-content: center;
+      margin-bottom: 16px;
+      
+      .avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+    
+    .label {
+      font-weight: 500;
+      min-width: fit-content;
+    }
+    
+    .value {
+      font-weight: 400;
+      text-align: right;
+      flex: 1;
+      margin-left: 8px;
+      word-break: break-all;
+    }
+  }
+  
+  // 社交链接
+  .social-link-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 0.8rem;
+    width: 100%;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    
+    .social-link {
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.2s;
+      word-break: break-all;
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
+  }
+  
+  // 兴趣、技能、项目、作品列表
+  .interest-list,
+  .craft-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-left: 0;
+    padding-left: 0;
+    
+    &::before {
+      content: '';
+      display: none;
+    }
+    
+    .label-item,
+    .craft-item {
+      position: relative;
+      padding: 6px 12px;
+      border-radius: 16px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      
+      &:hover {
+        .img-pop-container {
+          opacity: 1;
+          transform: translate(-50%, -8px);
+        }
+      }
+      
+      .interest-name,
+      .craft-name {
+        font-weight: 500;
+        line-height: 1.4;
+      }
+      
+      .interest-link {
+        font-size: 0.7rem;
+      }
+      
+      &.with-link {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// 图片弹窗容器
+.img-pop-container {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  padding: 8px;
+  width: 120%;
+  border-radius: 8px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  
+  .img-pop {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  &::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
+
+// 链接样式
+.skill-name-link,
+.article-title-link,
+.project-title-link,
+.craft-title-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  .interest-name,
+  .craft-name {
+    color: inherit;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  [class$="-sidebar"] {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    border-right: none !important;
+    border-left: none !important;
+    padding: 16px;
+    flex-shrink: 0;
+    
+    [class$="-sidebar-section"] {
+      margin-bottom: 16px;
+      
+      // 只显示前两个section（系统信息和链接）
+      &:nth-child(n+3) {
+        display: none;
+      }
+      
+      .info-item {
+        &.avatar-item {
+          .avatar {
+            width: 60px;
+            height: 60px;
+          }
+        }
+        
+        .label,
+        .value {
+          font-size: 0.75rem;
+        }
+      }
+      
+      .social-link-item {
+        font-size: 0.75rem;
+        
+        .social-link {
+          font-size: 0.75rem;
+        }
+      }
+      
+      .section-header h3 {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  [class$="-sidebar"] {
+    padding: 12px;
+    
+    [class$="-sidebar-section"] {
+      margin-bottom: 12px;
+      
+      .info-item {
+        &.avatar-item {
+          .avatar {
+            width: 50px;
+            height: 50px;
+          }
+        }
+        
+        .label,
+        .value {
+          font-size: 0.7rem;
+        }
+      }
+      
+      .social-link-item {
+        font-size: 0.7rem;
+        
+        .social-link {
+          font-size: 0.7rem;
+        }
+      }
+      
+      .section-header h3 {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

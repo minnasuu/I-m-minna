@@ -1,19 +1,29 @@
-import type { PersonalData } from '../types';
-import type { Language } from '../contexts/LanguageContext';
-import {  svg_interactive_wheel } from '../pages/articles/articlesData/svg-interactive-wheel/svg_interactive_wheel';
-import { dark_mode_and_adaptation } from "../pages/articles/articlesData/dark_mode_and_adaptation/dark_mode_and_adaptation";
-import { deep_understanding_of_images } from "../pages/articles/articlesData/deep_understanding_of_images/deep_understanding_of_images";
-import css_implementation_of_morphing_animation from "../pages/articles/articlesData/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio";
-import { build_a_smooth_ai_chat_layout } from "../pages/articles/articlesData/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout";
-import { web_shortcut_key } from "../pages/articles/articlesData/web-shortcut-key/web_shortcut_key";
-import { article_1763369707943 } from "../pages/articles/articlesData/article-1763369707943/article_1763369707943";
+import type { PersonalData } from '../shared/types';
+import type { Language } from '../shared/contexts/LanguageContext';
+import {  svg_interactive_wheel } from '../features/articles/data/svg-interactive-wheel/svg_interactive_wheel';
+import { dark_mode_and_adaptation } from "../features/articles/data/dark_mode_and_adaptation/dark_mode_and_adaptation";
+import { deep_understanding_of_images } from "../features/articles/data/deep_understanding_of_images/deep_understanding_of_images";
+import css_implementation_of_morphing_animation from "../features/articles/data/css-implementation-of-morphing-animatio/css_implementation_of_morphing_animatio";
+import { build_a_smooth_ai_chat_layout } from "../features/articles/data/build-a-smooth-ai-chat-layout/build_a_smooth_ai_chat_layout";
+import { web_shortcut_key, web_shortcut_key_md } from "../features/articles/data/web-shortcut-key/web_shortcut_key";
+
+// Import assets
+import avatarImg from '../assets/images/avatar.png';
+import cktMiniprogramQr from '../assets/images/ckt-miniprogram-qr.jpg';
+import darkModeAdaptationCover from '../assets/articles/covers/dark_mode_and_adaptation.jpg';
+import svgInteractiveWheelCover from '../assets/articles/covers/svg-interactive-wheel.jpg';
+import deepUnderstandingImagesCover from '../assets/articles/covers/deep_understanding_of_images.jpg';
+// import buildAiChatLayoutCover from '../assets/articles/covers/build_a_smooth_ai_chat_layout.jpg'; // File doesn't exist
+import coverMock from '../assets/articles/covers/cover-mock.png';
+import nuovoCinemaParadisoCover from '../assets/articles/covers/nuovo_cinema_paradiso.jpg';
+import shortcutCover from '../assets/articles/covers/shortcut.png';
 
 // 多语言个人数据
 export const personalDataMultiLang: Record<Language, PersonalData> = {
   zh: {
     info: {
       name: "苏敏晗",
-      avatar: "./avatar.png",
+      avatar: avatarImg,
       title: "UI 开发 @腾讯",
       bio: "我觉得自己是一个热爱生活、用心做体验、追求产品品质的 UI开发工程师。我希望自己成为一个技术与艺术并重的、专业的全栈体验开发工程师。",
       email: "minhansu508@gmail.com",
@@ -70,17 +80,18 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
     ],
     articles: [
-      {
-        id: "article-1763369707943",
-        title: "前端项目样式组织方案探索",
-        summary: "xxx",
-        content: article_1763369707943,
-        publishDate: "2025-11-17",
-        tags: ["css", "原子类", "Material Design"],
-        readTime: 10,
-        link: "https://blog.example.com/article-1763369707943",
-        type: "tech",
-      },
+      // {
+      //   id: "article-1763369707943",
+      //   title: "前端项目样式组织方案探索",
+      //   summary: "xxx",
+      //   content: article_1763369707943,
+      //   markdownContent: article_1763369707943_md,
+      //   publishDate: "2025-11-17",
+      //   tags: ["css", "原子类", "Material Design"],
+      //   readTime: 10,
+      //   link: "https://blog.example.com/article-1763369707943",
+      //   type: "tech",
+      // },
       {
         id: "dark-mode-and-adaptation",
         title: "网页深色模式与适配 ☀️🌙",
@@ -97,7 +108,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation",
         type: "tech",
-        coverImage: "./articles/cover/dark_mode_and_adaptation.jpg",
+        coverImage: darkModeAdaptationCover,
       },
       {
         id: "svg-interactive-wheel",
@@ -109,7 +120,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/svg-interactive-wheel",
         type: "tech",
-        coverImage: "./articles/cover/svg-interactive-wheel.mp4",
+        coverImage: svgInteractiveWheelCover,
       },
       {
         id: "deep-understanding-of-images",
@@ -121,7 +132,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/know-more-about-image",
         type: "tech",
-        coverImage: "./articles/cover/deep_understanding_of_images.jpg",
+        coverImage: deepUnderstandingImagesCover,
       },
       {
         id: "css-implementation-of-morphing-animation",
@@ -134,8 +145,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 15,
         link: "https://blog.example.com/threejs-guide",
         type: "tech",
-        coverImage:
-          "./articles/cover/css_implementation_of_morphing_animation.jpg",
+        coverImage: nuovoCinemaParadisoCover,
       },
       {
         id: "build-a-smooth-ai-chat-layout",
@@ -147,18 +157,20 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 18,
         link: "https://blog.example.com/ai-chat-layout",
         type: "tech",
-        coverImage: "./articles/cover/build_a_smooth_ai_chat_layout.jpg",
+        coverImage: coverMock,
       },
       {
         id: "web-shortcut-key",
         title: "揭秘网页快捷键",
-        summary: "揭秘网页快捷键，了解网页快捷键的原理和实现方式。",
+        summary: "揭秘网页快捷键，了解网页快捷键的设计原则和实现方式。",
         content: web_shortcut_key,
+        markdownContent: web_shortcut_key_md,
         publishDate: "2025-09-15",
         tags: ["网页快捷键", "Linear", "YouTuBe"],
         readTime: 15,
         link: "https://blog.example.com/web-shortcut-key",
         type: "tech",
+        coverImage: shortcutCover,
       },
     ],
     projects: [
@@ -191,11 +203,11 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
       {
         id: "crochet-knit-time",
-        name: "织作时光",
-        description: "原创手工编织教程与工具小程序，用户数累计7800+。",
+        name: "Minna集（小程序）",
+        description: "个人工具集小程序，用户数累计7800+。",
         technologies: ["微信小程序"],
         featured: true,
-        imgPopUrl: "/ckt-miniprogram-qr.jpg",
+        imgPopUrl: cktMiniprogramQr,
       },
     ],
     crafts: [
@@ -235,7 +247,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
   en: {
     info: {
       name: "minna",
-      avatar: "./avatar.png",
+      avatar: avatarImg,
       title: "UI Developer @Tencent",
       bio: "I think I am a UI developer who is passionate about life, focused on experience, and building products. I hope to become a professional full-stack experience developer who is good at both technology and art.",
       email: "minhansu508@gmail.com",
@@ -292,17 +304,18 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
     ],
     articles: [
-      {
-        id: "article-1763369707943",
-        title: "前端项目样式组织方案探索",
-        summary: "xxx",
-        content: article_1763369707943,
-        publishDate: "2025-11-17",
-        tags: ["css", "原子类", "Material Design"],
-        readTime: 10,
-        link: "https://blog.example.com/article-1763369707943",
-        type: "tech",
-      },
+      // {
+      //   id: "article-1763369707943",
+      //   title: "Frontend CSS",
+      //   summary: "xxx",
+      //   content: article_1763369707943,
+      //   markdownContent: article_1763369707943_md,
+      //   publishDate: "2025-11-17",
+      //   tags: ["css", "原子类", "Material Design"],
+      //   readTime: 10,
+      //   link: "https://blog.example.com/article-1763369707943",
+      //   type: "tech",
+      // },
       {
         id: "dark-mode-and-adaptation",
         title: "Dark Mode and Adaptation",
@@ -320,7 +333,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 5,
         link: "https://blog.example.com/dark-mode-and-adaptation",
         type: "tech",
-        coverImage: "./articles/cover/dark_mode_and_adaptation.jpg",
+        coverImage: darkModeAdaptationCover,
       },
       {
         id: "svg-interactive-wheel",
@@ -333,7 +346,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/svg-interactive-wheel",
         type: "tech",
-        coverImage: "./articles/cover/svg-interactive-wheel.mp4",
+        coverImage: svgInteractiveWheelCover,
       },
       {
         id: "deep-understanding-of-images",
@@ -346,7 +359,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 2,
         link: "https://blog.example.com/know-more-about-image",
         type: "tech",
-        coverImage: "./articles/cover/deep_understanding_of_images.jpg",
+        coverImage: deepUnderstandingImagesCover,
       },
       {
         id: "css-implementation-of-morphing-animation",
@@ -359,7 +372,7 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 15,
         link: "https://blog.example.com/threejs-guide",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: coverMock,
       },
       {
         id: "build-a-smooth-ai-chat-layout",
@@ -372,19 +385,21 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
         readTime: 18,
         link: "https://blog.example.com/ai-chat-layout",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: coverMock,
       },
       {
         id: "web-shortcut-key",
         title: "Web Shortcut Key",
-        summary: "Web Shortcut Key, understand the shortcut key of web.",
+        summary:
+          "Web Shortcut Key, understand the shortcut key of web and how to use them.",
         content: web_shortcut_key,
+        markdownContent: web_shortcut_key_md,
         publishDate: "2025-09-15",
         tags: ["网页快捷键", "Linear", "YouTuBe"],
         readTime: 15,
         link: "https://blog.example.com/web-shortcut-key",
         type: "tech",
-        coverImage: "./articles/cover/cover-mock.png",
+        coverImage: coverMock,
       },
     ],
     projects: [
@@ -420,12 +435,11 @@ export const personalDataMultiLang: Record<Language, PersonalData> = {
       },
       {
         id: "crochet-knit-time",
-        name: "Crochet&Knit Time",
-        description:
-          "Original crochet and knitting tutorial and tool mini-program, with more than 7,800 users.",
+        name: "Minna's Collection(miniprogram)",
+        description: "Minna's Collection of tools, with more than 7,800 users.",
         technologies: ["WeChat Mini Program"],
         featured: true,
-        imgPopUrl: "/ckt-miniprogram-qr.jpg",
+        imgPopUrl: cktMiniprogramQr,
       },
     ],
     crafts: [

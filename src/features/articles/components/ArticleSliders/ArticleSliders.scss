@@ -1,0 +1,376 @@
+// Import fonts and variables if needed, or assume global availability. 
+// Since scoped, we'll redefine or use CSS variables.
+
+.article-sliders-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg-1);
+  color: var(--color-text-1);
+  font-family: "Wotfard", system-ui, sans-serif;
+
+  .slider-track {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .slide {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+    position: relative;
+    
+    &.is-cover {
+        overflow: hidden; // Cover usually doesn't scroll
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .slide-inner {
+       width: 80%;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       aspect-ratio: 16 / 9;
+       max-height: 80vh;
+        background: azure;
+        overflow: hidden;
+        transition: all 0.3s ease;
+
+       
+       // Default padding for markdown slides
+       &:not(:has(.cover-slide-content)) {
+           padding: 40px 20px 100px; // bottom padding for controls
+       }
+    }
+    
+    .markdown-content-wrapper {
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
+    }
+  }
+
+  /* --- Cover Slide Styles (Mimicking Article List Card) --- */
+  .cover-slide-content {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      position: relative;
+      isolation: isolate;
+      
+      // Text Layer
+      .cover-text {
+        //   grid-area: 1 / 1 / 2 / 2;
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 0 20px;
+      }
+
+      // Visual Layer
+      .cover-visual {
+position: absolute;
+top: 0;
+left: 0;
+          z-index: 1;
+          width: 100%;
+          height: 100%; 
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0.4; // Slightly faded like the card
+          pointer-events: none;
+
+          .visual-inner {
+              width: 100%;
+              height: 100%; // Fill the screen
+              overflow: hidden;
+              
+              // Radial mask to fade edges
+              -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+              mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+
+              img, video {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  // Blur and filter effects
+                  filter: grayscale(100%) blur(4px) contrast(0.9) brightness(1.1);
+                  transform: scale(1.1);
+              }
+          }
+      }
+
+      /* Typography & Elements */
+      .article-meta-top {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 2rem;
+          
+          .article-date {
+              font-family: "ChenYuluoyan-Thin", serif;
+              font-style: italic;
+              color: var(--color-text-3);
+              font-size: 1.2rem;
+          }
+          
+          .article-type-badge {
+              font-size: 0.8rem;
+              letter-spacing: 0.15em;
+              text-transform: uppercase;
+              border: 1px solid var(--color-border-1);
+              padding: 4px 10px;
+              border-radius: 4px;
+              color: var(--color-text-3);
+          }
+      }
+
+      .article-title {
+          font-size: 4.5rem; // Larger for full screen
+          line-height: 1.1;
+          font-weight: 400;
+          margin: 0 0 2rem 0;
+          color: var(--color-text-1);
+          letter-spacing: -0.03em;
+          // Optional text shadow for better readability
+          text-shadow: 0 20px 40px var(--color-bg-1); 
+          
+          @media (max-width: 768px) {
+              font-size: 2.5rem;
+          }
+      }
+
+      .article-summary {
+          font-size: 1.2rem;
+          line-height: 1.6;
+          color: var(--color-text-2);
+          margin: 0 auto 3rem;
+          max-width: 600px;
+          font-weight: 400;
+      }
+
+      .article-tags {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 1rem;
+          
+          .tag-pill {
+              font-size: 0.9rem;
+              color: var(--color-text-3);
+              background: var(--color-bg-2);
+              padding: 4px 12px;
+              border-radius: 12px;
+              &::before { content: '#'; opacity: 0.4; margin-right: 2px;}
+          }
+      }
+  }
+
+  /* Controls */
+  .slider-controls {
+    position: fixed;
+    bottom: 110px; // Moved up to accommodate thumbnails
+    right: 30px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+
+    button {
+      padding: 10px 20px;
+      background: var(--color-bg-2);
+      color: var(--color-text-1);
+      border: 1px solid var(--color-border-1);
+      border-radius: 20px; // Pill shape
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 0.2s;
+      backdrop-filter: blur(10px);
+
+      &:hover {
+        opacity: 1;
+        background: var(--color-text-1);
+        color: var(--color-bg-1);
+      }
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        &:hover {
+            background: var(--color-bg-2);
+            color: var(--color-text-1);
+        }
+      }
+    }
+  }
+
+  .slider-controls-close {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    z-index: 100;
+  }
+
+  .slide-indicator {
+    position: fixed;
+    bottom: 115px; // Moved up
+    left: 40px;
+    color: var(--color-text-3);
+    font-family: "Momozhuanji", monospace;
+    font-size: 16px;
+    z-index: 100;
+    letter-spacing: 1px;
+  }
+
+  /* Thumbnails Container */
+  .slider-thumbnails-container {
+      width: 100%;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+
+      .slider-thumbnails {
+          display: flex;
+          gap: 10px;
+          overflow-x: auto;
+          width: 100%;
+          height: 100%;
+          max-width: 80vw;
+          margin-inline: auto;
+          align-items: center;
+          
+          /* Hide scrollbar but allow scroll */
+          scrollbar-width: none; 
+          -ms-overflow-style: none; 
+          &::-webkit-scrollbar { 
+              display: none; 
+          }
+
+          .thumbnail {
+              flex-shrink: 0;
+              width: 120px;
+                aspect-ratio: 16 / 9;
+              border-radius: 6px;
+              overflow: hidden;
+              cursor: pointer;
+              transition: all 0.2s ease;
+              border: 2px solid transparent;
+              position: relative;
+              background: azure;
+
+              &.active {
+                  border-color: var(--color-primary);
+              }
+
+              .thumb-cover {
+                  width: 100%;
+                  height: 100%;
+                  img, video {
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                  }
+              }
+
+              .thumb-content {
+                  width: 100%;
+                  height: 100%;
+                  position: relative;
+                  overflow: hidden;
+                  
+                  .thumb-markdown {
+                      width: 100%;
+                      height: 100%;
+                      padding: 4px;
+                      font-size: 3px;
+                      line-height: 1.2;
+                      overflow: hidden;
+                      pointer-events: none;
+                      
+                      // Scale down all markdown content
+                      transform: scale(0.15);
+                      transform-origin: top left;
+                      width: 666%; // 100% / 0.15 to compensate for scale
+                      height: 666%;
+                      
+                      // Override markdown styles for thumbnail
+                      * {
+                          margin: 0 !important;
+                          padding: 0 !important;
+                          font-size: inherit !important;
+                          line-height: 1.2 !important;
+                      }
+                      
+                      h1, h2, h3, h4, h5, h6 {
+                          font-size: 1.2em !important;
+                          font-weight: bold !important;
+                          margin-bottom: 2px !important;
+                      }
+                      
+                      p {
+                          margin-bottom: 2px !important;
+                      }
+                      
+                      img, video {
+                          max-width: 100% !important;
+                          height: auto !important;
+                          display: none; // Hide images in thumbnails for performance
+                      }
+                      
+                      code {
+                          font-size: 0.9em !important;
+                      }
+                  }
+                  
+                  .thumb-overlay {
+                      position: absolute;
+                      bottom: 2px;
+                      right: 2px;
+                      width: 24px;
+                      height: 24px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      background: rgba(0, 0, 0, 0.1);
+                      color: var(--color-gray-10);
+                      border-radius: 4px;
+                      font-size: 10px;
+                      z-index: 10;
+                      font-family: "Momozhuanji", monospace;
+                      font-size: 12px;
+                  }
+              }
+          }
+      }
+  }
+}
+
+// markdown content styles
+.slide-inner{
+    h1{
+        margin-bottom: 0;
+        margin-top: auto;
+        text-align: center;
+        font-size: 40px;
+    }
+}
