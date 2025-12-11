@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './TerminalTheme.scss';
+import './terminalTheme.scss';
 import type { PersonalData } from '../../../shared/types';
 import LanguageSwitcher from "../../../shared/components/LanguageSwitcher";
 import ThemeSwitcher from "../../../shared/components/ThemeSwitcher";
