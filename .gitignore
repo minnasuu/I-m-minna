@@ -23,6 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# Baota Panel files
+.user.ini
+.htaccess
+
 # Environment variables with sensitive data
 .env
 .env.local

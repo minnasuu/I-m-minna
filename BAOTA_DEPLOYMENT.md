@@ -54,36 +54,35 @@ cd minna
 5. 右键 `.env` → **编辑**
 6. 修改以下配置：
 ```env
-DIFY_API_KEY=app-hsdN9lBGRuoyfq50LLYh1k4A
+DIFY_API_KEY=your-actual-dify-api-key-here
 DIFY_API_URL=https://api.dify.ai/v1
 PORT=3001
 FRONTEND_URL=http://your-domain.com
 ```
 7. 点击 **保存**
 
+⚠️ **安全提醒**：请替换 `your-actual-dify-api-key-here` 为你的真实 Dify API 密钥
+
 #### 方式 B：使用命令行
 
 ```bash
 cd /www/wwwroot/minna
 
-# 方法1: 使用 cat 直接写入（推荐）
+# 方法1: 复制示例文件后编辑（推荐）
+cp env.example .env
+vi .env
+# 按 i 进入编辑模式，修改 DIFY_API_KEY 为你的真实密钥
+# 编辑完成后按 ESC，输入 :wq 保存退出
+
+# 方法2: 使用 cat 直接写入
 cat > .env << 'EOF'
-DIFY_API_KEY=app-hsdN9lBGRuoyfq50LLYh1k4A
+DIFY_API_KEY=your-actual-dify-api-key-here
 DIFY_API_URL=https://api.dify.ai/v1
 PORT=3001
 FRONTEND_URL=http://your-domain.com
 EOF
 
-# 方法2: 复制示例文件后用 vi 编辑
-cp env.example .env
-vi .env
-# 按 i 进入编辑模式，编辑完成后按 ESC，输入 :wq 保存退出
-
-# 方法3: 使用 echo 逐行写入
-echo "DIFY_API_KEY=app-hsdN9lBGRuoyfq50LLYh1k4A" > .env
-echo "DIFY_API_URL=https://api.dify.ai/v1" >> .env
-echo "PORT=3001" >> .env
-echo "FRONTEND_URL=http://your-domain.com" >> .env
+# ⚠️ 记得替换 your-actual-dify-api-key-here 为真实密钥
 ```
 
 ### 第 3 步：安装 Node.js 环境

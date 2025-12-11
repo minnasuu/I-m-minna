@@ -178,17 +178,23 @@ FRONTEND_URL=http://your-domain.com
 
 ## 🔐 安全说明
 
-1. **API 密钥保护**
-   - 使用后端代理，密钥不暴露给前端
-   - `.env` 文件已添加到 `.gitignore`
+### API 密钥保护 ⚠️ 重要
 
-2. **HTTPS 支持**
-   - 支持 SSL 证书配置
-   - 自动 HTTPS 重定向
+本项目使用**后端代理模式**保护 Dify API 密钥：
 
-3. **CORS 配置**
-   - 限制允许的域名
-   - 防止跨域攻击
+```
+浏览器 → 前端 → 后端代理 → Dify API
+                    ↑
+              密钥只存在这里
+```
+
+- ✅ **前端代码**：不包含任何 API 密钥
+- ✅ **后端服务**：API 密钥存储在 `.env.server` 中
+- ✅ **Git 保护**：`.env*` 文件已添加到 `.gitignore`
+- ✅ **HTTPS**：支持 SSL 证书，加密传输
+- ✅ **CORS**：限制允许的域名访问
+
+详细安全说明请查看 [SECURITY.md](./SECURITY.md)
 
 ---
 
