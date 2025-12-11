@@ -25,10 +25,11 @@ Nginx 没有正确配置 JavaScript 模块文件的 MIME 类型。浏览器期�
 ```nginx
 server {
     # 在这里添加 MIME 类型配置
-    include mime.types;
+    # ⚠️ 宝塔面板使用完整路径
+    include /www/server/nginx/conf/mime.types;
     default_type application/octet-stream;
     
-    # 明确指定 JavaScript 模块的 MIME 类型
+    # 或者直接定义 types（如果上面的路径不对）
     types {
         application/javascript js mjs;
         text/javascript js;
@@ -79,8 +80,8 @@ server {
     
     charset utf-8;
     
-    # 确保包含 MIME 类型
-    include mime.types;
+    # 确保包含 MIME 类型（宝塔面板使用完整路径）
+    include /www/server/nginx/conf/mime.types;
     default_type text/html;
     
     # ... 其他配置 ...
@@ -99,7 +100,8 @@ server {
     server_name your-domain.com;
     
     # MIME 类型配置（重要！）
-    include mime.types;
+    # 宝塔面板使用完整路径
+    include /www/server/nginx/conf/mime.types;
     default_type application/octet-stream;
     
     # 字符集

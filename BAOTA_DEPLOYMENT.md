@@ -211,7 +211,8 @@ server {
     server_name your-domain.com;
     
     # MIME 类型配置（重要！防止 JS 模块加载失败）
-    include mime.types;
+    # 宝塔面板的 mime.types 路径
+    include /www/server/nginx/conf/mime.types;
     default_type application/octet-stream;
     
     # 字符集
