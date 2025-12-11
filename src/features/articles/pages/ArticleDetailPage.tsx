@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Navigate } from "react-router-dom";
 import { useLanguage } from '../../../shared/contexts/LanguageContext';
-import { personalDataMultiLang } from '../../../data/personalData';
+// import { personalDataMultiLang } from '../../../data/personalData';
+import { fetchArticleById } from "../../../shared/utils/backendClient";
+import ArticleMarkdown from '../components/ArticleMarkdown';
 import type { Article } from "../../../shared/types";
 import "../styles/ArticleDetailPage.scss";
 import LineAnchor from '../components/LineAnchor/LineAnchor';
@@ -17,17 +19,48 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
 }) => {
   const { id } = useParams<{ id: string }>();
   const { language } = useLanguage();
-  const data = personalDataMultiLang[language];
+  // const data = personalDataMultiLang[language];
 
-  // 优先使用 props 传入的文章，如果没有则从 personalData 中查找
-  const article =
-    propArticle || data.articles.find((article) => article.id === id);
+  const [article, setArticle] = useState<Article | undefined>(propArticle);
+  const [loading, setLoading] = useState(!propArticle);
+
+  useEffect(() => {
+    if (propArticle) {
+      setArticle(propArticle);
+      setLoading(false);
+      return;
+    }
+    if (!id) return;
+
+    const loadArticle = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchArticleById(id);
+        // 将后端返回的 content (string) 转换为 ReactNode (ArticleMarkdown)
+        const contentString = data.content as unknown as string;
+        setArticle({
+          ...data,
+          markdownContent: contentString,
+          content: <ArticleMarkdown>{contentString}</ArticleMarkdown>,
+        });
+      } catch (error) {
+        console.error("Failed to load article:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadArticle();
+  }, [id, propArticle]);
+
+  if (loading) return <div>Loading...</div>;
 
   if (!article) {
     return <Navigate to="/articles" replace />;
   }
 
-  const [articleAnchors,setArticleAnchors] = useState<{ key: string; title: string }[]>([]);
+  const [articleAnchors, setArticleAnchors] = useState<
+    { key: string; title: string }[]
+  >([]);
   const [isSliderView, setIsSliderView] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -41,11 +74,11 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
   useEffect(() => {
     // 立即滚动到顶部，处理页面刷新或首次加载
     window.scrollTo(0, 0);
-    
+
     if (scrollRef.current) {
       scrollRef.current.scrollTo({
         top: 0,
-        behavior: 'auto' // 使用 'auto' 确保立即滚动，不使用平滑动画
+        behavior: "auto", // 使用 'auto' 确保立即滚动，不使用平滑动画
       });
     }
   }, []);
@@ -53,11 +86,11 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
   // 当文章ID变化时滚动到顶部（处理路由切换）
   useEffect(() => {
     window.scrollTo(0, 0);
-    
+
     if (scrollRef.current) {
       scrollRef.current.scrollTo({
         top: 0,
-        behavior: 'auto'
+        behavior: "auto",
       });
     }
   }, [id]);
@@ -67,27 +100,27 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
     const timer = setTimeout(() => {
       if (contentRef.current) {
         const extractHeadings = () => {
-          const headings = contentRef.current?.querySelectorAll('h1,h2');
+          const headings = contentRef.current?.querySelectorAll("h1,h2");
           const anchors: { key: string; title: string }[] = [];
-          
+
           headings?.forEach((heading, index) => {
             let headingId = heading.id;
-            
+
             // 如果没有id，则自动生成一个
             if (!headingId) {
               headingId = `heading-${index + 1}`;
               heading.id = headingId;
             }
-            
+
             // 提取标题文本
             const title = heading.textContent?.trim() || `标题 ${index + 1}`;
-            
+
             anchors.push({
               key: headingId,
-              title: title
+              title: title,
             });
           });
-          
+
           setArticleAnchors(anchors);
         };
 
@@ -106,27 +139,27 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
       // 延迟执行，避免频繁更新
       const timer = setTimeout(() => {
         if (contentRef.current) {
-          const headings = contentRef.current.querySelectorAll('h1');
+          const headings = contentRef.current.querySelectorAll("h1");
           const anchors: { key: string; title: string }[] = [];
-          
+
           headings?.forEach((heading, index) => {
             let headingId = heading.id;
-            
+
             // 如果没有id，则自动生成一个
             if (!headingId) {
               headingId = `heading-${index + 1}`;
               heading.id = headingId;
             }
-            
+
             // 提取标题文本
             const title = heading.textContent?.trim() || `标题 ${index + 1}`;
-            
+
             anchors.push({
               key: headingId,
-              title: title
+              title: title,
             });
           });
-          
+
           setArticleAnchors(anchors);
         }
       }, 50);
@@ -137,100 +170,129 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
     observer.observe(contentRef.current, {
       childList: true,
       subtree: true,
-      characterData: true
+      characterData: true,
     });
 
     return () => observer.disconnect();
   }, []);
   return (
     <div className="article-detail-page" id="article-detail-page">
-      {!isSliderView && <>
-      <div className="article-detail-page-bottom-mask"></div>
-      {articleAnchors.length > 0 && (
-        <LineAnchor
-          anchors={articleAnchors}
-          contentRef={contentRef}
-          onSectionChange={handleSectionChange}
-        />
-      )}
-      <div className="articles-header">
-        <div className="header-content" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <BackButton to="/articles" />
-          {article.markdownContent && (
-            <button 
-              onClick={() => setIsSliderView(true)}
+      {!isSliderView && (
+        <>
+          <div className="article-detail-page-bottom-mask"></div>
+          {articleAnchors.length > 0 && (
+            <LineAnchor
+              anchors={articleAnchors}
+              contentRef={contentRef}
+              onSectionChange={handleSectionChange}
+            />
+          )}
+          <div className="articles-header">
+            <div
+              className="header-content"
               style={{
-                background: 'var(--color-bg-2)',
-                border: '1px solid var(--color-border-1)',
-                borderRadius: '20px',
-                padding: '6px 16px',
-                cursor: 'pointer',
-                color: 'var(--color-text-1)',
-                fontSize: '14px'
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
-              Slider View
-            </button>
-          )}
-        </div>
-      </div>
-      </>}
+              <BackButton to="/articles" />
+              {article.markdownContent && (
+                <button
+                  onClick={() => setIsSliderView(true)}
+                  style={{
+                    background: "var(--color-bg-2)",
+                    border: "1px solid var(--color-border-1)",
+                    borderRadius: "20px",
+                    padding: "6px 16px",
+                    cursor: "pointer",
+                    color: "var(--color-text-1)",
+                    fontSize: "14px",
+                  }}
+                >
+                  Slider View
+                </button>
+              )}
+            </div>
+          </div>
+        </>
+      )}
 
       {isSliderView && article.markdownContent ? (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 2000, background: 'var(--color-bg-1)' }}>
-            <ArticleSliders article={article} onClose={() => setIsSliderView(false)} />
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            zIndex: 2000,
+            background: "var(--color-bg-1)",
+          }}
+        >
+          <ArticleSliders
+            article={article}
+            onClose={() => setIsSliderView(false)}
+          />
         </div>
       ) : (
-      <div className="article-detail-container" ref={scrollRef}>
-        <header className="article-detail-header">
-          
-          {/* 标题和 Meta 信息上移，作为页面的一级信息 */}
-          <h1 className="article-detail-title">{article.title}</h1>
-          
-          <div className="article-meta">
-            <span className="article-date">
-              {new Date(article.publishDate).toLocaleDateString(
-                language === "zh" ? "zh-CN" : "en-US",
-                { year: 'numeric', month: 'long', day: 'numeric' }
-              )}
-            </span>
-            
-            <div className="article-detail-tags">
-              {article.tags.map((tag, index) => (
-                <span key={index} className="article-detail-tag">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+        <div className="article-detail-container" ref={scrollRef}>
+          <header className="article-detail-header">
+            {/* 标题和 Meta 信息上移，作为页面的一级信息 */}
+            <h1 className="article-detail-title">{article.title}</h1>
 
-          {/* 封面图作为视觉分割，放在标题下方 */}
-          {article.coverImage && (
-            <div className="article-header-background">
-              {article.coverImage.endsWith(".mp4") ? (
-                 <video 
-                   src={article.coverImage} 
-                   autoPlay loop muted playsInline 
-                   style={{width: '100%', height: '100%', objectFit: 'cover'}}
-                 />
-              ) : (
-                <div 
-                  className="article-header-image"
-                  style={{ backgroundImage: `url(${article.coverImage})` }}
-                />
-              )}
-            </div>
-          )}
-        </header>
+            <div className="article-meta">
+              <span className="article-date">
+                {new Date(article.publishDate).toLocaleDateString(
+                  language === "zh" ? "zh-CN" : "en-US",
+                  { year: "numeric", month: "long", day: "numeric" }
+                )}
+              </span>
 
-        <div className="article-content">
-          <div className="article-detail-body">
-            <div className="article-detail-body-content" ref={contentRef}>
-              {article.content}
+              <div className="article-detail-tags">
+                {article.tags.map((tag, index) => (
+                  <span key={index} className="article-detail-tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* 封面图作为视觉分割，放在标题下方 */}
+            {article.coverImage && (
+              <div className="article-header-background">
+                {article.coverImage.endsWith(".mp4") ? (
+                  <video
+                    src={article.coverImage}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : (
+                  <div
+                    className="article-header-image"
+                    style={{ backgroundImage: `url(${article.coverImage})` }}
+                  />
+                )}
+              </div>
+            )}
+          </header>
+
+          <div className="article-content">
+            <div className="article-detail-body">
+              <div className="article-detail-body-content" ref={contentRef}>
+                {article.content}
+              </div>
             </div>
           </div>
         </div>
-      </div>
       )}
     </div>
   );

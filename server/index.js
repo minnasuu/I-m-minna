@@ -6,6 +6,7 @@ const fs = require('fs');
 // 导入路由
 const chatRoutes = require('./routes/chat');
 const healthRoutes = require('./routes/health');
+const articleRoutes = require('./routes/articles');
 
 // 加载环境变量 - 尝试多个可能的位置
 const possibleEnvPaths = [
@@ -61,6 +62,7 @@ app.use((req, res, next) => {
 // 挂载路由
 app.use('/health', healthRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/articles', articleRoutes);
 
 // 启动服务器
 app.listen(PORT, () => {

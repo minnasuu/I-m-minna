@@ -1,3 +1,5 @@
+import type { Article } from '../types';
+
 export interface ChatRequest {
   query: string;
   conversation_id?: string;
@@ -18,7 +20,7 @@ const getBackendUrl = (): string => {
     return ''; // 空字符串表示使用相对路径
   }
   // 开发环境默认使用 localhost
-  return 'http://localhost:3001';
+  return 'http://localhost:8001';
 };
 
 export const sendMessageToBackend = async (
@@ -56,6 +58,40 @@ export const sendMessageToBackend = async (
     return data;
   } catch (error) {
     console.error('Error calling backend:', error);
+    throw error;
+  }
+};
+
+export const fetchArticles = async (): Promise<Article[]> => {
+  const backendUrl = getBackendUrl();
+  const url = `${backendUrl}/api/articles`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Failed to fetch articles: ${response.status}`);
+    }
+    const data: Article[] = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching articles:', error);
+    throw error;
+  }
+};
+
+export const fetchArticleById = async (id: string): Promise<Article> => {
+  const backendUrl = getBackendUrl();
+  const url = `${backendUrl}/api/articles/${id}`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Failed to fetch article ${id}: ${response.status}`);
+    }
+    const data: Article = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Error fetching article ${id}:`, error);
     throw error;
   }
 };

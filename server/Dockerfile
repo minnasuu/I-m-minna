@@ -4,9 +4,13 @@ WORKDIR /app
 
 # 复制后端依赖文件
 COPY package*.json ./
+COPY prisma ./prisma/
 
-# 安装依赖（仅生产依赖）
-RUN npm install --production
+# 安装依赖
+RUN npm install
+
+# 生成 Prisma Client
+RUN rm -rf node_modules/.prisma/client && npx prisma generate
 
 # 复制后端源代码
 COPY index.js ./
