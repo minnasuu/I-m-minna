@@ -3,16 +3,18 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 
+// 导入路由
+const chatRoutes = require('./routes/chat');
+const healthRoutes = require('./routes/health');
+
 // 加载环境变量 - 尝试多个可能的位置
 const possibleEnvPaths = [
-  path.join(__dirname, '.env.server'),  // server/.env.server (推荐)
   path.join(__dirname, '..', '.env'),   // 根目录的 .env (Docker 部署)
 ];
 
 let envLoaded = false;
 for (const envPath of possibleEnvPaths) {
   if (fs.existsSync(envPath)) {
-    console.log('✅ 找到环境变量文件:', envPath);
     require('dotenv').config({ path: envPath });
     envLoaded = true;
     break;
@@ -23,19 +25,29 @@ if (!envLoaded) {
   console.error('⚠️  未找到环境变量文件，尝试的路径:', possibleEnvPaths);
 }
 
-console.log('\n📋 环境变量加载结果:');
-console.log('  DIFY_API_KEY:', process.env.DIFY_API_KEY ? `✅ 已设置 (${process.env.DIFY_API_KEY.substring(0, 10)}...)` : '❌ 未设置');
-console.log('  DIFY_API_URL:', process.env.DIFY_API_URL || '使用默认值');
-console.log('  FRONTEND_URL:', process.env.FRONTEND_URL || '使用默认值');
-console.log('  PORT:', process.env.PORT || '使用默认值 (3001)');
-console.log('');
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // 中间件
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    // 允许没有 origin 的请求 (比如移动端应用或 curl)
+    if (!origin) return callback(null, true);
+    // 允许 localhost (任何端口)
+    if (origin.match(/^https?:\/\/localhost:\d+$/) || origin.match(/^https?:\/\/127\.0\.0\.1:\d+$/)) {
+      return callback(null, true);
+    }
+
+    // 检查是否匹配配置的 FRONTEND_URL
+    const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
+    if (origin === allowedOrigin) {
+      return callback(null, true);
+    }
+
+    // 开发环境如果需要更宽松，可以在这里添加逻辑
+    // console.log('Blocked CORS for:', origin);
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 app.use(express.json());
@@ -46,76 +58,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// 健康检查端点
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
-});
-
-// Dify 代理端点
-app.post('/api/chat', async (req, res) => {
-  try {
-    console.log('收到聊天请求:', { query: req.body.query?.substring(0, 50) });
-    const { query, conversation_id } = req.body;
-
-    if (!query) {
-      console.error('缺少 query 参数');
-      return res.status(400).json({ error: 'Query is required' });
-    }
-
-    const difyApiKey = process.env.DIFY_API_KEY;
-    const difyApiUrl = process.env.DIFY_API_URL || 'https://api.dify.ai/v1';
-
-    if (!difyApiKey) {
-      console.error('❌ DIFY_API_KEY 未配置');
-      return res.status(500).json({ error: 'Server configuration error: DIFY_API_KEY not set' });
-    }
-
-    console.log('调用 Dify API:', difyApiUrl);
-
-    // 调用 Dify API
-    const response = await fetch(`${difyApiUrl}/chat-messages`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${difyApiKey}`,
-      },
-      body: JSON.stringify({
-        inputs: {},
-        query: query,
-        response_mode: 'blocking',
-        conversation_id: conversation_id,
-        user: 'web-user',
-      }),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('❌ Dify API 错误:', response.status, errorText);
-      return res.status(response.status).json({ 
-        error: 'Dify API error',
-        details: errorText,
-        status: response.status
-      });
-    }
-
-    const data = await response.json();
-    console.log('✅ Dify API 响应成功');
-
-    // 返回结果给前端
-    res.json({
-      answer: data.answer,
-      conversationId: data.conversation_id,
-    });
-
-  } catch (error) {
-    console.error('❌ 服务器错误:', error.message);
-    console.error('错误堆栈:', error.stack);
-    res.status(500).json({ 
-      error: 'Internal server error',
-      message: error.message 
-    });
-  }
-});
+// 挂载路由
+app.use('/health', healthRoutes);
+app.use('/api/chat', chatRoutes);
 
 // 启动服务器
 app.listen(PORT, () => {
