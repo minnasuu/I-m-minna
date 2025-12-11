@@ -1,6 +1,34 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config({ path: '.env.server' });
+const path = require('path');
+const fs = require('fs');
+
+// 加载环境变量 - 尝试多个可能的位置
+const possibleEnvPaths = [
+  path.join(__dirname, '.env.server'),  // server/.env.server (推荐)
+  path.join(__dirname, '..', '.env'),   // 根目录的 .env (Docker 部署)
+];
+
+let envLoaded = false;
+for (const envPath of possibleEnvPaths) {
+  if (fs.existsSync(envPath)) {
+    console.log('✅ 找到环境变量文件:', envPath);
+    require('dotenv').config({ path: envPath });
+    envLoaded = true;
+    break;
+  }
+}
+
+if (!envLoaded) {
+  console.error('⚠️  未找到环境变量文件，尝试的路径:', possibleEnvPaths);
+}
+
+console.log('\n📋 环境变量加载结果:');
+console.log('  DIFY_API_KEY:', process.env.DIFY_API_KEY ? `✅ 已设置 (${process.env.DIFY_API_KEY.substring(0, 10)}...)` : '❌ 未设置');
+console.log('  DIFY_API_URL:', process.env.DIFY_API_URL || '使用默认值');
+console.log('  FRONTEND_URL:', process.env.FRONTEND_URL || '使用默认值');
+console.log('  PORT:', process.env.PORT || '使用默认值 (3001)');
+console.log('');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
