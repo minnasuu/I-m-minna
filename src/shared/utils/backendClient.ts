@@ -9,9 +9,13 @@ export interface ChatResponse {
 }
 
 const getBackendUrl = (): string => {
-  // 生产环境使用环境变量配置的后端地址
+  // 如果设置了环境变量，优先使用
   if (import.meta.env.VITE_BACKEND_URL) {
     return import.meta.env.VITE_BACKEND_URL;
+  }
+  // 生产环境（通过域名访问）使用相对路径，nginx会代理到后端
+  if (import.meta.env.PROD) {
+    return ''; // 空字符串表示使用相对路径
   }
   // 开发环境默认使用 localhost
   return 'http://localhost:3001';
