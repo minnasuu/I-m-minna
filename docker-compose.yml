@@ -9,7 +9,7 @@ services:
     container_name: minna-backend
     restart: unless-stopped
     ports:
-      - "3001:3001"
+      - "8001:3001"  # 外部使用 8001，容器内仍是 3001
     environment:
       - NODE_ENV=production
       - PORT=3001
