@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables with sensitive data
+.env
+.env.local
+.env.server
+.env.production
+src/config/dify.ts
+
+# Server
+server/node_modules
+
+# Docker
+.dockerignore

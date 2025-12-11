@@ -2,6 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../../../shared/contexts/LanguageContext';
 import { personalDataMultiLang } from '../../../data/personalData';
 import avatarImg from '../../../assets/images/avatar.png';
+import { sendMessageToBackend } from '../../../shared/utils/backendClient';
+import ChatMarkdown from './ChatMarkdown';
+import {
+  saveChatMessages,
+  loadChatMessages,
+  clearChatCache,
+  saveConversationId,
+  loadConversationId,
+} from '../../../shared/utils/chatCache';
 
 interface Message {
   id: string;
@@ -11,15 +20,35 @@ interface Message {
   terminalOutput?: React.ReactNode;
   isTyping?: boolean;
   displayText?: string;
+  startTime?: number;
+  isFeedback?: boolean;  // 标记为反馈消息
 }
+
+const Timer: React.FC<{ startTime: number }> = ({ startTime }) => {
+  const [elapsed, setElapsed] = useState(0);
+
+  useEffect(() => {
+    // Initial calculation
+    setElapsed((Date.now() - startTime) / 1000);
+    
+    const interval = setInterval(() => {
+      setElapsed((Date.now() - startTime) / 1000);
+    }, 100);
+    return () => clearInterval(interval);
+  }, [startTime]);
+
+  return <span className="generation-timer" style={{ fontSize: '0.8em', color: '#9ca3af', marginLeft: '8px' }}>({elapsed.toFixed(1)}s)</span>;
+};
 
 // 逐字输出组件，与终端主题保持一致的速度
 const TypewriterText: React.FC<{
   text: string;
   speed?: number;
   onComplete?: () => void;
+  onStop?: (displayedText: string) => void;
   isVisible: boolean;
-}> = ({ text, speed = 30, onComplete, isVisible }) => {
+  shouldStop?: boolean;
+}> = ({ text, speed = 30, onComplete, onStop, isVisible, shouldStop }) => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -27,6 +56,14 @@ const TypewriterText: React.FC<{
     if (!isVisible) {
       setDisplayText("");
       setCurrentIndex(0);
+      return;
+    }
+
+    // 检查是否需要停止
+    if (shouldStop && currentIndex > 0) {
+      if (onStop) {
+        onStop(displayText);
+      }
       return;
     }
 
@@ -40,7 +77,7 @@ const TypewriterText: React.FC<{
     } else if (onComplete) {
       onComplete();
     }
-  }, [currentIndex, text, speed, onComplete, isVisible]);
+  }, [currentIndex, text, speed, onComplete, onStop, isVisible, shouldStop, displayText]);
 
   useEffect(() => {
     if (isVisible && currentIndex === 0) {
@@ -52,7 +89,7 @@ const TypewriterText: React.FC<{
   return (
     <span style={{ whiteSpace: "pre-line" }}>
       {displayText}
-      {isVisible && currentIndex < text.length && (
+      {isVisible && currentIndex < text.length && !shouldStop && (
         <span className="typewriter-cursor">|</span>
       )}
     </span>
@@ -64,12 +101,30 @@ const AIChatInterface: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [autoChatIndex, setAutoChatIndex] = useState(0);
-  const [isAutoChatting, setIsAutoChatting] = useState(false);
   const [typingMessageId, setTypingMessageId] = useState<string | null>(null);
+  const [conversationId, setConversationId] = useState<string | undefined>(undefined);
+  const [generationStartTime, setGenerationStartTime] = useState<number | null>(null);
+  const [shouldStopTyping, setShouldStopTyping] = useState(false);
+  const [isCacheLoaded, setIsCacheLoaded] = useState(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const currentData = personalDataMultiLang[language];
+
+  // 保存消息到 localStorage
+  useEffect(() => {
+    if (isCacheLoaded && messages.length > 0) {
+      saveChatMessages(messages);
+    }
+  }, [messages, isCacheLoaded]);
+
+  // 保存会话 ID
+  useEffect(() => {
+    if (conversationId) {
+      saveConversationId(conversationId);
+    }
+  }, [conversationId]);
 
   useEffect(() => {
     // 消息从头部插入，最新的消息显示在顶部
@@ -80,268 +135,38 @@ const AIChatInterface: React.FC = () => {
     }
   }, [messages]);
 
-  // 自然对话形式的问题，回答内容与终端主题保持一致
-  const autoChatQuestions =
-    language === "zh"
-      ? [
-          {
-            question: "你叫什么名字？",
-            answer: currentData.info.name,
-            type: "conversation",
-          },
-          {
-            question: "你在哪里工作？",
-            answer: currentData.info.title,
-            type: "conversation",
-          },
-          {
-            question: "能简单介绍一下你自己吗？",
-            answer: currentData.info.bio,
-            type: "conversation",
-          },
-          {
-            question: "你都掌握哪些技能？",
-            answer: currentData.skills
-              .map((skill) => `⚡️ ${skill.name} - ${skill.level}%`)
-              .join("\n"),
-            type: "conversation",
-          },
-          {
-            question: "你有什么兴趣爱好？",
-            answer: currentData.interests
-              .map((interest) => interest.name)
-              .join("、"),
-            type: "conversation",
-          },
-          {
-            question: "你最近写了哪些文章？",
-            answer:
-              currentData.articles
-                .slice(0, 5)
-                .map(
-                  (article) => `📄 ${article.title} (${article.readTime}min)`
-                )
-                .join("\n") +
-              (currentData.articles.length > 5
-                ? `\n... and ${currentData.articles.length - 5} more articles`
-                : ""),
-            type: "conversation",
-          },
-          {
-            question: "你参与了哪些主要项目？",
-            answer:
-              currentData.projects
-                .filter((p) => p.featured)
-                .slice(0, 5)
-                .map((project) => `💎 ${project.name} - ${project.description}`)
-                .join("\n") +
-              (currentData.projects.filter((p) => p.featured).length > 5
-                ? `\n... and ${
-                    currentData.projects.filter((p) => p.featured).length - 5
-                  } more projects`
-                : ""),
-            type: "conversation",
-          },
-          {
-            question: "你有什么个人作品吗？",
-            answer:
-              currentData.crafts
-                .filter((c) => c.featured)
-                .slice(0, 5)
-                .map((craft) => `♾️ ${craft.name} - ${craft.description}`)
-                .join("\n") +
-              (currentData.crafts.filter((c) => c.featured).length > 5
-                ? `\n... and ${
-                    currentData.crafts.filter((c) => c.featured).length - 5
-                  } more crafts`
-                : ""),
-            type: "conversation",
-          },
-          {
-            question: "还可以了解些什么？",
-            answer: "你可以在左侧查看更多详细信息，或者继续和我聊天！",
-            type: "info",
-          },
-        ]
-      : [
-          {
-            question: "What's your name?",
-            answer: currentData.info.name,
-            type: "conversation",
-          },
-          {
-            question: "Where do you work?",
-            answer: currentData.info.title,
-            type: "conversation",
-          },
-          {
-            question: "Can you tell me about yourself?",
-            answer: currentData.info.bio,
-            type: "conversation",
-          },
-          {
-            question: "What skills do you have?",
-            answer: currentData.skills
-              .map((skill) => `⚡️ ${skill.name} - ${skill.level}%`)
-              .join("\n"),
-            type: "conversation",
-          },
-          {
-            question: "What are your interests?",
-            answer: currentData.interests
-              .map((interest) => interest.name)
-              .join(", "),
-            type: "conversation",
-          },
-          {
-            question: "What articles have you written recently?",
-            answer:
-              currentData.articles
-                .slice(0, 5)
-                .map(
-                  (article) => `📄 ${article.title} (${article.readTime}min)`
-                )
-                .join("\n") +
-              (currentData.articles.length > 5
-                ? `\n... and ${currentData.articles.length - 5} more articles`
-                : ""),
-            type: "conversation",
-          },
-          {
-            question: "What major projects have you worked on?",
-            answer:
-              currentData.projects
-                .filter((p) => p.featured)
-                .slice(0, 5)
-                .map((project) => `💎 ${project.name} - ${project.description}`)
-                .join("\n") +
-              (currentData.projects.filter((p) => p.featured).length > 5
-                ? `\n... and ${
-                    currentData.projects.filter((p) => p.featured).length - 5
-                  } more projects`
-                : ""),
-            type: "conversation",
-          },
-          {
-            question: "Do you have any personal projects?",
-            answer:
-              currentData.crafts
-                .filter((c) => c.featured)
-                .slice(0, 5)
-                .map((craft) => `♾️ ${craft.name} - ${craft.description}`)
-                .join("\n") +
-              (currentData.crafts.filter((c) => c.featured).length > 5
-                ? `\n... and ${
-                    currentData.crafts.filter((c) => c.featured).length - 5
-                  } more crafts`
-                : ""),
-            type: "conversation",
-          },
-          {
-            question: "Is there anything else you'd like to know?",
-            answer:
-              "You can check more details in the sidebar, or continue chatting with me!",
-            type: "info",
-          },
-        ];
-
-  // 自动对话逻辑，与终端主题保持一致的100ms间隔
+  // 初始化：从缓存加载或显示欢迎消息
   useEffect(() => {
-    if (!isAutoChatting || autoChatIndex >= autoChatQuestions.length) {
-      setIsAutoChatting(false);
-      return;
-    }
-
-    const currentQ = autoChatQuestions[autoChatIndex];
-
-    // 添加用户问题（自然对话格式）
-    const userMessage: Message = {
-      id: `auto-user-${autoChatIndex}`,
-      text: currentQ.question,
-      sender: "user",
-      timestamp: new Date(),
-    };
-
-    // 新消息从数组头部插入，最新的消息显示在顶部
-    setMessages((prev) => [userMessage, ...prev]);
-
-    // 延迟后添加AI回答，使用与终端主题一致的100ms间隔
-    setTimeout(() => {
-      const aiMessageId = `auto-ai-${autoChatIndex}`;
-      const aiMessage: Message = {
-        id: aiMessageId,
-        text: currentQ.answer,
-        sender: "ai",
-        timestamp: new Date(),
-        isTyping: true,
-      };
-
-      // 新消息从数组头部插入，最新的消息显示在顶部
-      setMessages((prev) => [aiMessage, ...prev]);
-      setTypingMessageId(aiMessageId);
-
-      // 使用更快的逐字输出速度（每个字符30ms，比终端稍快以适应AI主题）
-      const typingDuration = currentQ.answer.length * 30;
-
-      // 逐字输出完成后继续下一个问题
-      setTimeout(() => {
-        setMessages((prev) =>
-          prev.map((msg) =>
-            msg.id === aiMessageId
-              ? { ...msg, isTyping: false, displayText: currentQ.answer }
-              : msg
-          )
-        );
-        setTypingMessageId(null);
-
-        // 继续下一个问题，与终端主题保持一致的100ms间隔
-        setTimeout(() => {
-          setAutoChatIndex((prev) => prev + 1);
-        }, 100);
-      }, typingDuration);
-    }, 100);
-  }, [autoChatIndex, isAutoChatting, language, currentData]);
-
-  // 初始化欢迎消息，使用与终端主题一致的速度
-  useEffect(() => {
-    // 重置自动对话状态
-    setIsAutoChatting(false);
-    setAutoChatIndex(0);
-
     const welcomeText =
       language === "zh"
-        ? "你好！欢迎来到我的个人空间。"
-        : "Hello! Welcome to my personal space.";
+        ? `你好！我是 **${currentData.info.name}** 的数字分身，想了解小苏，问我就好啦。`
+        : `Hello! I'm **${currentData.info.name}**'s digital twin, want to know about Minna, ask me.`;
 
     const welcomeMessage: Message = {
-      id: "1",
+      id: "welcome",
       text: welcomeText,
       sender: "ai",
       timestamp: new Date(),
-      isTyping: true,
+      isTyping: false,
+      displayText: welcomeText,
     };
-    // 欢迎消息从数组头部插入
-    setMessages([welcomeMessage]);
-    setTypingMessageId("1");
 
-    // 欢迎消息的逐字输出，使用30ms间隔
-    const typingDuration = welcomeText.length * 30;
-    setTimeout(() => {
-      setMessages((prev) =>
-        prev.map((msg) =>
-          msg.id === "1"
-            ? { ...msg, isTyping: false, displayText: welcomeText }
-            : msg
-        )
-      );
-      setTypingMessageId(null);
+    // 尝试从缓存加载
+    const cachedMessages = loadChatMessages();
+    const cachedConversationId = loadConversationId();
 
-      // 欢迎消息完成后，开始自动对话
-      setTimeout(() => {
-        setAutoChatIndex(0);
-        setIsAutoChatting(true);
-      }, 1000);
-    }, typingDuration);
+    if (cachedMessages && cachedMessages.length > 0) {
+      // 加载缓存的消息，并在前面添加欢迎消息
+      setMessages([welcomeMessage, ...cachedMessages]);
+      if (cachedConversationId) {
+        setConversationId(cachedConversationId);
+      }
+    } else {
+      // 没有缓存，显示欢迎消息
+      setMessages([welcomeMessage]);
+    }
+
+    setIsCacheLoaded(true);
   }, [language]);
 
   const generateTerminalOutput = (command: string): React.ReactNode => {
@@ -443,7 +268,26 @@ const AIChatInterface: React.FC = () => {
     }
 
     if (lowerCommand === "clear" || lowerCommand === "清除") {
-      setMessages([]);
+      // 清除消息和缓存
+      clearChatCache();
+      setConversationId(undefined);
+      
+      // 重新设置欢迎消息
+      const welcomeText =
+        language === "zh"
+          ? `你好！我是 **${currentData.info.name}** 的数字分身，想了解小苏，问我就好啦。\n\n你可以：\n- 直接和我对话\n- 输入命令（如 \`help\`、\`about\`、\`skills\`）`
+          : `Hello! I'm **${currentData.info.name}**'s digital twin, want to know about Minna, ask me.\n\nYou can:\n- Chat with me directly\n- Type commands (like \`help\`, \`about\`, \`skills\`)`;
+
+      const welcomeMessage: Message = {
+        id: "welcome",
+        text: welcomeText,
+        sender: "ai",
+        timestamp: new Date(),
+        isTyping: false,
+        displayText: welcomeText,
+      };
+      
+      setMessages([welcomeMessage]);
       return null;
     }
 
@@ -451,75 +295,76 @@ const AIChatInterface: React.FC = () => {
     return null;
   };
 
-  const generateAIResponse = (userInput: string): string => {
-    const lowerInput = userInput.toLowerCase();
 
-    if (
-      lowerInput.includes("hello") ||
-      lowerInput.includes("hi") ||
-      lowerInput.includes("你好")
-    ) {
-      return language === "zh"
-        ? "你好！很高兴见到你。我是Minna的AI助手，有什么可以帮助你的吗？"
-        : "Hello! Nice to meet you. I'm Minna's AI assistant, how can I help you?";
+  // 停止生成
+  const handleStopGeneration = () => {
+    // 中止后端请求
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
     }
 
-    if (lowerInput.includes("name") || lowerInput.includes("名字")) {
-      return language === "zh"
-        ? `我的名字是${currentData.info.name}，我是一名${currentData.info.title}。我专注于创造优美的用户界面和出色的用户体验。`
-        : `My name is ${currentData.info.name}, I'm a ${currentData.info.title}. I focus on creating beautiful user interfaces and exceptional user experiences.`;
+    // 停止打字机效果
+    setShouldStopTyping(true);
+    
+    // 清除打字超时
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+      typingTimeoutRef.current = null;
     }
 
-    if (
-      lowerInput.includes("skill") ||
-      lowerInput.includes("技术") ||
-      lowerInput.includes("能力")
-    ) {
-      return language === "zh"
-        ? `我主要擅长以下技术领域：\n• 前端开发：React、Vue、TypeScript、现代CSS\n• 后端开发：Node.js、Python、数据库设计\n• UI/UX设计：用户研究、原型设计、交互设计\n• 开发工具：Git、Docker、自动化部署`
-        : `I'm skilled in several technical areas:\n• Frontend Development: React, Vue, TypeScript, Modern CSS\n• Backend Development: Node.js, Python, Database Design\n• UI/UX Design: User Research, Prototyping, Interaction Design\n• Development Tools: Git, Docker, Automated Deployment`;
+    // 将当前正在输入的消息标记为完成
+    if (typingMessageId) {
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === typingMessageId
+            ? { ...msg, isTyping: false }
+            : msg
+        )
+      );
+      setTypingMessageId(null);
     }
 
-    if (lowerInput.includes("project") || lowerInput.includes("项目")) {
-      return language === "zh"
-        ? `我参与过多种类型的项目：\n• 企业级Web应用 - 复杂业务逻辑的前端实现\n• 数据可视化平台 - 让数据更直观易懂\n• 移动端应用 - 响应式设计和原生体验\n• 开源工具库 - 为开发者社区贡献代码`
-        : `I've worked on various types of projects:\n• Enterprise Web Applications - Complex business logic implementation\n• Data Visualization Platforms - Making data more intuitive\n• Mobile Applications - Responsive design and native experience\n• Open Source Libraries - Contributing to the developer community`;
-    }
+    // 添加暂停反馈消息
+    const feedbackMessages = language === "zh"
+      ? [
+          "你犹豫啦～",
+          "好嘛，那我就先停下来休息一下 ☕️",
+          "收到！已暂停回答",
+          "你撤回了一条消息",
+          "明白，我先停一停 🤚"
+        ]
+      : [
+          "You hesitated~",
+          "Okay, I'll take a break ☕️",
+          "Got it! Stopped",
+          "You withdrew a message",
+          "I understand, stopping 🤚"
+        ];
+    
+    const randomFeedback = feedbackMessages[Math.floor(Math.random() * feedbackMessages.length)];
+    
+    const feedbackMessage: Message = {
+      id: `feedback-${Date.now()}`,
+      text: randomFeedback,
+      sender: "ai",
+      timestamp: new Date(),
+      isTyping: false,
+      displayText: randomFeedback,
+      isFeedback: true,
+    };
 
-    if (
-      lowerInput.includes("contact") ||
-      lowerInput.includes("联系") ||
-      lowerInput.includes("邮箱")
-    ) {
-      return language === "zh"
-        ? `你可以通过以下方式联系我：\n• 邮箱：${currentData.info.email}\n• 地址：${currentData.info.location}\n我很乐意与你交流技术话题或合作机会！`
-        : `You can contact me through:\n• Email: ${currentData.info.email}\n• Location: ${currentData.info.location}\nI'd love to discuss technical topics or collaboration opportunities with you!`;
-    }
+    setTimeout(() => {
+      setMessages((prev) => [feedbackMessage, ...prev]);
+    }, 100);
 
-    // 对于无关的输入，提供命令指导
-    const responses =
-      language === "zh"
-        ? [
-            "感谢你的分享！如果你想了解更多关于我的信息，可以尝试以下命令：\n• about - 查看我的基本信息\n• skills - 查看技术技能\n• projects - 查看项目作品\n• contact - 查看联系方式",
-            "这很有趣！如果你想深入了解我的工作和技能，可以输入相关命令获取详细信息。输入 'help' 查看所有可用命令。",
-            "谢谢你的问题！我可以为你提供关于我的技能、项目和经验的详细信息。试试输入 'skills' 或 'projects' 来了解更多。",
-            "我很高兴与你交流！如果你对我的技术背景或项目经验感兴趣，可以使用命令来获取具体信息。输入 'help' 查看帮助。",
-          ]
-        : [
-            "Thanks for sharing! If you'd like to know more about me, you can try these commands:\n• about - View my basic information\n• skills - View technical skills\n• projects - View project works\n• contact - View contact information",
-            "That's interesting! If you want to learn more about my work and skills, you can input relevant commands for detailed information. Type 'help' to see all available commands.",
-            "Thanks for your question! I can provide detailed information about my skills, projects, and experience. Try typing 'skills' or 'projects' to learn more.",
-            "I'm glad to chat with you! If you're interested in my technical background or project experience, you can use commands to get specific information. Type 'help' for assistance.",
-          ];
-
-    return responses[Math.floor(Math.random() * responses.length)];
+    setIsTyping(false);
+    setGenerationStartTime(null);
+    setShouldStopTyping(false);
   };
 
   const handleSendMessage = async () => {
     if (!inputText.trim()) return;
-
-    // 停止自动对话
-    setIsAutoChatting(false);
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -531,51 +376,119 @@ const AIChatInterface: React.FC = () => {
     // 新消息从数组头部插入，最新的消息显示在顶部
     setMessages((prev) => [userMessage, ...prev]);
     setInputText("");
+    
+    // Start timing
+    const startTime = Date.now();
+    setGenerationStartTime(startTime);
     setIsTyping(true);
+    setShouldStopTyping(false);
 
     // 检查是否是命令
     const terminalOutput = generateTerminalOutput(inputText);
-    const aiResponseText = terminalOutput ? "" : generateAIResponse(inputText);
 
-    setTimeout(() => {
-      const aiMessageId = (Date.now() + 1).toString();
-      const aiResponse: Message = {
-        id: aiMessageId,
-        text: aiResponseText,
-        sender: "ai",
-        timestamp: new Date(),
-        terminalOutput,
-        isTyping: true,
-      };
-      // 新消息从数组头部插入，最新的消息显示在顶部
-      setMessages((prev) => [aiResponse, ...prev]);
-      setTypingMessageId(aiMessageId);
+    if (terminalOutput) {
+       const aiMessageId = (Date.now() + 1).toString();
+       const aiResponse: Message = {
+           id: aiMessageId,
+           text: "",
+           sender: "ai",
+           timestamp: new Date(),
+           terminalOutput,
+           isTyping: false,
+       };
+       setTimeout(() => {
+            setMessages((prev) => [aiResponse, ...prev]);
+            setIsTyping(false);
+            setGenerationStartTime(null);
+       }, 300);
+       return;
+    }
 
-      if (aiResponseText) {
-        // 计算逐字输出的时间
-        const typingDuration = aiResponseText.length * 50;
-        setTimeout(() => {
-          setMessages((prev) =>
-            prev.map((msg) =>
-              msg.id === aiMessageId
-                ? { ...msg, isTyping: false, displayText: aiResponseText }
-                : msg
-            )
-          );
-          setTypingMessageId(null);
+    // 创建 AbortController 用于取消请求
+    abortControllerRef.current = new AbortController();
+
+    // 调用后端代理 API（安全）
+    let aiResponseText = "";
+
+    try {
+        const response = await sendMessageToBackend(inputText, conversationId, abortControllerRef.current.signal);
+        
+        // 检查是否被取消
+        if (abortControllerRef.current?.signal.aborted) {
           setIsTyping(false);
-        }, typingDuration);
-      } else {
-        // 如果是终端输出，直接完成
-        setMessages((prev) =>
-          prev.map((msg) =>
-            msg.id === aiMessageId ? { ...msg, isTyping: false } : msg
-          )
-        );
-        setTypingMessageId(null);
-        setIsTyping(false);
-      }
-    }, 500 + Math.random() * 1000);
+          setGenerationStartTime(null);
+          return;
+        }
+
+        aiResponseText = response.answer;
+        if (response.conversationId) {
+            setConversationId(response.conversationId);
+        }
+    } catch (error: any) {
+        // 如果是取消请求的错误，静默处理
+        if (error.name === 'AbortError') {
+          setIsTyping(false);
+          setGenerationStartTime(null);
+          return;
+        }
+
+        console.error("Backend API Error:", error);
+        
+        const errorMessage = error.message || "";
+        if (errorMessage.includes("Workflow not published")) {
+            aiResponseText = language === "zh"
+                ? "API 调用失败：检测到 Dify 应用/工作流未发布。请前往 Dify 控制台点击右上角的【发布】按钮，然后重试。"
+                : "API Error: Dify Workflow/App not published. Please go to the Dify dashboard and click the 'Publish' button, then try again.";
+        } else if (errorMessage.includes("Failed to fetch") || errorMessage.includes("NetworkError")) {
+            aiResponseText = language === "zh"
+                ? "无法连接到后端服务。请确保后端服务器正在运行（在 server 目录运行 npm start）。"
+                : "Cannot connect to backend service. Please ensure the backend server is running (run npm start in the server directory).";
+        } else if (errorMessage.includes("401")) {
+             aiResponseText = language === "zh"
+                ? "API 认证失败：请检查后端的 Dify API Key 配置。"
+                : "API Auth Failed: Please check the Dify API Key configuration in the backend.";
+        } else {
+            aiResponseText = language === "zh"
+                ? "抱歉，我的大脑暂时断开了连接。请稍后再试，或检查 API 配置。"
+                : "Sorry, my brain is temporarily disconnected. Please try again later or check API configuration.";
+        }
+    }
+
+    // 检查是否被取消
+    if (shouldStopTyping || abortControllerRef.current?.signal.aborted) {
+      setIsTyping(false);
+      setGenerationStartTime(null);
+      return;
+    }
+
+    const aiMessageId = (Date.now() + 1).toString();
+    const aiResponse: Message = {
+      id: aiMessageId,
+      text: aiResponseText,
+      sender: "ai",
+      timestamp: new Date(),
+      terminalOutput: undefined,
+      isTyping: true,
+      startTime: startTime,
+    };
+    // 新消息从数组头部插入，最新的消息显示在顶部
+    setMessages((prev) => [aiResponse, ...prev]);
+    setTypingMessageId(aiMessageId);
+
+    if (aiResponseText) {
+      // TypewriterText 组件会处理打字效果，不需要 setTimeout
+      // 打字完成会通过 onComplete 回调处理
+    } else {
+      // 如果是终端输出，直接完成
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === aiMessageId ? { ...msg, isTyping: false } : msg
+        )
+      );
+      setTypingMessageId(null);
+      setIsTyping(false);
+      setGenerationStartTime(null);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -601,6 +514,20 @@ const AIChatInterface: React.FC = () => {
     <div className="ai-chat-interface">
       <div className="chat-messages">
         <>
+          {isTyping && (
+            <div className="message ai">
+              <div className="message-avatar">🤖</div>
+              <div className="message-content">
+                <span className="typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+                {generationStartTime && <Timer startTime={generationStartTime} />}
+              </div>
+            </div>
+          )}
+
           {messages.map((message) => (
             <div key={message.id} className={`message ${message.sender}`}>
               {message.sender === "ai" ? (
@@ -611,47 +538,59 @@ const AIChatInterface: React.FC = () => {
               <div className="message-content">
                 {message.text &&
                   (message.isTyping ? (
-                    <TypewriterText
-                      text={message.text}
-                      speed={30}
-                      isVisible={typingMessageId === message.id}
-                      onComplete={() => {
-                        setMessages((prev) =>
-                          prev.map((msg) =>
-                            msg.id === message.id
-                              ? {
-                                  ...msg,
-                                  isTyping: false,
-                                  displayText: message.text,
-                                }
-                              : msg
-                          )
-                        );
-                        setTypingMessageId(null);
-                      }}
-                    />
+                    <>
+                      <TypewriterText
+                        text={message.text}
+                        speed={30}
+                        isVisible={typingMessageId === message.id}
+                        shouldStop={shouldStopTyping}
+                        onComplete={() => {
+                          setMessages((prev) =>
+                            prev.map((msg) =>
+                              msg.id === message.id
+                                ? {
+                                    ...msg,
+                                    isTyping: false,
+                                    displayText: message.text,
+                                  }
+                                : msg
+                            )
+                          );
+                          setTypingMessageId(null);
+                          setIsTyping(false);
+                          setGenerationStartTime(null);
+                        }}
+                        onStop={(displayedText) => {
+                          // 更新消息为已显示的部分
+                          setMessages((prev) =>
+                            prev.map((msg) =>
+                              msg.id === message.id
+                                ? {
+                                    ...msg,
+                                    isTyping: false,
+                                    displayText: displayedText,
+                                    text: displayedText,
+                                  }
+                                : msg
+                            )
+                          );
+                          setTypingMessageId(null);
+                          setIsTyping(false);
+                          setGenerationStartTime(null);
+                          setShouldStopTyping(false);
+                        }}
+                      />
+                      {message.startTime && <Timer startTime={message.startTime} />}
+                    </>
                   ) : (
-                    <div style={{ whiteSpace: "pre-line" }}>
+                    <ChatMarkdown>
                       {message.displayText || message.text}
-                    </div>
+                    </ChatMarkdown>
                   ))}
                 {message.terminalOutput && message.terminalOutput}
               </div>
             </div>
           ))}
-
-          {isTyping && (
-            <div className="message ai">
-              <div className="message-avatar">🤖</div>
-              <div className="message-content">
-                <span className="typing-indicator">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
-              </div>
-            </div>
-          )}
 
           {/* 移除 messagesEndRef，在 column-reverse 模式下不需要 */}
         </>
@@ -667,25 +606,22 @@ const AIChatInterface: React.FC = () => {
               onKeyPress={handleKeyPress}
               placeholder={
                 language === "zh"
-                  ? "输入消息或命令..."
-                  : "Type a message or command..."
+                  ? "快和我聊点啥吧"
+                  : "Chat with me..."
               }
-              disabled={isTyping || isAutoChatting}
+              disabled={isTyping}
               rows={1}
             />
           </div>
           <button
-            onClick={handleSendMessage}
-            disabled={!inputText.trim() || isTyping || isAutoChatting}
+            onClick={isTyping ? handleStopGeneration : handleSendMessage}
+            disabled={!isTyping && !inputText.trim()}
+            className={isTyping ? "stop-button" : ""}
           >
             {isTyping
               ? language === "zh"
-                ? "AI正在输入..."
-                : "AI is typing..."
-              : isAutoChatting
-              ? language === "zh"
-                ? "自动对话中..."
-                : "Auto chatting..."
+                ? "⏸"
+                : "⏸"
               : language === "zh"
               ? "发送"
               : "Send"}

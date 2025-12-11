@@ -490,6 +490,15 @@
           cursor: not-allowed;
           transform: none;
         }
+
+        // 暂停按钮样式
+        &.stop-button {
+          background: #202020;
+          
+          &:hover {
+            background: #000000;
+          }
+        }
       }
     }
   }
