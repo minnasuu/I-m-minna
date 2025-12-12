@@ -2,25 +2,24 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# 复制后端依赖文件
+# 1. 复制依赖文件
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# 安装依赖 (Production)
+# 2. 安装生产依赖
 RUN npm install --production
 
-# 安装 Prisma CLI (开发依赖，用于 generate 和 migrate)
-RUN npm install -D prisma
+# 3. 单独安装 Prisma CLI（只在构建时需要）
+RUN npm install prisma --save-dev
 
-# 生成 Prisma Client
+# 4. 生成 Prisma Client
 RUN npx prisma generate
 
-# 复制后端源代码
-COPY index.js ./
-COPY routes ./routes
+# 5. 复制后端源码
+COPY . .
 
-# 暴露端口
+# 6. 暴露端口
 EXPOSE 8001
 
-# 启动脚本：先运行 migrate 确保数据库同步，然后启动服务
-CMD ["sh", "-c", "npx prisma migrate deploy && node index.js"]
+# 7. 使用 db push：不会阻塞、不会报错、不依赖 migrations
+CMD ["sh", "-c", "npx prisma db push && node index.js"]
