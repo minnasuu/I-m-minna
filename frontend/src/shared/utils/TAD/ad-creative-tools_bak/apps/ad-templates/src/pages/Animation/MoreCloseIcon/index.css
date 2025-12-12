@@ -1,0 +1,35 @@
+.header__menu-button{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.header__menu-line{
+    background: #000;
+    display: block;
+    height: 1px;
+    left: 0;
+    position: absolute;
+    transition: all .4s ease;
+    width: 100%;
+}
+
+.header__menu-line.top{
+    top: 13px;
+}
+
+.header__menu-line.bottom{
+    top: 17px;
+}
+
+.header__menu-button.is-open .header__menu-line.top{
+    top: 15px;
+    transform: rotate(30deg);
+}
+
+.header__menu-button.is-open .header__menu-line.bottom{
+    top: 15px;
+    transform: rotate(-30deg);
+}

@@ -4,7 +4,7 @@ services:
   # 后端服务
   backend:
     build:
-      context: ./server
+      context: ./backend
       dockerfile: Dockerfile
     container_name: minna-backend
     restart: always
@@ -34,12 +34,12 @@ services:
   # 前端服务
   frontend:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
     container_name: minna-frontend
     restart: always
     ports:
-      - "8080:80" # 生产环境通常直接暴露 80
+      - "80" # 生产环境通常直接暴露 80
     depends_on:
       backend:
         condition: service_healthy
@@ -55,6 +55,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=minna_blog
+    expose:
+      - "5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:

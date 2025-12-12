@@ -1,5 +1,23 @@
 # 部署指南
 
+## 项目结构
+
+```
+project/
+├─ docker-compose.yml
+├─ frontend/      # 前端项目 (React + Vite)
+│  ├─ src/
+│  ├─ public/
+│  ├─ Dockerfile
+│  ├─ nginx.conf
+│  └─ package.json
+└─ backend/       # 后端服务 (Node.js + Express)
+   ├─ routes/
+   ├─ prisma/
+   ├─ Dockerfile
+   └─ package.json
+```
+
 ## 1. 准备工作
 
 确保服务器已安装：
@@ -8,23 +26,14 @@
 
 ## 2. 文件传输
 
-将以下文件和文件夹上传到服务器的同一目录下（例如 `/app/minna-blog`）：
-
-- `dist/` (无需上传，Docker 会自动构建)
-- `node_modules/` (无需上传)
-- `server/` (整个文件夹)
-- `src/` (整个文件夹)
-- `package.json`
-- `package-lock.json`
-- `Dockerfile`
-- `docker-compose.yml`
-- `nginx.conf`
-- `tsconfig.json` (及其他配置文件)
-- `.env` (包含敏感信息，如 DIFY_API_KEY，**不要提交到 git**)
+将整个项目目录上传到服务器（例如 `/app/minna-blog`），不需要上传：
+- `node_modules/`
+- `dist/`
+- `.vite/`
 
 ## 3. 环境变量配置
 
-在服务器目录创建 `.env` 文件：
+在项目根目录创建 `.env` 文件：
 
 ```bash
 DIFY_API_KEY=your_dify_api_key_here
@@ -44,7 +53,7 @@ docker-compose up -d --build
 
 ## 5. 验证
 
-- 前端访问：`http://your-server-ip`
+- 前端访问：`http://your-server-ip:80`
 - 后端 API：`http://your-server-ip:8001/health`
 
 ## 6. 常用命令
@@ -65,4 +74,21 @@ docker-compose up -d --build
   ```bash
   docker-compose down -v
   ```
+
+## 7. 开发环境
+
+### 前端开发
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### 后端开发
+```bash
+cd backend
+npm install
+npm run dev
+```
+
 
