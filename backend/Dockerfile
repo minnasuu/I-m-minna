@@ -20,7 +20,7 @@ COPY index.js ./
 COPY routes ./routes
 
 # 暴露端口
-EXPOSE 3001
+EXPOSE 8001
 
 # 启动脚本：先运行 migrate 确保数据库同步，然后启动服务
 CMD ["sh", "-c", "npx prisma migrate deploy && node index.js"]

@@ -32,7 +32,7 @@ const getBackendUrl = (): string => {
     return ''; // 空字符串表示使用相对路径
   }
   // 开发环境默认使用 localhost
-  return 'http://localhost:3001';
+  return 'http://localhost:8001';
 };
 
 export const sendMessageToBackend = async (
