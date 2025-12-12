@@ -11,6 +11,7 @@ project/
 │  ├─ Dockerfile
 │  ├─ nginx.conf
 │  └─ package.json
+│  └─ .env
 └─ backend/       # 后端服务 (Node.js + Express)
    ├─ routes/
    ├─ prisma/
