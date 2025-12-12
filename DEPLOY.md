@@ -55,7 +55,7 @@ docker-compose up -d --build
 ## 5. 验证
 
 - 前端访问：`http://your-server-ip:80`
-- 后端 API：`http://your-server-ip:8001/health`
+- 后端 API：`http://your-server-ip:3001/health`
 
 ## 6. 常用命令
 

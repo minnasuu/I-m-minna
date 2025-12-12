@@ -9,7 +9,7 @@ services:
     container_name: minna-backend
     restart: always
     ports:
-      - "8001:3001"
+      - "3001:3001"
     environment:
       - NODE_ENV=production
       - PORT=3001
